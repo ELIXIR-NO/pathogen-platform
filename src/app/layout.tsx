@@ -4,6 +4,7 @@ import { Inter as FontSans } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-porivder';
+import { NavBar } from '@/components/nav-bar';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -34,7 +35,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <NavBar />
+          <div className='mx-auto w-3/4 pt-24'>{children}</div>
         </ThemeProvider>
       </body>
     </html>
