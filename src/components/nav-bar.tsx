@@ -27,7 +27,7 @@ const topics: Topics[] = [
   },
   {
     title: 'Antibiotic resistance',
-    href: 'topics/antibiotic-resistance',
+    href: '/topics/antibiotic-resistance',
     description: 'the impending threat of super bugs',
   },
   {
@@ -37,7 +37,7 @@ const topics: Topics[] = [
   },
   {
     title: 'Pseudomonas',
-    href: 'topics/pseudomonas',
+    href: '/topics/pseudomonas',
     description: 'an opportunistic pathogen',
   },
   {
