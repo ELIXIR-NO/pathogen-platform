@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 import { ModeToggle } from '@/components/mode-toggle';
@@ -14,7 +13,6 @@ import {
   NavigationMenuLink,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-import { useRouter } from 'next/router';
 import { LogoModeToggle } from '@/components/logo-mode-toggle';
 
 type Topics = { title: string; href: string; description: string };
