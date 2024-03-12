@@ -11,13 +11,13 @@ export function LogoModeToggle() {
 
   switch (resolvedTheme) {
     case 'light':
-      src = '/pathogens_portal_norway_logo.png';
+      src = '/pathogens_portal_norway_logo_light.png';
       break;
     case 'dark':
-      src = '/pathogens_portal_norway_logo.png'; // replace with appropriate image
+      src = '/pathogens_portal_norway_logo_dark.png'; // replace with appropriate image
       break;
     default:
-      src = '/pathogens_portal_norway_logo.png'; // default to the light image
+      src = '/pathogens_portal_norway_logo_light.png'; // default to the light image
       break;
   }
 
