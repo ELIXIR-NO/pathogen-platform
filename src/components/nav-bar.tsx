@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Children, FC } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -50,33 +50,46 @@ const topics: Topics[] = [
   },
 ];
 
+type NavItem = { pageUrl: string; pageName: string };
+const NavItems: NavItem[] = [
+  {
+    pageUrl: '/research-data-management',
+    pageName: 'RDM',
+  },
+  {
+    pageUrl: '/training-and-events',
+    pageName: 'Events',
+  },
+  {
+    pageUrl: '/dashboard',
+    pageName: 'Dashboard',
+  },
+  {
+    pageUrl: '/analysis-tools',
+    pageName: 'Analysis Tools',
+  },
+  {
+    pageUrl: '/about',
+    pageName: 'About',
+  },
+];
+
 export function NavBar() {
   const pathName = usePathname();
   return (
     <nav className='fixed left-0 right-0 top-0 z-10 h-fit py-2 backdrop-blur-sm'>
-      <div className='container flex flex-row items-center justify-between pt-2'>
-        <ul className='flex flex-row items-center justify-center gap-x-5'>
+      <div className='container flex flex-row items-center justify-between gap-x-4 pt-2'>
+        <ul className='flex flex-row items-center justify-center gap-x-4'>
           <li>
             <Link href='/'>
               <LogoModeToggle />
             </Link>
           </li>
           <li>
-            <Link
-              className={cn(
-                'text-lg hover:underline hover:decoration-primary hover:underline-offset-4',
-                pathName === '/about' && 'font-semibold text-primary'
-              )}
-              href='/about'
-            >
-              About
-            </Link>
-          </li>
-          <li>
             <NavigationMenu>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className='text-lg font-normal decoration-primary underline-offset-4 hover:underline'>
-                  <Link href='/topics'>Topics</Link>
+                  Topics
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] '>
@@ -94,17 +107,13 @@ export function NavBar() {
               </NavigationMenuItem>
             </NavigationMenu>
           </li>
-          <li>
-            <Link
-              className={cn(
-                'text-lg hover:underline hover:decoration-primary hover:underline-offset-4',
-                pathName === '/dashboard' && 'font-semibold text-primary'
-              )}
-              href='/dashboard'
-            >
-              Dashboard
-            </Link>
-          </li>
+          {NavItems.map(it => (
+            <NavBarItem
+              key={it.pageName}
+              pageUrl={it.pageUrl}
+              pageName={it.pageName}
+            />
+          ))}
         </ul>
         <ModeToggle />
       </div>
@@ -137,3 +146,20 @@ const ListItem = React.forwardRef<
   );
 });
 ListItem.displayName = 'ListItem';
+
+const NavBarItem: FC<NavItem> = ({ pageUrl, pageName }) => {
+  const pathName = usePathname();
+  return (
+    <li>
+      <Link
+        className={cn(
+          'text-lg hover:underline hover:decoration-primary hover:underline-offset-4',
+          pathName === `/${pageUrl}` && 'font-semibold text-primary'
+        )}
+        href={`/${pageUrl}`}
+      >
+        {pageName}
+      </Link>
+    </li>
+  );
+};
