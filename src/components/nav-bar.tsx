@@ -53,7 +53,7 @@ const topics: Topics[] = [
 type NavItem = { pageUrl: string; pageName: string };
 const NavItems: NavItem[] = [
   {
-    pageUrl: '/research-data-management',
+    pageUrl: '/rdm',
     pageName: 'RDM',
   },
   {
@@ -154,9 +154,9 @@ const NavBarItem: FC<NavItem> = ({ pageUrl, pageName }) => {
       <Link
         className={cn(
           'text-lg hover:underline hover:decoration-primary hover:underline-offset-4',
-          pathName === `/${pageUrl}` && 'font-semibold text-primary'
+          pathName === `${pageUrl}` && 'font-semibold text-primary'
         )}
-        href={`/${pageUrl}`}
+        href={pageUrl}
       >
         {pageName}
       </Link>
