@@ -33,7 +33,6 @@ export default function Error({
           <CardDescription>Something went wrong!!</CardDescription>
         </CardHeader>
         <CardContent>
-          <p>{error.message}</p>
           <p>Looks like we could not locate the requested resource</p>
         </CardContent>
         <CardFooter className='justify-end space-x-2'>
