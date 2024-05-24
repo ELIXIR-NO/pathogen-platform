@@ -28,7 +28,7 @@ const searchFormSchema = z.object({
     .max(20, { message: 'search term can be at most 20 characters' }),
 });
 
-export function SearchBar({ className }: SearchBarProps) {
+export default function SearchBar({ className }: SearchBarProps) {
   const form = useForm<z.infer<typeof searchFormSchema>>({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
