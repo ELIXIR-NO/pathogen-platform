@@ -25,7 +25,6 @@ interface SearchBarProps {
 const searchFormSchema = z.object({
   searchTerm: z
     .string()
-    .min(3, { message: 'search term must be at least 3 characters' })
     .max(20, { message: 'search term can be at most 20 characters' }),
 });
 
@@ -46,21 +45,29 @@ export function SearchBar({ className }: SearchBarProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn('flex flex-row space-x-2 px-5', className)}
+        className={cn('flex flex-row items-center space-x-2', className)}
       >
-        <Button type='submit' className='h-full'>
-          <Search />
-        </Button>
         <FormField
           control={form.control}
           name='searchTerm'
           render={({ field }) => (
             <FormItem className='w-full'>
-              {/* <FormLabel>Search</FormLabel> */}
+              <FormLabel className='sr-only'>Search</FormLabel>
               <FormControl>
-                <Input placeholder='Search' {...field} />
+                <div>
+                  <Button type='submit' className='absolute h-fit'>
+                    <Search />
+                  </Button>
+                  <Input
+                    placeholder='What can we help you find?'
+                    {...field}
+                    className='pl-16'
+                  />
+                </div>
               </FormControl>
-              {/* <FormDescription>Term(s) to search for.</FormDescription> */}
+              <FormDescription className='sr-only'>
+                Term(s) to search for.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
