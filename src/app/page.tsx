@@ -1,3 +1,4 @@
+import DashboardsPreview from '@/components/dashboards-preview';
 import SearchBar from '@/components/search-bar';
 import { Separator } from '@/components/ui/separator';
 import { Info } from 'lucide-react';
@@ -32,6 +33,7 @@ export default function Home() {
         </div>
       </div>
       <SearchBar />
+      <DashboardsPreview />
     </main>
   );
 }
