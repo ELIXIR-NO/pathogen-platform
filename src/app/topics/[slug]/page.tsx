@@ -7,7 +7,7 @@ import {
 } from '@notionhq/client/build/src/api-endpoints';
 import { isFullBlock } from '@notionhq/client';
 
-import { notion } from '@/lib/utils';
+import { notion } from '@/lib/notion-utils';
 
 export default async function Topics({ params }: { params: { slug: string } }) {
   const dbId = process.env.NOTION_DB_ID;
