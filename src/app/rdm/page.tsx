@@ -1,3 +1,3 @@
 export default function Rdm() {
-  return <div>rmd</div>;
+	return <div>rmd</div>;
 }
