@@ -31,27 +31,31 @@ export default async function DashboardsPreview() {
   ).slice(0, 3);
 
   return (
-    <div className='flex flex-col space-y-4'>
-      <div>
+    <div className='grid grid-cols-3 gap-4'>
+      <div className='col-span-3'>
         <h2 className='text-2xl font-semibold'>Pandemic Preparedness</h2>
-        <div className='flex flex-row space-x-4'>
-          {pandemicPreparednessDashboardItems.map(it =>
-            DashBoardItem(it, it.id)
-          )}
-        </div>
       </div>
-      <div>
+      {pandemicPreparednessDashboardItems.map(it => (
+        <div key={it.id} className='h-full w-full'>
+          {DashBoardItem(it, it.id)}
+        </div>
+      ))}
+      <div className='col-span-3'>
         <h2 className='text-2xl font-semibold'>Covid 19</h2>
-        <div className='flex flex-row space-x-4'>
-          {covidDashboardItems.map(it => DashBoardItem(it, it.id))}
-        </div>
       </div>
-      <div>
+      {covidDashboardItems.map(it => (
+        <div key={it.id} className='h-full w-full'>
+          {DashBoardItem(it, it.id)}
+        </div>
+      ))}
+      <div className='col-span-3'>
         <h2 className='text-2xl font-semibold'>Infectious Diseases</h2>
-        <div className='flex flex-row space-x-4'>
-          {infectiousDiseasesDashboardItems.map(it => DashBoardItem(it, it.id))}
-        </div>
       </div>
+      {infectiousDiseasesDashboardItems.map(it => (
+        <div key={it.id} className='h-full w-full'>
+          {DashBoardItem(it, it.id)}
+        </div>
+      ))}
     </div>
   );
 }
@@ -67,7 +71,7 @@ type PageSummary = {
 
 function DashBoardItem(item: PageSummary, key: string) {
   return (
-    <Card key={key}>
+    <Card key={key} className='h-full'>
       <CardHeader>
         <CardTitle className='text-center capitalize'>{item.title}</CardTitle>
       </CardHeader>
@@ -82,6 +86,16 @@ function DashBoardItem(item: PageSummary, key: string) {
     </Card>
   );
 }
+
+// function DashBoardItem(item: PageSummary, key: string) {
+//   return (
+//     <div className='h-full rounded-xl border bg-card text-card-foreground shadow'>
+//       <div>{item.title}</div>
+//       <div>{item.summary}</div>
+//       <div>{item.slug}</div>
+//     </div>
+//   );
+// }
 
 function getDashboardDetails(page: PageObjectResponse[]): PageSummary[] {
   return page.map((page: any) => ({
