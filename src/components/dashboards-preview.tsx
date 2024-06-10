@@ -1,3 +1,7 @@
+import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import Link from "next/link";
+import Image from "next/image";
+
 import { getNotionPagesWithTag } from "@/lib/notion-utils";
 import {
 	Card,
@@ -6,9 +10,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export default async function DashboardsPreview() {
 	const pandemicPreparednessPages = await getNotionPagesWithTag(
@@ -67,12 +69,14 @@ type PageSummary = {
 	slug: string;
 	relative_link: string;
 	summary: string;
+	image_url: string;
 };
 
 function DashBoardItem(item: PageSummary, key: string) {
 	return (
 		<Card key={key} className="h-full">
 			<CardHeader>
+				<Image src={item.image_url} width={360} height={180} alt="card-image" />
 				<CardTitle className="text-center capitalize">{item.title}</CardTitle>
 			</CardHeader>
 			<CardContent>
@@ -106,5 +110,6 @@ function getDashboardDetails(page: PageObjectResponse[]): PageSummary[] {
 		relative_link:
 			page.properties?.relative_link?.rich_text[0]?.plain_text ?? "",
 		summary: page.properties?.summary?.rich_text[0]?.plain_text ?? "",
+		image_url: page.properties?.card_image?.files[0]?.file?.url ?? "",
 	}));
 }
