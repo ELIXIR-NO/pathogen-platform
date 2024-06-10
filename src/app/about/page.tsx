@@ -1,9 +1,11 @@
-import { ContactUsForm } from "@/components/contact-us-form";
+import ContactUs from "./contact-us";
+import Partners from "./partners";
+import AboutUsTabs from "./tabs";
 
 export default function About() {
 	return (
 		<main>
-			<ContactUsForm className="w-1/3" />
+			<AboutUsTabs partners={<Partners />} contactUs={<ContactUs />} />
 		</main>
 	);
 }
