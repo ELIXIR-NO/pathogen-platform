@@ -19,12 +19,12 @@ export default async function DashboardsPreview() {
 
 	const pandemicPreparednessDashboardItems = getDashboardDetails(
 		pandemicPreparednessPages as PageObjectResponse[]
-	);
+	).slice(0, 3);
 
 	const covidPages = await getNotionPagesWithTag("Covid-19");
 	const covidDashboardItems = getDashboardDetails(
 		covidPages as PageObjectResponse[]
-	);
+	).slice(0, 3);
 
 	const infectiousDiseasesPages =
 		await getNotionPagesWithTag("Infectious disease");
