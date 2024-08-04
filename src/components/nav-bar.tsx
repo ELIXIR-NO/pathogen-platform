@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Children, FC } from "react";
+import React, { FC } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -108,7 +108,6 @@ const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 ]
 
 export function NavBar() {
-	const pathName = usePathname();
 	return (
 		<nav className="fixed left-0 right-0 top-0 z-10 h-fit py-2 backdrop-blur-sm">
 			<div className="container flex flex-row items-center justify-between gap-x-4 pt-2">
