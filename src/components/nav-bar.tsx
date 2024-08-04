@@ -15,6 +15,26 @@ import {
 } from "@/components/ui/navigation-menu";
 import { LogoModeToggle } from "@/components/logo-mode-toggle";
 
+type NavItem = { pageUrl: string; pageName: string };
+const NavItems: NavItem[] = [
+	{
+		pageUrl: "/training-and-events",
+		pageName: "Events",
+	},
+	{
+		pageUrl: "/dashboard",
+		pageName: "Dashboard",
+	},
+	{
+		pageUrl: "/analysis-tools",
+		pageName: "Analysis Tools",
+	},
+	{
+		pageUrl: "/about",
+		pageName: "About",
+	},
+];
+
 type DropdownMenuItem = { title: string; href: string; description: string };
 const topics: DropdownMenuItem[] = [
 	{
@@ -50,30 +70,6 @@ const topics: DropdownMenuItem[] = [
 	},
 ];
 
-type NavItem = { pageUrl: string; pageName: string };
-const NavItems: NavItem[] = [
-	{
-		pageUrl: "/rdm",
-		pageName: "RDM",
-	},
-	{
-		pageUrl: "/training-and-events",
-		pageName: "Events",
-	},
-	{
-		pageUrl: "/dashboard",
-		pageName: "Dashboard",
-	},
-	{
-		pageUrl: "/analysis-tools",
-		pageName: "Analysis Tools",
-	},
-	{
-		pageUrl: "/about",
-		pageName: "About",
-	},
-];
-
 const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 	{
 		title: "Surveillance",
@@ -102,6 +98,38 @@ const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 		href: "/pandemic-preparedness/one-health",
 		description:
 			"The close connection between human health, animals, and the environment",
+	},
+];
+
+const RDMNavDropdownItems: DropdownMenuItem[] = [
+	{
+		title: "About RDM",
+		href: "/rdm",
+		description: "All about research data management",
+	},
+	{
+		title: "Databases",
+		href: "/rdm/databases",
+		description:
+			"Databases and data repositories relevant for research on pathogen data",
+	},
+	{
+		title: "Sharing data",
+		href: "rdm/sharing-data",
+		description:
+			"making research data available to other investigators or the public",
+	},
+	{
+		title: "Tools and workflows",
+		href: "/rdm/tools-and-workflows",
+		description:
+			"Tools, workflows and relevant resources for performing analysis of pathogen data",
+	},
+	{
+		title: "Pathogen data hub",
+		href: "/rdm/pathogen-data-hub",
+		description:
+			"A secure, user-friendly infrastructure for the storage, sharing, and archiving of FAIR pathogen data",
 	},
 ];
 
@@ -142,6 +170,24 @@ export function NavBar() {
 								<NavigationMenuContent>
 									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
 										{pandemicPreparednessNavItems.map((item) => (
+											<ListItem
+												key={item.title}
+												title={item.title}
+												href={item.href}
+											>
+												{item.description}
+											</ListItem>
+										))}
+									</ul>
+								</NavigationMenuContent>
+							</NavigationMenuItem>
+							<NavigationMenuItem>
+								<NavigationMenuTrigger className="text-lg font-normal decoration-primary underline-offset-4 hover:underline">
+									RDM
+								</NavigationMenuTrigger>
+								<NavigationMenuContent>
+									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+										{RDMNavDropdownItems.map((item) => (
 											<ListItem
 												key={item.title}
 												title={item.title}
