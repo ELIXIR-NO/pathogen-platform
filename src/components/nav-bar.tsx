@@ -76,34 +76,32 @@ const NavItems: NavItem[] = [
 
 const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 	{
-		title: "Surveillance and monitoring",
-		href: "/pandemic-preparedness/surveillance-and-monitoring",
-		description: "",
+		title: "Surveillance",
+		href: "/pandemic-preparedness/surveillance",
+		description:
+			"continuous, systematic collection, analysis and interpretation of health-related data",
 	},
 	{
-		title: "Healthcare and research infrastructure",
-		href: "/pandemic-preparedness/healthcare-and-research-infrastructure",
-		description: "",
+		title: "Environmentally transmitted diseases",
+		href: "/pandemic-preparedness/environmentally-transmitted-diseases",
+		description:
+			"microorganisms found in the environment, capable of infecting humans",
 	},
 	{
-		title: "Public health policies and emergency response plans",
-		href: "/pandemic-preparedness/public-health-policies",
-		description: "",
+		title: "Medical microbiology reference labs",
+		href: "/pandemic-preparedness/medical-microbiology-reference-labs",
+		description: "Microbiology labs authorized by the Health Directorate",
 	},
 	{
-		title: "Vaccination and treatment",
-		href: "/pandemic-preparedness/vaccination-and-treatment",
-		description: "",
+		title: "Infectious diseases",
+		href: "/pandemic-preparedness/infectious-diseases",
+		description: "Disorders caused by organisms",
 	},
 	{
-		title: "Community engagement",
-		href: "/pandemic-preparedness/community-engagement",
-		description: "",
-	},
-	{
-		title: "Research and innovation",
-		href: "/pandemic-preparedness/research-and-innovation",
-		description: "",
+		title: "One health",
+		href: "/pandemic-preparedness/one-health",
+		description:
+			"The close connection between human health, animals, and the environment",
 	},
 ];
 
