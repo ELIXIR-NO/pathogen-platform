@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Children, FC } from "react";
+import React, { FC } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/navigation-menu";
 import { LogoModeToggle } from "@/components/logo-mode-toggle";
 
-type Topics = { title: string; href: string; description: string };
-const topics: Topics[] = [
+type DropdownMenuItem = { title: string; href: string; description: string };
+const topics: DropdownMenuItem[] = [
 	{
 		title: "Infectious diseases",
 		href: "/topics/infectious-diseases",
@@ -74,8 +74,38 @@ const NavItems: NavItem[] = [
 	},
 ];
 
+const pandemicPreparednessNavItems: DropdownMenuItem[] = [
+	{
+		title: "Surveillance",
+		href: "/pandemic-preparedness/surveillance",
+		description:
+			"continuous, systematic collection, analysis and interpretation of health-related data",
+	},
+	{
+		title: "Environmentally transmitted diseases",
+		href: "/pandemic-preparedness/environmentally-transmitted-diseases",
+		description:
+			"microorganisms found in the environment, capable of infecting humans",
+	},
+	{
+		title: "Medical microbiology reference labs",
+		href: "/pandemic-preparedness/medical-microbiology-reference-labs",
+		description: "Microbiology labs authorized by the Health Directorate",
+	},
+	{
+		title: "Infectious diseases",
+		href: "/pandemic-preparedness/infectious-diseases",
+		description: "Disorders caused by organisms",
+	},
+	{
+		title: "One health",
+		href: "/pandemic-preparedness/one-health",
+		description:
+			"The close connection between human health, animals, and the environment",
+	},
+];
+
 export function NavBar() {
-	const pathName = usePathname();
 	return (
 		<nav className="fixed left-0 right-0 top-0 z-10 h-fit py-2 backdrop-blur-sm">
 			<div className="container flex flex-row items-center justify-between gap-x-4 pt-2">
@@ -92,7 +122,7 @@ export function NavBar() {
 									Topics
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
 										{topics.map((topic) => (
 											<ListItem
 												key={topic.title}
@@ -100,6 +130,24 @@ export function NavBar() {
 												href={topic.href}
 											>
 												{topic.description}
+											</ListItem>
+										))}
+									</ul>
+								</NavigationMenuContent>
+							</NavigationMenuItem>
+							<NavigationMenuItem>
+								<NavigationMenuTrigger className="text-lg font-normal decoration-primary underline-offset-4 hover:underline">
+									Pandemic Preparedness
+								</NavigationMenuTrigger>
+								<NavigationMenuContent>
+									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+										{pandemicPreparednessNavItems.map((item) => (
+											<ListItem
+												key={item.title}
+												title={item.title}
+												href={item.href}
+											>
+												{item.description}
 											</ListItem>
 										))}
 									</ul>
