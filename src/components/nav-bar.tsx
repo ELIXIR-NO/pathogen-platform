@@ -78,34 +78,34 @@ const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 	{
 		title: "Surveillance and monitoring",
 		href: "/pandemic-preparedness/surveillance-and-monitoring",
-		description: ""
+		description: "",
 	},
 	{
 		title: "Healthcare and research infrastructure",
 		href: "/pandemic-preparedness/healthcare-and-research-infrastructure",
-		description: ""
+		description: "",
 	},
 	{
 		title: "Public health policies and emergency response plans",
 		href: "/pandemic-preparedness/public-health-policies",
-		description: ""
+		description: "",
 	},
 	{
 		title: "Vaccination and treatment",
 		href: "/pandemic-preparedness/vaccination-and-treatment",
-		description: ""
+		description: "",
 	},
 	{
 		title: "Community engagement",
 		href: "/pandemic-preparedness/community-engagement",
-		description: ""
+		description: "",
 	},
 	{
 		title: "Research and innovation",
 		href: "/pandemic-preparedness/research-and-innovation",
-		description: ""
+		description: "",
 	},
-]
+];
 
 export function NavBar() {
 	return (
@@ -143,8 +143,12 @@ export function NavBar() {
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
 									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-										{pandemicPreparednessNavItems.map(item => (
-											<ListItem key={item.title} title={item.title} href={item.href}>
+										{pandemicPreparednessNavItems.map((item) => (
+											<ListItem
+												key={item.title}
+												title={item.title}
+												href={item.href}
+											>
 												{item.description}
 											</ListItem>
 										))}
