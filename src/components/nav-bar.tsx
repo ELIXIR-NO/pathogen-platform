@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/navigation-menu";
 import { LogoModeToggle } from "@/components/logo-mode-toggle";
 
-type Topics = { title: string; href: string; description: string };
-const topics: Topics[] = [
+type DropdownMenuItem = { title: string; href: string; description: string };
+const topics: DropdownMenuItem[] = [
 	{
 		title: "Infectious diseases",
 		href: "/topics/infectious-diseases",
@@ -74,6 +74,39 @@ const NavItems: NavItem[] = [
 	},
 ];
 
+const pandemicPreparednessNavItems: DropdownMenuItem[] = [
+	{
+		title: "Surveillance and monitoring",
+		href: "/pandemic-preparedness/surveillance-and-monitoring",
+		description: ""
+	},
+	{
+		title: "Healthcare and research infrastructure",
+		href: "/pandemic-preparedness/healthcare-and-research-infrastructure",
+		description: ""
+	},
+	{
+		title: "Public health policies and emergency response plans",
+		href: "/pandemic-preparedness/public-health-policies",
+		description: ""
+	},
+	{
+		title: "Vaccination and treatment",
+		href: "/pandemic-preparedness/vaccination-and-treatment",
+		description: ""
+	},
+	{
+		title: "Community engagement",
+		href: "/pandemic-preparedness/community-engagement",
+		description: ""
+	},
+	{
+		title: "Research and innovation",
+		href: "/pandemic-preparedness/research-and-innovation",
+		description: ""
+	},
+]
+
 export function NavBar() {
 	const pathName = usePathname();
 	return (
@@ -92,7 +125,7 @@ export function NavBar() {
 									Topics
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
 										{topics.map((topic) => (
 											<ListItem
 												key={topic.title}
@@ -100,6 +133,20 @@ export function NavBar() {
 												href={topic.href}
 											>
 												{topic.description}
+											</ListItem>
+										))}
+									</ul>
+								</NavigationMenuContent>
+							</NavigationMenuItem>
+							<NavigationMenuItem>
+								<NavigationMenuTrigger className="text-lg font-normal decoration-primary underline-offset-4 hover:underline">
+									Pandemic Preparedness
+								</NavigationMenuTrigger>
+								<NavigationMenuContent>
+									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+										{pandemicPreparednessNavItems.map(item => (
+											<ListItem key={item.title} title={item.title} href={item.href}>
+												{item.description}
 											</ListItem>
 										))}
 									</ul>
