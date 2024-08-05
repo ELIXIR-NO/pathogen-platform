@@ -60,7 +60,7 @@ const topics: DropdownMenuItem[] = [
 	},
 	{
 		title: "Covid-19",
-		href: "/topics/covid",
+		href: "/topics/covid-19",
 		description: "an infectious disease caused by the novel SARS-CoV-2 virus",
 	},
 	{
