@@ -26,10 +26,6 @@ const NavItems: NavItem[] = [
 		pageName: "Dashboard",
 	},
 	{
-		pageUrl: "/analysis-tools",
-		pageName: "Analysis Tools",
-	},
-	{
 		pageUrl: "/about",
 		pageName: "About",
 	},
