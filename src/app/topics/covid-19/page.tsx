@@ -85,7 +85,9 @@ function InfoCard({
 		<Card className="mb-3 aspect-square max-w-sm break-inside-avoid hover:shadow-2xl">
 			<CardHeader>
 				<CardTitle>{title}</CardTitle>
-				<CardDescription>{description}</CardDescription>
+				<CardDescription className="text-justify">
+					{description}
+				</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<Image
