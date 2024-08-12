@@ -3,6 +3,7 @@
 import { ThemeProvider } from "@/providers/theme-provider";
 import { NextUIProvider } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import ReactQueryProvider from "@/providers/react-query-provider";
 
 export function Providers({ children }: { children: React.ReactNode }) {
 	const router = useRouter();
@@ -15,7 +16,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 				enableSystem
 				disableTransitionOnChange
 			>
-				{children}
+				<ReactQueryProvider>{children}</ReactQueryProvider>
 			</ThemeProvider>
 		</NextUIProvider>
 	);
