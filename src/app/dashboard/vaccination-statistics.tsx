@@ -1,8 +1,8 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import {
-	FHIVaccinationStatisticsDimensionsAPIResponse,
+	convertFHIVaccinationStatsFromJsonStatsToSimpleObject,
 	getFHIVaccinationStatisticsLocations,
 } from "@/lib/data/fetchFHIStatistics";
 
@@ -23,15 +23,31 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { getVaccinationStatisticsQuery } from "@/hooks/getVaccinationStatisticsQuery";
+import {
+	ChartConfig,
+	ChartContainer,
+	ChartTooltip,
+	ChartTooltipContent,
+} from "@/components/ui/chart";
+import {
+	Bar,
+	BarChart,
+	CartesianGrid,
+	Legend,
+	ResponsiveContainer,
+	XAxis,
+	YAxis,
+} from "recharts";
 
 export function VaccinationStatistics() {
 	const [open, setOpen] = useState(false);
-	const [values, setValues] = useState([""]);
+	const [selectedLocations, setSelectedLocations] = useState([""]);
 
 	useEffect(() => {
-		console.log(values);
-	}, [values]);
+		console.log(selectedLocations);
+	}, [selectedLocations]);
 
 	const {
 		data: locationData,
@@ -50,6 +66,11 @@ export function VaccinationStatistics() {
 	if (error) return <div>Error: {error.message}</div>;
 
 	const locations = getFHIVaccinationStatisticsLocations(locationData);
+	const selectedLocationIds = selectedLocations.flatMap((location) =>
+		locations
+			.filter((item) => item.location === location)
+			.map((item) => item.id)
+	);
 
 	return (
 		<div className="flex flex-row space-x-3">
@@ -79,20 +100,23 @@ export function VaccinationStatistics() {
 												key={it.id}
 												value={it.location}
 												onSelect={(selectedValue) => {
-													if (values.includes(selectedValue)) {
-														const val = values.filter(
+													if (selectedLocations.includes(selectedValue)) {
+														const val = selectedLocations.filter(
 															(it) => it !== selectedValue
 														);
-														setValues([...val]);
+														setSelectedLocations([...val]);
 													} else {
-														setValues([...values, selectedValue]);
+														setSelectedLocations([
+															...selectedLocations,
+															selectedValue,
+														]);
 													}
 												}}
 											>
 												<Check
 													className={cn(
 														"mr-2 h-4 w-4",
-														values.includes(it.location)
+														selectedLocations.includes(it.location)
 															? "opacity-100"
 															: "opacity-0"
 													)}
@@ -105,11 +129,129 @@ export function VaccinationStatistics() {
 							</Command>
 						</PopoverContent>
 					</Popover>
-					<Button variant="outline" onClick={() => setValues([])}>
+					<Button variant="outline" onClick={() => setSelectedLocations([])}>
 						Reset
 					</Button>
 				</div>
 			</div>
+			<VaccinationStatisticsBarPlot selectedIds={selectedLocationIds} />
+		</div>
+	);
+}
+
+interface VaccinationStatisticsProps {
+	selectedIds: string[];
+}
+
+interface LocationData {
+	location: Record<string, string>;
+	years: string[];
+	rates: number[];
+	ratios: number[];
+}
+
+interface ProcessedDataPoint {
+	year: string;
+	[key: string]: string | number;
+}
+
+function VaccinationStatisticsBarPlot({
+	selectedIds,
+}: VaccinationStatisticsProps) {
+	const queries = useMemo(
+		() => selectedIds.map((id) => getVaccinationStatisticsQuery(id)),
+		[selectedIds]
+	);
+
+	const queryResults = useQueries({ queries });
+
+	const isLoading = queryResults.some((query) => query.isLoading);
+	const isError = queryResults.some((query) => query.isError);
+	const isSuccess = queryResults.every((query) => query.isSuccess);
+
+	const { processedData, chartConfig } = useMemo(() => {
+		if (!isSuccess)
+			return { processedData: null, chartConfig: {} as ChartConfig };
+
+		const data = queryResults
+			.map((query) =>
+				convertFHIVaccinationStatsFromJsonStatsToSimpleObject(query.data)
+			)
+			.filter((d): d is LocationData => d !== null && d !== undefined);
+
+		if (data.length === 0)
+			return { processedData: null, chartConfig: {} as ChartConfig };
+
+		// Generate dynamic chart config
+		const config: ChartConfig = {};
+		const colors = [
+			"hsl(var(--chart-1))",
+			"hsl(var(--chart-2))",
+			"hsl(var(--chart-3))",
+			"hsl(var(--chart-4))",
+			"hsl(var(--chart-5))",
+		];
+
+		// Find the dataset with the most years to use as a base
+		const baseData = data.reduce((prev, current) =>
+			(prev.years?.length || 0) > (current.years?.length || 0) ? prev : current
+		);
+
+		data.forEach((locationData, index) => {
+			const locationKey = Object.values(locationData.location)[0];
+			if (locationKey) {
+				config[locationKey] = {
+					label: locationKey,
+					color: colors[index % colors.length],
+				};
+			}
+		});
+
+		// Restructure data for bar chart
+		const processedData: ProcessedDataPoint[] = baseData.years.map(
+			(year, index) => {
+				const yearData: ProcessedDataPoint = { year };
+				data.forEach((locationData) => {
+					const locationKey = Object.values(locationData.location)[0];
+					if (
+						locationKey &&
+						locationData.rates &&
+						locationData.rates[index] !== undefined
+					) {
+						yearData[locationKey] = locationData.rates[index];
+					}
+				});
+				return yearData;
+			}
+		);
+
+		return { processedData, chartConfig: config };
+	}, [isSuccess, queryResults]);
+
+	if (isLoading) return <div>Loading...</div>;
+	if (isError) return <div>Error occurred in fetching data</div>;
+	if (!processedData || processedData.length === 0)
+		return <div>No data available</div>;
+
+	return (
+		<div className="flex flex-col">
+			<ChartContainer config={chartConfig} className="h-[400px]">
+				<ResponsiveContainer width="100%" height="100%">
+					<BarChart data={processedData}>
+						<CartesianGrid strokeDasharray="3 3" />
+						<XAxis dataKey="year" />
+						<YAxis
+							label={{ value: "Andel (%)", angle: -90, position: "insideLeft" }}
+							domain={[0, 100]}
+						/>
+						<ChartTooltip content={<ChartTooltipContent />} />
+						<Legend />
+						{Object.keys(chartConfig).map((key) => (
+							<Bar key={key} dataKey={key} fill={chartConfig[key].color} />
+						))}
+					</BarChart>
+				</ResponsiveContainer>
+			</ChartContainer>
 		</div>
 	);
 }
