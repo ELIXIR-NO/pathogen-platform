@@ -7,7 +7,9 @@
     "test": "vitest",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format:check": "prettier --check ./src",
+    "format:write": "prettier ./src --write"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",
