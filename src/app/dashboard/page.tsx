@@ -1,11 +1,3 @@
-"use client";
-
-import {
-	convertFHIVaccinationStatsFromJsonStatsToSimpleObject,
-	getFHIVaccinationStatistics,
-	FHIVaccinationApiResponse,
-	getFHIVaccinationStatisticsLocations,
-} from "@/lib/data/fetchFHIStatistics";
 import { VaccinationStatistics } from "@/app/dashboard/vaccination-statistics";
 
 export default function DashboardPage() {
