@@ -88,7 +88,12 @@ export default function ContributorsPanel({
 							</Avatar>
 							<div className="flex flex-col">
 								<p className="font-bold">{getNameByAlias(contributor)}</p>
-								<p className="italic">{getEmailByAlias(contributor)}</p>
+								<a
+									className="italic text-primary hover:underline"
+									href={`mailto:${getEmailByAlias(contributor)}`}
+								>
+									{getEmailByAlias(contributor)}
+								</a>
 							</div>
 						</div>
 					))}
