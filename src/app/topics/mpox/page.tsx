@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/hover-card";
 import Image from "next/image";
 import ReferencesPanel, { Reference } from "@/components/references-panel";
+import ContributorsPanel from "@/components/contributors-panel";
 
 const references: Reference[] = [
 	{
@@ -34,7 +35,10 @@ export default function MpoxPage() {
 	return (
 		<div className="relative min-h-screen">
 			<div className="fixed right-12 top-32 z-10">
-				<ReferencesPanel references={references} className="py-2" />
+				<div className="flex flex-col space-y-2">
+					<ReferencesPanel references={references} className="py-2" />
+					<ContributorsPanel contributors={["terje"]} />
+				</div>
 			</div>
 			<section className="flex flex-col space-y-6 p-2">
 				<h1 className="text-3xl font-bold">Overview</h1>
