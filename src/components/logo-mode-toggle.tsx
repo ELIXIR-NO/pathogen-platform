@@ -28,6 +28,7 @@ export function LogoModeToggle() {
 			width={150}
 			height={35.55}
 			className={cn("hover:ring-2 hover:ring-primary")}
+			priority={true}
 		/>
 	);
 }
