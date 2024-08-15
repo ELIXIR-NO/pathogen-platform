@@ -33,8 +33,6 @@ export default function Home() {
 					or use the contact form.
 				</div>
 			</div>
-			<SearchBar />
-			<SearchCombobox />
 			<DashboardsPreview />
 		</main>
 	);
