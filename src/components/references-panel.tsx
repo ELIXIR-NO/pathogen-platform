@@ -6,8 +6,6 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 export interface Reference {
 	referenceNumber: number;
@@ -18,17 +16,13 @@ export interface Reference {
 
 interface ReferencesPanelProps {
 	references: Reference[];
-	className?: string;
 }
 
-export default function ReferencesPanel({
-	references,
-	className,
-}: ReferencesPanelProps) {
+export default function ReferencesPanel({ references }: ReferencesPanelProps) {
 	return (
 		<Sheet>
-			<SheetTrigger asChild className={cn(className)}>
-				<Button variant="outline">References</Button>
+			<SheetTrigger className="fixed right-[-42px] top-44 z-10 flex h-[60px] w-[120px] -rotate-90 justify-center rounded-t-2xl bg-primary px-3 py-1 text-lg font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:right-[-30px]">
+				References
 			</SheetTrigger>
 			<SheetContent>
 				<SheetHeader>

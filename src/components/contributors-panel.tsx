@@ -6,7 +6,6 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface Contributor {
@@ -68,8 +67,8 @@ export default function ContributorsPanel({
 }) {
 	return (
 		<Sheet>
-			<SheetTrigger asChild>
-				<Button variant="outline">Contributors</Button>
+			<SheetTrigger className="fixed right-[-42px] top-80 z-10 flex h-[60px] w-[120px] -rotate-90 justify-center rounded-t-2xl bg-primary px-4 py-1 text-lg font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:right-[-30px]">
+				Contributors
 			</SheetTrigger>
 			<SheetContent>
 				<SheetHeader>
