@@ -34,12 +34,6 @@ const NavItems: NavItem[] = [
 type DropdownMenuItem = { title: string; href: string; description: string };
 const topics: DropdownMenuItem[] = [
 	{
-		title: "Infectious diseases",
-		href: "/topics/infectious-diseases",
-		description:
-			"disorders which are primarily caused by pathogenic microorganisms",
-	},
-	{
 		title: "Antibiotic resistance",
 		href: "/topics/antibiotic-resistance",
 		description: "the impending threat of super bugs",
@@ -74,12 +68,6 @@ const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 			"continuous, systematic collection, analysis and interpretation of health-related data",
 	},
 	{
-		title: "Environmentally transmitted diseases",
-		href: "/pandemic-preparedness/environmentally-transmitted-diseases",
-		description:
-			"microorganisms found in the environment, capable of infecting humans",
-	},
-	{
 		title: "Medical microbiology reference labs",
 		href: "/pandemic-preparedness/medical-microbiology-reference-labs",
 		description: "Microbiology labs authorized by the Health Directorate",
@@ -94,6 +82,30 @@ const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 		href: "/pandemic-preparedness/one-health",
 		description:
 			"The close connection between human health, animals, and the environment",
+	},
+	{
+		title: "Food and waterborne Pathogens",
+		href: "/pandemic-preparedness/one-health/food-and-waterborne-pathogens",
+		description:
+			"Pathogens transmitted through the ingestion of or contact with contaminated food or water",
+	},
+	{
+		title: "Environmentally Transmitted Pathogen",
+		href: "/pandemic-preparedness/one-health/environmentally-transmitted-pathogen",
+		description:
+			"Some pathogenic microorganisms can be found in the environment and are capable of infecting humans and causing disease",
+	},
+	{
+		title: "Vector Borne Pathogens",
+		href: "/pandemic-preparedness/one-health/vector-borne-pathogens",
+		description:
+			"Vector-borne pathogens are transmitted to humans through vectors, which are typically arthropods such as mosquitoes, ticks, or fleas",
+	},
+	{
+		title: "Zoonotic Pathogens",
+		href: "/pandemic-preparedness/one-health/zoonotic-pathogens",
+		description:
+			"Zoonotic pathogens are infectious agents that can be transmitted directly or indirectly between animals and humans",
 	},
 ];
 
@@ -111,7 +123,7 @@ const RDMNavDropdownItems: DropdownMenuItem[] = [
 	},
 	{
 		title: "Sharing data",
-		href: "rdm/sharing-data",
+		href: "/rdm/sharing-data",
 		description:
 			"making research data available to other investigators or the public",
 	},
