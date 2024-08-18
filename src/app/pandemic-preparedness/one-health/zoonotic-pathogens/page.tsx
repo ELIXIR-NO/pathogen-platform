@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
+import CristinResults from '@/components/cristin-result';
 
 export default function ZoonoticPathogensPage() {
 	return (
@@ -12,8 +15,8 @@ export default function ZoonoticPathogensPage() {
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">Zoonotic pathogens</h2>
 				<Image
-					src="https://prod-files-secure.s3.us-west-2.amazonaws.com/f66e1653-d12d-4ace-a61b-25015798895c/7517472a-7ad0-4d7a-838a-212a519b122c/christopher-carson-i4XLJmlYit4-unsplash.jpg"
-					alt="White piglet chewing hay"
+					src="/pandemic-preparedness/one-health/zoonotic-pathogens/christopher-carson-i4XLJmlYit4-unsplash.jpg"
+					alt="Photo by Christopher Carson on Unsplash"
 					width={900}
 					height={500}
 					className="mx-auto rounded-md"
@@ -94,25 +97,11 @@ export default function ZoonoticPathogensPage() {
 					</a>
 					.
 				</p>
-				<Image
-					src="https://prod-files-secure.s3.us-west-2.amazonaws.com/f66e1653-d12d-4ace-a61b-25015798895c/a28ce5f9-4ae0-4276-9e71-b31ed7555c5e/mattilsynet_logo_ok.png"
-					alt="Mattilsynet logo"
-					width={400}
-					height={200}
-					className="mx-auto"
-				/>
 
 				<h3 className="font-bold">MSIS</h3>
 				<p>
 					The health registry MSIS (Meldingssystem for smittsomme sykdommer) is the official system for monitoring infectious diseases in humans, including zoonotic pathogens.
 				</p>
-				<Image
-					src="https://prod-files-secure.s3.us-west-2.amazonaws.com/f66e1653-d12d-4ace-a61b-25015798895c/61782409-a708-440b-bb3b-4618c97fea81/fhi-logo-norsk-hele-navnet.webp"
-					alt="FHI logo"
-					width={400}
-					height={200}
-					className="mx-auto"
-				/>
 				<a
 					className="text-primary hover:underline"
 					href="https://msis.no/"
@@ -124,13 +113,6 @@ export default function ZoonoticPathogensPage() {
 				<p>
 					The health registry NORM (Norsk overvåkingssystem for antibiotikaresistens hos mikrober) monitors antibiotic resistance in pathogenic bacteria from humans. It collaborates closely with the NORM-VET program to produce annual reports on antibiotic resistance in both humans and animals.
 				</p>
-				<Image
-					src="https://prod-files-secure.s3.us-west-2.amazonaws.com/f66e1653-d12d-4ace-a61b-25015798895c/b26c9dbc-3222-49f8-aac5-3469d6aee06b/norm-logo_OK_ratio.png"
-					alt="NORM logo"
-					width={400}
-					height={200}
-					className="mx-auto"
-				/>
 				<a
 					className="text-primary hover:underline"
 					href="https://www.unn.no/fag-og-forskning/norm-norsk-overvakingssystem-for-antibiotikaresistens-hos-mikrober"
@@ -142,19 +124,14 @@ export default function ZoonoticPathogensPage() {
 				<p>
 					The surveillance program NORM-VET (Norsk overvåkingsprogram for antibiotikaresistens i mikrober fra fôr, dyr og næringsmidler) focuses on antibiotic resistance in microbes originating from feed, animals, and food.
 				</p>
-				<Image
-					src="https://prod-files-secure.s3.us-west-2.amazonaws.com/f66e1653-d12d-4ace-a61b-25015798895c/9b8a831d-0589-4dda-b682-692bda55f5bc/VI-logo_OK.png"
-					alt="Veterinærinstituttet logo"
-					width={400}
-					height={200}
-					className="mx-auto"
-				/>
 				<a
 					className="text-primary hover:underline"
 					href="https://www.vetinst.no/overvaking/antibiotikaresistens-norm-vet"
 				>
 					Antibiotikaresistens (NORM-VET)
 				</a>
+
+				<CristinResults title="zoonosis" />
 			</section>
 		</div>
 	);
