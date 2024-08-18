@@ -3,11 +3,12 @@
 import { Tabs, Tab } from "@nextui-org/react";
 
 type AboutUsTabsProps = {
+	people: React.ReactNode;
 	partners: React.ReactNode;
 	contactUs: React.ReactNode;
 };
 
-export default function AboutUsTabs({ partners, contactUs }: AboutUsTabsProps) {
+export default function AboutUsTabs({ people, partners, contactUs }: AboutUsTabsProps) {
 	return (
 		<Tabs
 			aria-label="Options"
@@ -19,7 +20,9 @@ export default function AboutUsTabs({ partners, contactUs }: AboutUsTabsProps) {
 				tabContent: "group-data-[selected=true]:text-foreground",
 			}}
 		>
-			<Tab key="people" title="People" className="text-lg font-semibold"></Tab>
+			<Tab key="people" title="People" className="text-lg font-semibold">
+				{people}
+			</Tab>
 			<Tab key="partners" title="Partners" className="text-lg font-semibold">
 				{partners}
 			</Tab>
