@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
+import CristinResults from '@/components/cristin-result';
 
-export default function EnvironmentallyTransmittedPage() {
+export default function EnvironmentallyTransmittedPathogenPage() {
 	return (
 		<div className="relative min-h-screen">
 			<div className="fixed right-12 top-32 z-10">
@@ -12,8 +15,8 @@ export default function EnvironmentallyTransmittedPage() {
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">Environmentally transmitted pathogens</h2>
 				<Image
-					src="https://prod-files-secure.s3.us-west-2.amazonaws.com/f66e1653-d12d-4ace-a61b-25015798895c/5241ead5-ca0c-45ac-ad80-b5064d3cf73b/jacek-kadaj-oG88wo81y70-unsplash.jpg"
-					alt="Aerial view of a blue lake surrounded by trees"
+					src="/pandemic-preparedness/one-health/environmentally-transmitted-pathogen/jacek-kadaj-oG88wo81y70-unsplash.jpg"
+					alt="Photo by Jacek Kadaj on Unsplash"
 					width={900}
 					height={500}
 					className="mx-auto rounded-md"
@@ -123,6 +126,8 @@ export default function EnvironmentallyTransmittedPage() {
 				>
 					https://www.mattilsynet.no/
 				</a>
+			
+				<CristinResults title="Environmental" />
 			</section>
 		</div>
 	);

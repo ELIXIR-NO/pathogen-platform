@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
+import CristinResults from '@/components/cristin-result';
 
-export default function VectorBornePage() {
+export default function VectorVornePathogensPage() {
 	return (
 		<div className="relative min-h-screen">
 			<div className="fixed right-12 top-32 z-10">
@@ -12,7 +15,7 @@ export default function VectorBornePage() {
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">Vector-borne pathogens</h2>
 				<Image
-					src="https://prod-files-secure.s3.us-west-2.amazonaws.com/f66e1653-d12d-4ace-a61b-25015798895c/d718632e-aca0-4898-ad62-2f5261055ac9/marino-linic-M_krTMIPSLg-unsplash.jpg"
+					src="/pandemic-preparedness/one-health/vector-borne-pathogens/marino-linic-M_krTMIPSLg-unsplash.jpg"
 					alt="Photo by Marino Linic on Unsplash"
 					width={900}
 					height={500}
@@ -58,6 +61,8 @@ export default function VectorBornePage() {
 					</a>{" "}
 					on the surveillance of diseases caused by vector-borne pathogens in Norway. In addition to vector-borne pathogens, the report (Overvåkning av infeksjonssykdommer som smitter fra mat, vann og dyr, inkludert vektorbårne sykdommer) includes infectious diseases caused by food- and waterborne and zoonotic pathogens.
 				</p>
+
+				<CristinResults title="Vector-borne" />
 			</section>
 		</div>
 	);

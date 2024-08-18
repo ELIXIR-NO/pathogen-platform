@@ -126,7 +126,7 @@ export default function OneHealthPage() {
 					</li>
 				</ul>
 
-                <CristinResults title="waterborne%20pathogen" />
+                <CristinResults title="one health" />
 			</section>
 		</div>
 	);
