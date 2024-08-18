@@ -1,11 +1,15 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import Image from "next/image";
 import ReferencesPanel, { Reference } from "@/components/references-panel";
 import ContributorsPanel from "@/components/contributors-panel";
+import CristinResults from '@/components/cristin-result';
 
 const references: Reference[] = [
 	{
@@ -121,6 +125,8 @@ export default function OneHealthPage() {
 						</a>
 					</li>
 				</ul>
+
+                <CristinResults title="waterborne%20pathogen" />
 			</section>
 		</div>
 	);
