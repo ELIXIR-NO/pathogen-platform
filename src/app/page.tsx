@@ -1,6 +1,4 @@
 import DashboardsPreview from "@/components/dashboards-preview";
-import SearchBar from "@/components/search/search-bar";
-import SearchCombobox from "@/components/search/search-combobox";
 import { Separator } from "@/components/ui/separator";
 import { Info } from "lucide-react";
 
