@@ -2,29 +2,11 @@ import Image from "next/image";
 import ReferencesPanel, { Reference } from "@/components/references-panel";
 import ContributorsPanel from "@/components/contributors-panel";
 
-const references: Reference[] = [
-	{
-		referenceNumber: 1,
-		reference:
-			"Taylor Louise H., Latham Sophia M. and Woolhouse Mark E.J. 2001 Risk factors for human disease emergence Phil. Trans. R. Soc. Lond. B356983–989",
-		pmcid: "PMC1088493",
-		link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1088493/",
-	},
-	{
-		referenceNumber: 2,
-		reference:
-			"Swanson David, Koren Clemence, Hopp Petter, Jonsson Malin E, Rø Gunnar Isaksson, White Richard A, Grøneng Gry Marysol. A One Health real-time surveillance system for nowcasting Campylobacter gastrointestinal illness outbreaks, Norway, week 30 2010 to week 11 2022. Euro Surveill. 2022;27(43):pii=2101121",
-		pmcid: "PMC9615412",
-		link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9615412/",
-	}
-];
-
 export default function PathogenDataHubPage() {
 	return (
 		<div className="relative min-h-screen">
 			<div className="fixed right-12 top-32 z-10">
 				<div className="flex flex-col space-y-2">
-                    <ReferencesPanel references={references} className="py-2" />
 					<ContributorsPanel contributors={["erik"]} />
 				</div>
 			</div>
