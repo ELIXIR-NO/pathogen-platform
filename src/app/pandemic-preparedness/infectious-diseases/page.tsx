@@ -158,7 +158,7 @@ export default function InfectiousDiseasesPage() {
 						href="https://www.ecdc.europa.eu/en"
 					>
 						The European Centre for Disease Prevention and Control (ECDC)
-					</a>
+					</a> 
 					is an EU agency aimed at strengthening Europe's defenses against infectious diseases in humans. ECDC maintains the
 					<a
 						className="text-primary hover:underline"
