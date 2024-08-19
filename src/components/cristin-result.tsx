@@ -40,10 +40,14 @@ export default function CristinResults({ title }: CristinResultsProps) {
 
   return (
     <div className="mt-6 space-y-4">
-      <h3 className="font-bold">Latest publications in Cristin</h3>
+      <h3 className="font-bold">
+      Latest publications by <a href={`https://app.cristin.no/search.jsf?t=${title}&type=result&sort=PUBL_YEAR_DESC`} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">Cristin</a>
+      </h3>
       {apiData.map((item, index) => (
         <div key={index} className="p-4 border rounded-lg">
-          <h2 className="text-xl font-bold">{item.title.en}</h2>
+          <h2 className="text-xl font-bold">
+            {item.title.en || item.title.no}
+          </h2>
           <p className="text-gray-700">Published in: {item.year_published}</p>
           <p className="text-gray-700">Journal: {item.journal?.name}</p>
           <p className="text-gray-700">Publisher: {item.journal?.publisher?.name}</p>
