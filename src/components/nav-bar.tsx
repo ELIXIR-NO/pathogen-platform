@@ -129,7 +129,7 @@ const RDMNavDropdownItems: DropdownMenuItem[] = [
 	},
 ];
 
-export function NavBar({ children }: { children: React.ReactNode }) {
+export function NavBar() {
 	return (
 		<nav className="fixed left-0 right-0 top-0 z-10 h-fit py-2 backdrop-blur-sm">
 			<div className="container flex flex-row items-center justify-between gap-x-4 pt-2">
@@ -206,7 +206,6 @@ export function NavBar({ children }: { children: React.ReactNode }) {
 					))}
 				</ul>
 				<div className="flex flex-row items-center space-x-1">
-					{children}
 					<ModeToggle />
 				</div>
 			</div>
