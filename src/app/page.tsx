@@ -25,7 +25,7 @@ export default function Home() {
 				<div>
 					We are happy for any input and suggestions for relevant content that
 					you think should be mentioned in the Portal. Contact us at{" "}
-					<a href="contact@elixir.no" className="text-primary">
+					<a href="mailto:contact@elixir.no" className="text-primary">
 						contact@elixir.no
 					</a>{" "}
 					or use the contact form.
