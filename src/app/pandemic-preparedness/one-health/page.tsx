@@ -1,6 +1,3 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import {
     HoverCard,
     HoverCardContent,
@@ -33,7 +30,7 @@ export default function OneHealthPage() {
 		<div className="relative min-h-screen">
 			<div className="fixed right-12 top-32 z-10">
 				<div className="flex flex-col space-y-2">
-                    <ReferencesPanel references={references} className="py-2" />
+                    <ReferencesPanel references={references} />
 					<ContributorsPanel contributors={["terje"]} />
 				</div>
 			</div>

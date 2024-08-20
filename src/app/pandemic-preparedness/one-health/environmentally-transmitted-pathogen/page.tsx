@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
 import CristinResults from '@/components/cristin-result';
@@ -127,7 +125,7 @@ export default function EnvironmentallyTransmittedPathogenPage() {
 					https://www.mattilsynet.no/
 				</a>
 			
-				<CristinResults title="Environmental" />
+				<CristinResults title="Environmental pathogen"/>
 			</section>
 		</div>
 	);
