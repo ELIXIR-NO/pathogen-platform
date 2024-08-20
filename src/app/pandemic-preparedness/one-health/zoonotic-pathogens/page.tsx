@@ -1,6 +1,5 @@
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
-import CristinResults from "@/components/cristin-result";
 
 export default function ZoonoticPathogensPage() {
 	return (
@@ -54,7 +53,6 @@ export default function ZoonoticPathogensPage() {
 					incorporating animal health, human health, and environmental
 					management.
 				</p>
-
 				<h3 className="font-bold">Norwegian resources</h3>
 				<p>
 					In Norway, the Norwegian Veterinary Institute (
@@ -147,8 +145,6 @@ export default function ZoonoticPathogensPage() {
 				>
 					Antibiotikaresistens (NORM-VET)
 				</a>
-
-				<CristinResults title="zoonosis" />
 			</section>
 		</div>
 	);
