@@ -4,7 +4,7 @@ import {
 	extractUniqueRegions,
 	getNormAtlasCSVData,
 } from "@/lib/data/csvUtils";
-import { MultiRegionResistanceLineCharts } from "./multi-region-resistance-line-charts";
+import { ResistanceOccurrenceLineChart } from "./resistance-occurrence-line-chart";
 
 export default async function DataLoader() {
 	const records = await getNormAtlasCSVData();
@@ -13,7 +13,7 @@ export default async function DataLoader() {
 	const regions = extractUniqueRegions(records);
 
 	return (
-		<MultiRegionResistanceLineCharts
+		<ResistanceOccurrenceLineChart
 			microbes={microbes}
 			antibiotics={antibiotics}
 			regions={regions}
