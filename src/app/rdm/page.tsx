@@ -74,14 +74,33 @@ export default function ResearchDataManagementPage() {
 					validity of scientific findings.
 				</p>
 
-                <h3 className="text-2xl font-bold">FAIR RDM</h3>
-                <p>
-                    FAIR data management refers to a set of principles that guide researchers and other professionals on how to manage data in a way that makes it easy for others to access, understand, and reuse. The acronym <strong>FAIR</strong> stands for <strong>Findable</strong>, <strong>Accessible</strong>, <strong>Interoperable</strong>, and <strong>Reusable</strong>. These principles were first published in a 2016 Scientific Data paper, <a className="text-primary hover:underline" href="https://www.nature.com/articles/sdata201618">
-                        The FAIR Guiding Principles for scientific data management and stewardship
-                    </a> by Wilkinson et al. and have since been widely adopted across various scientific disciplines. For a deeper dive into how to use these principles, you can also visit the <a className="text-primary hover:underline" href="https://www.go-fair.org/fair-principles/">
-                        GO FAIR initiatives website
-                    </a>.
-                </p>
+				<h3 className="text-2xl font-bold">FAIR RDM</h3>
+				<p>
+					FAIR data management refers to a set of principles that guide
+					researchers and other professionals on how to manage data in a way
+					that makes it easy for others to access, understand, and reuse. The
+					acronym <strong>FAIR</strong> stands for <strong>Findable</strong>,{" "}
+					<strong>Accessible</strong>, <strong>Interoperable</strong>, and{" "}
+					<strong>Reusable</strong>. These principles were first published in a
+					2016 Scientific Data paper,{" "}
+					<a
+						className="text-primary hover:underline"
+						href="https://www.nature.com/articles/sdata201618"
+					>
+						The FAIR Guiding Principles for scientific data management and
+						stewardship
+					</a>{" "}
+					by Wilkinson et al. and have since been widely adopted across various
+					scientific disciplines. For a deeper dive into how to use these
+					principles, you can also visit the{" "}
+					<a
+						className="text-primary hover:underline"
+						href="https://www.go-fair.org/fair-principles/"
+					>
+						GO FAIR initiatives website
+					</a>
+					.
+				</p>
 
 				<h3 className="text-2xl font-bold">
 					Understanding the FAIR Principles
