@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ContributorsPanel from "@/components/contributors-panel";
-import CristinResults from '@/components/cristin-result';
+import CristinResults from "@/components/cristin-result";
 
 export default function Covid19Page() {
 	return (
@@ -26,9 +26,9 @@ export default function Covid19Page() {
 					respiratory illness and recover without requiring special treatment.
 					However, some will become seriously ill and require medical attention.
 					Older people and those with underlying medical conditions like
-					cardiovascular disease, diabetes, chronic respiratory disease, or cancer
-					are more likely to develop serious illness. Anyone can get sick with
-					COVID-19 and become seriously ill or die at any age.
+					cardiovascular disease, diabetes, chronic respiratory disease, or
+					cancer are more likely to develop serious illness. Anyone can get sick
+					with COVID-19 and become seriously ill or die at any age.
 				</p>
 				<div className="columns-3 gap-3">
 					<InfoCard

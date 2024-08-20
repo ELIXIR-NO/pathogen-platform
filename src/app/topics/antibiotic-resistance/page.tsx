@@ -16,14 +16,14 @@ export default function AntibioticResistancePage() {
 				/>
 				<p>
 					Antibiotic resistance, where bacteria evolve to withstand medicines,
-					significantly threatens global public health by making infections harder
-					to treat in humans, pets, and livestock. This resistance leads to
-					persistent infections, increased disease severity, higher healthcare
-					costs, and greater mortality. It jeopardizes the treatment of common
-					infectious diseases, potentially making minor injuries and routine
-					life-threatening surgeries. The issue also impacts veterinary medicine
-					and agriculture, complicating outbreaks in animals, affecting food
-					safety, and reducing farm productivity.
+					significantly threatens global public health by making infections
+					harder to treat in humans, pets, and livestock. This resistance leads
+					to persistent infections, increased disease severity, higher
+					healthcare costs, and greater mortality. It jeopardizes the treatment
+					of common infectious diseases, potentially making minor injuries and
+					routine life-threatening surgeries. The issue also impacts veterinary
+					medicine and agriculture, complicating outbreaks in animals, affecting
+					food safety, and reducing farm productivity.
 				</p>
 				<h3 className="font-bold">
 					In Norway, various resources offer detailed information on antibiotic

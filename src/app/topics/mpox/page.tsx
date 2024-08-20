@@ -8,7 +8,7 @@ import {
 import Image from "next/image";
 import ReferencesPanel, { Reference } from "@/components/references-panel";
 import ContributorsPanel from "@/components/contributors-panel";
-import CristinResults from '@/components/cristin-result';
+import CristinResults from "@/components/cristin-result";
 
 const references: Reference[] = [
 	{
@@ -155,7 +155,7 @@ export default function MpoxPage() {
 						</a>
 					</li>
 				</ul>
-			<CristinResults title="monkeypox" />
+				<CristinResults title="monkeypox" />
 			</section>
 		</div>
 	);

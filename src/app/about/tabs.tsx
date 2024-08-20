@@ -8,7 +8,11 @@ type AboutUsTabsProps = {
 	contactUs: React.ReactNode;
 };
 
-export default function AboutUsTabs({ people, partners, contactUs }: AboutUsTabsProps) {
+export default function AboutUsTabs({
+	people,
+	partners,
+	contactUs,
+}: AboutUsTabsProps) {
 	return (
 		<Tabs
 			aria-label="Options"

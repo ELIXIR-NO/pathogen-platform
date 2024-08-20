@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
-import CristinResults from '@/components/cristin-result';
+import CristinResults from "@/components/cristin-result";
 
 export default function VectorVornePathogensPage() {
 	return (
@@ -19,7 +19,7 @@ export default function VectorVornePathogensPage() {
 					height={500}
 					className="mx-auto rounded-md"
 				/>
-				<p className="text-sm text-center">
+				<p className="text-center text-sm">
 					Photo by{" "}
 					<a
 						className="text-primary hover:underline"
@@ -36,12 +36,19 @@ export default function VectorVornePathogensPage() {
 					</a>
 				</p>
 				<p>
-					Vector-borne pathogens are transmitted to humans through vectors, which are typically arthropods such as mosquitoes, ticks, or fleas. The general transmission pathway is that the vector becomes infected by feeding on the blood of an infected host (often an animal) and then transmits the pathogen to a human host through subsequent bites.
+					Vector-borne pathogens are transmitted to humans through vectors,
+					which are typically arthropods such as mosquitoes, ticks, or fleas.
+					The general transmission pathway is that the vector becomes infected
+					by feeding on the blood of an infected host (often an animal) and then
+					transmits the pathogen to a human host through subsequent bites.
 				</p>
 				<p>
-					The key difference from zoonotic pathogens is that vector-borne pathogens require an intermediary vector for transmission to humans.
+					The key difference from zoonotic pathogens is that vector-borne
+					pathogens require an intermediary vector for transmission to humans.
 				</p>
-				<h3 className="font-bold">Surveillance of vector-borne pathogens in Norway</h3>
+				<h3 className="font-bold">
+					Surveillance of vector-borne pathogens in Norway
+				</h3>
 				<p>
 					The National Institute of Public Health (
 					<a
@@ -57,7 +64,11 @@ export default function VectorVornePathogensPage() {
 					>
 						annual reports
 					</a>{" "}
-					on the surveillance of diseases caused by vector-borne pathogens in Norway. In addition to vector-borne pathogens, the report (Overvåkning av infeksjonssykdommer som smitter fra mat, vann og dyr, inkludert vektorbårne sykdommer) includes infectious diseases caused by food- and waterborne and zoonotic pathogens.
+					on the surveillance of diseases caused by vector-borne pathogens in
+					Norway. In addition to vector-borne pathogens, the report (Overvåkning
+					av infeksjonssykdommer som smitter fra mat, vann og dyr, inkludert
+					vektorbårne sykdommer) includes infectious diseases caused by food-
+					and waterborne and zoonotic pathogens.
 				</p>
 
 				<CristinResults title="Vector-borne" />

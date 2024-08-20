@@ -15,11 +15,11 @@ export default function PseudomonasPage() {
 					className="mx-auto rounded-md"
 				/>
 				<p>
-					Pseudomonas species are Gram-negative aerobic rods, forming granular and
-					dry- colonies of various colors. Their measure is from 0.5 to 0.8 μm by
-					1.5 to 3.0 μm. It occupies the environment, mostly soil (coastal areas),
-					water, and plant and animal tissues, and it can easily survive various
-					environmental stresses.
+					Pseudomonas species are Gram-negative aerobic rods, forming granular
+					and dry- colonies of various colors. Their measure is from 0.5 to 0.8
+					μm by 1.5 to 3.0 μm. It occupies the environment, mostly soil (coastal
+					areas), water, and plant and animal tissues, and it can easily survive
+					various environmental stresses.
 				</p>
 				<p>
 					Pseudomonas means ”false unit”, aeruginosa refers to the blue-green
@@ -29,20 +29,22 @@ export default function PseudomonasPage() {
 					light turned to a blue-green color.
 				</p>
 				<p>
-					<span className="font-bold italic">Pseudomonas aeruginos</span> usually
-					affects immunocompromised people. Healthy people usually would not get
-					infected by this microbe.
+					<span className="font-bold italic">Pseudomonas aeruginos</span>{" "}
+					usually affects immunocompromised people. Healthy people usually would
+					not get infected by this microbe.
 				</p>
 				<p>
 					<span className="font-bold italic">P. aeruginosa</span> is an
-					opportunistic pathogen, and it needs to be a break in the first defence
-					line of the body. The break is a classified example as trauma, cystic
-					fibrosis, surgeries, cancer, AIDS, or other immunosuppressed stages.
+					opportunistic pathogen, and it needs to be a break in the first
+					defence line of the body. The break is a classified example as trauma,
+					cystic fibrosis, surgeries, cancer, AIDS, or other immunosuppressed
+					stages.
 				</p>
 				<p>
 					These bacteria have an increased ability to erase antibiotics from
 					inside the cell, leading to high resistance to antibiotics and common
-					disinfectants. It primarily infects the urinary and respiratory tracts,
+					disinfectants. It primarily infects the urinary and respiratory
+					tracts,
 					{/* eslint-disable-next-line react/no-unescaped-entities */}
 					swimmer's ears, cornea, wounds, and folliculitis.
 				</p>
@@ -59,9 +61,10 @@ export default function PseudomonasPage() {
 					.
 				</p>
 				<p>
-					In the <span className="font-bold italic">Pseudomonas aeruginosa</span>
-					database, you can find the genomes of the species and, corresponding to
-					them, metadata with relevant information about the pathogen source
+					In the{" "}
+					<span className="font-bold italic">Pseudomonas aeruginosa</span>
+					database, you can find the genomes of the species and, corresponding
+					to them, metadata with relevant information about the pathogen source
 				</p>
 				<h3 className="font-bold">Relevant links</h3>
 				<ul className="list-disc">

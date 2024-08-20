@@ -6,7 +6,11 @@ import AboutUsTabs from "./tabs";
 export default function About() {
 	return (
 		<main>
-			<AboutUsTabs people={<People />} partners={<Partners />} contactUs={<ContactUs />} />
+			<AboutUsTabs
+				people={<People />}
+				partners={<Partners />}
+				contactUs={<ContactUs />}
+			/>
 		</main>
 	);
 }

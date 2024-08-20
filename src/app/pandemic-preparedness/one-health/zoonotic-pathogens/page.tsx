@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
-import CristinResults from '@/components/cristin-result';
+import CristinResults from "@/components/cristin-result";
 
 export default function ZoonoticPathogensPage() {
 	return (
@@ -19,7 +19,7 @@ export default function ZoonoticPathogensPage() {
 					height={500}
 					className="mx-auto rounded-md"
 				/>
-				<p className="text-sm text-center">
+				<p className="text-center text-sm">
 					Photo by{" "}
 					<a
 						className="text-primary hover:underline"
@@ -36,13 +36,23 @@ export default function ZoonoticPathogensPage() {
 					</a>
 				</p>
 				<p>
-					Zoonotic pathogens are infectious agents that can be transmitted from animals to humans. These pathogens include a wide range of microorganisms such as viruses, bacteria, fungi, parasites, and prions.
+					Zoonotic pathogens are infectious agents that can be transmitted from
+					animals to humans. These pathogens include a wide range of
+					microorganisms such as viruses, bacteria, fungi, parasites, and
+					prions.
 				</p>
 				<p>
-					The close interaction between humans and animals, whether through agriculture, pet ownership, wildlife contact, or environmental encroachment, can facilitate the spread of zoonotic diseases (zoonosis). The transmission can occur through direct contact with infected animals, bites or scratches, inhalation of aerosols, or through vectors such as mosquitoes and ticks.
+					The close interaction between humans and animals, whether through
+					agriculture, pet ownership, wildlife contact, or environmental
+					encroachment, can facilitate the spread of zoonotic diseases
+					(zoonosis). The transmission can occur through direct contact with
+					infected animals, bites or scratches, inhalation of aerosols, or
+					through vectors such as mosquitoes and ticks.
 				</p>
 				<p>
-					Preventing zoonotic diseases requires a multidisciplinary approach, incorporating animal health, human health, and environmental management.
+					Preventing zoonotic diseases requires a multidisciplinary approach,
+					incorporating animal health, human health, and environmental
+					management.
 				</p>
 
 				<h3 className="font-bold">Norwegian resources</h3>
@@ -54,14 +64,17 @@ export default function ZoonoticPathogensPage() {
 					>
 						Veterinærinstituttet
 					</a>
-					) is responsible for maintaining a comprehensive overview of the occurrence of zoonoses in animals, food, and the environment.{" "}
+					) is responsible for maintaining a comprehensive overview of the
+					occurrence of zoonoses in animals, food, and the environment.{" "}
 					<a
 						className="text-primary hover:underline"
 						href="https://www.vetinst.no/"
 					>
 						Veterinærinstituttet
 					</a>{" "}
-					also serves as the National Reference Laboratory (NRL) for these areas in Norway and reports Norwegian data on specified zoonoses in feed, animals, and food to the{" "}
+					also serves as the National Reference Laboratory (NRL) for these areas
+					in Norway and reports Norwegian data on specified zoonoses in feed,
+					animals, and food to the{" "}
 					<a
 						className="text-primary hover:underline"
 						href="https://www.efsa.europa.eu/en"
@@ -98,18 +111,21 @@ export default function ZoonoticPathogensPage() {
 
 				<h3 className="font-bold">MSIS</h3>
 				<p>
-					The health registry MSIS (Meldingssystem for smittsomme sykdommer) is the official system for monitoring infectious diseases in humans, including zoonotic pathogens.
+					The health registry MSIS (Meldingssystem for smittsomme sykdommer) is
+					the official system for monitoring infectious diseases in humans,
+					including zoonotic pathogens.
 				</p>
-				<a
-					className="text-primary hover:underline"
-					href="https://msis.no/"
-				>
+				<a className="text-primary hover:underline" href="https://msis.no/">
 					https://msis.no/
 				</a>
 
 				<h3 className="font-bold">NORM</h3>
 				<p>
-					The health registry NORM (Norsk overvåkingssystem for antibiotikaresistens hos mikrober) monitors antibiotic resistance in pathogenic bacteria from humans. It collaborates closely with the NORM-VET program to produce annual reports on antibiotic resistance in both humans and animals.
+					The health registry NORM (Norsk overvåkingssystem for
+					antibiotikaresistens hos mikrober) monitors antibiotic resistance in
+					pathogenic bacteria from humans. It collaborates closely with the
+					NORM-VET program to produce annual reports on antibiotic resistance in
+					both humans and animals.
 				</p>
 				<a
 					className="text-primary hover:underline"
@@ -120,7 +136,10 @@ export default function ZoonoticPathogensPage() {
 
 				<h3 className="font-bold">NORM-VET</h3>
 				<p>
-					The surveillance program NORM-VET (Norsk overvåkingsprogram for antibiotikaresistens i mikrober fra fôr, dyr og næringsmidler) focuses on antibiotic resistance in microbes originating from feed, animals, and food.
+					The surveillance program NORM-VET (Norsk overvåkingsprogram for
+					antibiotikaresistens i mikrober fra fôr, dyr og næringsmidler) focuses
+					on antibiotic resistance in microbes originating from feed, animals,
+					and food.
 				</p>
 				<a
 					className="text-primary hover:underline"

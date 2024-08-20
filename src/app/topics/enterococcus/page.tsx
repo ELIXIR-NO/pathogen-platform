@@ -27,9 +27,9 @@ export default function EnterococcusPage() {
 					environment.
 				</p>
 				<p className="text-justify">
-					As a commensal bacterium, it lives harmlessly in the healthy human gut.
-					It is commonly used as a probiotic. However, <em>E. faecalis</em> could
-					spread to the other part of the body, causing infections.
+					As a commensal bacterium, it lives harmlessly in the healthy human
+					gut. It is commonly used as a probiotic. However, <em>E. faecalis</em>{" "}
+					could spread to the other part of the body, causing infections.
 				</p>
 				<p className="text-justify">
 					The bacterium can survive extreme environments such as acid and
