@@ -1,8 +1,7 @@
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
-import CristinResults from "@/components/cristin-result";
 
-export default function VectorVornePathogensPage() {
+export default function VectorBornePathogensPage() {
 	return (
 		<div className="relative min-h-screen">
 			<div className="fixed right-12 top-32 z-10">
@@ -70,8 +69,6 @@ export default function VectorVornePathogensPage() {
 					vektorbårne sykdommer) includes infectious diseases caused by food-
 					and waterborne and zoonotic pathogens.
 				</p>
-
-				<CristinResults title="Vector-borne" />
 			</section>
 		</div>
 	);
