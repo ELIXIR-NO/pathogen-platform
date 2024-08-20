@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
 
 export default function DataSharingPage() {

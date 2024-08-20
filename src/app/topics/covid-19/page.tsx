@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ContributorsPanel from "@/components/contributors-panel";
-import CristinResults from "@/components/cristin-result";
 
 export default function Covid19Page() {
 	return (
@@ -68,7 +67,6 @@ export default function Covid19Page() {
 						link="https://allvis.fhi.no/sysvak/antall-vaksinerte?etter=diagnose&fordeltPaa=dag&diagnose=COVID_19"
 					/>
 				</div>
-				<CristinResults title="Covid-19" />
 			</section>
 		</div>
 	);

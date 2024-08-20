@@ -1,5 +1,3 @@
-import Image from "next/image";
-import ReferencesPanel, { Reference } from "@/components/references-panel";
 import ContributorsPanel from "@/components/contributors-panel";
 
 export default function PathogenDataHubPage() {
