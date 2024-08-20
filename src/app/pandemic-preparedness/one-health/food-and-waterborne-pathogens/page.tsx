@@ -1,6 +1,5 @@
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
-import CristinResults from "@/components/cristin-result";
 
 export default function FoodWaterbornePathogensPage() {
 	return (
@@ -183,8 +182,6 @@ export default function FoodWaterbornePathogensPage() {
 						Home - Norwegian Veterinary Institute
 					</a>
 				</p>
-
-				<CristinResults title="waterborne%20pathogen" />
 			</section>
 		</div>
 	);
