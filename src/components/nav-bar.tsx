@@ -22,7 +22,7 @@ const NavItems: NavItem[] = [
 		pageName: "Events",
 	},
 	{
-		pageUrl: "/dashboard",
+		pageUrl: "/dashboards",
 		pageName: "Dashboard",
 	},
 	{
