@@ -16,7 +16,7 @@ export default function DataSharingPage() {
 				</p>
 				<ol className="list-decimal pl-5">
 					<li>
-						<strong>Advancing Scientific Research</strong>: Sharing data allows researchers to build on each other's work, verify results, and conduct meta-analyses or pooled studies, which can lead to new discoveries and innovations faster than if each researcher worked in isolation.
+						<strong>Advancing Scientific Research</strong>: Sharing data allows researchers to build on each others work, verify results, and conduct meta-analyses or pooled studies, which can lead to new discoveries and innovations faster than if each researcher worked in isolation.
 					</li>
 					<li>
 						<strong>Transparency and Reproducibility</strong>: By making data available, other researchers can validate and reproduce findings. This enhances the credibility of the research and helps to eliminate biases or errors that might occur if data were kept private.
