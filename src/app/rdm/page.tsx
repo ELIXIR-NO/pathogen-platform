@@ -14,14 +14,14 @@ export default function ResearchDataManagementPage() {
 
                 <h3 className="text-2xl font-bold">From Data to Discovery: The Complex Path of Scientific Research</h3>
                 <p>
-                    Research projects are complex and produce many different types of information, showing how detailed and careful the work must be. The process starts with collecting raw data from experiments or observations and ends with detailed final reports that explain the results and their importance. Along the way, raw data is turned into processed data that's easier to understand, statistical methods are used to analyze the data, and every part of the research—from the tools used to ethical approvals and following rules—is documented. Research results can include academic papers, presentations, patents, and agreements for working together, all of which need careful planning and detailed records. The wide range of information not only highlights how complex research projects are but also makes sure that the results can be checked, used again, and understood by others, adding to the overall pool of knowledge.
+                    Research projects are complex and produce many different types of information, showing how detailed and careful the work must be. The process starts with collecting raw data from experiments or observations and ends with detailed final reports that explain the results and their importance. Along the way, raw data is turned into processed data thats easier to understand, statistical methods are used to analyze the data, and every part of the research—from the tools used to ethical approvals and following rules—is documented. Research results can include academic papers, presentations, patents, and agreements for working together, all of which need careful planning and detailed records. The wide range of information not only highlights how complex research projects are but also makes sure that the results can be checked, used again, and understood by others, adding to the overall pool of knowledge.
                 </p>
 
                 <h3 className="text-2xl font-bold">The Importance of RDM</h3>
                 <p>
-                    By following good practices in RDM, you can manage your research results more effectively, making it easier for others to use them later. Generally, it's best to make research results as open <strong>as possible</strong> and easy to find, access, use, and reuse, following what are called the <strong>FAIR principles</strong>. To understand more about making research open and FAIR, you can check out{" "}
+                    By following good practices in RDM, you can manage your research results more effectively, making it easier for others to use them later. Generally, its best to make research results as open <strong>as possible</strong> and easy to find, access, use, and reuse, following what are called the <strong>FAIR principles</strong>. To understand more about making research open and FAIR, you can check out{" "}
                     <a className="text-primary hover:underline" href="https://www.regjeringen.no/no/dokumenter/nasjonale-mal-og-retningslinjer-for-apen-tilgang-til-vitenskapelige-artikler/id2567591/">
-                        Norway's national guidelines on promoting open science
+                        Norways national guidelines on promoting open science
                     </a>{" "}
                     and a detailed explanation by{" "}
                     <a className="text-primary hover:underline" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4792175/pdf/sdata201618.pdf">
@@ -31,7 +31,7 @@ export default function ResearchDataManagementPage() {
 
                 <h3 className="text-2xl font-bold">The Hidden Barrier to AI Medical Breakthroughs: Why Data Management is Key</h3>
                 <p>
-                    In a time when AI is expected to greatly improve medicine and boost scientific breakthroughs, it's important to recognize that managing data well is essential. For AI to reach its full potential and to safely make decisions based on data, we need proper FAIR data management. Whether it's for human, animal, or environmental health, AI in healthcare and scientific research relies on having access to large, well-organized, and structured datasets. AI algorithms need high-quality data to build accurate and reliable models. Without good data management, the data may not be reliable or usable, making AI tools less effective and possibly risking patient safety and the validity of scientific findings.
+                    In a time when AI is expected to greatly improve medicine and boost scientific breakthroughs, its important to recognize that managing data well is essential. For AI to reach its full potential and to safely make decisions based on data, we need proper FAIR data management. Whether its for human, animal, or environmental health, AI in healthcare and scientific research relies on having access to large, well-organized, and structured datasets. AI algorithms need high-quality data to build accurate and reliable models. Without good data management, the data may not be reliable or usable, making AI tools less effective and possibly risking patient safety and the validity of scientific findings.
                 </p>
 
                 <h3 className="text-2xl font-bold">FAIR RDM</h3>
@@ -39,7 +39,7 @@ export default function ResearchDataManagementPage() {
                     FAIR data management refers to a set of principles that guide researchers and other professionals on how to manage data in a way that makes it easy for others to access, understand, and reuse. The acronym <strong>"FAIR"</strong> stands for <strong>Findable</strong>, <strong>Accessible</strong>, <strong>Interoperable</strong>, and <strong>Reusable</strong>. These principles were first published in a 2016 Scientific Data paper, <a className="text-primary hover:underline" href="https://www.nature.com/articles/sdata201618">
                         The FAIR Guiding Principles for scientific data management and stewardship
                     </a> by Wilkinson et al. and have since been widely adopted across various scientific disciplines. For a deeper dive into how to use these principles, you can also visit the <a className="text-primary hover:underline" href="https://www.go-fair.org/fair-principles/">
-                        GO FAIR initiative's website
+                        GO FAIR initiatives website
                     </a>.
                 </p>
 
@@ -61,7 +61,7 @@ export default function ResearchDataManagementPage() {
 
                 <h3 className="text-2xl font-bold">Pathogen Data Are Special</h3>
                 <p>
-                    The adaptation of FAIR principles to the genomic data of pathogenic microorganisms involves specific considerations that distinguish it significantly from the management of human genomic data and biodiversity data management. Unlike human data, which is heavily guarded due to privacy concerns, and biodiversity data, which often focuses on conservation and ecological studies, pathogenic microorganisms' data management is critical for both scientific research and clinical practice. This type of data management not only supports scientific research but also heavily supports clinical and public health responses to infectious disease threats. The urgency of public health responses demands that this data must be rapidly accessible and interoperable to facilitate timely decision-making and outbreak control. At the same time, the rigorous standards of scientific research require this data to be meticulously documented and reusable under ethical and legal frameworks. This dual demand creates unique challenges in managing pathogenic microorganisms' genomic data, as it must be handled in a way that respects both the immediate needs of clinical settings and the detailed, methodical requirements of scientific inquiry.
+                    The adaptation of FAIR principles to the genomic data of pathogenic microorganisms involves specific considerations that distinguish it significantly from the management of human genomic data and biodiversity data management. Unlike human data, which is heavily guarded due to privacy concerns, and biodiversity data, which often focuses on conservation and ecological studies, pathogenic microorganisms data management is critical for both scientific research and clinical practice. This type of data management not only supports scientific research but also heavily supports clinical and public health responses to infectious disease threats. The urgency of public health responses demands that this data must be rapidly accessible and interoperable to facilitate timely decision-making and outbreak control. At the same time, the rigorous standards of scientific research require this data to be meticulously documented and reusable under ethical and legal frameworks. This dual demand creates unique challenges in managing pathogenic microorganisms genomic data, as it must be handled in a way that respects both the immediate needs of clinical settings and the detailed, methodical requirements of scientific inquiry.
                 </p>
 
                 <h3 className="text-2xl font-bold">Pathogen Research Integrates Important Research Domains</h3>
@@ -79,7 +79,7 @@ export default function ResearchDataManagementPage() {
                     These different facets of research and practice are united under the One Health domain, which recognizes the interconnectedness of human, animal, and environmental health. Each domain, while overlapping in overall goals, often is subject to different legal and financial frameworks, necessitating tailored data management approaches.
                 </p>
 
-                <h3 className="text-2xl font-bold">FAIR Principles in Human Pathogenic Microorganisms' Genomics Data</h3>
+                <h3 className="text-2xl font-bold">FAIR Principles in Human Pathogenic Microorganisms Genomics Data</h3>
                 <p>
                     Genomics data from pathogenic microorganisms are needed for the understanding of disease mechanisms, tracking outbreaks, and developing treatments. However, the sensitive nature of this data, especially when linked to human hosts, requires stringent management to protect patient privacy while enabling scientific advancement. FAIR data management practices provide guidelines that help balance these needs, ensuring that data are not only useful and accessible but also protected from misuse.
                 </p>
@@ -90,7 +90,7 @@ export default function ResearchDataManagementPage() {
                     <li><strong>Reusability</strong> of data is critical in both fields but comes with different expectations and requirements. Human genomics data reuse must be tightly coupled with consent and ethical considerations, often limiting the scope of future research. Pathogenic genomics data, on the other hand, is primarily reused for broader public health research and policy-making, requiring it to be highly adaptable and easily integrated with diverse data types.</li>
                 </ul>
                 <p>
-                    To effectively manage pathogenic microorganisms' genomics data according to FAIR principles, researchers can utilize a suite of resources provided by ELIXIR and other actors in Norway, which facilitate the application of these principles.
+                    To effectively manage pathogenic microorganisms genomics data according to FAIR principles, researchers can utilize a suite of resources provided by ELIXIR and other actors in Norway, which facilitate the application of these principles.
                 </p>
 
                 <h3 className="text-2xl font-bold">Where Do I Start?</h3>

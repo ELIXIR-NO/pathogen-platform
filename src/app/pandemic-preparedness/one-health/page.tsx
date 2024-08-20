@@ -6,7 +6,7 @@ import {
 import Image from "next/image";
 import ReferencesPanel, { Reference } from "@/components/references-panel";
 import ContributorsPanel from "@/components/contributors-panel";
-import CristinResults from '@/components/cristin-result';
+import CristinResults from @/components/cristin-result;
 
 const references: Reference[] = [
 	{
@@ -118,7 +118,7 @@ export default function OneHealthPage() {
 							className="text-primary hover:underline"
 							href="https://www.fhi.no/en/in/smitte-fra-mat-vann-og-dyr/artikler/the-largest-ever-health-project-funded-from-the-eus-horizon-2020/"
 						>
-							Norwegian Institute of Public Health - EU's Horizon 2020 projects
+							Norwegian Institute of Public Health - EUs Horizon 2020 projects
 						</a>
 					</li>
 				</ul>
