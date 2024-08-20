@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
-import CristinResults from '@/components/cristin-result';
+import CristinResults from "@/components/cristin-result";
 
 export default function FoodWaterbornePathogensPage() {
 	return (
@@ -19,7 +19,7 @@ export default function FoodWaterbornePathogensPage() {
 					height={500}
 					className="mx-auto rounded-md"
 				/>
-				<p className="text-sm text-center">
+				<p className="text-center text-sm">
 					Photo by{" "}
 					<a
 						className="text-primary hover:underline"
@@ -131,10 +131,7 @@ export default function FoodWaterbornePathogensPage() {
 					food- and waterborne pathogens.
 				</p>
 				<p>
-					<a
-						className="text-primary hover:underline"
-						href="https://msis.no/"
-					>
+					<a className="text-primary hover:underline" href="https://msis.no/">
 						MSIS Registry
 					</a>
 				</p>

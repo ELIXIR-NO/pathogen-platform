@@ -10,13 +10,18 @@ export default function DatabasesPage() {
 				</div>
 			</div>
 			<section className="flex flex-col space-y-6 text-justify">
-				<h2 className="text-3xl font-bold">Databases and public repositories</h2>
+				<h2 className="text-3xl font-bold">
+					Databases and public repositories
+				</h2>
 				<p>
-					On this page you will find descriptions and links to databases and data repositories relevant for research on pathogen data. We have selected these resources because they are public and freely available.
+					On this page you will find descriptions and links to databases and
+					data repositories relevant for research on pathogen data. We have
+					selected these resources because they are public and freely available.
 				</p>
 				<h3 className="text-2xl font-semibold">The Pathogens Portal</h3>
 				<p>
-					A web portal for accessing open data on emerging and endemic pathogens. Developed and maintained by EMBL-EBI
+					A web portal for accessing open data on emerging and endemic
+					pathogens. Developed and maintained by EMBL-EBI
 					<a
 						className="text-primary hover:underline"
 						href="https://www.pathogensportal.org/"
@@ -26,7 +31,8 @@ export default function DatabasesPage() {
 				</p>
 				<h3 className="text-2xl font-semibold">European Nucleotide Archive</h3>
 				<p>
-					The European Nucleotide Archive (ENA) is a repository providing free and unrestricted access to annotated DNA and RNA sequences: 
+					The European Nucleotide Archive (ENA) is a repository providing free
+					and unrestricted access to annotated DNA and RNA sequences:
 					<a
 						className="text-primary hover:underline"
 						href="https://www.ebi.ac.uk/ena/browser/home"
