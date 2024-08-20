@@ -23,7 +23,7 @@ export default function ResearchDataManagementPage() {
                     <a className="text-primary hover:underline" href="https://www.regjeringen.no/no/dokumenter/nasjonale-mal-og-retningslinjer-for-apen-tilgang-til-vitenskapelige-artikler/id2567591/">
                         Norways national guidelines on promoting open science
                     </a>{" "}
-                    and a detailed explanation by{" "}
+                        and a detailed explanation by{" "}
                     <a className="text-primary hover:underline" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4792175/pdf/sdata201618.pdf">
                         Wilkinson et al. (2016)
                     </a>.
