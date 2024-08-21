@@ -1,10 +1,5 @@
 import Image from "next/image";
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const contributors = [
 	{
@@ -12,7 +7,7 @@ const contributors = [
 		image: "/people/erik.jpg",
 		description:
 			"Erik Hjerde works as the node leader at ELIXIR@UIT. He has a background in biology with a PhD in Genomics. During his career he has been working mainly with prokaryotes with focus on genomics, transcriptomics and metagenomic analysis on communities from both the human host as well as from various ecological habitats.",
-			email: "erik.hjerde@uit.no",
+		email: "erik.hjerde@uit.no",
 	},
 	{
 		name: "Peter Kovachich - Team lead",
@@ -66,13 +61,13 @@ const contributors = [
 export default function PathogenPortalContributors() {
 	return (
 		<section className="p-6">
-			<h2 className="text-3xl font-bold mb-6">Pathogen Portal Contributors</h2>
+			<h2 className="mb-6 text-3xl font-bold">Pathogen Portal Contributors</h2>
 
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+			<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 				{contributors.map((contributor, index) => (
 					<Card key={index} className="flex flex-col items-center">
 						<CardHeader className="flex flex-col items-center">
-							<div className="h-[150px] w-[150px] overflow-hidden rounded-full mb-4">
+							<div className="mb-4 h-[150px] w-[150px] overflow-hidden rounded-full">
 								<Image
 									src={contributor.image}
 									alt={contributor.name}
@@ -83,14 +78,16 @@ export default function PathogenPortalContributors() {
 							</div>
 							<CardTitle className="text-center">{contributor.name}</CardTitle>
 							<a
-								className="italic text-primary text-center hover:underline"
+								className="text-center italic text-primary hover:underline"
 								href={`mailto:${contributor.email}`}
 							>
 								{contributor.email}
 							</a>
 						</CardHeader>
 						<CardContent>
-							<p className="font-normal text-center">{contributor.description} </p>
+							<p className="text-center font-normal">
+								{contributor.description}{" "}
+							</p>
 						</CardContent>
 					</Card>
 				))}
