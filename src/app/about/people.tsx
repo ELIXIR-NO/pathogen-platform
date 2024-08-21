@@ -1,7 +1,14 @@
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const contributors: {name: string, image: string, description: string, email: string}[] = [
+type Contributor = {
+	name: string;
+	image: string;
+	description: string;
+	email: string;
+};
+
+const contributors = ([] = [
 	{
 		name: "Erik Hjerde - Project lead",
 		image: "/people/erik.jpg",
@@ -56,7 +63,7 @@ const contributors: {name: string, image: string, description: string, email: st
 			"Sebastian Peters works as a support being involved in support, helpdesk, training, data curation, and data processing for genomics and transcriptomics projects. He has a background in environmental soil metatranscriptomics focusing on trophic interactions and predatory prokaryotes (myxobacteria) and their role in the soil food web, before switching to marine genomics and transcriptomics with a main focus on phototrophic eukaryotes (microalgae) and their interactions in the phycosphere.",
 		email: "sebastian.petters@uit.no",
 	},
-];
+]);
 
 export default function PathogenPortalContributors() {
 	return (
