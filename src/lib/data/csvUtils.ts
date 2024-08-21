@@ -3,7 +3,7 @@ import path from "node:path";
 import { parse } from "csv-parse/sync";
 
 export interface NormDataRecord {
-	proveAar: string;
+	ProveAar: string;
 	Opplegg: string;
 	Mikrobe: string;
 	Antibiotika: string;
