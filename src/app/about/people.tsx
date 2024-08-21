@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-type Contributor = {
+interface Contributor {
 	name: string;
 	image: string;
 	description: string;
 	email: string;
 };
 
-const contributors = ([] = [
+export const contributors: Contributor[] = [
 	{
 		name: "Erik Hjerde - Project lead",
 		image: "/people/erik.jpg",
@@ -63,42 +63,42 @@ const contributors = ([] = [
 			"Sebastian Peters works as a support being involved in support, helpdesk, training, data curation, and data processing for genomics and transcriptomics projects. He has a background in environmental soil metatranscriptomics focusing on trophic interactions and predatory prokaryotes (myxobacteria) and their role in the soil food web, before switching to marine genomics and transcriptomics with a main focus on phototrophic eukaryotes (microalgae) and their interactions in the phycosphere.",
 		email: "sebastian.petters@uit.no",
 	},
-]);
+] as const;
 
 export default function PathogenPortalContributors() {
 	return (
-		<section className="p-6">
-			<h2 className="mb-6 text-3xl font-bold">Pathogen Portal Contributors</h2>
-
-			<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-				{contributors.map((contributor, index) => (
-					<Card key={index} className="flex flex-col items-center">
-						<CardHeader className="flex flex-col items-center">
-							<div className="mb-4 h-[150px] w-[150px] overflow-hidden rounded-full">
-								<Image
-									src={contributor.image}
-									alt={contributor.name}
-									width={150}
-									height={150}
-									className="h-full w-full rounded-full object-cover"
-								/>
-							</div>
-							<CardTitle className="text-center">{contributor.name}</CardTitle>
-							<a
-								className="text-center italic text-primary hover:underline"
-								href={`mailto:${contributor.email}`}
-							>
-								{contributor.email}
-							</a>
-						</CardHeader>
-						<CardContent>
-							<p className="text-center font-normal">
-								{contributor.description}{" "}
-							</p>
-						</CardContent>
-					</Card>
-				))}
-			</div>
-		</section>
+	  <section className="p-6">
+		<h2 className="mb-6 text-3xl font-bold">Pathogen Portal Contributors</h2>
+  
+		<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+		  {contributors.map((contributor, index) => (
+			<Card key={index} className="flex flex-col items-center">
+			  <CardHeader className="flex flex-col items-center">
+				<div className="mb-4 h-[150px] w-[150px] overflow-hidden rounded-full">
+				  <Image
+					src={contributor.image}
+					alt={contributor.name}
+					width={150}
+					height={150}
+					className="h-full w-full rounded-full object-cover"
+				  />
+				</div>
+				<CardTitle className="text-center">{contributor.name}</CardTitle>
+				<a
+				  className="text-center italic text-primary hover:underline"
+				  href={`mailto:${contributor.email}`}
+				>
+				  {contributor.email}
+				</a>
+			  </CardHeader>
+			  <CardContent>
+				<p className="text-center font-normal">
+				  {contributor.description}
+				</p>
+			  </CardContent>
+			</Card>
+		  ))}
+		</div>
+	  </section>
 	);
-}
+  }
