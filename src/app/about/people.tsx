@@ -6,7 +6,7 @@ interface Contributor {
 	image: string;
 	description: string;
 	email: string;
-};
+}
 
 export const contributors: Contributor[] = [
 	{
@@ -67,38 +67,38 @@ export const contributors: Contributor[] = [
 
 export default function PathogenPortalContributors() {
 	return (
-	  <section className="p-6">
-		<h2 className="mb-6 text-3xl font-bold">Pathogen Portal Contributors</h2>
-  
-		<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-		  {contributors.map((contributor, index) => (
-			<Card key={index} className="flex flex-col items-center">
-			  <CardHeader className="flex flex-col items-center">
-				<div className="mb-4 h-[150px] w-[150px] overflow-hidden rounded-full">
-				  <Image
-					src={contributor.image}
-					alt={contributor.name}
-					width={150}
-					height={150}
-					className="h-full w-full rounded-full object-cover"
-				  />
-				</div>
-				<CardTitle className="text-center">{contributor.name}</CardTitle>
-				<a
-				  className="text-center italic text-primary hover:underline"
-				  href={`mailto:${contributor.email}`}
-				>
-				  {contributor.email}
-				</a>
-			  </CardHeader>
-			  <CardContent>
-				<p className="text-center font-normal">
-				  {contributor.description}
-				</p>
-			  </CardContent>
-			</Card>
-		  ))}
-		</div>
-	  </section>
+		<section className="p-6">
+			<h2 className="mb-6 text-3xl font-bold">Pathogen Portal Contributors</h2>
+
+			<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+				{contributors.map((contributor, index) => (
+					<Card key={index} className="flex flex-col items-center">
+						<CardHeader className="flex flex-col items-center">
+							<div className="mb-4 h-[150px] w-[150px] overflow-hidden rounded-full">
+								<Image
+									src={contributor.image}
+									alt={contributor.name}
+									width={150}
+									height={150}
+									className="h-full w-full rounded-full object-cover"
+								/>
+							</div>
+							<CardTitle className="text-center">{contributor.name}</CardTitle>
+							<a
+								className="text-center italic text-primary hover:underline"
+								href={`mailto:${contributor.email}`}
+							>
+								{contributor.email}
+							</a>
+						</CardHeader>
+						<CardContent>
+							<p className="text-center font-normal">
+								{contributor.description}
+							</p>
+						</CardContent>
+					</Card>
+				))}
+			</div>
+		</section>
 	);
-  }
+}
