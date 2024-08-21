@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const contributors = [
+const contributors: {name: string, image: string, description: string, email: string}[] = [
 	{
 		name: "Erik Hjerde - Project lead",
 		image: "/people/erik.jpg",
