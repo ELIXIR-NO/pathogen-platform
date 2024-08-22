@@ -129,3 +129,27 @@ export function fuzzySearchIndex(
 
 	return Array.from(results);
 }
+
+export function exactTagSearch(
+	tag: string,
+	searchIndex: SearchIndex
+): IndexItem[] {
+	const resultsSet = new Set<IndexItem>();
+
+	// Convert the tag to lowercase for case-insensitive comparison
+	const normalizedTag = tag.toLowerCase();
+
+	Object.entries(searchIndex).forEach(([key, value]) => {
+		if (Array.isArray(value)) {
+			if (key.toLowerCase() === normalizedTag) {
+				value.forEach((item) => resultsSet.add(item));
+			}
+		} else {
+			if (value.tags.some((t) => t.toLowerCase() === normalizedTag)) {
+				resultsSet.add(value);
+			}
+		}
+	});
+
+	return Array.from(resultsSet);
+}
