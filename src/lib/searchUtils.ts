@@ -1,5 +1,4 @@
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { fetchAllPages } from "@/lib/notion-utils";
 
 export interface IndexItem {
 	pageId: string;
@@ -7,6 +6,8 @@ export interface IndexItem {
 	relativeLink: string;
 	slug: string;
 	summary: string;
+	oneLiner: string;
+	imageUrl?: string;
 	tags: string[];
 }
 
@@ -66,9 +67,23 @@ export function createSearchIndex(pages: PageObjectResponse[]): SearchIndex {
 				? page.properties.summary.rich_text[0]?.plain_text || ""
 				: "";
 
+		const oneLiner =
+			page.properties.one_liner.type === "rich_text"
+				? page.properties.one_liner.rich_text[0]?.plain_text || ""
+				: "";
+
 		const title =
 			page.properties.page.type === "title"
 				? page.properties.page.title[0]?.plain_text || ""
+				: "";
+
+		const imageUrl =
+			page.properties.card_image.type === "files"
+				? page.properties.card_image.files[0]?.type === "file"
+					? page.properties.card_image.files[0].file.url
+					: page.properties.card_image.files[0]?.type === "external"
+						? page.properties.card_image.files[0].external.url
+						: ""
 				: "";
 
 		const pageId = page.id;
@@ -79,6 +94,8 @@ export function createSearchIndex(pages: PageObjectResponse[]): SearchIndex {
 			relativeLink,
 			slug,
 			summary,
+			oneLiner,
+			imageUrl,
 			tags,
 		};
 
@@ -136,7 +153,6 @@ export function exactTagSearch(
 ): IndexItem[] {
 	const resultsSet = new Set<IndexItem>();
 
-	// Convert the tag to lowercase for case-insensitive comparison
 	const normalizedTag = tag.toLowerCase();
 
 	Object.entries(searchIndex).forEach(([key, value]) => {

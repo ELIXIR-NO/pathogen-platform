@@ -31,7 +31,9 @@ export default function Home() {
 					or use the contact form.
 				</div>
 			</div>
-			<QuickView />
+			<QuickView tag="One health" />
+			<QuickView tag="Covid-19" />
+			<QuickView tag="National resources" />
 		</main>
 	);
 }
