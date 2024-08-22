@@ -21,7 +21,7 @@ interface ReferencesPanelProps {
 export default function ReferencesPanel({ references }: ReferencesPanelProps) {
 	return (
 		<Sheet>
-			<SheetTrigger className="fixed right-[-56px] top-80 z-10 flex h-[80px] w-[140px] -rotate-90 justify-center rounded-t-2xl bg-primary px-4 py-1 text-lg font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:right-[-30px]">
+			<SheetTrigger className="fixed right-[-56px] top-[32rem] z-10 flex h-[80px] w-[140px] -rotate-90 justify-center rounded-t-2xl bg-primary px-4 py-1 text-lg font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:right-[-30px]">
 				References
 			</SheetTrigger>
 			<SheetContent>
