@@ -36,7 +36,7 @@ export default async function QuickView({ tag }: { tag: string }) {
 							<Link href={`${item.relativeLink}/${item.slug}`}>
 								<Card className="h-full transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
 									<CardHeader>
-										<CardTitle className="text-lg">{item.title}</CardTitle>
+										<CardTitle>{item.title}</CardTitle>
 									</CardHeader>
 									<CardContent className="flex flex-col">
 										<div className="mb-4 h-48 w-full overflow-hidden rounded-md">
