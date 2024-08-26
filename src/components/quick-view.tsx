@@ -9,34 +9,44 @@ import {
 	CarouselPrevious,
 } from "@/components/ui/carousel";
 import { fetchAllPages } from "@/lib/notion-utils";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function QuickView({ tag }: { tag: string }) {
 	const notionPages = await fetchAllPages();
 	const searchIndex = createSearchIndex(notionPages);
-	const covidPages = exactTagSearch(tag, searchIndex);
+	const taggedPages = exactTagSearch(tag, searchIndex);
+
+	const contractSummary = (text: string) => {
+		if (text.length > 180) return text.slice(0, 180) + "...";
+		return text;
+	};
 
 	return (
-		<div>
-			<h2 className="my-4 text-xl font-bold">{tag}</h2>
-			<Carousel>
+		<div className="p-6">
+			<div className="mb-6 flex items-center justify-between">
+				<h2 className="text-2xl font-bold">{tag}</h2>
+			</div>
+			<Carousel className="w-full">
 				<CarouselContent className="-ml-2 md:-ml-4">
-					{covidPages.map((item) => (
-						<CarouselItem key={item.pageId} className="basis-1/3 pl-2 md:pl-4">
+					{taggedPages.map((item) => (
+						<CarouselItem
+							key={item.pageId}
+							className="pl-2 md:basis-1/2 md:pl-4 lg:basis-1/3"
+						>
 							<Link href={`${item.relativeLink}/${item.slug}`}>
-								<div className="flex flex-col">
-									<div className="group relative h-[200px] w-full overflow-hidden">
-										<div className="absolute inset-0 z-10">
+								<Card className="h-full transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
+									<CardHeader>
+										<CardTitle className="text-lg">{item.title}</CardTitle>
+									</CardHeader>
+									<CardContent className="flex flex-col">
+										<div className="mb-4 h-48 w-full overflow-hidden rounded-md">
 											{item.imageUrl ? (
 												<Image
 													src={item.imageUrl}
 													alt={item.title}
-													width={300}
-													height={200}
-													style={{
-														width: "100%",
-														height: "100%",
-														objectFit: "cover",
-													}}
+													width={400}
+													height={300}
+													className="h-full w-full object-cover"
 												/>
 											) : (
 												<div className="flex h-full w-full items-center justify-center bg-gray-200">
@@ -44,15 +54,11 @@ export default async function QuickView({ tag }: { tag: string }) {
 												</div>
 											)}
 										</div>
-										<div className="absolute inset-0 z-20 bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-50"></div>
-										<div className="absolute inset-0 z-30 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-											<p className="text-center text-white">{item.summary}</p>
-										</div>
-									</div>
-									<h3 className="truncate bg-primary text-center font-semibold text-primary-foreground">
-										{item.title}
-									</h3>
-								</div>
+										<p className="flex-grow text-sm">
+											{contractSummary(item.summary)}
+										</p>
+									</CardContent>
+								</Card>
 							</Link>
 						</CarouselItem>
 					))}
