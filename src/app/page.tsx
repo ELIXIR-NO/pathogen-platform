@@ -1,6 +1,6 @@
-import DashboardsPreview from "@/components/dashboards-preview";
 import { Separator } from "@/components/ui/separator";
 import { Info } from "lucide-react";
+import QuickView from "@/components/quick-view";
 
 export default function Home() {
 	return (
@@ -31,7 +31,9 @@ export default function Home() {
 					or use the contact form.
 				</div>
 			</div>
-			<DashboardsPreview />
+			<QuickView tag="One health" />
+			<QuickView tag="Covid-19" />
+			<QuickView tag="National resources" />
 		</main>
 	);
 }
