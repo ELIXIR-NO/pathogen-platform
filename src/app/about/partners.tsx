@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Partners() {
 	return (
-		<div className="flex flex-col items-start justify-evenly gap-4 p-4 text-justify text-medium font-normal">
+		<div className="mt-6 flex flex-col items-start justify-evenly gap-4 p-4 text-justify text-medium font-normal">
 			<div className="flex flex-col items-center self-center">
 				<Image
 					src="/by-covid-logo3.svg"
