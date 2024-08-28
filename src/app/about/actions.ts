@@ -19,7 +19,12 @@ export async function sendEmailToElixir(values: ContactUsFormSchema) {
 			to: ["joshua.baskaran@uit.no"],
 			from: "request@pathogens.unrelease.app",
 			subject: validatedValues.data.subject,
-			react: EmailTemplate({ message: validatedValues.data.message }),
+			react: EmailTemplate({
+				firstName: validatedValues.data.firstName,
+				lastName: validatedValues.data.lastName,
+				email: validatedValues.data.email,
+				message: validatedValues.data.message,
+			}),
 		});
 		if (error) {
 			return { error: error };

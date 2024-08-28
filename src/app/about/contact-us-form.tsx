@@ -87,9 +87,6 @@ export default function ContactUsForm() {
 							<FormControl>
 								<Input placeholder="" {...field} />
 							</FormControl>
-							<FormDescription>
-								Short description of your reason to contact us
-							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
