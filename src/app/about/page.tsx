@@ -16,21 +16,21 @@ export default function About() {
 					<TabsTrigger
 						value="people"
 						variant="underline"
-						className="text-lg font-semibold"
+						className="text-lg font-semibold text-gray-500 hover:text-foreground"
 					>
 						People
 					</TabsTrigger>
 					<TabsTrigger
 						value="partners"
 						variant="underline"
-						className="text-lg font-semibold"
+						className="text-lg font-semibold text-gray-500 hover:text-foreground"
 					>
 						Partners
 					</TabsTrigger>
 					<TabsTrigger
 						value="contact-us"
 						variant="underline"
-						className="text-lg font-semibold"
+						className="text-lg font-semibold text-gray-500 hover:text-foreground"
 					>
 						Contact Us
 					</TabsTrigger>

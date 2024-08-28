@@ -13,7 +13,8 @@ const TabsListVariants = cva(" inline-flex items-center justify-start h-9", {
 	variants: {
 		variant: {
 			default: "rounded-lg bg-muted p-1",
-			underline: "border-b rounded-none bg-background gap-2 p-0",
+			underline:
+				"rounded-none bg-background gap-0 p-0 border-b border-gray-200",
 		},
 		size: {
 			default: "h-9",
@@ -41,7 +42,7 @@ const TabsTriggerVariants = cva(
 				default:
 					"data-[state=active]:bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=active]:shadow disabled:opacity-50 rounded-md py-1",
 				underline:
-					"bg-background border-b-2 border-background focus:border-primary ring-0 outline-none shadow-none data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary disabled:opacity-100 data-[state=active]:shadow-none rounded-none m-0 pt-1.5 pb-2 hover:bg-background-muted",
+					"bg-background border-b-2 border-secondary focus:border-primary ring-0 outline-none shadow-none data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary disabled:opacity-100 rounded-none m-0 pt-1.5 pb-2 hover:bg-background-muted data-[state=active]:font-semibold",
 			},
 			size: {
 				default: "",
@@ -72,7 +73,11 @@ const TabsList = React.forwardRef<
 >(({ className, variant, size, width, ...props }, ref) => (
 	<TabsPrimitive.List
 		ref={ref}
-		className={cn(TabsListVariants({ variant, size, width, className }))}
+		className={cn(
+			TabsListVariants({ variant, size, width }),
+			variant === "underline" && "border-b border-gray-200",
+			className
+		)}
 		{...props}
 	/>
 ));
