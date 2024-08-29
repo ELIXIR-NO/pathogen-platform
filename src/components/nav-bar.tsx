@@ -14,7 +14,13 @@ import {
 	NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { LogoModeToggle } from "@/components/logo-mode-toggle";
-import { NavItems, topics, pandemicPreparednessNavItems, RDMNavDropdownItems, oneHealthNavItems } from '@/lib/navData';
+import {
+	NavItems,
+	topics,
+	pandemicPreparednessNavItems,
+	RDMNavDropdownItems,
+	oneHealthNavItems,
+} from "@/lib/navData";
 
 export function NavBar() {
 	return (
