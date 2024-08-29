@@ -169,3 +169,34 @@ export function exactTagSearch(
 
 	return Array.from(resultsSet);
 }
+
+export function exactSlugSearch(
+	slug: string,
+	searchIndex: SearchIndex
+): IndexItem | null {
+	const normalizedSlug = slug.toLowerCase();
+
+	if (normalizedSlug in searchIndex) {
+		const result = searchIndex[normalizedSlug];
+
+		if (!Array.isArray(result)) {
+			return result;
+		}
+	}
+
+	for (const value of Object.values(searchIndex)) {
+		if (Array.isArray(value)) {
+			for (const item of value) {
+				if (item.slug.toLowerCase() === normalizedSlug) {
+					return item;
+				}
+			}
+		} else {
+			if (value.slug.toLowerCase() === normalizedSlug) {
+				return value;
+			}
+		}
+	}
+
+	return null;
+}
