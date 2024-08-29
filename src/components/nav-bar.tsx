@@ -77,36 +77,6 @@ const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 		href: "/pandemic-preparedness/infectious-diseases",
 		description: "Disorders caused by organisms",
 	},
-	{
-		title: "One health",
-		href: "/pandemic-preparedness/one-health",
-		description:
-			"The close connection between human health, animals, and the environment",
-	},
-	{
-		title: "Food and waterborne Pathogens",
-		href: "/pandemic-preparedness/one-health/food-and-waterborne-pathogens",
-		description:
-			"Pathogens transmitted through the ingestion of or contact with contaminated food or water",
-	},
-	{
-		title: "Environmentally Transmitted Pathogen",
-		href: "/pandemic-preparedness/one-health/environmentally-transmitted-pathogen",
-		description:
-			"Some pathogenic microorganisms can be found in the environment and are capable of infecting humans and causing disease",
-	},
-	{
-		title: "Vector Borne Pathogens",
-		href: "/pandemic-preparedness/one-health/vector-borne-pathogens",
-		description:
-			"Vector-borne pathogens are transmitted to humans through vectors, which are typically arthropods such as mosquitoes, ticks, or fleas",
-	},
-	{
-		title: "Zoonotic Pathogens",
-		href: "/pandemic-preparedness/one-health/zoonotic-pathogens",
-		description:
-			"Zoonotic pathogens are infectious agents that can be transmitted directly or indirectly between animals and humans",
-	},
 ];
 
 const RDMNavDropdownItems: DropdownMenuItem[] = [
@@ -138,6 +108,29 @@ const RDMNavDropdownItems: DropdownMenuItem[] = [
 		href: "/rdm/pathogen-data-hub",
 		description:
 			"A secure, user-friendly infrastructure for the storage, sharing, and archiving of FAIR pathogen data",
+	},
+];
+
+const oneHealthNavItems: DropdownMenuItem[] = [
+	{
+		title: "Food and waterborne Pathogens",
+		href: "/one-health/food-and-waterborne-pathogens",
+		description: "",
+	},
+	{
+		title: "Zoonotic Pathogens",
+		href: "/one-health/zoonotic-pathogens",
+		description: "",
+	},
+	{
+		title: "Environmentally transmitted pathogens",
+		href: "/one-health/environmentally-transmitted-pathogens",
+		description: "",
+	},
+	{
+		title: "Vector-borne pathogens",
+		href: "/one-health/vector-borne-pathogens",
+		description: "",
 	},
 ];
 
@@ -196,6 +189,24 @@ export function NavBar() {
 								<NavigationMenuContent>
 									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
 										{RDMNavDropdownItems.map((item) => (
+											<ListItem
+												key={item.title}
+												title={item.title}
+												href={item.href}
+											>
+												{item.description}
+											</ListItem>
+										))}
+									</ul>
+								</NavigationMenuContent>
+							</NavigationMenuItem>
+							<NavigationMenuItem>
+								<NavigationMenuTrigger className="text-lg font-normal decoration-primary underline-offset-4 hover:underline">
+									One Health
+								</NavigationMenuTrigger>
+								<NavigationMenuContent>
+									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+										{oneHealthNavItems.map((item) => (
 											<ListItem
 												key={item.title}
 												title={item.title}
