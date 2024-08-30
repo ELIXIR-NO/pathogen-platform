@@ -136,25 +136,30 @@ export default function Covid19Page() {
 						</Card>
 					))}
 				</div>
-				<h2 className="text-2xl font-bold">Public data archives</h2>
-				<h2 className="text-2xl font-bold">
-					Latest publication in{" "}
-					<a
-						href="https://app.cristin.no/search.jsf?t=Covid-19&type=result&filter=category_idfacet~ARTICLE"
-						className="text-primary hover:underline"
-					>
-						Cristin
-					</a>
-				</h2>
-				<h2 className="text-2xl font-bold">
-					Ongoing projects listed in{" "}
-					<a
-						href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=date&sortOrder=desc&resultCount=30&offset=0&TemaEmne.1=Covid19"
-						className="text-primary hover:underline"
-					>
-						Prosjektbanken
-					</a>
-				</h2>
+				<div>
+					<h2 className="pb-2 text-2xl font-bold">External resources</h2>
+					<ul className="list-disc pl-5">
+						{/*<li>Public data archives</li>*/}
+						<li>
+							Latest publication in{" "}
+							<a
+								href="https://app.cristin.no/search.jsf?t=Covid-19&type=result&filter=category_idfacet~ARTICLE"
+								className="text-primary hover:underline"
+							>
+								Cristin
+							</a>
+						</li>
+						<li>
+							Ongoing projects listed in{" "}
+							<a
+								href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=date&sortOrder=desc&resultCount=30&offset=0&TemaEmne.1=Covid19"
+								className="text-primary hover:underline"
+							>
+								Prosjektbanken
+							</a>
+						</li>
+					</ul>
+				</div>
 			</section>
 		</div>
 	);
