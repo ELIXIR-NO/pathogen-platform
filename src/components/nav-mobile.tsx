@@ -6,29 +6,24 @@ import Link from "next/link";
 import { LogoModeToggle } from "@/components/logo-mode-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
+	NavItem,
 	NavItems,
 	topics,
 	pandemicPreparednessNavItems,
 	RDMNavDropdownItems,
 	oneHealthNavItems,
+	DropdownMenuItem,
 } from "@/lib/navData";
 
 export default function NavMobile() {
 	const [menuOpen, setMenuOpen] = React.useState(false);
-	const router = useRouter();
+	const pathname = usePathname();
 
 	React.useEffect(() => {
-		const handleRouteChange = () => setMenuOpen(false);
-
-		if (router.events) {
-			router.events.on("routeChangeComplete", handleRouteChange);
-			return () => {
-				router.events.off("routeChangeComplete", handleRouteChange);
-			};
-		}
-	}, [router]);
+		setMenuOpen(false);
+	}, [pathname]);
 
 	return (
 		<nav className="fixed left-0 right-0 top-0 z-10 h-fit py-2 backdrop-blur-sm">

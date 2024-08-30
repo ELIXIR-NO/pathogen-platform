@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { LogoModeToggle } from "@/components/logo-mode-toggle";
 import {
+	NavItem,
 	NavItems,
 	topics,
 	pandemicPreparednessNavItems,
