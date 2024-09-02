@@ -27,17 +27,17 @@ export default function NavMobile() {
 
 	return (
 		<nav className="fixed left-0 right-0 top-0 z-10 h-fit py-2 backdrop-blur-sm">
-			<div className="container flex flex-row items-center justify-between gap-x-4 pt-2">
-				<Link href="/">
-					<LogoModeToggle />
-				</Link>
-				<div className="flex items-center">
-					<Hamburger toggled={menuOpen} toggle={setMenuOpen} />
-					<ModeToggle />
-				</div>
-			</div>
+    		<div className="container flex flex-row items-center justify-between gap-x-4 pt-2">
+				<div className="border border-gray-200 p-1 rounded">
+          			<Hamburger toggled={menuOpen} toggle={setMenuOpen} />
+        		</div>
+        		<Link href="/" className="mx-auto">
+           			 <LogoModeToggle />
+        		</Link>
+        		<ModeToggle />
+    		</div>
 			{menuOpen && (
-				<div className="absolute left-0 right-0 top-full bg-white shadow-md">
+				<div className="absolute left-0 right-0 top-full shadow-md bg-background">
 					<ul className="flex flex-col items-start justify-start gap-y-4 p-4">
 						<NavMenuItem
 							title="Topics"
@@ -84,7 +84,7 @@ const NavMenuItem: React.FC<{
 	return (
 		<li className="w-full">
 			<button
-				className="w-full text-left text-lg font-semibold hover:underline"
+				className="w-full text-left text-lg font-normal hover:underline"
 				onClick={() => setIsOpen(!isOpen)}
 			>
 				{title}
@@ -137,9 +137,9 @@ const NavBarItem: React.FC<NavItem & { onClick: () => void }> = ({
 }) => (
 	<li>
 		<Link
-			className="block w-full text-lg font-semibold hover:underline"
-			href={pageUrl}
-			onClick={onClick}
+			className="block w-full text-lg font-normal hover:underline hover:decoration-primary cursor-pointer"
+            href={pageUrl}
+            onClick={onClick}
 		>
 			{pageName}
 		</Link>
