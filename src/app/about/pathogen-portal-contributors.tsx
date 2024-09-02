@@ -10,7 +10,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import Link from "next/link";
-import { link } from "node:fs";
 
 interface Contributor {
 	name: string;
@@ -45,16 +44,16 @@ export const contributors: Contributor[] = [
 			"Terje Klemetsen is the work-package leader of ELIXIR 3 Biodiversity at the Tromsø node of UiT The Arctic University of Norway. He holds a PhD in bioinformatics from UiT, specializing in comparative genomics and phylogeny. In addition, since 2017 he has contributed to the design and curation of the Marine Metagenomics Portal (MMP) and the genomic marine prokaryotic databases, including MarRef.",
 		email: "terje.klemetsen@uit.no",
 	},
-	{
-		name: "Peter Kovachich",
-		image: "/people/peter.jpg",
-		position: "Team lead",
-		description: "",
-		email: "peter.w.kovachich@uit.no",
-	},
+	// {
+	// 	name: "Peter Kovachich",
+	// 	image: "/people/peter.jpg",
+	// 	position: "Team lead",
+	// 	description: "",
+	// 	email: "peter.w.kovachich@uit.no",
+	// },
 	{
 		name: "Joshua Baskaran",
-		position: "System developer",
+		position: "Lead developer",
 		image: "/people/joshua.jpg",
 		description:
 			"Bridging the worlds of molecular biology and software engineering, I bring a unique perspective to my role as a developers' team lead. My expertise lies in crafting user-centric applications, with a primary focus on cutting-edge browser-based solutions. I excel in orchestrating seamless deployments through Kubernetes, ensuring our products are robust, scalable, and always at the forefront of technology. My background in science informs my analytical approach to problem-solving, while my passion for coding drives innovation in every project I lead.",
@@ -68,13 +67,13 @@ export const contributors: Contributor[] = [
 			"With a background in Information Technology and a master's degree in Bioinformatics from the Federal University of Rio Grande do Norte in Brazil, I bring a distinctive perspective to my role in technology development. My expertise is focused on creating innovative solutions, including the design and implementation of pipelines and web applications.",
 		email: "danilo.l.martins@uit.no",
 	},
-	{
-		name: "Dorota Buczek",
-		position: "ELIXIR support",
-		image: "/people/dorota.jpg",
-		description: "",
-		email: "dorota.j.buczek@uit.no",
-	},
+	// {
+	// 	name: "Dorota Buczek",
+	// 	position: "ELIXIR support",
+	// 	image: "/people/dorota.jpg",
+	// 	description: "",
+	// 	email: "dorota.j.buczek@uit.no",
+	// },
 	{
 		name: "Sebastian Peters",
 		position: "ELIXIR support",

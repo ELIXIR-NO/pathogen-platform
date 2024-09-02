@@ -3,7 +3,7 @@ import ContributorsPanel from "@/components/contributors-panel";
 
 export default function InfectiousDiseasesPage() {
 	return (
-		<div className="relative min-h-screen">
+		<>
 			<div className="fixed right-12 top-32 z-10">
 				<div className="flex flex-col space-y-2">
 					<ContributorsPanel contributors={["espen", "peter"]} />
@@ -195,6 +195,6 @@ export default function InfectiousDiseasesPage() {
 					produce various tables and maps.
 				</p>
 			</section>
-		</div>
+		</>
 	);
 }

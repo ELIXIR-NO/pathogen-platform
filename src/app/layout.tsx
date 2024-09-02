@@ -10,6 +10,7 @@ import { Providers } from "@/providers/providers";
 import { fetchAllPages } from "@/lib/notion-utils";
 import { createSearchIndex } from "@/lib/searchUtils";
 import SearchPanel from "@/components/search/search-panel";
+import Footer from "@/components/footer";
 
 const fontSans = FontSans({
 	subsets: ["latin"],
@@ -33,7 +34,7 @@ export default async function RootLayout({
 		<html lang="en">
 			<body
 				className={cn(
-					"min-h-screen bg-background font-sans antialiased",
+					"flex min-h-screen flex-col bg-background font-sans antialiased",
 					fontSans.variable
 				)}
 			>

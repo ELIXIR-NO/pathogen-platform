@@ -26,7 +26,7 @@ const references: Reference[] = [
 
 export default function OneHealthPage() {
 	return (
-		<div className="relative min-h-screen">
+		<>
 			<div className="fixed right-12 top-32 z-10">
 				<div className="flex flex-col space-y-2">
 					<ReferencesPanel references={references} />
@@ -137,7 +137,7 @@ export default function OneHealthPage() {
 					</li>
 				</ul>
 			</section>
-		</div>
+		</>
 	);
 }
 

@@ -157,7 +157,7 @@ const NavBarItem: FC<NavItem> = ({ pageUrl, pageName }) => {
 		<li>
 			<Link
 				className={cn(
-					"text-lg hover:underline hover:decoration-primary hover:underline-offset-4",
+					"px-3 text-lg hover:underline hover:decoration-primary hover:underline-offset-4",
 					pathName === `${pageUrl}` && "font-semibold text-primary"
 				)}
 				href={pageUrl}

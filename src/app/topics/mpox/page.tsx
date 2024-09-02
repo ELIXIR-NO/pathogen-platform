@@ -33,7 +33,7 @@ const references: Reference[] = [
 
 export default function MpoxPage() {
 	return (
-		<div className="relative min-h-screen">
+		<>
 			<ReferencesPanel references={references} />
 			<ContributorsPanel contributors={["terje"]} />
 			<section className="flex flex-col space-y-6 p-2">
@@ -153,7 +153,7 @@ export default function MpoxPage() {
 					</li>
 				</ul>
 			</section>
-		</div>
+		</>
 	);
 }
 

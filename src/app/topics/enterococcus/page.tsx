@@ -3,7 +3,7 @@ import ContributorsPanel from "@/components/contributors-panel";
 
 export default function EnterococcusPage() {
 	return (
-		<div className="relative min-h-screen">
+		<>
 			<ContributorsPanel contributors={["dorota"]} />
 			<section className="flex flex-col space-y-6">
 				<h2 className="text-3xl font-bold">
@@ -95,6 +95,6 @@ export default function EnterococcusPage() {
 					</li>
 				</ul>
 			</section>
-		</div>
+		</>
 	);
 }

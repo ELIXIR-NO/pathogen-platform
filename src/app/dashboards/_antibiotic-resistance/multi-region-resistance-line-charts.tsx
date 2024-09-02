@@ -37,9 +37,17 @@ export function MultiRegionResistanceLineCharts({
 	regions: string[];
 	data: NormDataRecord[];
 }) {
-	const [selectedAntibiotics, setSelectedAntibiotics] = useState<string[]>([]);
-	const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
-	const [selectedMicrobes, setSelectedMicrobes] = useState<string[]>([]);
+	const [selectedAntibiotics, setSelectedAntibiotics] = useState<string[]>([
+		"Ceftazidim",
+		"Ciprofloxacin",
+	]);
+	const [selectedRegions, setSelectedRegions] = useState<string[]>([
+		"Norge",
+		"Nord",
+	]);
+	const [selectedMicrobes, setSelectedMicrobes] = useState<string[]>([
+		"Pseudomonas aeruginosa",
+	]);
 	const [hoveredYear, setHoveredYear] = useState<number | null>(null);
 
 	const handleSelectionChange = useCallback(
