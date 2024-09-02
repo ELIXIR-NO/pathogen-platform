@@ -99,12 +99,12 @@ const RDMNavDropdownItems: DropdownMenuItem[] = [
 		description:
 			"Tools, workflows and relevant resources for performing analysis of pathogen data",
 	},
-	{
-		title: "Pathogen data hub",
-		href: "/rdm/pathogen-data-hub",
-		description:
-			"A secure, user-friendly infrastructure for the storage, sharing, and archiving of FAIR pathogen data",
-	},
+	// {
+	// 	title: "Pathogen data hub",
+	// 	href: "/rdm/pathogen-data-hub",
+	// 	description:
+	// 		"A secure, user-friendly infrastructure for the storage, sharing, and archiving of FAIR pathogen data",
+	// },
 ];
 
 const oneHealthNavItems: DropdownMenuItem[] = [
