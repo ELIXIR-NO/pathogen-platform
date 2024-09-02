@@ -1,5 +1,3 @@
-import { Separator } from "@/components/ui/separator";
-import { Info } from "lucide-react";
 import QuickView from "@/components/quick-view";
 
 export default function Home() {
@@ -17,23 +15,9 @@ export default function Home() {
 				enables sharing pathogen data and their associated
 				clinical/epidemiological metadata under controlled access.
 			</div>
-			<div className="flex flex-row rounded-lg bg-accent p-2">
-				<div className="flex">
-					<Info className="self-center stroke-primary" size={20} />
-				</div>
-				<Separator orientation="vertical" className="mx-3 bg-foreground" />
-				<div>
-					We are happy for any input and suggestions for relevant content that
-					you think should be mentioned in the Portal. Contact us at{" "}
-					<a href="mailto:contact@elixir.no" className="text-primary">
-						contact@elixir.no
-					</a>{" "}
-					or use the contact form.
-				</div>
-			</div>
 			<QuickView tag="One health" />
-			<QuickView tag="Covid-19" />
-			<QuickView tag="National resources" />
+			<QuickView tag="Antimicrobial resistance" />
+			<QuickView tag="Infectious disease" />
 		</main>
 	);
 }
