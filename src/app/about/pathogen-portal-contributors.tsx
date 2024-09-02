@@ -45,13 +45,13 @@ export const contributors: Contributor[] = [
 			"Terje Klemetsen is the work-package leader of ELIXIR 3 Biodiversity at the Tromsø node of UiT The Arctic University of Norway. He holds a PhD in bioinformatics from UiT, specializing in comparative genomics and phylogeny. In addition, since 2017 he has contributed to the design and curation of the Marine Metagenomics Portal (MMP) and the genomic marine prokaryotic databases, including MarRef.",
 		email: "terje.klemetsen@uit.no",
 	},
-	{
-		name: "Peter Kovachich",
-		image: "/people/peter.jpg",
-		position: "Team lead",
-		description: "",
-		email: "peter.w.kovachich@uit.no",
-	},
+	// {
+	// 	name: "Peter Kovachich",
+	// 	image: "/people/peter.jpg",
+	// 	position: "Team lead",
+	// 	description: "",
+	// 	email: "peter.w.kovachich@uit.no",
+	// },
 	{
 		name: "Joshua Baskaran",
 		position: "System developer",
@@ -68,13 +68,13 @@ export const contributors: Contributor[] = [
 			"With a background in Information Technology and a master's degree in Bioinformatics from the Federal University of Rio Grande do Norte in Brazil, I bring a distinctive perspective to my role in technology development. My expertise is focused on creating innovative solutions, including the design and implementation of pipelines and web applications.",
 		email: "danilo.l.martins@uit.no",
 	},
-	{
-		name: "Dorota Buczek",
-		position: "ELIXIR support",
-		image: "/people/dorota.jpg",
-		description: "",
-		email: "dorota.j.buczek@uit.no",
-	},
+	// {
+	// 	name: "Dorota Buczek",
+	// 	position: "ELIXIR support",
+	// 	image: "/people/dorota.jpg",
+	// 	description: "",
+	// 	email: "dorota.j.buczek@uit.no",
+	// },
 	{
 		name: "Sebastian Peters",
 		position: "ELIXIR support",
