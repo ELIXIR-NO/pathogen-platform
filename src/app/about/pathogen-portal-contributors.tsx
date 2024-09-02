@@ -53,7 +53,7 @@ export const contributors: Contributor[] = [
 	// },
 	{
 		name: "Joshua Baskaran",
-		position: "System developer",
+		position: "Lead developer",
 		image: "/people/joshua.jpg",
 		description:
 			"Bridging the worlds of molecular biology and software engineering, I bring a unique perspective to my role as a developers' team lead. My expertise lies in crafting user-centric applications, with a primary focus on cutting-edge browser-based solutions. I excel in orchestrating seamless deployments through Kubernetes, ensuring our products are robust, scalable, and always at the forefront of technology. My background in science informs my analytical approach to problem-solving, while my passion for coding drives innovation in every project I lead.",
