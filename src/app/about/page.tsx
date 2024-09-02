@@ -11,7 +11,7 @@ import { Suspense } from "react";
 
 export default function About() {
 	return (
-		<main>
+		<>
 			<Suspense>
 				<Tabs defaultValue="people">
 					<TabsList variant="underline">
@@ -48,6 +48,6 @@ export default function About() {
 					</TabsContent>
 				</Tabs>
 			</Suspense>
-		</main>
+		</>
 	);
 }

@@ -3,7 +3,7 @@ import ContributorsPanel from "@/components/contributors-panel";
 
 export default function PseudomonasPage() {
 	return (
-		<div className="relative min-h-screen">
+		<>
 			<ContributorsPanel contributors={["dorota"]} />
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">Pseudomonas</h2>
@@ -95,6 +95,6 @@ export default function PseudomonasPage() {
 					</li>
 				</ul>
 			</section>
-		</div>
+		</>
 	);
 }

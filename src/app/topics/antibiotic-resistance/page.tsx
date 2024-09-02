@@ -3,7 +3,7 @@ import ContributorsPanel from "@/components/contributors-panel";
 
 export default function AntibioticResistancePage() {
 	return (
-		<div className="relative min-h-screen">
+		<>
 			<ContributorsPanel contributors={["erik", "espen", "peter"]} />
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">Antibiotic Resistance</h2>
@@ -64,6 +64,6 @@ export default function AntibioticResistancePage() {
 					</li>
 				</ul>
 			</section>
-		</div>
+		</>
 	);
 }

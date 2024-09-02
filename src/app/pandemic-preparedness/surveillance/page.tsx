@@ -3,7 +3,7 @@ import ContributorsPanel from "@/components/contributors-panel";
 
 export default function SurveillancePage() {
 	return (
-		<div className="relative min-h-screen">
+		<>
 			<div className="fixed right-12 top-32 z-10">
 				<div className="flex flex-col space-y-2">
 					<ContributorsPanel contributors={["sebastian", "espen", "terje"]} />
@@ -332,6 +332,6 @@ export default function SurveillancePage() {
 					.
 				</p>
 			</section>
-		</div>
+		</>
 	);
 }

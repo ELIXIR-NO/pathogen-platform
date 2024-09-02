@@ -65,7 +65,7 @@ const norwegianResources: {
 
 export default function Covid19Page() {
 	return (
-		<div className="relative min-h-screen">
+		<>
 			<ContributorsPanel contributors={["erik"]} />
 			<section className="flex flex-col space-y-6">
 				<h1 className="text-3xl font-bold">
@@ -161,6 +161,6 @@ export default function Covid19Page() {
 					</ul>
 				</div>
 			</section>
-		</div>
+		</>
 	);
 }

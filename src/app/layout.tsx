@@ -32,7 +32,7 @@ export default async function RootLayout({
 		<html lang="en">
 			<body
 				className={cn(
-					"min-h-screen bg-background font-sans antialiased",
+					"flex min-h-dvh flex-col bg-background font-sans antialiased",
 					fontSans.variable
 				)}
 			>
@@ -40,6 +40,13 @@ export default async function RootLayout({
 					<NavBar />
 					<SearchPanel contentIndex={searchIndex} />
 					<div className="mx-auto w-3/4 py-10 pt-24">{children}</div>
+					<header>
+						<NavBar />
+						<SearchPanel contentIndex={searchIndex} />
+					</header>
+					<main className="mx-auto w-3/4 flex-grow py-10 pt-24">
+						{children}
+					</main>
 					<Analytics />
 				</Providers>
 			</body>
