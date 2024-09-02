@@ -9,6 +9,7 @@ import { Providers } from "@/providers/providers";
 import { fetchAllPages } from "@/lib/notion-utils";
 import { createSearchIndex } from "@/lib/searchUtils";
 import SearchPanel from "@/components/search/search-panel";
+import Footer from "@/components/footer";
 
 const fontSans = FontSans({
 	subsets: ["latin"],
@@ -32,21 +33,19 @@ export default async function RootLayout({
 		<html lang="en">
 			<body
 				className={cn(
-					"flex min-h-dvh flex-col bg-background font-sans antialiased",
+					"flex min-h-screen flex-col bg-background font-sans antialiased",
 					fontSans.variable
 				)}
 			>
 				<Providers>
-					<NavBar />
-					<SearchPanel contentIndex={searchIndex} />
-					<div className="mx-auto w-3/4 py-10 pt-24">{children}</div>
 					<header>
 						<NavBar />
 						<SearchPanel contentIndex={searchIndex} />
 					</header>
-					<main className="mx-auto w-3/4 flex-grow py-10 pt-24">
+					<main className="mx-auto min-h-[93vh] w-3/4 py-10 pt-24">
 						{children}
 					</main>
+					<Footer />
 					<Analytics />
 				</Providers>
 			</body>
