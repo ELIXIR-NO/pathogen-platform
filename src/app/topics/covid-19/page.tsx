@@ -120,7 +120,7 @@ export default function Covid19Page() {
 						>
 							<Link href={resource.link} className="flex h-full flex-col">
 								<CardHeader>
-									<CardTitle>{resource.title}</CardTitle>
+									<CardTitle className="text-lg">{resource.title}</CardTitle>
 									<CardDescription></CardDescription>
 								</CardHeader>
 								<CardContent className="flex flex-col items-center justify-center space-y-6">

@@ -90,7 +90,7 @@ export default function PathogenPortalContributors() {
 			{contributors.map((contributor) => (
 				<Card
 					key={contributor.email}
-					className="flex flex-col hover:shadow-2xl"
+					className="flex flex-col transition-shadow duration-300 hover:shadow-2xl"
 				>
 					<CardHeader>
 						<CardTitle>{contributor.name}</CardTitle>
