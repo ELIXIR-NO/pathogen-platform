@@ -24,10 +24,10 @@ export default function Footer() {
 				</li>
 				<li>
 					<Link
-						href="/terms-of-service"
+						href="/terms-of-use"
 						className="border-r-2 pr-2 text-primary hover:underline"
 					>
-						Terms of Service
+						Terms of Use
 					</Link>
 				</li>
 				<li>
