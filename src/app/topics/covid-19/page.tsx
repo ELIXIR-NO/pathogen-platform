@@ -12,6 +12,7 @@ import {
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import ContributorsPanel from "@/components/contributors-panel";
+import Link from "next/link";
 
 const norwegianResources: {
 	title: string;
@@ -111,28 +112,28 @@ export default function Covid19Page() {
 					with COVID-19 and become seriously ill or die at any age.
 				</p>
 				<h2 className="text-2xl font-bold">Norwegian Resources</h2>
-				<div className="mt-6 grid grid-cols-3 gap-4">
+				<div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 					{norwegianResources.map((resource) => (
 						<Card
 							key={resource.title}
-							className="flex flex-col hover:shadow-2xl"
+							className="flex h-full flex-col transition-shadow duration-300 hover:shadow-2xl"
 						>
-							<CardHeader>
-								<CardTitle>{resource.title}</CardTitle>
-								<CardDescription></CardDescription>
-							</CardHeader>
-							<CardContent className="flex flex-grow flex-col items-center justify-between">
-								<Image
-									src={`/topics/covid-19/${resource.image}`}
-									alt={resource.title}
-									width={300}
-									height={200}
-									className="object-cover"
-								/>
-								<p className="flex-grow text-justify text-sm font-semibold">
-									{resource.description}
-								</p>
-							</CardContent>
+							<Link href={resource.link} className="flex h-full flex-col">
+								<CardHeader>
+									<CardTitle>{resource.title}</CardTitle>
+									<CardDescription></CardDescription>
+								</CardHeader>
+								<CardContent className="flex flex-col items-center justify-center space-y-6">
+									<Image
+										src={`/topics/covid-19/${resource.image}`}
+										alt={resource.title}
+										width={500}
+										height={250}
+										className="aspect-video self-center object-fill"
+									/>
+									<p className="text-justify text-sm">{resource.description}</p>
+								</CardContent>
+							</Link>
 						</Card>
 					))}
 				</div>

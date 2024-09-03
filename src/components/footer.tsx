@@ -43,7 +43,7 @@ export default function Footer() {
 						href="/about?tab=contact-us"
 						className="text-primary hover:underline"
 					>
-						Contact
+						Contact Us
 					</Link>
 				</li>
 			</ul>
