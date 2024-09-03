@@ -8,7 +8,7 @@ export interface IndexItem {
 	summary: string;
 	oneLiner: string;
 	imageUrl?: string;
-	imageCredit: string;
+	imageCredit: Array<{ text: string; href: string | null }>;
 	tags: string[];
 }
 
@@ -89,8 +89,11 @@ export function createSearchIndex(pages: PageObjectResponse[]): SearchIndex {
 
 		const imageCredit =
 			page.properties.card_image_credit.type === "rich_text"
-				? page.properties.card_image_credit.rich_text[0]?.plain_text || ""
-				: "";
+				? page.properties.card_image_credit.rich_text.map((textBlock) => ({
+						text: textBlock.plain_text,
+						href: textBlock.href,
+					}))
+				: [];
 
 		const pageId = page.id;
 

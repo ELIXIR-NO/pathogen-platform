@@ -10,6 +10,10 @@ import {
 } from "@/components/ui/carousel";
 import { fetchAllPages } from "@/lib/notion-utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+
+const ImageCredit = dynamic(() => import("./image-credit"), { ssr: false });
 
 export default async function QuickView({ tag }: { tag: string }) {
 	const notionPages = await fetchAllPages();
@@ -41,13 +45,23 @@ export default async function QuickView({ tag }: { tag: string }) {
 									<CardContent className="flex flex-col">
 										<div className="mb-4 h-48 w-full overflow-hidden rounded-md">
 											{item.imageUrl ? (
-												<Image
-													src={item.imageUrl}
-													alt={item.title}
-													width={400}
-													height={300}
-													className="h-full w-full object-cover"
-												/>
+												<Suspense
+													fallback={
+														<div className="flex h-full w-full items-center justify-center bg-gray-200">
+															Loading...
+														</div>
+													}
+												>
+													<ImageCredit credits={item.imageCredit}>
+														<Image
+															src={item.imageUrl}
+															alt={item.title}
+															width={400}
+															height={300}
+															className="h-full w-full object-cover"
+														/>
+													</ImageCredit>
+												</Suspense>
 											) : (
 												<div className="flex h-full w-full items-center justify-center bg-gray-200">
 													No image
