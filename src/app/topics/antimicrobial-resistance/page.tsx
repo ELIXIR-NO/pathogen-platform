@@ -1,21 +1,21 @@
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
 
-export default function AntibioticResistancePage() {
+export default function AntimicrobialResistancePage() {
 	return (
 		<>
 			<ContributorsPanel contributors={["erik", "espen", "peter"]} />
 			<section className="flex flex-col space-y-6 text-justify">
-				<h2 className="text-3xl font-bold">Antibiotic Resistance</h2>
+				<h2 className="text-3xl font-bold">Antimicrobial Resistance</h2>
 				<Image
-					src="/topics/antibiotic-resistance/antibiotic-resistance.png"
+					src="/topics/Antimicrobial-resistance/antimicrobial-resistance.png"
 					alt="Image of laboratory test"
 					width={900}
 					height={500}
 					className="mx-auto rounded-md"
 				/>
 				<p>
-					Antibiotic resistance, where bacteria evolve to withstand medicines,
+					Antimicrobial resistance, where bacteria evolve to withstand medicines,
 					significantly threatens global public health by making infections
 					harder to treat in humans, pets, and livestock. This resistance leads
 					to persistent infections, increased disease severity, higher
@@ -26,7 +26,7 @@ export default function AntibioticResistancePage() {
 					food safety, and reducing farm productivity.
 				</p>
 				<h3 className="font-bold">
-					In Norway, various resources offer detailed information on antibiotic
+					In Norway, various resources offer detailed information on antimicrobial
 					resistance research and surveillance.
 				</h3>
 				<ul className="list-disc">

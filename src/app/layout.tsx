@@ -5,6 +5,7 @@ import { Inter as FontSans } from "next/font/google";
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
 import { NavBar } from "@/components/nav-bar";
+import NavMobile from "@/components/nav-mobile";
 import { Providers } from "@/providers/providers";
 import { fetchAllPages } from "@/lib/notion-utils";
 import { createSearchIndex } from "@/lib/searchUtils";
@@ -38,14 +39,14 @@ export default async function RootLayout({
 				)}
 			>
 				<Providers>
-					<header>
+					<div className="hidden md:block">
 						<NavBar />
-						<SearchPanel contentIndex={searchIndex} />
-					</header>
-					<main className="mx-auto min-h-[93vh] w-3/4 py-10 pt-24">
-						{children}
-					</main>
-					<Footer />
+					</div>
+					<div className="md:hidden">
+						<NavMobile />
+					</div>
+					<SearchPanel contentIndex={searchIndex} />
+					<div className="mx-auto w-3/4 py-10 pt-24">{children}</div>
 					<Analytics />
 				</Providers>
 			</body>
