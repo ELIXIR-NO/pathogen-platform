@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
 
-export default function AntibioticResistancePage() {
+export default function AntimicrobialResistancePage() {
 	return (
 		<>
 			<ContributorsPanel contributors={["erik", "espen", "peter"]} />

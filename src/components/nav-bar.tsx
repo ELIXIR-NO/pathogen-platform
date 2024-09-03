@@ -31,7 +31,7 @@ type DropdownMenuItem = { title: string; href: string; description: string };
 const topics: DropdownMenuItem[] = [
 	{
 		title: "Antibiotic resistance",
-		href: "/topics/antibiotic-resistance",
+		href: "/topics/antimicrobial-resistance",
 		description: "the impending threat of super bugs",
 	},
 	{
