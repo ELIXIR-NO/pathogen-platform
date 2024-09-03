@@ -42,7 +42,7 @@ export default async function RootLayout({
 						<NavBar />
 						<SearchPanel contentIndex={searchIndex} />
 					</header>
-					<main className="mx-auto min-h-[93vh] w-3/4 py-10 pt-24">
+					<main className="mx-auto min-h-[95vh] w-3/4 py-10 pt-24">
 						{children}
 					</main>
 					<Footer />
