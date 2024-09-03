@@ -8,7 +8,7 @@ export default function AntimicrobialResistancePage() {
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">Antimicrobial Resistance</h2>
 				<Image
-					src="/topics/Antimicrobial-resistance/antimicrobial-resistance.png"
+					src="/topics/antimicrobial-resistance/antimicrobial-resistance.png"
 					alt="Image of laboratory test"
 					width={900}
 					height={500}
