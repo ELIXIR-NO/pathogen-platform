@@ -46,7 +46,10 @@ export default async function RootLayout({
 						<NavMobile />
 					</div>
 					<SearchPanel contentIndex={searchIndex} />
-					<div className="mx-auto w-3/4 py-10 pt-24">{children}</div>
+					<main className="mx-auto min-h-[95vh] w-3/4 py-10 pt-24">
+						{children}
+					</main>
+					<Footer />
 					<Analytics />
 				</Providers>
 			</body>

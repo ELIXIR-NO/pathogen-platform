@@ -13,8 +13,8 @@ export type DropdownMenuItem = {
 };
 export const topics: DropdownMenuItem[] = [
 	{
-		title: "Antibiotic resistance",
-		href: "/topics/antibiotic-resistance",
+		title: "Antimicrobial resistance",
+		href: "/topics/antimicrobial-resistance",
 		description: "the impending threat of super bugs",
 	},
 	{

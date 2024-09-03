@@ -16,6 +16,7 @@ import {
 	oneHealthNavItems,
 	DropdownMenuItem,
 } from "@/lib/navData";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 export default function NavMobile() {
 	const [menuOpen, setMenuOpen] = React.useState(false);
@@ -37,8 +38,8 @@ export default function NavMobile() {
 				<ModeToggle />
 			</div>
 			{menuOpen && (
-				<div className="absolute left-0 right-0 top-full bg-background shadow-md">
-					<ul className="flex flex-col items-start justify-start gap-y-4 p-4">
+				<div className="top-[4rem] w-full bg-background p-4">
+					<ul className="flex flex-col items-start justify-start gap-y-4 p-4 pl-4">
 						<NavMenuItem
 							title="Topics"
 							items={topics}
@@ -68,6 +69,7 @@ export default function NavMobile() {
 							/>
 						))}
 					</ul>
+					<hr className="my-4 border-t border-gray-300" />
 				</div>
 			)}
 		</nav>
@@ -84,10 +86,14 @@ const NavMenuItem: React.FC<{
 	return (
 		<li className="w-full">
 			<button
-				className="w-full text-left text-lg font-normal hover:underline"
+				className="inline-flex w-full items-center text-left text-lg font-normal hover:underline"
 				onClick={() => setIsOpen(!isOpen)}
 			>
 				{title}
+				<ChevronDownIcon
+					className={`ml-2 h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+					aria-hidden="true"
+				/>
 			</button>
 			{isOpen && (
 				<ul className="flex flex-col gap-y-2 pl-4 pt-2">
