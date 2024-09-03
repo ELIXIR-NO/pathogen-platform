@@ -77,27 +77,37 @@ const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 
 const RDMNavDropdownItems: DropdownMenuItem[] = [
 	{
-		title: "About RDM",
+		title: "Research data management",
 		href: "/rdm",
-		description: "All about research data management",
+		description:
+			"RDM organizes, stores, and ensures accessibility of research data.",
+	},
+	{
+		title: "Where do I start?",
+		href: "/rdm/where-do-i-start",
+		description:
+			"Explore various Norwegian tools and guidelines for managing pathogen genomics data.",
+	},
+	{
+		title: "About RDM",
+		href: "/rdm/about-rdm",
+		description: "Learn about pathogenic microorganisms RDM",
 	},
 	{
 		title: "Databases",
 		href: "/rdm/databases",
-		description:
-			"Databases and data repositories relevant for research on pathogen data",
+		description: "Databases and data repositories",
 	},
 	{
 		title: "Sharing data",
 		href: "/rdm/sharing-data",
 		description:
-			"making research data available to other investigators or the public",
+			"Data sharing boosts medical research, transparency, efficiency, and ethical adherence.",
 	},
 	{
 		title: "Tools and workflows",
 		href: "/rdm/tools-and-workflows",
-		description:
-			"Tools, workflows and relevant resources for performing analysis of pathogen data",
+		description: "Bioinformatic tools and analysis pipelines",
 	},
 	// {
 	// 	title: "Pathogen data hub",
