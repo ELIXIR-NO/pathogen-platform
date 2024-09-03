@@ -58,20 +58,24 @@ const topics: DropdownMenuItem[] = [
 
 const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 	{
+		title: "About pandemic preparedness",
+		href: "/pandemic-preparedness",
+		description: "",
+	},
+	{
 		title: "Surveillance",
 		href: "/pandemic-preparedness/surveillance",
-		description:
-			"continuous, systematic collection, analysis and interpretation of health-related data",
+		description: "National surveillance of pathogens",
 	},
 	{
 		title: "Medical microbiology reference labs",
 		href: "/pandemic-preparedness/medical-microbiology-reference-labs",
-		description: "Microbiology labs authorized by the Health Directorate",
+		description: "Reference laboratories with national responsibilities",
 	},
 	{
 		title: "Infectious diseases",
 		href: "/pandemic-preparedness/infectious-diseases",
-		description: "Disorders caused by organisms",
+		description: "",
 	},
 ];
 
