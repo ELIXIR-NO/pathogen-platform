@@ -15,9 +15,17 @@ export default function Home() {
 				enables sharing pathogen data and their associated
 				clinical/epidemiological metadata under controlled access.
 			</div>
-			<QuickView tag="One health" />
-			<QuickView tag="Antimicrobial resistance" />
-			<QuickView tag="Infectious disease" />
+			<QuickView title="One Health" searchFor="tags" searchTerm="One health" />
+			<QuickView
+				title="Antimicrobial resistance"
+				searchFor="tags"
+				searchTerm="Antimicrobial resistance"
+			/>
+			<QuickView
+				title="Infectious disease"
+				searchFor="tags"
+				searchTerm="Infectious disease"
+			/>
 		</main>
 	);
 }
