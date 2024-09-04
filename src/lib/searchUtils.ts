@@ -210,3 +210,30 @@ export function exactSlugSearch(
 
 	return null;
 }
+
+export function relativeLinkSearch(
+	basePath: string,
+	searchIndex: SearchIndex
+): IndexItem[] {
+	const results = new Map<string, IndexItem>();
+	const normalizedBasePath = basePath.toLowerCase().replace(/^\/+|\/+$/g, "");
+
+	Object.values(searchIndex).forEach((value) => {
+		const processItem = (item: IndexItem) => {
+			const normalizedRelativeLink = item.relativeLink
+				.toLowerCase()
+				.replace(/^\/+|\/+$/g, "");
+			if (normalizedRelativeLink.includes(normalizedBasePath)) {
+				results.set(item.pageId, item);
+			}
+		};
+
+		if (Array.isArray(value)) {
+			value.forEach(processItem);
+		} else if (typeof value === "object" && value !== null) {
+			processItem(value as IndexItem);
+		}
+	});
+
+	return Array.from(results.values());
+}

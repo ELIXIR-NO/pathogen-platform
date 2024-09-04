@@ -5,6 +5,7 @@ import {
 	HoverCardContent,
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import QuickView from "@/components/quick-view";
 
 export default function PandemicPreparednessPage() {
 	return (
@@ -54,6 +55,11 @@ export default function PandemicPreparednessPage() {
 					<li>Research and innovation</li>
 				</ul>
 			</section>
+			<QuickView
+				title="Further reading:"
+				searchFor="relativeLinks"
+				searchTerm="pandemic-preparedness"
+			/>
 		</>
 	);
 }

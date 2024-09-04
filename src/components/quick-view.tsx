@@ -1,6 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { createSearchIndex, exactTagSearch } from "@/lib/searchUtils";
+import {
+	createSearchIndex,
+	exactTagSearch,
+	relativeLinkSearch,
+} from "@/lib/searchUtils";
 import {
 	Carousel,
 	CarouselContent,
@@ -15,10 +19,28 @@ import { Suspense } from "react";
 
 const ImageCredit = dynamic(() => import("./image-credit"), { ssr: false });
 
-export default async function QuickView({ tag }: { tag: string }) {
+type SearchType = "tags" | "relativeLinks";
+
+interface QuickViewProps {
+	title: string;
+	searchFor: SearchType;
+	searchTerm: string;
+}
+
+export default async function QuickView({
+	title,
+	searchFor,
+	searchTerm,
+}: QuickViewProps) {
 	const notionPages = await fetchAllPages();
 	const searchIndex = createSearchIndex(notionPages);
-	const taggedPages = exactTagSearch(tag, searchIndex);
+
+	let searchResults;
+	if (searchFor === "tags") {
+		searchResults = exactTagSearch(searchTerm, searchIndex);
+	} else {
+		searchResults = relativeLinkSearch(searchTerm, searchIndex);
+	}
 
 	const contractSummary = (text: string) => {
 		if (text.length > 180) return text.slice(0, 180) + "...";
@@ -28,11 +50,11 @@ export default async function QuickView({ tag }: { tag: string }) {
 	return (
 		<div className="p-6">
 			<div className="mb-6 flex items-center justify-between">
-				<h2 className="text-2xl font-bold">{tag}</h2>
+				<h2 className="text-2xl font-bold">{title}</h2>
 			</div>
 			<Carousel className="w-full">
 				<CarouselContent className="-ml-2 md:-ml-4">
-					{taggedPages.map((item) => (
+					{searchResults.map((item) => (
 						<CarouselItem
 							key={item.pageId}
 							className="pl-2 md:basis-1/2 md:pl-4 lg:basis-1/3"
