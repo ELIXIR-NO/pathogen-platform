@@ -179,7 +179,7 @@ function ReferenceHoverCard({
 			<HoverCardTrigger className="cursor-pointer text-primary hover:underline">
 				{refNumber}
 			</HoverCardTrigger>
-			<HoverCardContent className="w-[500px] text-justify text-small">
+			<HoverCardContent className="text-small w-[500px] text-justify">
 				{paper};PMCID:
 				<a href={href} className="text-primary hover:underline">
 					{pmcid}
