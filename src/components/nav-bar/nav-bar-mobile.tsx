@@ -23,12 +23,15 @@ import {
 } from "@/components/nav-bar/navBarData";
 import { LogoModeToggle } from "@/components/logo-mode-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
+import React from "react";
 
 export default function NavBarMobile() {
 	return (
 		<nav className="flex flex-row justify-between px-6 py-3">
 			<NavigationSheet />
-			<LogoModeToggle />
+			<Link href="/">
+				<LogoModeToggle />
+			</Link>
 			<div className="flex flex-row justify-end">
 				<ModeToggle />
 			</div>

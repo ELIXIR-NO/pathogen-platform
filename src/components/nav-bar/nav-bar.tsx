@@ -38,7 +38,7 @@ export function NavBar() {
 			<div className="container flex flex-row items-center justify-between gap-x-4 pt-2">
 				<ul className="flex flex-row items-center justify-center gap-x-4">
 					<li>
-						<Link href="/public">
+						<Link href="/">
 							<LogoModeToggle />
 						</Link>
 					</li>
