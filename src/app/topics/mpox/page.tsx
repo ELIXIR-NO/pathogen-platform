@@ -179,15 +179,15 @@ export default function MpoxPage() {
 						>
 							Cristin
 						</a>
-						<li>
-							Ongoing projects listed in{" "}
-							<a
-								href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=date&sortOrder=desc&resultCount=30&offset=0&Fritekst=Mpox,+monkey+pox."
-								className="text-primary hover:underline"
-							>
-								Projektbanken
-							</a>
-						</li>
+					</li>
+					<li>
+						Ongoing projects listed in{" "}
+						<a
+							href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=date&sortOrder=desc&resultCount=30&offset=0&Fritekst=Mpox,+monkey+pox."
+							className="text-primary hover:underline"
+						>
+							Projektbanken
+						</a>
 					</li>
 				</ul>
 			</section>
