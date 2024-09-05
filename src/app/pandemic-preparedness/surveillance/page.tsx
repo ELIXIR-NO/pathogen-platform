@@ -210,7 +210,7 @@ export default function SurveillancePage() {
 					FHI and VI are partners in the EU-WISH project.
 				</p>
 				<h2 className="text-2xl font-bold">External resources</h2>
-				<ul className="ml-6 flex list-disc flex-col space-x-2">
+				<ul className="flex list-disc flex-col space-x-2 pl-5">
 					<li>
 						Latest publication in{" "}
 						<a
