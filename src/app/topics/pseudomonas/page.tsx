@@ -28,7 +28,8 @@ const norwegianResources: {
 	},
 	{
 		title: "World Health Organisation (WHO)",
-		description: "WHO list of bacteria for which new antibiotics are urgently needed.",
+		description:
+			"WHO list of bacteria for which new antibiotics are urgently needed.",
 		image: "WHO-logo.png",
 		link: "https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed",
 	},
@@ -73,22 +74,25 @@ export default function PseudomonasPage() {
 					various <span className="italic">colours</span>. Their measure is from
 					0.5 to 0.8 μm by 1.5 to 3.0 μm. They inhabit environments like soil
 					(coastal areas), water, and plant and animal tissues, easily surviving
-					environmental stresses. <span className="italic">Pseudomonas</span> means “false unit”,
-					while <span className="italic">aeruginosa</span> refers to the
-					blue-green colour of laboratory cultures discovered by Carle Gessard,
-					a French scientist, in 1882. He found that under ultraviolet light,
-					water-soluble pigments of <span className="italic">P. aeruginosa</span>{" "}
-					turn blue-green. <span className="italic">Pseudomonas aeruginosa</span>{" "}
-					primarily affects immunocompromised individuals. Healthy people are
-					usually not at risk of infection from this microbe. <span className="italic">P. aeruginosa</span> is an
-					opportunistic pathogen. It requires a break in the body's first line
-					of defense, such as trauma, cystic fibrosis, surgeries, cancer, AIDS,
-					or other immunosuppressive conditions. These bacteria are known for
-					their resistance to antibiotics and disinfectants, as they can expel
+					environmental stresses. <span className="italic">Pseudomonas</span>{" "}
+					means “false unit”, while <span className="italic">aeruginosa</span>{" "}
+					refers to the blue-green colour of laboratory cultures discovered by
+					Carle Gessard, a French scientist, in 1882. He found that under
+					ultraviolet light, water-soluble pigments of{" "}
+					<span className="italic">P. aeruginosa</span> turn blue-green.{" "}
+					<span className="italic">Pseudomonas aeruginosa</span> primarily
+					affects immunocompromised individuals. Healthy people are usually not
+					at risk of infection from this microbe.{" "}
+					<span className="italic">P. aeruginosa</span> is an opportunistic
+					pathogen. It requires a break in the body&#39;s first line of defense,
+					such as trauma, cystic fibrosis, surgeries, cancer, AIDS, or other
+					immunosuppressive conditions. These bacteria are known for their
+					resistance to antibiotics and disinfectants, as they can expel
 					antibiotics from within the cell. They primarily infect the urinary
-					and respiratory tracts, swimmer's ears, cornea, wounds, and cause
-					folliculitis. <span className="italic">P. aeruginosa</span> is listed as a
-					CRITICAL priority on the antimicrobial pathogen list published by the{" "}
+					and respiratory tracts, swimmer&#39;s ears, cornea, wounds, and cause
+					folliculitis. <span className="italic">P. aeruginosa</span> is listed
+					as a CRITICAL priority on the antimicrobial pathogen list published by
+					the{" "}
 					<a
 						className="text-primary hover:underline"
 						href="https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed"
