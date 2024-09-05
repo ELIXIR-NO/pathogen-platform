@@ -8,7 +8,7 @@ import { NavBar } from "@/components/nav-bar";
 import { Providers } from "@/providers/providers";
 import { fetchAllPages } from "@/lib/notion-utils";
 import { createSearchIndex } from "@/lib/searchUtils";
-import SearchPanel from "@/components/search/search-panel";
+import SearchPanel from "@/components/search-panel";
 import Footer from "@/components/footer";
 
 const fontSans = FontSans({
