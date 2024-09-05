@@ -8,7 +8,7 @@ export default function ContactUs() {
 				think should be mentioned in the Portal. Contact us at{" "}
 				<a
 					className="text-primary visited:text-destructive"
-					href="mailto:contact@elixir.no"
+					href="mailto:support@elixir.no"
 				>
 					contact@elixir.no
 				</a>{" "}
