@@ -25,8 +25,8 @@ export function LogoModeToggle() {
 		<Image
 			src={src}
 			alt="Logo of pathogens portal norway"
-			width={150}
-			height={35.55}
+			width={250}
+			height={65.55}
 			className={cn("hover:ring-2 hover:ring-primary")}
 			priority={true}
 		/>
