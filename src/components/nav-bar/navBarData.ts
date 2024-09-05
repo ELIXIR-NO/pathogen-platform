@@ -7,7 +7,7 @@ export const topics: DropdownMenuItem[] = [
 	{
 		title: "About Topics",
 		href: "/topics",
-		description: "About Topics",
+		description: "",
 	},
 	{
 		title: "Antimicrobial resistance",
@@ -65,6 +65,11 @@ export const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 
 export const RDMNavDropdownItems: DropdownMenuItem[] = [
 	{
+		title: "About RDM",
+		href: "/rdm/about-rdm",
+		description: "",
+	},
+	{
 		title: "Research data management",
 		href: "/rdm",
 		description:
@@ -75,11 +80,6 @@ export const RDMNavDropdownItems: DropdownMenuItem[] = [
 		href: "/rdm/where-do-i-start",
 		description:
 			"Explore various Norwegian tools and guidelines for managing pathogen genomics data.",
-	},
-	{
-		title: "About RDM",
-		href: "/rdm/about-rdm",
-		description: "Learn about pathogenic microorganisms RDM",
 	},
 	{
 		title: "Databases",
@@ -109,7 +109,7 @@ export const oneHealthNavItems: DropdownMenuItem[] = [
 	{
 		title: "About One Health",
 		href: "/one-health",
-		description: "One Health link human, animal, and environmental aspects.",
+		description: "",
 	},
 	{
 		title: "Food and waterborne Pathogens",
