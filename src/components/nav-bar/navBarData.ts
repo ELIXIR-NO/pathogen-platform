@@ -5,29 +5,38 @@ export type DropdownMenuItem = {
 };
 export const topics: DropdownMenuItem[] = [
 	{
+		title: "About Topics",
+		href: "/topics",
+		description: "About Topics",
+	},
+	{
 		title: "Antimicrobial resistance",
 		href: "/topics/antimicrobial-resistance",
-		description: "the impending threat of super bugs",
+		description:
+			"Microbes evolve to protect them from the effects of antimicrobial treatment",
 	},
 	{
 		title: "Monkey Pox",
 		href: "/topics/mpox",
-		description: "a zoonotic disease induced by the monkeypox virus",
+		description: "Mpox is a zoonotic virus endemic to central Africa.",
 	},
 	{
 		title: "Pseudomonas",
 		href: "/topics/pseudomonas",
-		description: "an opportunistic pathogen",
+		description:
+			"Pseudomonas aeruginosa is a a gramnegative Gammaproteobacterium that can infect immunocompromised people.",
 	},
 	{
 		title: "Covid-19",
 		href: "/topics/covid-19",
-		description: "an infectious disease caused by the novel SARS-CoV-2 virus",
+		description:
+			"Coronavirus disease (COVID-19) was responsible for the global pandemic that started in 2019",
 	},
 	{
 		title: "Enterococcus",
 		href: "/topics/enterococcus",
-		description: "the harmless inhabitants of the gut",
+		description:
+			"Enterococcus faecalis is a grampositive lactic acid bacterium that resides in the GI tract",
 	},
 ];
 
@@ -98,23 +107,28 @@ export const RDMNavDropdownItems: DropdownMenuItem[] = [
 
 export const oneHealthNavItems: DropdownMenuItem[] = [
 	{
+		title: "About One Health",
+		href: "/one-health",
+		description: "One Health link human, animal, and environmental aspects.",
+	},
+	{
 		title: "Food and waterborne Pathogens",
 		href: "/one-health/food-and-waterborne-pathogens",
-		description: "",
+		description: "Pathogens transmitted through food or water",
 	},
 	{
 		title: "Zoonotic Pathogens",
 		href: "/one-health/zoonotic-pathogens",
-		description: "",
+		description: "Pathogens transmitted between animals and humans",
 	},
 	{
 		title: "Environmentally transmitted pathogens",
 		href: "/one-health/environmentally-transmitted-pathogens",
-		description: "",
+		description: "Pathogens transmitted from the environment",
 	},
 	{
 		title: "Vector-borne pathogens",
 		href: "/one-health/vector-borne-pathogens",
-		description: "",
+		description: "Pathogens transmitted via vectors",
 	},
 ];
