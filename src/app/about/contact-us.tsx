@@ -10,7 +10,7 @@ export default function ContactUs() {
 					className="text-primary visited:text-destructive"
 					href="mailto:support@elixir.no"
 				>
-					contact@elixir.no
+					support@elixir.no
 				</a>{" "}
 				or use the contact form below.
 			</div>
