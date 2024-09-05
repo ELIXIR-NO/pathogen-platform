@@ -4,13 +4,13 @@ import { Inter as FontSans } from "next/font/google";
 
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
-import { NavBar } from "@/components/nav-bar";
-import NavMobile from "@/components/nav-mobile";
+import { NavBar } from "@/components/nav-bar/nav-bar";
 import { Providers } from "@/providers/providers";
 import { fetchAllPages } from "@/lib/notion-utils";
 import { createSearchIndex } from "@/lib/searchUtils";
-import SearchPanel from "@/components/search/search-panel";
+import SearchPanel from "@/components/search-panel";
 import Footer from "@/components/footer";
+import NavBarMobile from "@/components/nav-bar/nav-bar-mobile";
 
 const fontSans = FontSans({
 	subsets: ["latin"],
@@ -39,14 +39,19 @@ export default async function RootLayout({
 				)}
 			>
 				<Providers>
-					<div className="hidden md:block">
-						<NavBar />
-					</div>
-					<div className="md:hidden">
-						<NavMobile />
-					</div>
-					<SearchPanel contentIndex={searchIndex} />
-					<div className="mx-auto w-3/4 py-10 pt-24">{children}</div>
+					<header>
+						<div className="lg:hidden">
+							<NavBarMobile />
+						</div>
+						<div className="hidden lg:flex">
+							<NavBar />
+						</div>
+						<SearchPanel contentIndex={searchIndex} />
+					</header>
+					<main className="mx-auto min-h-[95vh] w-3/4 py-10 pt-24">
+						{children}
+					</main>
+					<Footer />
 					<Analytics />
 				</Providers>
 			</body>

@@ -75,11 +75,11 @@ export const contributors: Contributor[] = [
 	// 	email: "dorota.j.buczek@uit.no",
 	// },
 	{
-		name: "Sebastian Peters",
+		name: "Sebastian Petters",
 		position: "ELIXIR support",
 		image: "/people/sebastian.jpg",
 		description:
-			"Sebastian Peters works as a support being involved in support, helpdesk, training, data curation, and data processing for genomics and transcriptomics projects. He has a background in environmental soil metatranscriptomics focusing on trophic interactions and predatory prokaryotes (myxobacteria) and their role in the soil food web, before switching to marine genomics and transcriptomics with a main focus on phototrophic eukaryotes (microalgae) and their interactions in the phycosphere.",
+			"Sebastian Petters works as a support being involved in support, helpdesk, training, data curation, and data processing for genomics and transcriptomics projects. He has a background in environmental soil metatranscriptomics focusing on trophic interactions and predatory prokaryotes (myxobacteria) and their role in the soil food web, before switching to marine genomics and transcriptomics with a main focus on phototrophic eukaryotes (microalgae) and their interactions in the phycosphere.",
 		email: "sebastian.petters@uit.no",
 	},
 ];
@@ -90,7 +90,7 @@ export default function PathogenPortalContributors() {
 			{contributors.map((contributor) => (
 				<Card
 					key={contributor.email}
-					className="flex flex-col hover:shadow-2xl"
+					className="flex flex-col transition-shadow duration-300 hover:shadow-2xl"
 				>
 					<CardHeader>
 						<CardTitle>{contributor.name}</CardTitle>

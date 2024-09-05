@@ -8,7 +8,7 @@ export interface IndexItem {
 	summary: string;
 	oneLiner: string;
 	imageUrl?: string;
-	imageCredit: string;
+	imageCredit: Array<{ text: string; href: string | null }>;
 	tags: string[];
 }
 
@@ -89,8 +89,11 @@ export function createSearchIndex(pages: PageObjectResponse[]): SearchIndex {
 
 		const imageCredit =
 			page.properties.card_image_credit.type === "rich_text"
-				? page.properties.card_image_credit.rich_text[0]?.plain_text || ""
-				: "";
+				? page.properties.card_image_credit.rich_text.map((textBlock) => ({
+						text: textBlock.plain_text,
+						href: textBlock.href,
+					}))
+				: [];
 
 		const pageId = page.id;
 
@@ -206,4 +209,31 @@ export function exactSlugSearch(
 	}
 
 	return null;
+}
+
+export function relativeLinkSearch(
+	basePath: string,
+	searchIndex: SearchIndex
+): IndexItem[] {
+	const results = new Map<string, IndexItem>();
+	const normalizedBasePath = basePath.toLowerCase().replace(/^\/+|\/+$/g, "");
+
+	Object.values(searchIndex).forEach((value) => {
+		const processItem = (item: IndexItem) => {
+			const normalizedRelativeLink = item.relativeLink
+				.toLowerCase()
+				.replace(/^\/+|\/+$/g, "");
+			if (normalizedRelativeLink.includes(normalizedBasePath)) {
+				results.set(item.pageId, item);
+			}
+		};
+
+		if (Array.isArray(value)) {
+			value.forEach(processItem);
+		} else if (typeof value === "object" && value !== null) {
+			processItem(value as IndexItem);
+		}
+	});
+
+	return Array.from(results.values());
 }
