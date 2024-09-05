@@ -6,6 +6,8 @@ import {
 import Image from "next/image";
 import ReferencesPanel, { Reference } from "@/components/references-panel";
 import ContributorsPanel from "@/components/contributors-panel";
+import CentralImage from "@/components/central-image";
+import CardGrid, { CardGridData } from "@/components/card-grid";
 
 const references: Reference[] = [
 	{
@@ -29,6 +31,43 @@ const references: Reference[] = [
 		pmcid: "PMC9908738",
 		link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9908738/",
 	},
+	{
+		referenceNumber: 4,
+		reference:
+			"Mathieu E., Spooner F., Dattani S., Ritchie H. and Roser M. (2022) - “Mpox” Published online at OurWorldInData.org. Retrieved from: 'https://ourworldindata.org/mpox' [Online Resource]",
+		pmcid: "",
+		link: "https://ourworldindata.org/mpox",
+	},
+];
+
+const resources: CardGridData[] = [
+	{
+		title: "FHI - Mpox topic",
+		description:
+			"FHI (Folkehelseinstituttet) maintains a topic page for the Mpox in Norway.",
+		link: "https://www.fhi.no/en/id/mpox/",
+		image: "/logos/FHI.png",
+	},
+	{
+		title: "FHI - Mpox naming convention in Norwegian",
+		description:
+			"FHI (Folkehelseinstituttet) also regulate the official nomenclature and naming related to the viral disease.",
+		link: "https://www.fhi.no/ss/mpox/fhi-beholder-navnet-apekopper/",
+		image: "/logos/FHI.png",
+	},
+	{
+		title: "Press releases from the Norwegian government",
+		description:
+			"A filtered search for Mpox related news statemens and press releases by the Norwegian government.",
+		link: "https://www.regjeringen.no/no/sok/id86008/?isfilteropen=True&term=apekopper",
+		image: "/logos/regjeringen.jpg",
+	},
+	{
+		title: "Store medisinske leksikon - Mpox",
+		description: "Mpox related articles by the Norwegian lexicon.",
+		link: "https://snl.no/.search?query=apekopper",
+		image: "/logos/snl.png",
+	},
 ];
 
 export default function MpoxPage() {
@@ -36,7 +75,7 @@ export default function MpoxPage() {
 		<>
 			<ReferencesPanel references={references} />
 			<ContributorsPanel contributors={["terje"]} />
-			<section className="flex flex-col space-y-6 p-2">
+			<section className="flex flex-col space-y-6 text-justify">
 				<h1 className="text-3xl font-bold">Overview</h1>
 				<p className="text-justify">
 					The monkeypox virus (MPXV), abbreviated Mpox, is a zoonotic disease
@@ -74,33 +113,44 @@ export default function MpoxPage() {
 					mechanisms causing disease (<ReferenceOneHoverCard />
 					).
 				</p>
-				<Image
-					src="/topics/monkeypox/monkeypox-daily-cases.jpg"
-					alt="Graph showing daily cases of monkeypox"
-					width={700}
-					height={500}
-					className="mx-auto rounded-md"
-				/>
 				<HoverCard>
 					<HoverCardTrigger asChild>
-						<Image
-							src="/topics/monkeypox/monkeypox-daily-cases-2.jpg"
+						<CentralImage
+							src="/topics/monkeypox/daily-cases.png"
 							alt="Graph showing daily cases of monkeypox"
-							width={700}
-							height={500}
-							className="mx-auto rounded-md"
 						/>
 					</HoverCardTrigger>
-					<HoverCardContent>
-						Confirmed cases by the WHO between 2022-05-01 and 2024-02-04.
-						Source:
+					<HoverCardContent className="w-[400px]">
+						Daily confirmed cases by the WHO between May 1. 2022 and August 25.
+						2024 and cumulative confirmed cases reported around the world.
+						Source: Our World in data (
 						<a
 							href="https://ourworldindata.org/monkeypox"
 							className="text-primary hover:underline"
 						>
-							Our World in data
-						</a>{" "}
-						(2024-02-27)
+							https://ourworldindata.org/monkeypox
+						</a>
+						, 2024-08-27, 4)
+					</HoverCardContent>
+				</HoverCard>
+				<HoverCard>
+					<HoverCardTrigger asChild>
+						<CentralImage
+							src="/topics/monkeypox/daily-cases-2.png"
+							alt="Daily cases of monkeypox"
+						/>
+					</HoverCardTrigger>
+					<HoverCardContent className="w-[400px]">
+						Daily confirmed cases by the WHO between May 1. 2022 and August 25.
+						2024 and cumulative confirmed cases reported around the world.
+						Source: Our World in data (
+						<a
+							href="https://ourworldindata.org/monkeypox"
+							className="text-primary hover:underline"
+						>
+							https://ourworldindata.org/monkeypox
+						</a>
+						, 2024-08-27, 4)
 					</HoverCardContent>
 				</HoverCard>
 				<p className="text-justify">
@@ -118,38 +168,26 @@ export default function MpoxPage() {
 					information relating the samples to their origins.
 				</p>
 				<h2 className="text-2xl font-bold">Norwegian resources for Mpox</h2>
-				<ul className="list-disc">
+				<CardGrid data={resources} />
+				<h2 className="text-2xl font-bold">External Resource</h2>
+				<ul className="flex list-disc flex-col space-x-2 pl-5">
 					<li>
+						Latest publication in{" "}
 						<a
-							href="https://www.fhi.no/en/id/mpox/"
+							href="https://app.cristin.no/search.jsf?t=monkey%20pox"
 							className="text-primary hover:underline"
 						>
-							NIPH Mpox topic
+							Cristin
 						</a>
-					</li>
-					<li>
-						<a
-							href="https://www.fhi.no/ss/mpox/fhi-beholder-navnet-apekopper/"
-							className="text-primary hover:underline"
-						>
-							NIPH naming convention in Norwegian
-						</a>
-					</li>
-					<li>
-						<a
-							href="https://www.regjeringen.no/no/sok/id86008/?isfilteropen=True&term=apekopper"
-							className="text-primary hover:underline"
-						>
-							Press releases from the Norwegian government{" "}
-						</a>
-					</li>
-					<li>
-						<a
-							href="https://snl.no/.search?query=apekopper"
-							className="text-primary hover:underline"
-						>
-							Store medisinske leksikon
-						</a>
+						<li>
+							Ongoing projects listed in{" "}
+							<a
+								href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=date&sortOrder=desc&resultCount=30&offset=0&Fritekst=Mpox,+monkey+pox."
+								className="text-primary hover:underline"
+							>
+								Projektbanken
+							</a>
+						</li>
 					</li>
 				</ul>
 			</section>
