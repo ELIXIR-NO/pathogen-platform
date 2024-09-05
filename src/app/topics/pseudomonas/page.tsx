@@ -1,5 +1,33 @@
-import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
+import CentralImage from "@/components/central-image";
+import {
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import CardGrid, { CardGridData } from "@/components/card-grid";
+
+const repositories: CardGridData[] = [
+	{
+		title: "FHI - Folkehelseinstituttet",
+		description: "",
+		link: "https://www.fhi.no/ut/utbrudd/oversikt-over-storre-utbrudd/utbrudd-av-pseudomonas-infeksjon-i-/",
+		image: "/logos/FHI.png",
+	},
+	{
+		title: "WHO - World Health Organisation",
+		description: "",
+		link: "https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed",
+		image: "/logos/WHO.png",
+	},
+	{
+		title:
+			"Pseudomonas aeruginosa countrywide outbreak in Norwegian hospitals ",
+		description: "",
+		link: "https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2022.27.18.2200312",
+		image: "",
+	},
+];
 
 export default function PseudomonasPage() {
 	return (
@@ -7,13 +35,23 @@ export default function PseudomonasPage() {
 			<ContributorsPanel contributors={["dorota"]} />
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">Pseudomonas</h2>
-				<Image
-					src="/topics/pseudomonas/pseudomonas-aeruginosa.jpg"
-					alt="Image of pseudomonas aeruginos"
-					width={700}
-					height={500}
-					className="mx-auto rounded-md"
-				/>
+				<HoverCard>
+					<HoverCardTrigger asChild>
+						<CentralImage
+							src="/topics/pseudomonas/pseudomonas-aeruginosa.jpg"
+							alt="Image of pseudomonas aeruginos"
+						/>
+					</HoverCardTrigger>
+					<HoverCardContent className="w-fit">
+						Source:{" "}
+						<a
+							href="https://nanosept-disinfectant.com/pathogens/pseudomonas-aeruginosa/"
+							className="text-primary hover:underline"
+						>
+							Nanosept
+						</a>
+					</HoverCardContent>
+				</HoverCard>
 				<p>
 					Pseudomonas species are Gram-negative aerobic rods, forming granular
 					and dry- colonies of various colors. Their measure is from 0.5 to 0.8
@@ -44,9 +82,7 @@ export default function PseudomonasPage() {
 					These bacteria have an increased ability to erase antibiotics from
 					inside the cell, leading to high resistance to antibiotics and common
 					disinfectants. It primarily infects the urinary and respiratory
-					tracts,
-					{/* eslint-disable-next-line react/no-unescaped-entities */}
-					swimmer's ears, cornea, wounds, and folliculitis.
+					tracts, swimmer&apos;s ears, cornea, wounds, and folliculitis.
 				</p>
 				<p>
 					<span className="font-bold italic">P. aeruginosa</span> is listed as a
@@ -66,31 +102,26 @@ export default function PseudomonasPage() {
 					database, you can find the genomes of the species and, corresponding
 					to them, metadata with relevant information about the pathogen source
 				</p>
-				<h3 className="font-bold">Relevant links</h3>
-				<ul className="list-disc">
+				<h2 className="text-2xl font-bold">Data repositories</h2>
+				<CardGrid data={repositories} />
+				<h2 className="text-2xl font-bold">External Resources</h2>
+				<ul className="flex list-disc flex-col space-x-2 pl-5">
 					<li>
+						Latest publication in{" "}
 						<a
+							href="https://app.cristin.no/search.jsf?t=pseudomonas&type=result&sort=PUBL_YEAR_DESC"
 							className="text-primary hover:underline"
-							href="https://www.fhi.no/ut/utbrudd/oversikt-over-storre-utbrudd/utbrudd-av-pseudomonas-infeksjon-i-/"
 						>
-							Utbrudd av pseudomonas-infeksjon i Norge
+							Cristin
 						</a>
 					</li>
 					<li>
+						Ongoing projects listed in{" "}
 						<a
+							href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=score&sortOrder=desc&resultCount=30&offset=0&Fritekst=pseudomonas"
 							className="text-primary hover:underline"
-							href="https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed"
 						>
-							World Health Organisation
-						</a>
-					</li>
-					<li>
-						<a
-							className="text-primary hover:underline"
-							href="https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2022.27.18.2200312"
-						>
-							<span>Pseudomonas aeruginosa</span> countrywide outbreak in
-							Norwegian hospitals
+							Projektbanken
 						</a>
 					</li>
 				</ul>
