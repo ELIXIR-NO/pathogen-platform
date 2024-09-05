@@ -111,29 +111,27 @@ export default function Covid19Page() {
 				</p>
 				<h2 className="text-2xl font-bold">Norwegian Resources</h2>
 				<CardGrid data={norwegianResources} />
-				<div>
-					<h2 className="pb-2 text-2xl font-bold">External resources</h2>
-					<ul className="list-disc pl-5">
-						<li>
-							Latest publication in{" "}
-							<a
-								href="https://app.cristin.no/search.jsf?t=Covid-19&type=result&filter=category_idfacet~ARTICLE"
-								className="text-primary hover:underline"
-							>
-								Cristin
-							</a>
-						</li>
-						<li>
-							Ongoing projects listed in{" "}
-							<a
-								href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=date&sortOrder=desc&resultCount=30&offset=0&TemaEmne.1=Covid19"
-								className="text-primary hover:underline"
-							>
-								Prosjektbanken
-							</a>
-						</li>
-					</ul>
-				</div>
+				<h2 className="pb-2 text-2xl font-bold">External resources</h2>
+				<ul className="flex list-disc flex-col space-y-1 pl-5">
+					<li>
+						Latest publication in{" "}
+						<a
+							href="https://app.cristin.no/search.jsf?t=Covid-19&type=result&filter=category_idfacet~ARTICLE"
+							className="text-primary hover:underline"
+						>
+							Cristin
+						</a>
+					</li>
+					<li>
+						Ongoing projects listed in{" "}
+						<a
+							href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=date&sortOrder=desc&resultCount=30&offset=0&TemaEmne.1=Covid19"
+							className="text-primary hover:underline"
+						>
+							Prosjektbanken
+						</a>
+					</li>
+				</ul>
 			</section>
 		</>
 	);

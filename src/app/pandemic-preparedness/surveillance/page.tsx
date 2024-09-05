@@ -210,7 +210,7 @@ export default function SurveillancePage() {
 					FHI and VI are partners in the EU-WISH project.
 				</p>
 				<h2 className="text-2xl font-bold">External resources</h2>
-				<ul className="flex list-disc flex-col space-x-2 pl-5">
+				<ul className="flex list-disc flex-col space-y-1 pl-5">
 					<li>
 						Latest publication in{" "}
 						<a
@@ -219,15 +219,15 @@ export default function SurveillancePage() {
 						>
 							Cristin
 						</a>
-						<li>
-							Ongoing projects listed in{" "}
-							<a
-								href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=score&sortOrder=desc&resultCount=30&offset=0&Fritekst=pathogen+surveillance"
-								className="text-primary hover:underline"
-							>
-								Projektbanken
-							</a>
-						</li>
+					</li>
+					<li>
+						Ongoing projects listed in{" "}
+						<a
+							href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=score&sortOrder=desc&resultCount=30&offset=0&Fritekst=pathogen+surveillance"
+							className="text-primary hover:underline"
+						>
+							Projektbanken
+						</a>
 					</li>
 				</ul>
 			</section>

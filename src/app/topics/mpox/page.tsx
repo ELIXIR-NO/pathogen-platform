@@ -170,7 +170,7 @@ export default function MpoxPage() {
 				<h2 className="text-2xl font-bold">Norwegian resources for Mpox</h2>
 				<CardGrid data={resources} />
 				<h2 className="text-2xl font-bold">External Resource</h2>
-				<ul className="flex list-disc flex-col space-x-2 pl-5">
+				<ul className="flex list-disc flex-col space-y-1 pl-5">
 					<li>
 						Latest publication in{" "}
 						<a
