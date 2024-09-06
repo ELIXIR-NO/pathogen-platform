@@ -5,28 +5,28 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 
-export function LogoModeToggle() {
+export function ElixirNorwayLogoModeToggle() {
 	const { resolvedTheme } = useTheme();
 	let src;
 
 	switch (resolvedTheme) {
 		case "light":
-			src = "/pathogens_portal_norway_logo_light.png";
+			src = "/elixir-no-logo-black.svg";
 			break;
 		case "dark":
-			src = "/pathogens_portal_norway_logo_dark.png";
+			src = "/elixir-no-logo-white.svg";
 			break;
 		default:
-			src = "/pathogens_portal_norway_logo_light.png";
+			src = "/elixir-no-logo-black.svg";
 			break;
 	}
 
 	return (
 		<Image
 			src={src}
-			alt="Logo of pathogens portal norway"
-			width={250}
-			height={65.55}
+			alt="Logo of ELIXIR Norway"
+			width={150}
+			height={50}
 			className={cn("hover:ring-2 hover:ring-primary")}
 			priority={true}
 		/>
