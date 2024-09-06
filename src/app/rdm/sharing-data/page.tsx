@@ -1,25 +1,51 @@
 import ContributorsPanel from "@/components/contributors-panel";
+import ReferencesPanel, { Reference } from "@/components/references-panel";
+import {
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import CentralImage from "@/components/central-image";
+
+const references: Reference[] = [
+	{
+		referenceNumber: 1,
+		reference:
+			"Wilson SL, Way GP, Bittremieux W, Armache JP, Haendel MA, Hoffman MM. Sharing biological data: why, when, and how. FEBS Lett. 2021 Apr;595(7):847-863. doi: 10.1002/1873-3468.14067. PMID: 33843054;",
+		pmcid: "PMC10390076.",
+		link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10390076/",
+	},
+];
 
 export default function DataSharingPage() {
 	return (
-		<div>
-			<div className="fixed right-12 top-32 z-10">
-				<div className="flex flex-col space-y-2">
-					<ContributorsPanel contributors={["espen"]} />
-				</div>
-			</div>
+		<>
+			<ContributorsPanel contributors={["espen"]} />
+			<ReferencesPanel references={references} />
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">
 					Data Sharing in Biological and Medical Sciences
 				</h2>
+				<HoverCard>
+					<HoverCardTrigger asChild>
+						<CentralImage
+							src="/rdm/sharing-data/page-image.png"
+							alt="Page image"
+						/>
+					</HoverCardTrigger>
+					<HoverCardContent className="w-fit">
+						Credit: Adobe Stock image edited by Karen Arnott
+					</HoverCardContent>
+				</HoverCard>
 				<p>
 					Data sharing in the biological and medical sciences refers to the
 					practice of{" "}
 					<strong>
 						making research data available to other investigators or the public
 					</strong>
-					, often through databases, repositories, or other means. This practice
-					is <strong>crucial</strong> for several reasons:
+					(<ReferenceOneHoverCard />) , often through databases, repositories,
+					or other means. This practice is <strong>crucial</strong> for several
+					reasons:
 				</p>
 				<ol className="list-decimal pl-5">
 					<li>
@@ -51,42 +77,41 @@ export default function DataSharingPage() {
 					</li>
 				</ol>
 				<h3 className="text-2xl font-semibold">Where do I start?</h3>
-				<p>
-					The RDMkit provides a general introduction to{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://rdmkit.elixir-europe.org/sharing"
-					>
-						data sharing
-					</a>
-					, and what you should think about when you{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://rdmkit.elixir-europe.org/sharing"
-					>
-						consider sharing and publishing your data
-					</a>
-					.
-				</p>
-				<p>
-					For advice and tailored support on using repositories, secure storage
-					solutions, and standardizing data organization and documentation,
-					contact the ELIXIR Norway{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://elixir.no/helpdesk"
-					>
-						Helpdesk
-					</a>
-					. To get in touch, send an email to{" "}
-					<a
-						className="text-primary hover:underline"
-						href="mailto:support@elixir.no"
-					>
-						support@elixir.no
-					</a>
-					.
-				</p>
+				<ul className="list-disc pl-5">
+					<li>
+						The <a href="https://rdmkit.elixir-europe.org/sharing">RDMkit</a>{" "}
+						provides a general introduction to data sharing, and what you should
+						think about when you consider sharing and publishing your data.
+					</li>
+					<li>
+						The{" "}
+						<a href="https://www.regjeringen.no/en/dokumenter/one-digital-public-sector/id2653874/?ch=4">
+							digital strategy for data sharing
+						</a>{" "}
+						from the Norwegian Government
+					</li>
+					<li>
+						The{" "}
+						<a href="https://www.forskningsradet.no/en/research-policy-strategy/open-science/research-data/">
+							Research Council of Norway&apos;s policy
+						</a>{" "}
+						for open access to research data.
+					</li>
+					<li>
+						<a href="https://www.nature.com/sdata/policies/repositories#general">
+							Nature Scientific Data
+						</a>{" "}
+						has a guide for Recommended Data Repositories
+					</li>
+					<li>
+						There are tools that can help you select an appropriate licence for
+						your data like{" "}
+						<a href="https://ufal.github.io/public-license-selector/">
+							The Public License Selector
+						</a>{" "}
+						or <a href="https://choosealicense.com/">ChooseALicense.com</a>
+					</li>
+				</ul>
 				<h3 className="text-2xl font-semibold">
 					Importance of Participation by Clinical and Research Personnel
 				</h3>
@@ -100,7 +125,48 @@ export default function DataSharingPage() {
 					ethical and practical aspects of data sharing, including data privacy
 					and security measures to protect sensitive information.
 				</p>
+				<p className="mx-auto text-center text-3xl font-bold">
+					&quot;The problem is not really technical&quot;
+				</p>
+				<p className="mx-auto italic">Lancet Oncol 2011;12:933</p>
 			</section>
-		</div>
+		</>
+	);
+}
+
+function ReferenceOneHoverCard() {
+	return (
+		<ReferenceHoverCard
+			refNumber={1}
+			paper="Sharing biological data: why, when, and how. FEBS Lett. 2021 Apr;595(7):847-863."
+			pmcid="PMC10390076"
+			href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10390076/"
+		/>
+	);
+}
+
+function ReferenceHoverCard({
+	refNumber,
+	paper,
+	pmcid,
+	href,
+}: {
+	refNumber: number;
+	paper: string;
+	pmcid: string;
+	href: string;
+}) {
+	return (
+		<HoverCard>
+			<HoverCardTrigger className="cursor-pointer text-primary hover:underline">
+				{refNumber}
+			</HoverCardTrigger>
+			<HoverCardContent className="text-small w-[500px] text-justify">
+				{paper};PMCID:
+				<a href={href} className="text-primary hover:underline">
+					{pmcid}
+				</a>
+			</HoverCardContent>
+		</HoverCard>
 	);
 }
