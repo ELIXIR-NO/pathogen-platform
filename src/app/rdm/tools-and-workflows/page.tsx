@@ -5,7 +5,7 @@ const resources: CardGridData[] = [
 	{
 		title: "usegalaxy.no",
 		description:
-			"The Norwegian Galaxy server is operated by ELIXIR Norway and is free to use for Norwegian researchers. Multiple tools are available for performing analysis of pathogen data.",
+			"The Norwegian Galaxy server is operated by ELIXIR Norway and is free to use for Norwegian researchers. Multiple tools are available for performing analysis of pathogen data.",
 		link: "https://usegalaxy.no/",
 		image: "/logos/usegalaxy.png",
 	},
