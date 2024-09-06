@@ -10,29 +10,30 @@ import CardGrid, { CardGridData } from "@/components/card-grid";
 const repositories: CardGridData[] = [
 	{
 		title: "FHI - Folkehelseinstituttet",
-		description: "",
+		description: "Folkehelseinstituttet lists Pseudomonas outbreaks in Norway.",
 		link: "https://www.fhi.no/ut/utbrudd/oversikt-over-storre-utbrudd/utbrudd-av-pseudomonas-infeksjon-i-/",
 		image: "/logos/FHI.png",
 	},
 	{
 		title: "WHO - World Health Organisation",
-		description: "",
+		description:
+			"WHO considers Pseudomonas as critical in terms of requirement for new antibiotics.",
 		link: "https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed",
 		image: "/logos/WHO.png",
 	},
 	{
-		title:
+		title: "Eurosurveillance",
+		description:
 			"Pseudomonas aeruginosa countrywide outbreak in Norwegian hospitals ",
-		description: "",
 		link: "https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2022.27.18.2200312",
-		image: "",
+		image: "/logos/eurosurveillance.png",
 	},
 ];
 
 export default function PseudomonasPage() {
 	return (
 		<>
-			<ContributorsPanel contributors={["dorota"]} />
+			<ContributorsPanel contributors={["dorota", "sebastian"]} />
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">Pseudomonas</h2>
 				<HoverCard>
@@ -105,7 +106,7 @@ export default function PseudomonasPage() {
 				<h2 className="text-2xl font-bold">Data repositories</h2>
 				<CardGrid data={repositories} />
 				<h2 className="text-2xl font-bold">External Resources</h2>
-				<ul className="flex list-disc flex-col space-x-2 pl-5">
+				<ul className="flex list-disc flex-col space-y-1 pl-5">
 					<li>
 						Latest publication in{" "}
 						<a
