@@ -1,5 +1,49 @@
-import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
+import CentralImage from "@/components/central-image";
+import {
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import CardGrid, { CardGridData } from "@/components/card-grid";
+
+const resources: CardGridData[] = [
+	{
+		title: "Annual reports",
+		description:
+			"The FHI (Folkehelseinstituttet) is responsible for collecting and publishing of annual reports on the surveillance of diseases caused by food- and waterborne pathogens in Norway.",
+		link: "https://www.fhi.no/publ/2024/overvakning-av-infeksjonssykdommer-som-smitter-fra-mat-vann-og-dyr-inkludert-vektorbarne-sykdommer/",
+		image: "/logos/FHI.png",
+	},
+	{
+		title: "MSIS",
+		description:
+			"The health registry MSIS (Meldingssystem for smittsomme sykdommer) is the official system for monitoring infectious diseases in humans, food- and waterborne pathogens.",
+		link: "https://allvis.fhi.no/msis",
+		image: "/logos/FHI.png",
+	},
+	{
+		title: "Mattilsynet",
+		description:
+			"Mattilsynet (Norwegian Food Safety Authority) is responsible for ensuring food and water safety in Norway. It conducts inspections, monitors food and water quality, and enforces regulations to prevent contamination. The authority also collaborates with other institutions during foodborne outbreak investigations.",
+		link: "https://www.mattilsynet.no/",
+		image: "/logos/mattilsynet.png",
+	},
+	{
+		title: "NORM-VET",
+		description:
+			"The surveillance program NORM-VET (Norsk overvåkingsprogram for antibiotikaresistens i mikrober fra fôr, dyr og næringsmidler) focuses on antibiotic resistance in microbes originating from feed, animals, and food. It works in conjunction with NORM to provide a comprehensive overview of antibiotic resistance trends across human and animal populations.",
+		link: "https://www.vetinst.no/overvaking/antibiotikaresistens-norm-vet",
+		image: "/logos/norm.png",
+	},
+	{
+		title: "VI - Veterinærinstituttet",
+		description:
+			"VI (Norwegian Veterinary Institute) monitors zoonotic pathogens, including those that can be transmitted through food. It provides expertise and laboratory support for detecting and analysing pathogens in food products, contributing to food safety.",
+		link: "https://www.vetinst.no/en",
+		image: "/logos/VI.png",
+	},
+];
 
 export default function FoodWaterbornePathogensPage() {
 	return (
@@ -11,29 +55,31 @@ export default function FoodWaterbornePathogensPage() {
 			</div>
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">Food and waterborne pathogens</h2>
-				<Image
-					src="/pandemic-preparedness/one-health/food-and-waterborne-pathogens/rachael-gorjestani-XlA2994Txhw-unsplash.jpg"
-					alt="Photo by Rachael Gorjestani on Unsplash"
-					width={900}
-					height={500}
-					className="mx-auto rounded-md"
-				/>
-				<p className="text-center text-sm">
-					Photo by{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://unsplash.com/@rachaelgorjestani?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-					>
-						Rachael Gorjestani
-					</a>{" "}
-					on{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://unsplash.com/photos/shallow-focus-photography-of-green-pea-on-brown-wooden-surface-XlA2994Txhw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-					>
-						Unsplash
-					</a>
-				</p>
+				<HoverCard>
+					<HoverCardTrigger asChild>
+						<CentralImage
+							src="/pandemic-preparedness/one-health/food-and-waterborne-pathogens/rachael-gorjestani-XlA2994Txhw-unsplash.jpg"
+							alt="Photo by Rachael Gorjestani on Unsplash"
+						/>
+					</HoverCardTrigger>
+					<HoverCardContent className="w-fit">
+						Photo by{" "}
+						<a
+							className="text-primary hover:underline"
+							href="https://unsplash.com/@rachaelgorjestani?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+						>
+							Rachael Gorjestani
+						</a>{" "}
+						on{" "}
+						<a
+							className="text-primary hover:underline"
+							href="https://unsplash.com/photos/shallow-focus-photography-of-green-pea-on-brown-wooden-surface-XlA2994Txhw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+						>
+							Unsplash
+						</a>
+					</HoverCardContent>
+				</HoverCard>
+
 				<p>
 					Food- and waterborne pathogens are microorganisms that cause illness
 					when ingested through contaminated food or water. These pathogens
@@ -64,124 +110,29 @@ export default function FoodWaterbornePathogensPage() {
 					</a>
 					).
 				</p>
-				<h3 className="font-bold">Norwegian resources</h3>
-				<p>
-					The National Institute of Public Health (
-					<a
-						className="text-primary hover:underline"
-						href="https://www.fhi.no/"
-					>
-						Folkehelseinstituttet
-					</a>
-					) is responsible for collecting and publishing{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://www.fhi.no/publ/2024/"
-					>
-						annual reports
-					</a>{" "}
-					on the surveillance of diseases caused by food- and waterborne
-					pathogens in Norway. In addition to food- and waterborne pathogens,
-					the report (Overvåkning av infeksjonssykdommer som smitter fra mat,
-					vann og dyr, inkludert vektorbårne sykdommer) includes infectious
-					diseases caused by vector-borne and zoonotic pathogens.
-				</p>
-				<p>
-					<strong>Annual report 2023</strong> -{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://www.fhi.no/contentassets/d59572bcd8584c5ba0e5dcdf7db60948/arsrapport-mat-vann-dyr-2023.pdf"
-					>
-						ÅRSRAPPORT 2023
-					</a>
-				</p>
-				<h4 className="font-bold">Annual reports</h4>
-				<p>
-					The National Institute of Public Health (
-					<a
-						className="text-primary hover:underline"
-						href="https://www.fhi.no/"
-					>
-						Folkehelseinstituttet
-					</a>
-					) is responsible for collecting and publishing{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://www.fhi.no/publ/2024/"
-					>
-						annual reports
-					</a>{" "}
-					on the surveillance of diseases caused by food- and waterborne
-					pathogens in Norway.
-				</p>
-				<p>
-					<a
-						className="text-primary hover:underline"
-						href="https://www.fhi.no/publ/2024/overvakning-av-infeksjonssykdommer-som-smitter-fra-mat-vann-og-dyr-inkludert-vektorbarne-sykdommer/"
-					>
-						Overvåkning av infeksjonssykdommer som smitter fra mat, vann og dyr,
-						inkludert vektorbårne sykdommer
-					</a>
-				</p>
-				<h4 className="font-bold">MSIS</h4>
-				<p>
-					The health registry MSIS (Meldingssystem for smittsomme sykdommer) is
-					the official system for monitoring infectious diseases in humans,
-					food- and waterborne pathogens.
-				</p>
-				<p>
-					<a className="text-primary hover:underline" href="https://msis.no/">
-						MSIS Registry
-					</a>
-				</p>
-				<h4 className="font-bold">Mattilsynet</h4>
-				<p>
-					Mattilsynet (Norwegian Food Safety Authority) is responsible for
-					ensuring food and water safety in Norway. It conducts inspections,
-					monitors food and water quality, and enforces regulations to prevent
-					contamination. The authority also collaborates with other institutions
-					during foodborne outbreak investigations.
-				</p>
-				<p>
-					<a
-						className="text-primary hover:underline"
-						href="https://www.mattilsynet.no/"
-					>
-						Mattilsynet
-					</a>
-				</p>
-				<h4 className="font-bold">NORM-VET</h4>
-				<p>
-					The surveillance program NORM-VET (Norsk overvåkingsprogram for
-					antibiotikaresistens i mikrober fra fôr, dyr og næringsmidler) focuses
-					on antibiotic resistance in microbes originating from feed, animals,
-					and food. It works in conjunction with NORM to provide a comprehensive
-					overview of antibiotic resistance trends across human and animal
-					populations.
-				</p>
-				<p>
-					<a
-						className="text-primary hover:underline"
-						href="https://www.vetinst.no/overvaking/antibiotikaresistens-norm-vet"
-					>
-						Antibiotikaresistens (NORM-VET)
-					</a>
-				</p>
-				<h4 className="font-bold">Veterinærinstituttet</h4>
-				<p>
-					Veterinærinstituttet (Norwegian Veterinary Institute) monitors
-					zoonotic pathogens, including those that can be transmitted through
-					food. It provides expertise and laboratory support for detecting and
-					analysing pathogens in food products, contributing to food safety.
-				</p>
-				<p>
-					<a
-						className="text-primary hover:underline"
-						href="https://www.vetinst.no/en"
-					>
-						Home - Norwegian Veterinary Institute
-					</a>
-				</p>
+				<h2 className="text-2xl font-bold">Norwegian resources</h2>
+				<CardGrid data={resources} />
+				<h2 className="pb-2 text-2xl font-bold">External resources</h2>
+				<ul className="flex list-disc flex-col space-y-1 pl-5">
+					<li>
+						Latest publication in{" "}
+						<a
+							href="https://app.cristin.no/search.jsf?t=foodborne%20waterborne%20pathogen&type=result"
+							className="text-primary hover:underline"
+						>
+							Cristin
+						</a>
+					</li>
+					<li>
+						Ongoing projects listed in{" "}
+						<a
+							href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=date&sortOrder=desc&resultCount=30&offset=0&Fritekst=foodborne+waterborne+pathogen"
+							className="text-primary hover:underline"
+						>
+							Prosjektbanken
+						</a>
+					</li>
+				</ul>
 			</section>
 		</>
 	);
