@@ -3,45 +3,85 @@ import {
 	HoverCardContent,
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import Image from "next/image";
 import ReferencesPanel, { Reference } from "@/components/references-panel";
 import ContributorsPanel from "@/components/contributors-panel";
+import CentralImage from "@/components/central-image";
+import CardGrid, { CardGridData } from "@/components/card-grid";
 
 const references: Reference[] = [
 	{
 		referenceNumber: 1,
 		reference:
-			"Taylor Louise H., Latham Sophia M. and Woolhouse Mark E.J. 2001 Risk factors for human disease emergence Phil. Trans. R. Soc. Lond. B356983–989",
+			"Taylor Louise H., Latham Sophia M. and Woolhouse Mark E.J. 2001 Risk factors for human disease emergence Phil. Trans. R. Soc. Lond. B356983–989",
 		pmcid: "PMC1088493",
 		link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1088493/",
 	},
 	{
 		referenceNumber: 2,
 		reference:
-			"Swanson David, Koren Clemence, Hopp Petter, Jonsson Malin E, Rø Gunnar Isaksson, White Richard A, Grøneng Gry Marysol. A One Health real-time surveillance system for nowcasting Campylobacter gastrointestinal illness outbreaks, Norway, week 30 2010 to week 11 2022. Euro Surveill. 2022;27(43):pii=2101121",
+			"Swanson David, Koren Clemence, Hopp Petter, Jonsson Malin E, Rø Gunnar Isaksson, White Richard A, Grøneng Gry Marysol. A One Health real-time surveillance system for nowcasting Campylobacter gastrointestinal illness outbreaks, Norway, week 30 2010 to week 11 2022. Euro Surveill. 2022;27(43):pii=2101121",
 		pmcid: "PMC9615412",
 		link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9615412/",
+	},
+];
+
+const resources: CardGridData[] = [
+	{
+		title: "FHI - One Health concept in Norway",
+		description:
+			"FHI maintains a topic page for the One Health concept in Norway.",
+		link: "https://www.fhi.no/en/in/smitte-fra-mat-vann-og-dyr/artikler/one-health/",
+		image: "/logos/FHI.png",
+	},
+	{
+		title: "VI - One Health concept in Norway.",
+		description:
+			"VI (Veterinærinstituttet) maintains a page concerning the One Health topic. VI also lists projects and initiatives relevant to the veterinary institute. ",
+		link: "https://www.vetinst.no/en-helse",
+		image: "/logos/VI.png",
+	},
+	{
+		title: "FHI - Outbreak handbook",
+		description:
+			"FHI provide the outbreak handbook as a tool for medical and scientific personnel. It outlines methods and responsibilities as well as provides a set of tools related to the handling of outbreaks.",
+		link: "https://www.fhi.no/ut/utbruddshandboka/?term=",
+		image: "/logos/FHI.png",
+	},
+	{
+		title: "FHI - EU Horizon 2020",
+		description:
+			"FHI manages a webpage about the EU's Horizon 2020 project. It also describes 60 of the sub-projects in which FHI partake.",
+		link: "https://www.fhi.no/en/in/smitte-fra-mat-vann-og-dyr/artikler/the-largest-ever-health-project-funded-from-the-eus-horizon-2020/",
+		image: "/logos/FHI.png",
 	},
 ];
 
 export default function OneHealthPage() {
 	return (
 		<>
-			<div className="fixed right-12 top-32 z-10">
-				<div className="flex flex-col space-y-2">
-					<ReferencesPanel references={references} />
-					<ContributorsPanel contributors={["terje"]} />
-				</div>
-			</div>
+			<ReferencesPanel references={references} />
+			<ContributorsPanel contributors={["terje"]} />
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">One Health</h2>
-				<Image
-					src="/pandemic-preparedness/one-health/joint-tripartite-unep-one-health-graphic.png"
-					alt="Figure by the World Health Organization depicting the One Health concept"
-					width={900}
-					height={500}
-					className="mx-auto rounded-md"
-				/>
+				<HoverCard>
+					<HoverCardTrigger asChild>
+						<CentralImage
+							src="/pandemic-preparedness/one-health/joint-tripartite-unep-one-health-graphic.png"
+							alt="Figure by the World Health Organization depicting the One Health concept"
+						/>
+					</HoverCardTrigger>
+					<HoverCardContent className="w-fit">
+						Figure by the World Health Organization depicting the One Health
+						concept (
+						<a
+							href="https://www.who.int/news/item/01-12-2021-tripartite-and-unep-support-ohhlep-s-definition-of-one-health"
+							className="text-primary hover:underline"
+						>
+							www.who.int
+						</a>
+						).
+					</HoverCardContent>
+				</HoverCard>
 				<p className="text-center text-sm">
 					Figure by the World Health Organization depicting the One Health
 					concept
@@ -101,38 +141,28 @@ export default function OneHealthPage() {
 					hosted by UiT. For the current list of projects by the Research
 					Council of Norway see the list below pulled from Prosjektbanken.
 				</p>
-				<h3 className="font-bold">Norwegian resources for One Health</h3>
-				<ul className="list-disc">
+				<h2 className="text-2xl font-bold">
+					Norwegian resources for One Health
+				</h2>
+				<CardGrid data={resources} />
+				<h2 className="pb-2 text-2xl font-bold">External resources</h2>
+				<ul className="flex list-disc flex-col space-y-1 pl-5">
 					<li>
+						Latest publication in{" "}
 						<a
+							href="https://app.cristin.no/search.jsf?t=one%20health"
 							className="text-primary hover:underline"
-							href="https://www.fhi.no/sm/smitte-fra-mat-vann-dyr/artikler/en-helse/"
 						>
-							Norwegian Institute of Public Health - One Health
+							Cristin
 						</a>
 					</li>
 					<li>
+						Ongoing projects listed in{" "}
 						<a
+							href="https://prosjektbanken.forskningsradet.no/explore/statistics?Kilde=FORISS&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=score&sortOrder=desc&resultCount=30&offset=0&Fritekst=one+health"
 							className="text-primary hover:underline"
-							href="https://www.vetinst.no/en-helse"
 						>
-							Norwegian Veterinary Institute - En helse
-						</a>
-					</li>
-					<li>
-						<a
-							className="text-primary hover:underline"
-							href="https://www.fhi.no/ut/utbruddshandboka/?term="
-						>
-							Norwegian Institute of Public Health - The outbreak handbook
-						</a>
-					</li>
-					<li>
-						<a
-							className="text-primary hover:underline"
-							href="https://www.fhi.no/en/in/smitte-fra-mat-vann-og-dyr/artikler/the-largest-ever-health-project-funded-from-the-eus-horizon-2020/"
-						>
-							Norwegian Institute of Public Health - EUs Horizon 2020 projects
+							Prosjektbanken
 						</a>
 					</li>
 				</ul>
