@@ -32,7 +32,10 @@ export default function WhereDoIStartPage() {
 						genomics data management.
 					</li>
 					<li>
-						<a href="https://elixir.no/rdm-lookup/">
+						<a
+							href="https://elixir.no/rdm-lookup/"
+							className="text-primary hover:underline"
+						>
 							Norwegian Life Science RDM LookUp
 						</a>{" "}
 						is a resource that acts like a waypost to help you to find data
@@ -125,14 +128,20 @@ export default function WhereDoIStartPage() {
 				<ul className="list-disc pl-5">
 					<li>
 						The{" "}
-						<a href="https://faircookbook.elixir-europe.org/content/home.html">
+						<a
+							href="https://faircookbook.elixir-europe.org/content/home.html"
+							className="text-primary hover:underline"
+						>
 							FAIR Cookbook offers step-by-step instructions
 						</a>{" "}
 						for applying FAIR principles in practical, task-oriented ways.
 					</li>
 					<li>
 						To find{" "}
-						<a href="https://fairsharing.org/search?q=pathogen">
+						<a
+							href="https://fairsharing.org/search?q=pathogen"
+							className="text-primary hover:underline"
+						>
 							Metadata Standards and suitable Repositories
 						</a>{" "}
 						you can browse relevant standards at FAIRsharing to ensure
@@ -157,29 +166,51 @@ export default function WhereDoIStartPage() {
 				<ul className="list-disc pl-5">
 					<li>
 						The{" "}
-						<a href="https://tess.elixir-europe.org/search?q=pathogen">
+						<a
+							href="https://tess.elixir-europe.org/search?q=pathogen"
+							className="text-primary hover:underline"
+						>
 							Training eSupport System (TeSS)
 						</a>{" "}
 						is a website where you can find training materials, learning events
 						and courses on RDM.
 					</li>
 					<li>
-						<a href="https://bio.tools/">Bio.Tools</a> provides a comprehensive
-						catalogue of educational resources and{" "}
-						<a href="https://bio.tools/t?page=1&q=pathogen&sort=score">
+						<a
+							href="https://bio.tools/"
+							className="text-primary hover:underline"
+						>
+							Bio.Tools
+						</a>{" "}
+						provides a comprehensive catalogue of educational resources and{" "}
+						<a
+							href="https://bio.tools/t?page=1&q=pathogen&sort=score"
+							className="text-primary hover:underline"
+						>
 							bioinformatics tools tailored to pathogen genomics
 						</a>
 						.
 					</li>
 					<li>
 						For bioinformaticians it might be worth checking out the{" "}
-						<a href="https://galaxyproject.org/community/sig/microbial/">
+						<a
+							href="https://galaxyproject.org/community/sig/microbial/"
+							className="text-primary hover:underline"
+						>
 							Microgalaxy Community
 						</a>{" "}
 						and the tools available in the{" "}
-						<a href="https://microgalaxy.usegalaxy.eu/">MicroGalaxy instance</a>
+						<a
+							href="https://microgalaxy.usegalaxy.eu/"
+							className="text-primary hover:underline"
+						>
+							MicroGalaxy instance
+						</a>
 						, and how you can{" "}
-						<a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/">
+						<a
+							href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/"
+							className="text-primary hover:underline"
+						>
 							Use Galaxy and Managing your Data
 						</a>
 						.
@@ -205,12 +236,18 @@ export default function WhereDoIStartPage() {
 				</h3>
 				<p>
 					To start off, we recommend you to begin from reading the{" "}
-					<a href="https://rdmkit.elixir-europe.org/human_pathogen_genomics">
+					<a
+						href="https://rdmkit.elixir-europe.org/human_pathogen_genomics"
+						className="text-primary hover:underline"
+					>
 						Data Management Plan (DMP)
 					</a>{" "}
 					page on RDMkit as it helps to get an overview about what entails a
 					DMP. From RDMkit, you can choose a tool such as{" "}
-					<a href="https://norway.dsw.elixir-europe.org/wizard/knowledge-models/elixir.no:lifesciences-elixir-norway:latest/preview">
+					<a
+						href="https://norway.dsw.elixir-europe.org/wizard/knowledge-models/elixir.no:lifesciences-elixir-norway:latest/preview"
+						className="text-primary hover:underline"
+					>
 						Data Stewardship Wizard (DSW)
 					</a>{" "}
 					to create a DMP. The DSW is a questionnaire style tool for creating,
