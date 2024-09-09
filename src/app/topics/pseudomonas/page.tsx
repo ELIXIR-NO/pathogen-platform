@@ -58,26 +58,25 @@ export default function PseudomonasPage() {
 					and dry- colonies of various colors. Their measure is from 0.5 to 0.8
 					μm by 1.5 to 3.0 μm. It occupies the environment, mostly soil (coastal
 					areas), water, and plant and animal tissues, and it can easily survive
-					various environmental stresses. Pseudomonas means ”false unit”, 
-					aeruginosa refers to the blue-green colour of laboratory cultures of 
-					the species discovered by Carle Gessard, a French scientist, in 1882. 
-					In his experiment, water-soluble pigments in the presence of P. aeruginosa 
-					and under the ultraviolet light turned to a blue-green color.{" "}
-					<span className="font-bold italic">Pseudomonas aeruginos</span>{" "}
+					various environmental stresses. Pseudomonas means ”false unit”,
+					aeruginosa refers to the blue-green colour of laboratory cultures of
+					the species discovered by Carle Gessard, a French scientist, in 1882.
+					In his experiment, water-soluble pigments in the presence of P.
+					aeruginosa and under the ultraviolet light turned to a blue-green
+					color. <span className="font-bold italic">Pseudomonas aeruginos</span>{" "}
 					usually affects immunocompromised people. Healthy people usually would
 					not get infected by this microbe.{" "}
 					<span className="font-bold italic">P. aeruginosa</span> is an
 					opportunistic pathogen, and it needs to be a break in the first
 					defence line of the body. The break is a classified example as trauma,
 					cystic fibrosis, surgeries, cancer, AIDS, or other immunosuppressed
-					stages.
-					These bacteria have an increased ability to erase antibiotics from
-					inside the cell, leading to high resistance to antibiotics and common
-					disinfectants. It primarily infects the urinary and respiratory
+					stages. These bacteria have an increased ability to erase antibiotics
+					from inside the cell, leading to high resistance to antibiotics and
+					common disinfectants. It primarily infects the urinary and respiratory
 					tracts, swimmer&apos;s ears, cornea, wounds, and folliculitis.
-					<span className="font-bold italic"> P. aeruginosa</span> is listed as a
-					CRITICAL priority on the antimicrobial pathogen list published by the
-					World Health Organization{" "}
+					<span className="font-bold italic"> P. aeruginosa</span> is listed as
+					a CRITICAL priority on the antimicrobial pathogen list published by
+					the World Health Organization{" "}
 					<a
 						className="text-primary hover:underline"
 						href="https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed"
