@@ -192,7 +192,7 @@ export default function SurveillancePage() {
 				</p>
 				<p>
 					Important international resources and consortiums are the EU
-					Wastewater Observatory for Public Health, the Joint Action
+					Wastewater Observatory for Public Health, the Joint Action{" "}
 					<a
 						href="https://www.eu-wish.eu/"
 						className="text-primary hover:underline"

@@ -59,7 +59,7 @@ export const pandemicPreparednessNavItems: DropdownMenuItem[] = [
 	{
 		title: "Infectious diseases",
 		href: "/pandemic-preparedness/infectious-diseases",
-		description: "",
+		description: "Infectious diseases are caused by organisms and can lead to health crises globally.",
 	},
 ];
 
