@@ -9,15 +9,16 @@ import CardGrid, { CardGridData } from "@/components/card-grid";
 
 const repositories: CardGridData[] = [
 	{
-		title:
+		title: "Journal of Antimicrobial Resistance",
+		description:
 			"The first tigecycline resistant Enterococcus faecium in Norway was related to tigecycline exposure",
-		description: "",
 		link: "https://www.sciencedirect.com/science/article/pii/S2213716523002126",
-		image: "",
+		image: "/logos/science-direct.png",
 	},
 	{
 		title: "WHO - World Health Organisation",
-		description: "",
+		description:
+			"WHO considers Enterococcus as high in terms of requirement for new antibiotics.",
 		link: "https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed",
 		image: "/logos/WHO.png",
 	},
@@ -55,18 +56,20 @@ export default function EnterococcusPage() {
 					lactic acid bacteria group. It is primarily present in the GI tract of
 					humans, animals, and the environment. As a commensal bacterium, it
 					lives harmlessly in the healthy human gut. It is commonly used as a
-					probiotic i.e. However, E. faecalis could spread to the other parts of
-					the body, causing infections. The bacterium can survive extreme
-					environments such as acid and alkaline. Hence the E. faecalis
-					antimicrobial resistance to antibiotics, both intrinsic and acquired,
-					has become increasingly common. The resistance is mainly directed to
-					vancomycin. Exterminating the bacterium from the human body could be
-					tricky. E. faecalisis easily transferred via physical contact from
-					person to person and also via contact with contaminated surfaces.
-					Proper hand-washing techniques and a fibre-rich diet play an essential
-					role in not becoming disease-causing members of the community. E.
-					faecalisis is listed as a HIGH priority on the list of antimicrobial
-					pathogens published by the{" "}
+					probiotic i.e. However, <span className="italic">E.faecalis</span>{" "}
+					could spread to the other parts of the body, causing infections. The
+					bacterium can survive extreme environments such as acid and alkaline.
+					Hence the <span className="italic">E.faecalis</span> antimicrobial
+					resistance to antibiotics, both intrinsic and acquired, has become
+					increasingly common. The resistance is mainly directed to vancomycin.
+					Exterminating the bacterium from the human body could be tricky.{" "}
+					<span className="italic">E.faecalis</span> is easily transferred via
+					physical contact from person to person and also via contact with
+					contaminated surfaces. Proper hand-washing techniques and a fibre-rich
+					diet play an essential role in not becoming disease-causing members of
+					the community. <span className="italic">E.faecalis</span> is listed as
+					a HIGH priority on the list of antimicrobial pathogens published by
+					the{" "}
 					<a
 						href="https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed"
 						className="text-primary hover:underline"
