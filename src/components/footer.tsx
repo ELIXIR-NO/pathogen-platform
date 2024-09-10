@@ -12,7 +12,10 @@ export default function Footer() {
 			<div className="container mx-auto w-1/2 px-4 py-8">
 				<div className="grid grid-cols-1 items-start gap-4 md:grid-cols-4">
 					<div>
-						<Link href="https://elixir.no" className="hover:underline flex flex-col items-center space-y-4 md:items-center">
+						<Link
+							href="https://elixir.no"
+							className="flex flex-col items-center space-y-4 hover:underline md:items-center"
+						>
 							<ElixirNorwayLogoModeToggle />
 							<p className="text-center text-sm text-muted-foreground md:text-center">
 								Advancing life science research through bioinformatics services
@@ -51,7 +54,10 @@ export default function Footer() {
 						</ul>
 					</div>
 					<div>
-						<Link href="https://uit.no" className="hover:underline flex flex-col items-center space-y-4 md:items-center">
+						<Link
+							href="https://uit.no"
+							className="flex flex-col items-center space-y-4 hover:underline md:items-center"
+						>
 							<UiTLogoModeToggle />
 							<p className="text-center text-sm text-muted-foreground md:text-center">
 								Affiliated with UiT
@@ -60,7 +66,10 @@ export default function Footer() {
 							</p>
 						</Link>
 					</div>
-					<Link href="https://european-union.europa.eu" className="hover:underline flex flex-col items-center space-y-4 md:items-center">
+					<Link
+						href="https://european-union.europa.eu"
+						className="flex flex-col items-center space-y-4 hover:underline md:items-center"
+					>
 						<EuCoFoundedLogoModeToggle />
 					</Link>
 				</div>
