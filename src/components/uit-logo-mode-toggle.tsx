@@ -25,7 +25,7 @@ export function UiTLogoModeToggle() {
 		<Image
 			src={src}
 			alt="Logo of UiT The Arctic University of Norway"
-			width={120}
+			width={100}
 			height={40}
 			className={cn("hover:ring-2 hover:ring-primary")}
 			priority={true}

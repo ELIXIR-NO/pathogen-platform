@@ -91,7 +91,7 @@ export default function PseudomonasPage() {
 					database, you can find the genomes of the species and, corresponding
 					to them, metadata with relevant information about the pathogen source
 				</p>
-				<h2 className="text-2xl font-bold">Data repositories</h2>
+				<h2 className="text-2xl font-bold">Resources</h2>
 				<CardGrid data={repositories} />
 				<h2 className="text-2xl font-bold">External Resources</h2>
 				<ul className="flex list-disc flex-col space-y-1 pl-5">

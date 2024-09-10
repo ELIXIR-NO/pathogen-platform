@@ -65,17 +65,23 @@ export function createSearchIndex(pages: PageObjectResponse[]): SearchIndex {
 
 		const summary =
 			page.properties.summary.type === "rich_text"
-				? page.properties.summary.rich_text[0]?.plain_text || ""
+				? page.properties.summary.rich_text
+						.map((textBlock) => textBlock.plain_text)
+						.join("") || ""
 				: "";
 
 		const oneLiner =
 			page.properties.one_liner.type === "rich_text"
-				? page.properties.one_liner.rich_text[0]?.plain_text || ""
+				? page.properties.one_liner.rich_text
+						.map((textBlock) => textBlock.plain_text)
+						.join("") || ""
 				: "";
 
 		const title =
 			page.properties.page.type === "title"
-				? page.properties.page.title[0]?.plain_text || ""
+				? page.properties.page.title
+						.map((textBlock) => textBlock.plain_text)
+						.join("") || ""
 				: "";
 
 		const imageUrl =
