@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { UiTLogoModeToggle } from "./uit-logo-mode-toggle";
 import { ElixirNorwayLogoModeToggle } from "./elixir-norway-logo-mode-toggle";
+import { CreativeCommons } from "lucide-react";
 
 export default function Footer() {
 	return (
@@ -56,8 +57,12 @@ export default function Footer() {
 					</div>
 				</div>
 
-				<div className="mt-8 border-t border-gray-200 pt-4 text-center text-xs text-muted-foreground">
-					© {new Date().getFullYear()} ELIXIR Norway. All rights reserved.
+				<div className="mt-8 flex flex-row items-center justify-center space-x-2 border-t border-gray-200 pt-4 text-center text-xs text-muted-foreground">
+					<CreativeCommons />
+					<p>
+						{new Date().getFullYear()} ELIXIR Norway. Website content is
+						licensed under CC-BY 4.0 unless otherwise noted.
+					</p>
 				</div>
 			</div>
 		</footer>
