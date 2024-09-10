@@ -25,7 +25,7 @@ export function EuCoFoundedLogoModeToggle() {
 		<Image
 			src={src}
 			alt="EU co-funded Logo"
-			width={150}
+			width={160}
 			height={50}
 			className={cn("hover:ring-2 hover:ring-primary")}
 			priority={true}

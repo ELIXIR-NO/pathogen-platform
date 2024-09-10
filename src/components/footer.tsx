@@ -11,12 +11,14 @@ export default function Footer() {
 			<Separator />
 			<div className="container mx-auto w-1/2 px-4 py-8">
 				<div className="grid grid-cols-1 items-start gap-4 md:grid-cols-4">
-					<div className="flex flex-col items-center space-y-4 md:items-start">
-						<ElixirNorwayLogoModeToggle />
-						<p className="text-center text-sm text-muted-foreground md:text-left">
-							Advancing life science research through bioinformatics services
-							and resources.
-						</p>
+					<div>
+						<Link href="https://elixir.no" className="hover:underline flex flex-col items-center space-y-4 md:items-center">
+							<ElixirNorwayLogoModeToggle />
+							<p className="text-center text-sm text-muted-foreground md:text-center">
+								Advancing life science research through bioinformatics services
+								and resources.
+							</p>
+						</Link>
 					</div>
 					<div className="flex flex-col items-center md:items-center">
 						<h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
@@ -48,15 +50,19 @@ export default function Footer() {
 							</li>
 						</ul>
 					</div>
-					<div className="flex flex-col items-center space-y-4 md:items-start">
-						<UiTLogoModeToggle />
-						<p className="text-center text-sm text-muted-foreground md:text-left">
-							Affiliated with UiT
-							<br />
-							The Arctic University of Norway
-						</p>
+					<div>
+						<Link href="https://uit.no" className="hover:underline flex flex-col items-center space-y-4 md:items-center">
+							<UiTLogoModeToggle />
+							<p className="text-center text-sm text-muted-foreground md:text-center">
+								Affiliated with UiT
+								<br />
+								The Arctic University of Norway
+							</p>
+						</Link>
 					</div>
-					<EuCoFoundedLogoModeToggle />
+					<Link href="https://european-union.europa.eu" className="hover:underline flex flex-col items-center space-y-4 md:items-center">
+						<EuCoFoundedLogoModeToggle />
+					</Link>
 				</div>
 
 				<div className="mt-8 flex flex-row items-center justify-center space-x-2 border-t border-gray-200 pt-4 text-center text-xs text-muted-foreground">
