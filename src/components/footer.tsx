@@ -61,7 +61,14 @@ export default function Footer() {
 					<CreativeCommons />
 					<p>
 						{new Date().getFullYear()} ELIXIR Norway. Website content is
-						licensed under CC-BY 4.0 unless otherwise noted.
+						licensed under{" "}
+						<a
+							href="https://creativecommons.org/licenses/by/4.0/deed.en"
+							className="text-primary hover:underline"
+						>
+							CC-BY 4.0
+						</a>{" "}
+						unless otherwise noted.
 					</p>
 				</div>
 			</div>
