@@ -3,13 +3,14 @@ import { Separator } from "@/components/ui/separator";
 import { UiTLogoModeToggle } from "./uit-logo-mode-toggle";
 import { ElixirNorwayLogoModeToggle } from "./elixir-norway-logo-mode-toggle";
 import { CreativeCommons } from "lucide-react";
+import { EuCoFoundedLogoModeToggle } from "@/components/eu-co-founded-logo-mode-toggle";
 
 export default function Footer() {
 	return (
 		<footer className="w-full bg-background text-foreground">
 			<Separator />
 			<div className="container mx-auto w-1/2 px-4 py-8">
-				<div className="grid grid-cols-1 items-start gap-4 md:grid-cols-3">
+				<div className="grid grid-cols-1 items-start gap-4 md:grid-cols-4">
 					<div className="flex flex-col items-center space-y-4 md:items-start">
 						<ElixirNorwayLogoModeToggle />
 						<p className="text-center text-sm text-muted-foreground md:text-left">
@@ -55,6 +56,7 @@ export default function Footer() {
 							The Arctic University of Norway
 						</p>
 					</div>
+					<EuCoFoundedLogoModeToggle />
 				</div>
 
 				<div className="mt-8 flex flex-row items-center justify-center space-x-2 border-t border-gray-200 pt-4 text-center text-xs text-muted-foreground">
