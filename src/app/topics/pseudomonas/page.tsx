@@ -1,10 +1,10 @@
-import ContributorsPanel from "@/components/contributors-panel";
-import CentralImage from "@/components/central-image";
 import {
 	HoverCard,
 	HoverCardContent,
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import ContributorsPanel from "@/components/contributors-panel";
+import CentralImage from "@/components/central-image";
 import CardGrid, { CardGridData } from "@/components/card-grid";
 
 const repositories: CardGridData[] = [
@@ -50,38 +50,39 @@ export default function PseudomonasPage() {
 							className="text-primary hover:underline"
 						>
 							Nanosept
-						</a>
+						</a>{" "}
 					</HoverCardContent>
 				</HoverCard>
 				<p>
-					Pseudomonas species are Gram-negative aerobic rods, forming granular
-					and dry- colonies of various colors. Their measure is from 0.5 to 0.8
-					μm by 1.5 to 3.0 μm. It occupies the environment, mostly soil (coastal
-					areas), water, and plant and animal tissues, and it can easily survive
-					various environmental stresses. Pseudomonas means ”false unit”,
-					aeruginosa refers to the blue-green colour of laboratory cultures of
-					the species discovered by Carle Gessard, a French scientist, in 1882.
-					In his experiment, water-soluble pigments in the presence of P.
-					aeruginosa and under the ultraviolet light turned to a blue-green
-					color. <span className="font-bold italic">Pseudomonas aeruginos</span>{" "}
-					usually affects immunocompromised people. Healthy people usually would
-					not get infected by this microbe.{" "}
-					<span className="font-bold italic">P. aeruginosa</span> is an
-					opportunistic pathogen, and it needs to be a break in the first
-					defence line of the body. The break is a classified example as trauma,
-					cystic fibrosis, surgeries, cancer, AIDS, or other immunosuppressed
-					stages. These bacteria have an increased ability to erase antibiotics
-					from inside the cell, leading to high resistance to antibiotics and
-					common disinfectants. It primarily infects the urinary and respiratory
-					tracts, swimmer&apos;s ears, cornea, wounds, and folliculitis.
-					<span className="font-bold italic"> P. aeruginosa</span> is listed as
-					a CRITICAL priority on the antimicrobial pathogen list published by
-					the World Health Organization{" "}
+					<span className="font-bold">Pseudomonas</span> species are
+					Gram-negative aerobic rods, forming granular and dry colonies of
+					various <span className="italic">colours</span>. Their measure is from
+					0.5 to 0.8 μm by 1.5 to 3.0 μm. They inhabit environments like soil
+					(coastal areas), water, and plant and animal tissues, easily surviving
+					environmental stresses. <span className="italic">Pseudomonas</span>{" "}
+					means “false unit”, while <span className="italic">aeruginosa</span>{" "}
+					refers to the blue-green colour of laboratory cultures discovered by
+					Carle Gessard, a French scientist, in 1882. He found that under
+					ultraviolet light, water-soluble pigments of{" "}
+					<span className="italic">P. aeruginosa</span> turn blue-green.{" "}
+					<span className="italic">Pseudomonas aeruginosa</span> primarily
+					affects immunocompromised individuals. Healthy people are usually not
+					at risk of infection from this microbe.{" "}
+					<span className="italic">P. aeruginosa</span> is an opportunistic
+					pathogen. It requires a break in the body&#39;s first line of defense,
+					such as trauma, cystic fibrosis, surgeries, cancer, AIDS, or other
+					immunosuppressive conditions. These bacteria are known for their
+					resistance to antibiotics and disinfectants, as they can expel
+					antibiotics from within the cell. They primarily infect the urinary
+					and respiratory tracts, swimmer&#39;s ears, cornea, wounds, and cause
+					folliculitis. <span className="italic">P. aeruginosa</span> is listed
+					as a CRITICAL priority on the antimicrobial pathogen list published by
+					the{" "}
 					<a
 						className="text-primary hover:underline"
 						href="https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed"
 					>
-						(WHO)
+						World Health Organization (WHO)
 					</a>
 					.
 				</p>
@@ -93,12 +94,12 @@ export default function PseudomonasPage() {
 				</p>
 				<h2 className="text-2xl font-bold">Resources</h2>
 				<CardGrid data={repositories} />
-				<h2 className="text-2xl font-bold">External Resources</h2>
-				<ul className="flex list-disc flex-col space-y-1 pl-5">
+				<h2 className="pb-2 text-2xl font-bold">External Resources</h2>
+				<ul className="list-disc pl-5">
 					<li>
 						Latest publication in{" "}
 						<a
-							href="https://app.cristin.no/search.jsf?t=pseudomonas&type=result&sort=PUBL_YEAR_DESC"
+							href="https://app.cristin.no/search.jsf?t=pseudomonas&type=result&filter=category_idfacet~ARTICLE&sort=PUBL_YEAR_DESC"
 							className="text-primary hover:underline"
 						>
 							Cristin
@@ -110,7 +111,7 @@ export default function PseudomonasPage() {
 							href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=score&sortOrder=desc&resultCount=30&offset=0&Fritekst=pseudomonas"
 							className="text-primary hover:underline"
 						>
-							Projektbanken
+							Prosjektbanken
 						</a>
 					</li>
 				</ul>
