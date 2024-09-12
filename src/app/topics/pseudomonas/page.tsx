@@ -1,44 +1,32 @@
-import Image from "next/image";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
 import {
 	HoverCard,
 	HoverCardContent,
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import ContributorsPanel from "@/components/contributors-panel";
-import Link from "next/link";
+import CentralImage from "@/components/central-image";
+import CardGrid, { CardGridData } from "@/components/card-grid";
 
-const norwegianResources: {
-	title: string;
-	description: string;
-	image: string;
-	link: string;
-}[] = [
+const repositories: CardGridData[] = [
 	{
 		title: "FHI - Folkehelseinstituttet",
-		description: "Overview of a Pseudomonas infection outbreak in Norway.",
-		image: "FHI-logo.png",
+		description: "Folkehelseinstituttet lists Pseudomonas outbreaks in Norway.",
 		link: "https://www.fhi.no/ut/utbrudd/oversikt-over-storre-utbrudd/utbrudd-av-pseudomonas-infeksjon-i-/",
+		image: "/logos/FHI.png",
 	},
 	{
-		title: "World Health Organisation (WHO)",
+		title: "WHO - World Health Organisation",
 		description:
-			"WHO list of bacteria for which new antibiotics are urgently needed.",
-		image: "WHO-logo.png",
+			"WHO considers Pseudomonas as critical in terms of requirement for new antibiotics.",
 		link: "https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed",
+		image: "/logos/WHO.png",
 	},
 	{
-		title: "Pseudomonas aeruginosa Outbreak",
+		title: "Eurosurveillance",
 		description:
-			"Countrywide outbreak of Pseudomonas aeruginosa in Norwegian hospitals.",
-		image: "eurosurveillance-logo.jpg",
+			"Pseudomonas aeruginosa countrywide outbreak in Norwegian hospitals ",
 		link: "https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2022.27.18.2200312",
+		image: "/logos/eurosurveillance.png",
 	},
 ];
 
@@ -107,26 +95,26 @@ export default function PseudomonasPage() {
 				<h2 className="text-2xl font-bold">Resources</h2>
 				<CardGrid data={repositories} />
 				<h2 className="pb-2 text-2xl font-bold">External Resources</h2>
-					<ul className="list-disc pl-5">
-						<li>
-							Latest publication in{" "}
-							<a
-								href="https://app.cristin.no/search.jsf?t=pseudomonas&type=result&filter=category_idfacet~ARTICLE&sort=PUBL_YEAR_DESC"
-								className="text-primary hover:underline"
-							>
-								Cristin
-							</a>
-						</li>
-						<li>
-							Ongoing projects listed in{" "}
-							<a
-								href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=score&sortOrder=desc&resultCount=30&offset=0&Fritekst=pseudomonas"
-								className="text-primary hover:underline"
-							>
-								Prosjektbanken
-							</a>
-						</li>
-					</ul>
+				<ul className="list-disc pl-5">
+					<li>
+						Latest publication in{" "}
+						<a
+							href="https://app.cristin.no/search.jsf?t=pseudomonas&type=result&filter=category_idfacet~ARTICLE&sort=PUBL_YEAR_DESC"
+							className="text-primary hover:underline"
+						>
+							Cristin
+						</a>
+					</li>
+					<li>
+						Ongoing projects listed in{" "}
+						<a
+							href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=score&sortOrder=desc&resultCount=30&offset=0&Fritekst=pseudomonas"
+							className="text-primary hover:underline"
+						>
+							Prosjektbanken
+						</a>
+					</li>
+				</ul>
 			</section>
 		</>
 	);
