@@ -1,336 +1,235 @@
-import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
+import CentralImage from "@/components/central-image";
+import {
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import CardGrid, { CardGridData } from "@/components/card-grid";
+
+const surveillanceNationalInstitutionsCardData: CardGridData[] = [
+	{
+		title: "FHI - Folkehelseinstituttet",
+		description:
+			"FHI is Norway’s national institute of public health. FHI is the central body responsible for overseeing and coordinating the national surveillance of infectious diseases.",
+		image: "/logos/FHI.png",
+		link: "https://www.fhi.no/",
+	},
+	{
+		title: "VI - Veterinærinstituttet",
+		description:
+			"VI is the national Veterinary Institute. VI monitors zoonotic pathogens and pathogens in food and the environment.",
+		image: "/logos/VI.png",
+		link: "https://www.vetinst.no/",
+	},
+	{
+		title: "University hospitals and reference laboratories",
+		description:
+			"Support surveillance of specific pathogens, provide diagnostic services, and contribute to research on pathogen resistance and control strategies",
+		image: "/logos/regjeringen.jpg",
+		link: "https://www.regjeringen.no/",
+	},
+	{
+		title: "Mattilsynet",
+		description:
+			"Mattilsynet is the Norwegian Food Safety Authority. They play a crucial role in the surveillance of pathogens in Norway, particularly those related to food safety, animal health, and plant health.",
+		image: "/logos/mattilsynet.png",
+		link: "https://www.mattilsynet.no/",
+	},
+];
+
+const surveillanceSystemsCardData: CardGridData[] = [
+	{
+		title: "MSIS - Meldingssystem for smittsomme sykdommer",
+		description:
+			"The health registry MSIS is the official system for monitoring infectious diseases in Norway, including food-, water- and vector-borne pathogens, and zoonotic pathogens and pathogens transmitted through environmental sources.",
+		image: "/logos/FHI.png",
+		link: "https://allvis.fhi.no/msis",
+	},
+	{
+		title:
+			"NORM - Norsk overvåkingssystem for antibiotikaresistens hos mikrober",
+		description:
+			"NORM is the Norwegian Surveillance System for Antimicrobial Drug Resistance. This health registry collect and analyse data on antibiotic resistance",
+		image: "/logos/norm.png",
+		link: "https://www.unn.no/fag-og-forskning/norm-norsk-overvakingssystem-for-antibiotikaresistens-hos-mikrober",
+	},
+	{
+		title: "RAVN - Resistensovervåkning av virus i Norge",
+		description:
+			"RAVN is the national health registry for antiviral resistance, and is hosted by FHI. The registry contains de-identified health information about individuals who have provided samples with specific viruses, as well as details about the viruses and their resistance to antiviral medications. The system is access restricted, and researches can apply for access from Helsedata",
+		image: "/logos/FHI.png",
+		link: "https://www.fhi.no/sm/overvaking/ravn/",
+	},
+	{
+		title:
+			"NOIS - Norsk overvåkingssystem for antibiotikabruk og helsetjenesteassosierte infeksjoner",
+		description:
+			"The health registry NOIS provides an overview of the occurrence of healthcare-associated infections and the use of antibiotics in hospitals and nursing homes.",
+		image: "/logos/FHI.png",
+		link: "https://www.fhi.no/sm/overvaking/nois/",
+	},
+	{
+		title: "SYSVAK - Nasjonalt vaksinasjonsregister",
+		description:
+			"SYSVAK is the Norwegian Immunisation Registry that records an individual’s vaccination status and vaccination coverage in Norway.",
+		image: "/logos/FHI.png",
+		link: "https://www.fhi.no/va/sysvak/",
+	},
+	{
+		title:
+			"NORM-VET - Norsk overvåkingsprogram for antibiotikaresistens i mikrober fra fôr, dyr og næringsmidler",
+		description:
+			"The surveillance program NORM-VET focuses on antibiotic resistance in microbes originating from feed, animals, and food. Annual reports are made publicly available in joint annual reports with NORM.",
+		image: "/logos/VI.png",
+		link: "https://www.vetinst.no/en",
+	},
+	{
+		title: "ViltHOP - Helseovervåkingsprogrammet for vilt",
+		description:
+			"ViltHOP is the national wildlife health monitoring program. ViltHOP monitors diseases in wild animals to document health status in wildlife populations. The main focus is on inter-species disease transmission between wild and domestic animals, as well as zoonoses—diseases that can spread from animals to humans. ViltHOP produce annual reports.",
+		image: "/logos/VI.png",
+		link: "https://www.vetinst.no/dyr/vilt/hop",
+	},
+	{
+		title: "Mattilsynet - biosecurity monitoring ",
+		description:
+			"Mattilsynet conducts biosecurity monitoring for the aquaculture industry to enable early detection and management of diseases among farmed fish. This system requires operators to immediately notify the authority if any listed diseases are suspected. Consequently, operators must diligently surveil fish health and monitor for any signs of disease or abnormalities.",
+		image: "/logos/mattilsynet.png",
+		link: "https://www.mattilsynet.no/fisk-og-akvakultur/biosikkerhetsplan-i-akvakulturanlegg/bakgrunn-for-biosikkerhetsplan/generelt-om-forekomst-og-overvakning-av-sykdommer/helseovervakning",
+	},
+	{
+		title: "Veterinærinstituttet - environmental DNA surveillance",
+		description:
+			"Veterinærinstituttet additionally conducts surveillance using environmental DNA sampling. These sampling methods are increasingly used for monitoring and early detection of pathogens, foreign species, conservation of endangered species, and biodiversity mapping. ",
+		image: "/logos/VI.png",
+		link: "https://www.vetinst.no/fagomrader/miljo-dna",
+	},
+	{
+		title: "FHI - surveillance of food, water, and animal-transmitted diseases",
+		description:
+			"FHI conducts surveillance for the occurrence of common food, water, and animal-transmitted diseases, including vector-borne infections which are reported annually.",
+		image: "/logos/FHI.png",
+		link: "https://www.fhi.no/publ/2024/overvakning-av-infeksjonssykdommer-som-smitter-fra-mat-vann-og-dyr-inkludert-vektorbarne-sykdommer/",
+	},
+];
 
 export default function SurveillancePage() {
 	return (
 		<>
-			<div className="fixed right-12 top-32 z-10">
-				<div className="flex flex-col space-y-2">
-					<ContributorsPanel contributors={["sebastian", "espen", "terje"]} />
-				</div>
-			</div>
+			<ContributorsPanel contributors={["sebastian", "espen", "terje"]} />
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">Surveillance</h2>
-				<Image
-					src="/pandemic-preparedness/surveillance/WHO.png"
-					alt="Image of Word Health Organization"
-					width={300}
-					height={200}
-					className="mx-auto rounded-md"
-				/>
-
-				<p>
-					Public health surveillance is the “continuous, systematic collection,
-					analysis and interpretation of health-related data needed for the
-					planning, implementation, and evaluation of public health practice”
-					(WHO, 2016). Approaches can include epidemiological surveillance,
-					clinical surveillance, and/or syndromic surveillance. A common
-					practice is disease surveillance which “helps countries assess the
-					health of their populations in order for them to identify what
-					diseases are affecting their communities and the prevalence of
-					specific diseases for elimination efforts” which relies on the
-					practice of disease case reporting (The Task Force for Global Health,
-					2020).
-				</p>
-
-				<h2>
-					<strong>Surveillance in Norway</strong>
-				</h2>
-
-				<p>
-					<a
-						className="text-primary hover:underline"
-						href="https://www.who.int/"
-					>
-						The WHO (World Health Organization)
-					</a>{" "}
-					is a United Nation Specialized Agency that is responsible for
-					international public health.{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://www.who.int/countries/nor/"
-					>
-						As a participating member
-					</a>
-					,{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://www.who.int/norway"
-					>
-						Norway’s page
-					</a>{" "}
-					lists health related resources and data concerning the country.
-				</p>
-
-				<p>
-					<a
-						className="text-primary hover:underline"
-						href="https://www.fhi.no/en"
-					>
-						NIPH (Norwegian Institute of Public Health) or FHI
-						(Folkehelseinstituttet)
-					</a>{" "}
-					is Norway’s national public health institute and its main activities
-					are focussed on health surveillance. It conducts health surveys and
-					studies like CONOR (Cohort of Norway) and the Norwegian Twin Registry,
-					collects and promotes health data and services like biobanks or CyTOF
-					(NIPH mass cytometry platform), and is actively engaged in infection
-					control and prevention. Different surveillance systems and programs
-					are for example NORM (Norwegian Surveillance System for Antimicrobial
-					Drug Resistance), RAVN (Norwegian Surveillance System for Antiviral
-					Resistance), and{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://www.fhi.no/en/in/surveillance/wastewater-surveillance-of-infectious-diseases/"
-					>
-						wastewater surveillance.
-					</a>
-				</p>
-
-				<h2>
-					<strong>Health registry for infectious diseases in Norway</strong>
-				</h2>
-
-				<p>
-					The health registry{" "}
-					<strong>Meldingssystem for smittsomme sykdommer (MSIS)</strong> is the
-					official system for monitoring infectious diseases in Norway.
-					Healthcare personnel and medical microbiology laboratories have a
-					legal obligation to report cases of specified infectious diseases to
-					MSIS. A daily updated copy of parts of the MSIS database is available
-					on the website{" "}
-					<a className="text-primary hover:underline" href="http://msis.no/">
-						msis.no
-					</a>
-					.
-				</p>
-
-				<h2>
-					<strong>Covid Surveillance</strong>
-				</h2>
-
-				<p>
-					With the outbreak of Covid-19 pandemic, national and international
-					covid surveillance and data collection became crucial. One of the
-					resources is{" "}
-					<a href="https://elixir-europe.org/services/covid-19">
-						Elixir’s participation in covid surveillance
-					</a>
-					, including the Galaxy project:
-				</p>
-
-				<ul className="list-disc">
-					<li>
+				<HoverCard>
+					<HoverCardTrigger>
+						<CentralImage
+							src="/pandemic-preparedness/surveillance/surveillance.jpg"
+							alt="Image of Word Health Organization"
+						/>
+					</HoverCardTrigger>
+					<HoverCardContent className="w-fit">
+						Photo by{" "}
 						<a
+							href="https://unsplash.com/@sushioutlaw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
 							className="text-primary hover:underline"
-							href="https://covid19.galaxyproject.org/"
 						>
-							https://covid19.galaxyproject.org/
-						</a>
-					</li>
-					<li>
+							Brian McGowan
+						</a>{" "}
+						on{" "}
 						<a
+							href="https://unsplash.com/photos/black-flat-screen-tv-showing-20-00-gkpszAElZf8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
 							className="text-primary hover:underline"
-							href="https://galaxyproject.org/projects/covid19/"
 						>
-							https://galaxyproject.org/projects/covid19/
+							Unsplash
 						</a>
-					</li>
-				</ul>
-
+					</HoverCardContent>
+				</HoverCard>
 				<p>
-					Further important platforms are the Covid-19 database and data portal:
+					Norway&apos;s national surveillance of pathogens is a coordinated
+					effort involving multiple institutions that monitor and control
+					infectious diseases and antimicrobial resistance across various
+					domains.
 				</p>
-
-				<ul className="list-disc">
-					<li>
-						<a
-							className="text-primary hover:underline"
-							href="https://www.covid19dataportal.org/"
-						>
-							https://www.covid19dataportal.org/
-						</a>
-					</li>
-					<li>
-						<a
-							className="text-primary hover:underline"
-							href="https://covid19.sfb.uit.no/"
-						>
-							https://covid19.sfb.uit.no/
-						</a>
-					</li>
-				</ul>
-
-				<h2>
-					<strong>Wastewater Surveillance</strong>
+				<h2 className="text-2xl font-bold">
+					Norwegian institutions involved in surveillance of pathogens
 				</h2>
-
+				<CardGrid data={surveillanceNationalInstitutionsCardData} />
+				<h2 className="text-2xl font-bold">
+					Norwegian surveillance systems and health registries
+				</h2>
+				<p>
+					Norway has a comprehensive system of surveillance systems and health
+					registries designed to monitor public health, track the occurrence of
+					diseases, and support healthcare planning and research. These systems
+					are managed by various national institutions and cover a broad range
+					of health-related data. FHI is responsible for the data controller for
+					these registries and is also responsible for reporting to
+					international organisations such as WHO and ECDC.
+				</p>
+				<CardGrid data={surveillanceSystemsCardData} />
+				<h2 className="text-2xl font-bold">
+					Wastewater Surveillance - international
+				</h2>
 				<p>
 					Wastewater surveillance is one of the most important aspects of public
-					health surveillance. Important resources are the{" "}
-					<a href="https://wastewater-observatory.jrc.ec.europa.eu/">
-						EU Wastewater Observatory for Public Health
-					</a>
-					, the Joint Action{" "}
-					<a href="https://www.fhi.no/en/cristin-projects/ongoing/eu-wish-eu4health-joint-action/">
-						EU-WISH
-					</a>
-					, and the FHI’s{" "}
-					<a href="https://www.fhi.no/en/in/surveillance/wastewater-surveillance-of-infectious-diseases/">
-						wastewater surveillance
-					</a>
-					.
-				</p>
-
-				<h2>
-					<strong>
-						Surveillance of animal disease and infectious diseases from the
-						environment
-					</strong>
-				</h2>
-
-				<Image
-					src="/pandemic-preparedness/surveillance/surveillance.png"
-					alt="Image of surveillance"
-					width={1000}
-					height={200}
-					className="mx-auto rounded-md"
-				/>
-
-				<p>
-					The Norwegian Institute of Public Health conduct surveillance for the{" "}
-					<strong>
-						occurrence of common food, water, and animal-transmitted diseases,
-						including vector-borne infections
-					</strong>{" "}
-					which are{" "}
+					health surveillance, however Norway has not yet a national wastewater
+					surveillance systems. During the COVID-19 pandemic, FHI together with
+					the{" "}
 					<a
+						href="https://www.uib.no/pandemi"
 						className="text-primary hover:underline"
-						href="https://www.fhi.no/publ/2024/overvakning-av-infeksjonssykdommer-som-smitter-fra-mat-vann-og-dyr-inkludert-vektorbarne-sykdommer/"
 					>
-						reported annually
-					</a>
-					. These reports further inform about the Infection Control Guide and
-					Vaccination information for each disease, as well as the Outbreak
-					Guide and other sources for handling outbreaks.
-				</p>
-
-				<p>
-					Organized by the Norwegian Veterinary Institute at Ås and Oslo t
-					<strong>
-						he wildlife health monitoring program (
-						<a
-							className="text-primary hover:underline"
-							href="https://www.notion.so/Surveillance-90ff68cdf99948019641055d4dbd164f?pvs=21"
-						>
-							ViltHOP
-						</a>
-						)
-					</strong>{" "}
-					monitors diseases in wild animals to document health status in
-					wildlife populations, clarifying causes of illness and detecting
-					increased disease or mortality. The main focus is on inter-species
-					disease transmission{" "}
-					<strong>
-						between wild and domestic animals, as well as zoonoses—diseases that
-						can spread from animals to humans.
-					</strong>{" "}
-					The wildlife health monitoring program includes a diverse range of
-					species in the Norwegian ecosystem and has a special focus on diseases
-					in hares, bats, and predators.
-				</p>
-
-				<p>
-					The Norwegian Food Safety Authority conducts{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://www.mattilsynet.no/fisk-og-akvakultur/biosikkerhetsplan-i-akvakulturanlegg/bakgrunn-for-biosikkerhetsplan/generelt-om-forekomst-og-overvakning-av-sykdommer/helseovervakning"
-					>
-						<strong>biosecurity monitoring</strong>
+						Pandemic Centre
 					</a>{" "}
-					for the aquaculture industry to enable early detection and management
-					of diseases among farmed fish. This system requires operators to
-					immediately notify the Authority if any listed diseases are suspected.
-					Consequently, operators must diligently surveil fish health and
-					monitor for any signs of disease or abnormalities.
-				</p>
-
-				<p>
-					The Veterinary Institute additionally conduct surveillance using{" "}
+					at{" "}
 					<a
+						href="https://www.uib.no/"
 						className="text-primary hover:underline"
-						href="https://www.vetinst.no/fagomrader/miljo-dna"
 					>
-						<strong>environmental DNA sampling</strong>
-					</a>
-					. These sampling methods are increasingly used for monitoring and
-					early detection of pathogens, foreign species, conservation of
-					endangered species, and biodiversity mapping. This has been
-					implemented as a tool for monitoring crayfish plague and the
-					coordination of national monitoring of noble crayfish and signal
-					crayfish. There is ongoing work to develop environmental DNA
-					monitoring as a supplementary tool for diseases like Gyrodactylus
-					salaris, AGD, and ILA virus, among several research projects under the
-					biosafety and epidemiology theme.
+						UiB
+					</a>{" "}
+					conducted wastewater-based surveillance of SARS-CoV-2 in Norway.{" "}
 				</p>
-
-				<h2>
-					<strong>Surveillance of antimicrobial resistance</strong>
-				</h2>
-
 				<p>
-					Surveillance of antibiotic resistance among pathogenic bacteria from
-					humans is conducted through Norsk overvåkingssystem for
-					antibiotikaresistens hos mikrober (NORM), which is coordinated by the
-					Microbiological Department at the University Hospital of North Norway.
-				</p>
-
-				<p>
-					NORM and the Norwegian Surveillance Program for Antibiotic Resistance
-					in Microbes from Feed, Animals, and Food (NORM-VET) publish joint{" "}
+					Important international resources and consortiums are the EU
+					Wastewater Observatory for Public Health, the Joint Action{" "}
 					<a
+						href="https://www.eu-wish.eu/"
 						className="text-primary hover:underline"
-						href="https://www.unn.no/fag-og-forskning/norm-norsk-overvakingssystem-for-antibiotikaresistens-hos-mikrober#rapporter"
 					>
-						<strong>annual reports</strong>
+						EU-Wastewater Integrated Surveillance for Public Health (EU-WISH)
 					</a>
-					. The report presents data on the prevalence of antibiotic resistance
-					and the consumption of antibiotics in humans and animals. Data from
-					relevant projects that are not included in the continuous surveillance
-					programs are also presented.
-				</p>
-
-				<p>
-					Data collected in NORM can be explored and visualised using the{" "}
-					<a href="https://norm-atlas.no/">NORM-atlas</a>
-				</p>
-
-				<h2>
-					<strong>Surveillance of antiviral resistance</strong>
-				</h2>
-
-				<p>
-					In Norway the Norwegian Institute of Public Health is responsible for
-					hosting a national health registry for antiviral resistance (
+					, and the{" "}
 					<a
+						href="https://wastewater-observatory.jrc.ec.europa.eu/#/content/glowacon-new"
 						className="text-primary hover:underline"
-						href="https://www.fhi.no/sm/overvaking/ravn/"
 					>
-						Register for resistensovervåkning av virus i Norge - RAVN
-					</a>
-					). The registry contains de-identified health information about
-					individuals who have provided samples with specific viruses, as well
-					as details about the viruses and their resistance to antiviral
-					medications. The system is access restricted, and researches can apply
-					for access from{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://helsedata.no/no/"
-					>
-						Helsedata
-					</a>
-					.
+						Global Consortium for Wastewater and Environmental Surveillance for
+						Public Health (GLOWACON)
+					</a>{" "}
+					FHI and VI are partners in the EU-WISH project.
 				</p>
+				<h2 className="text-2xl font-bold">External resources</h2>
+				<ul className="flex list-disc flex-col space-y-1 pl-5">
+					<li>
+						Latest publication in{" "}
+						<a
+							href="https://app.cristin.no/search.jsf?t=pathogen%20surveillance&type=result&sort=PUBL_YEAR_DESC"
+							className="text-primary hover:underline"
+						>
+							Cristin
+						</a>
+					</li>
+					<li>
+						Ongoing projects listed in{" "}
+						<a
+							href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&Kilde=EU&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=score&sortOrder=desc&resultCount=30&offset=0&Fritekst=pathogen+surveillance"
+							className="text-primary hover:underline"
+						>
+							Projektbanken
+						</a>
+					</li>
+				</ul>
 			</section>
 		</>
 	);

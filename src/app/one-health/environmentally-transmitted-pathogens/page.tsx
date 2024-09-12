@@ -1,41 +1,80 @@
-import Image from "next/image";
 import ContributorsPanel from "@/components/contributors-panel";
+import CentralImage from "@/components/central-image";
+import {
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import ReferencesPanel, { Reference } from "@/components/references-panel";
+import CardGrid, { CardGridData } from "@/components/card-grid";
+
+const references: Reference[] = [
+	{
+		referenceNumber: 1,
+		reference:
+			"Jeffery S, Van Der Putten W. Soil Borne Human Diseases. EUR 24893 EN. Luxembourg (Luxembourg): Publications Office of the European Union; 2011. JRC65787",
+		pmcid: "",
+		link: "https://publications.jrc.ec.europa.eu/repository/handle/JRC65787",
+	},
+];
+
+const resources: CardGridData[] = [
+	{
+		title: "FHI - Folkehelseinstituttet",
+		description:
+			"The FHI is a central institution for monitoring infectious diseases, including those transmitted through environmental sources.",
+		link: "https://www.fhi.no/",
+		image: "/logos/FHI.png",
+	},
+	{
+		title: "MSIS",
+		description:
+			"The health registry MSIS (Meldingssystem for smittsomme sykdommer) is the official system for monitoring infectious diseases in humans, including those transmitted through environmental sources.",
+		link: "https://msis.no/",
+		image: "/logos/FHI.png",
+	},
+	{
+		title: "Mattilsynet",
+		description:
+			"Mattilsynet (Norwegian Food Safety Authority) is responsible for ensuring the safety of food and water, which includes monitoring and controlling pathogens that can be transmitted through these environmental mediums. The authority conducts inspections, enforces regulations, and responds to contamination incidents that could lead to public health risks.",
+		link: "https://www.mattilsynet.no/",
+		image: "/logos/mattilsynet.png",
+	},
+];
 
 export default function EnvironmentallyTransmittedPathogenPage() {
 	return (
 		<>
-			<div className="fixed right-12 top-32 z-10">
-				<div className="flex flex-col space-y-2">
-					<ContributorsPanel contributors={["author1", "author2", "author3"]} />
-				</div>
-			</div>
+			<ContributorsPanel contributors={["erik"]} />
+			<ReferencesPanel references={references} />
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">
 					Environmentally transmitted pathogens
 				</h2>
-				<Image
-					src="/pandemic-preparedness/one-health/environmentally-transmitted-pathogen/jacek-kadaj-oG88wo81y70-unsplash.jpg"
-					alt="Photo by Jacek Kadaj on Unsplash"
-					width={900}
-					height={500}
-					className="mx-auto rounded-md"
-				/>
-				<p className="text-center text-sm">
-					Photo by{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://unsplash.com/@jacekkadaj?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-					>
-						Jacek Kadaj
-					</a>{" "}
-					on{" "}
-					<a
-						className="text-primary hover:underline"
-						href="https://unsplash.com/photos/an-aerial-view-of-a-blue-lake-surrounded-by-trees-oG88wo81y70?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-					>
-						Unsplash
-					</a>
-				</p>
+				<HoverCard>
+					<HoverCardTrigger asChild>
+						<CentralImage
+							src="/pandemic-preparedness/one-health/environmentally-transmitted-pathogen/jacek-kadaj-oG88wo81y70-unsplash.jpg"
+							alt="Photo by Jacek Kadaj on Unsplash"
+						/>
+					</HoverCardTrigger>
+					<HoverCardContent className="w-fit">
+						Photo by{" "}
+						<a
+							className="text-primary hover:underline"
+							href="https://unsplash.com/@jacekkadaj?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+						>
+							Jacek Kadaj
+						</a>{" "}
+						on{" "}
+						<a
+							className="text-primary hover:underline"
+							href="https://unsplash.com/photos/an-aerial-view-of-a-blue-lake-surrounded-by-trees-oG88wo81y70?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+						>
+							Unsplash
+						</a>
+					</HoverCardContent>
+				</HoverCard>
 				<p>
 					Many human pathogens can be transmitted only by direct or close
 					contact with an infected person. However, some pathogenic
@@ -61,9 +100,11 @@ export default function EnvironmentallyTransmittedPathogenPage() {
 					>
 						Legionella pneumophila
 					</a>
+					). The European Commission&apos;s Joint Research Centre (JRC) has made
+					a report giving an overview of soil-borne diseases of humans (
+					<ReferenceOneHoverCard />
 					).
 				</p>
-
 				<h3 className="font-bold">Norwegian resources</h3>
 				<p>
 					In Norway, several public resources and institutions are dedicated to
@@ -101,44 +142,68 @@ export default function EnvironmentallyTransmittedPathogenPage() {
 						Vesuv
 					</a>
 					, a web-based outbreak alert system for specialist and municipal
-					health services as well as the Norwegian Food Safety Authority.
+					health services as well as Mattilsynet.
 				</p>
-
-				<h3 className="font-bold">Folkehelseinstituttet (FHI)</h3>
-				<p>
-					The FHI is a central institution for monitoring infectious diseases,
-					including those transmitted through environmental sources.
-				</p>
-				<a className="text-primary hover:underline" href="https://www.fhi.no/">
-					https://www.fhi.no/
-				</a>
-
-				<h3 className="font-bold">MSIS</h3>
-				<p>
-					The health registry MSIS (Meldingssystem for smittsomme sykdommer) is
-					the official system for monitoring infectious diseases in humans,
-					including those transmitted through environmental sources.
-				</p>
-				<a className="text-primary hover:underline" href="https://msis.no/">
-					https://msis.no/
-				</a>
-
-				<h3 className="font-bold">Mattilsynet</h3>
-				<p>
-					Mattilsynet (Norwegian Food Safety Authority) is responsible for
-					ensuring the safety of food and water, which includes monitoring and
-					controlling pathogens that can be transmitted through these
-					environmental mediums. The authority conducts inspections, enforces
-					regulations, and responds to contamination incidents that could lead
-					to public health risks.
-				</p>
-				<a
-					className="text-primary hover:underline"
-					href="https://www.mattilsynet.no/"
-				>
-					https://www.mattilsynet.no/
-				</a>
+				<CardGrid data={resources} />
+				<h2 className="pb-2 text-2xl font-bold">External resources</h2>
+				<ul className="flex list-disc flex-col space-y-1 pl-5">
+					<li>
+						Latest publication in{" "}
+						<a
+							href="https://app.cristin.no/search.jsf?t=Environmental%20pathogens&type=result"
+							className="text-primary hover:underline"
+						>
+							Cristin
+						</a>
+					</li>
+					<li>
+						Ongoing projects listed in{" "}
+						<a
+							href="https://prosjektbanken.forskningsradet.no/explore/projects?Kilde=FORISS&distribution=Ar&chart=bar&calcType=funding&Sprak=no&sortBy=date&sortOrder=desc&resultCount=30&offset=0&Fritekst=%22Environmental+pathogens%22+%22Environmentally+transmitted+pathogens%22+%22Soil+pathogens%22&Portefoljestyrer.1=Portef%C3%B8lje+Mat+og+bioressurser"
+							className="text-primary hover:underline"
+						>
+							Prosjektbanken
+						</a>
+					</li>
+				</ul>
 			</section>
 		</>
+	);
+}
+
+function ReferenceOneHoverCard() {
+	return (
+		<ReferenceHoverCard
+			refNumber={1}
+			paper="Soil Borne Human Diseases. EUR 24893 EN. Luxembourg (Luxembourg): Publications Office of the European Union; 2011. JRC65787"
+			pmcid=""
+			href="https://publications.jrc.ec.europa.eu/repository/handle/JRC65787"
+		/>
+	);
+}
+
+function ReferenceHoverCard({
+	refNumber,
+	paper,
+	pmcid,
+	href,
+}: {
+	refNumber: number;
+	paper: string;
+	pmcid: string;
+	href: string;
+}) {
+	return (
+		<HoverCard>
+			<HoverCardTrigger className="cursor-pointer text-primary hover:underline">
+				{refNumber}
+			</HoverCardTrigger>
+			<HoverCardContent className="text-small w-[500px] text-justify">
+				{paper};PMCID:
+				<a href={href} className="text-primary hover:underline">
+					{pmcid}
+				</a>
+			</HoverCardContent>
+		</HoverCard>
 	);
 }

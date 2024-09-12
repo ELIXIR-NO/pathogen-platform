@@ -50,16 +50,13 @@ export default function PseudomonasPage() {
 				<h2 className="text-3xl font-bold">Pseudomonas</h2>
 				<HoverCard>
 					<HoverCardTrigger asChild>
-						<Image
-							src="/topics/pseudomonas/pseudomonas-aeruginosa.jpg"
-							alt="Image of pseudomonas aeruginosa"
-							width={700}
-							height={500}
-							className="mx-auto rounded-md"
+						<CentralImage
+							src="/topics/pseudomonas/pseudomonas-aeruginosa.png"
+							alt="Image of pseudomonas aeruginos"
 						/>
 					</HoverCardTrigger>
 					<HoverCardContent className="w-fit">
-						Photo by{" "}
+						Source:{" "}
 						<a
 							href="https://nanosept-disinfectant.com/pathogens/pseudomonas-aeruginosa/"
 							className="text-primary hover:underline"
@@ -104,37 +101,12 @@ export default function PseudomonasPage() {
 				<p>
 					In the{" "}
 					<span className="font-bold italic">Pseudomonas aeruginosa</span>{" "}
-					database, you can find genomes of the species along with relevant
-					metadata about the pathogen source.
+					database, you can find the genomes of the species and, corresponding
+					to them, metadata with relevant information about the pathogen source
 				</p>
-				<h3 className="text-2xl font-bold">Norwegian Resources</h3>
-				<div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-					{norwegianResources.map((resource) => (
-						<Card
-							key={resource.title}
-							className="flex h-full flex-col transition-shadow duration-300 hover:shadow-2xl"
-						>
-							<Link href={resource.link} className="flex h-full flex-col">
-								<CardHeader>
-									<CardTitle className="text-lg">{resource.title}</CardTitle>
-									<CardDescription></CardDescription>
-								</CardHeader>
-								<CardContent className="flex flex-col items-center justify-center space-y-6">
-									<Image
-										src={`/topics/pseudomonas/${resource.image}`}
-										alt={resource.title}
-										width={500}
-										height={250}
-										className="aspect-video self-center object-fill"
-									/>
-									<p className="text-justify text-sm">{resource.description}</p>
-								</CardContent>
-							</Link>
-						</Card>
-					))}
-				</div>
-				<div>
-					<h2 className="pb-2 text-2xl font-bold">External Resources</h2>
+				<h2 className="text-2xl font-bold">Resources</h2>
+				<CardGrid data={repositories} />
+				<h2 className="pb-2 text-2xl font-bold">External Resources</h2>
 					<ul className="list-disc pl-5">
 						<li>
 							Latest publication in{" "}
@@ -155,7 +127,6 @@ export default function PseudomonasPage() {
 							</a>
 						</li>
 					</ul>
-				</div>
 			</section>
 		</>
 	);

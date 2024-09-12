@@ -86,7 +86,7 @@ export const contributors: Contributor[] = [
 
 export default function PathogenPortalContributors() {
 	return (
-		<section className="mt-6 grid grid-cols-3 gap-4">
+		<section className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 			{contributors.map((contributor) => (
 				<Card
 					key={contributor.email}
