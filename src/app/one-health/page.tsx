@@ -124,19 +124,19 @@ export default function OneHealthPage() {
 					to address the full spectrum of disease control – from prevention to
 					detection, preparedness, response, and forecasting – and contribute to
 					global health security. There are projects in Norway aligning with the
-					One health approach like the NMBU-lead
+					One health approach like the NMBU-lead{" "}
 					<a
 						className="text-primary hover:underline"
 						href="https://www.nmbu.no/en/research/projects/hunt-one-health"
 					>
-						HUNT One Health
+						HUNT One Health{" "}
 					</a>
-					and
+					and{" "}
 					<a
 						className="text-primary hover:underline"
 						href="https://en.uit.no/project/onehealth"
 					>
-						The One Health Education and Research project
+						The One Health Education and Research project{" "}
 					</a>
 					hosted by UiT. For the current list of projects by the Research
 					Council of Norway see the list below pulled from Prosjektbanken.
