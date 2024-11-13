@@ -30,6 +30,10 @@ const NavItems: NavItem[] = [
 		pageUrl: "/about",
 		pageName: "About",
 	},
+	{
+		pageUrl: "/news",
+		pageName: "News",
+	},
 ];
 
 export function NavBar() {

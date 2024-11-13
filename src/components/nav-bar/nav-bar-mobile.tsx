@@ -109,6 +109,9 @@ function NavigationSheet() {
 					<Link href="/about" className="pt-3 font-medium hover:underline">
 						About
 					</Link>
+					<Link href="/news" className="pt-3 font-medium hover:underline">
+						News
+					</Link>
 				</div>
 			</SheetContent>
 		</Sheet>
