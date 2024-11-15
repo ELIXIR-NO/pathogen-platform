@@ -71,7 +71,8 @@ export const contributors: Contributor[] = [
 		name: "Dorota Buczek",
 		position: "ELIXIR support",
 		image: "/people/dorota.jpg",
-		description: "She holds PhD in Molecular Biology and has extensive expertise in bioinformatics. She works as user support, being involved in the helpdesk, training, and the scientific part of many projects based on OMICS data.",
+		description:
+			"She holds PhD in Molecular Biology and has extensive expertise in bioinformatics. She works as user support, being involved in the helpdesk, training, and the scientific part of many projects based on OMICS data.",
 		email: "dorota.j.buczek@uit.no",
 	},
 	{
