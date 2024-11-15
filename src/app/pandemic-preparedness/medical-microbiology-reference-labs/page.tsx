@@ -50,6 +50,13 @@ const resources: CardGridData[] = [
 		image: "/logos/NMBU.png",
 		link: "https://www.nmbu.no/mattrygghetslab",
 	},
+	{
+		title: "K-res",
+		description:
+			"K-res aims to be a nationally leading and internationally recognized center for the detection and characterization of antibiotic resistance.",
+		image: "/logos/sykehus.png",
+		link: "https://www.unn.no/fag-og-forskning/k-res",
+	},
 ];
 
 export default function MedicalMicroBiologyReferenceLabsPage() {
