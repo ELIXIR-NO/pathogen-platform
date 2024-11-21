@@ -67,13 +67,14 @@ export const contributors: Contributor[] = [
 			"With a background in Information Technology and a master's degree in Bioinformatics from the Federal University of Rio Grande do Norte in Brazil, I bring a distinctive perspective to my role in technology development. My expertise is focused on creating innovative solutions, including the design and implementation of pipelines and web applications.",
 		email: "danilo.l.martins@uit.no",
 	},
-	// {
-	// 	name: "Dorota Buczek",
-	// 	position: "ELIXIR support",
-	// 	image: "/people/dorota.jpg",
-	// 	description: "",
-	// 	email: "dorota.j.buczek@uit.no",
-	// },
+	{
+		name: "Dorota Buczek",
+		position: "ELIXIR support",
+		image: "/people/dorota.jpg",
+		description:
+			"She holds PhD in Molecular Biology and has extensive expertise in bioinformatics. She works as user support, being involved in the helpdesk, training, and the scientific part of many projects based on OMICS data.",
+		email: "dorota.j.buczek@uit.no",
+	},
 	{
 		name: "Sebastian Petters",
 		position: "ELIXIR support",
