@@ -38,6 +38,12 @@ export const topics: DropdownMenuItem[] = [
 		description:
 			"Enterococcus faecalis is a grampositive lactic acid bacterium that resides in the GI tract",
 	},
+	{
+		title: "Influenza",
+		href: "/topics/influenza",
+		description:
+			"Influenza is a public health priority in Norway, with vaccination and awareness aimed at protecting vulnerable groups.",
+	},
 ];
 
 export const pandemicPreparednessNavItems: DropdownMenuItem[] = [
