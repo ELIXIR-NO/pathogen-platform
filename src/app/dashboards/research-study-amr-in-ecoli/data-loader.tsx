@@ -4,7 +4,7 @@ import {
 	extractUniqueSamples,
 	getEcoliCSVData,
 } from "@/lib/data/csvUtils";
-import { SampleBarChart } from "./multi-region-resistance-line-charts";
+import { SampleBarChart } from "./multi-phylogroup-bar-charts";
 
 export default async function DataLoader() {
 	const records = await getEcoliCSVData();
