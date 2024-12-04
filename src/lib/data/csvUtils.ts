@@ -113,3 +113,35 @@ export function extractUniqueCollections(data: EcoliRecord[]): string[] {
 export function extractUniquePhylogroups(data: EcoliRecord[]): string[] {
 	return Array.from(new Set(data.map((record) => record["Phylogroup"])));
 }
+
+export interface Covid19Record {
+	ProveAar: string;
+	Covid19?: number;
+	Vaccine?: number;
+}
+
+export async function getCovid19CSVData(): Promise<Covid19Record[]> {
+	const filePath = path.join(
+		process.cwd(),
+		"public",
+		"data",
+		"combine_covid19xvac.csv"
+	);
+
+	try {
+		const fileContent = await fsPromises.readFile(filePath, "utf8");
+
+		return parse(fileContent, {
+			columns: true,
+			skip_empty_lines: true,
+			delimiter: ";",
+		});
+	} catch (error) {
+		console.error("Error reading csv file: ", error);
+		throw error;
+	}
+}
+
+export function extractUniqueYears(data: Covid19Record[]): string[] {
+	return Array.from(new Set(data.map((record) => record.ProveAar)));
+}
