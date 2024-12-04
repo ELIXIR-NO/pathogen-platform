@@ -84,7 +84,7 @@ export async function getEcoliCSVData(): Promise<EcoliRecord[]> {
 		process.cwd(),
 		"public",
 		"data",
-		"final_table.csv"
+		"Ecoli_data.csv"
 	);
 
 	try {
