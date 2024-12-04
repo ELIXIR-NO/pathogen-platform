@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/chart";
 
 const generateHslColor = (index: number, total: number) => {
-	const safeHues = [210, 0, 120, 30, 270, 180, 45, 60, 75];
+	const safeHues = [330, 210, 0, 120, 30, 270, 180, 45, 60, 75, 315, 300];
 	const hue = safeHues[index % safeHues.length];
 	return `hsl(${hue}, 70%, 50%)`;
 };
@@ -42,6 +42,7 @@ export function SampleBarChart({
 	data: any[];
 }) {
 	const genotypes = [
+		"AMINOGLYCOSIDE",
 		"AMINOGLYCOSIDE/QUINOLONE",
 		"BETA-LACTAM",
 		"QUINOLONE",
