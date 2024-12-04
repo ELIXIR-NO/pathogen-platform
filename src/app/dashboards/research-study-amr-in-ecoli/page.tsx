@@ -3,7 +3,7 @@ import DataLoader from "./data-loader";
 export default function ResearchStudyAMRiEcoli() {
 	return (
 		<section className="flex w-full flex-col space-y-6 text-justify">
-			<h1 className="text-3xl font-bold">Research study: AMR in E.coli</h1>
+			<h1 className="text-3xl font-bold">Research study: AMR in <i>E.coli</i></h1>
 			<p>
 				This dashboard offers a subset of the contextual metadata associated
 				with the samples presented in the{" "}
@@ -13,9 +13,9 @@ export default function ResearchStudyAMRiEcoli() {
 				>
 					study
 				</a>{" "}
-				hat focused on the prevalence and population structure of ESBL-producing
-				E. coli. The dashboard enables filtering and visualisation of selected
-				phenotypic and genotypic AMR profiles from E. coli in a general adult
+				hat focused on the prevalence and population structure of ESBL-producing{" "} 
+				<i>E. coli.</i> The dashboard enables filtering and visualisation of selected
+				phenotypic and genotypic AMR profiles from <i>E. coli</i> in a general adult
 				population (
 				<a
 					href="https://uit.no/research/tromsostudy"
