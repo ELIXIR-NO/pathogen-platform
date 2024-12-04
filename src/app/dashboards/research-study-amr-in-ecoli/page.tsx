@@ -15,10 +15,10 @@ export default function ResearchStudyAMRiEcoli() {
 				>
 					study
 				</a>{" "}
-				that focused on the prevalence and population structure of ESBL-producing{" "}
-				<i>Escherichia. coli.</i> The dashboard enables filtering and visualisation of
-				selected phenotypic and genotypic AMR profiles from <i>E. coli</i> in a
-				general adult population (
+				that focused on the prevalence and population structure of
+				ESBL-producing <i>Escherichia. coli.</i> The dashboard enables filtering
+				and visualisation of selected phenotypic and genotypic AMR profiles from{" "}
+				<i>E. coli</i> in a general adult population (
 				<a
 					href="https://uit.no/research/tromsostudy"
 					className="text-primary hover:underline"
@@ -32,9 +32,10 @@ export default function ResearchStudyAMRiEcoli() {
 				>
 					NORM
 				</a>
-				). 
+				).
 				<br></br>
-				<strong>NOTE:</strong> this is not surveillance data and does not represent the general trend in the Norwegian population.
+				<strong>NOTE:</strong> this is not surveillance data and does not
+				represent the general trend in the Norwegian population.
 			</p>
 			<DataLoader />
 			<p className="italic">
