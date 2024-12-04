@@ -69,23 +69,18 @@ export interface EcoliRecord {
 	"AMINOGLYCOSIDE/QUINOLONE": string;
 	"BETA-LACTAM": string;
 
-	"QUINOLONE": string;
+	QUINOLONE: string;
 	"QUATERNARY AMMONIUM": string;
 	"Mobile Colistin?": string;
-	"SULFONAMIDE": string;
-	"TRIMETHOPRIM": string;
+	SULFONAMIDE: string;
+	TRIMETHOPRIM: string;
 
 	"DDM-Collection": string;
 	Phylogroup: string;
 }
 
 export async function getEcoliCSVData(): Promise<EcoliRecord[]> {
-	const filePath = path.join(
-		process.cwd(),
-		"public",
-		"data",
-		"Ecoli_data.csv"
-	);
+	const filePath = path.join(process.cwd(), "public", "data", "Ecoli_data.csv");
 
 	try {
 		const fileContent = await fsPromises.readFile(filePath, "utf8");
@@ -108,9 +103,7 @@ export function extractUniqueSamples(data: EcoliRecord[]): string[] {
 }
 
 export function extractUniqueCollections(data: EcoliRecord[]): string[] {
-	return Array.from(
-		new Set(data.map((record) => record["DDM-Collection"]))
-	);
+	return Array.from(new Set(data.map((record) => record["DDM-Collection"])));
 }
 
 export function extractUniquePhylogroups(data: EcoliRecord[]): string[] {
