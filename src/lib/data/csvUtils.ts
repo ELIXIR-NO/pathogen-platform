@@ -69,27 +69,22 @@ export function extractUniqueOpplegg(data: NormDataRecord[]): string[] {
 export interface EcoliRecord {
 	sample: string;
 	[key: string]: string | undefined;
-	"PPN-DDM-Sample material": string;
-	"PPN-AMINOGLYCOSIDE/QUINOLONE": string;
-	"PPN=BETA-LACTAM": string;
+	"DDM-Sample material": string;
+	"AMINOGLYCOSIDE/QUINOLONE": string;
+	"BETA-LACTAM": string;
 
-	"PPN-QUINOLONE": string;
-	"PPN-QUATERNARY AMMONIUM": string;
-	"PPN-Mobile Colistin?": string;
-	"PPN-SULFONAMIDE": string;
-	"PPN-TRIMETHOPRIM": string;
+	QUINOLONE: string;
+	"QUATERNARY AMMONIUM": string;
+	"Mobile Colistin?": string;
+	SULFONAMIDE: string;
+	TRIMETHOPRIM: string;
 
-	"PPN-DDM-Collection": string;
+	"DDM-Collection": string;
 	Phylogroup: string;
 }
 
 export async function getEcoliCSVData(): Promise<EcoliRecord[]> {
-	const filePath = path.join(
-		process.cwd(),
-		"public",
-		"data",
-		"final_table.csv"
-	);
+	const filePath = path.join(process.cwd(), "public", "data", "Ecoli_data.csv");
 
 	try {
 		const fileContent = await fsPromises.readFile(filePath, "utf8");
@@ -107,14 +102,12 @@ export async function getEcoliCSVData(): Promise<EcoliRecord[]> {
 
 export function extractUniqueSamples(data: EcoliRecord[]): string[] {
 	return Array.from(
-		new Set(data.map((record) => record["PPN-DDM-Sample material"]))
+		new Set(data.map((record) => record["DDM-Sample material"]))
 	);
 }
 
 export function extractUniqueCollections(data: EcoliRecord[]): string[] {
-	return Array.from(
-		new Set(data.map((record) => record["PPN-DDM-Collection"]))
-	);
+	return Array.from(new Set(data.map((record) => record["DDM-Collection"])));
 }
 
 export function extractUniquePhylogroups(data: EcoliRecord[]): string[] {

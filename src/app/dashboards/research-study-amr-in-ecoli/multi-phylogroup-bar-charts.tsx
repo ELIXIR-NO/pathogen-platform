@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/chart";
 
 const generateHslColor = (index: number, total: number) => {
-	const safeHues = [210, 0, 120, 30, 270, 180, 45, 60, 75];
+	const safeHues = [330, 210, 0, 120, 30, 270, 180, 45, 60, 75, 315, 300];
 	const hue = safeHues[index % safeHues.length];
 	return `hsl(${hue}, 70%, 50%)`;
 };
@@ -42,43 +42,44 @@ export function SampleBarChart({
 	data: any[];
 }) {
 	const genotypes = [
-		"PPN-AMINOGLYCOSIDE/QUINOLONE",
-		"PPN=BETA-LACTAM",
-		"PPN-QUINOLONE",
-		"PPN-QUATERNARY AMMONIUM",
-		"PPN-Mobile Colistin?",
-		"PPN-SULFONAMIDE",
-		"PPN-TRIMETHOPRIM",
+		"AMINOGLYCOSIDE",
+		"AMINOGLYCOSIDE/QUINOLONE",
+		"BETA-LACTAM",
+		"QUINOLONE",
+		"QUATERNARY AMMONIUM",
+		"Mobile Colistin",
+		"SULFONAMIDE",
+		"TRIMETHOPRIM",
 	];
 	const chartType: string[] = ["Phenotype", "Genotype"];
 
 	const phenotypes = [
-		"Amoxicillin-clavulanic_acid_category_i.v.",
-		"Amoxicillin-clavulanic_acid_category_uncomplicated UTI only",
-		"Piperacillin-tazobactam_category",
-		"Temocillin_category_UTI",
-		"Cefoxitin_category_screen ",
-		"Cefuroxime_category_oral_uncomplicated UTI only",
-		"Ceftazidime_category",
-		"Cefotaxime_category",
-		"Cefepime_category",
-		"Ceftazidime-avibactam_category",
-		"Ertapenem_category",
-		"Meropenem_category",
-		"Imipenem_category",
-		"Doripenem_category",
-		"Aztreonam_category",
-		"Amikacin_category",
-		"Gentamicin_category",
-		"Tobramycin_category",
-		"Ciprofloxacin_category",
-		"Trimethoprim-sulfamethoxazole_category",
-		"Trimethoprim_category",
-		"Nitrofurantoin_category",
-		"Fosfomycin_category_iv",
-		"Fosfomycin_category_UTI",
-		"Colistin_category",
-		"Tigecycline_category",
+		"Amoxicillin-clavulanic_acid_i.v.",
+		"Amoxicillin-clavulanic_acid_uncomplicated UTI only",
+		"Piperacillin-tazobactam",
+		"Temocillin_UTI",
+		"Cefoxitin_screen ",
+		"Cefuroxime_oral_uncomplicated UTI only",
+		"Ceftazidime",
+		"Cefotaxime",
+		"Cefepime",
+		"Ceftazidime-avibactam",
+		"Ertapenem",
+		"Meropenem",
+		"Imipenem",
+		"Doripenem",
+		"Aztreonam",
+		"Amikacin",
+		"Gentamicin",
+		"Tobramycin",
+		"Ciprofloxacin",
+		"Trimethoprim-sulfamethoxazole",
+		"Trimethoprim",
+		"Nitrofurantoin",
+		"Fosfomycin_iv",
+		"Fosfomycin_UTI",
+		"Colistin",
+		"Tigecycline",
 	];
 
 	const [selectedSamples, setSelectedSamples] = useState<string[]>(samples);
@@ -87,10 +88,10 @@ export function SampleBarChart({
 	const [selectedPhylogroup, setSelectedPhylogroup] =
 		useState<string[]>(phylogroups);
 	const [selectedGenotypes, setSelectedGenotypes] = useState<string[]>([
-		"PPN-AMINOGLYCOSIDE/QUINOLONE",
+		"AMINOGLYCOSIDE/QUINOLONE",
 	]);
 	const [selectedPhenotypes, setSelectedPhenotypes] = useState<string[]>([
-		"Amoxicillin-clavulanic_acid_category_i.v.",
+		"Amoxicillin-clavulanic_acid_i.v.",
 	]);
 	const [selectedchartType, setSelectedChartType] =
 		useState<string>("Phenotype");
@@ -117,8 +118,8 @@ export function SampleBarChart({
 
 		const filtered = data.filter(
 			(item) =>
-				selectedSamples.includes(item["PPN-DDM-Sample material"]) &&
-				selectedCollections.includes(item["PPN-DDM-Collection"]) &&
+				selectedSamples.includes(item["DDM-Sample material"]) &&
+				selectedCollections.includes(item["DDM-Collection"]) &&
 				selectedPhylogroup.includes(item["Phylogroup"])
 		);
 
@@ -138,8 +139,8 @@ export function SampleBarChart({
 							.filter(
 								(item) =>
 									item["Phylogroup"] === phylogroup &&
-									item["PPN-DDM-Collection"] === collection &&
-									item["PPN-DDM-Sample material"] === sample
+									item["DDM-Collection"] === collection &&
+									item["DDM-Sample material"] === sample
 							)
 							.reduce((sum, item) => sum + (Number(item[genotype]) || 0), 0);
 					}
@@ -168,8 +169,8 @@ export function SampleBarChart({
 
 		const filtered = data.filter(
 			(item) =>
-				selectedSamples.includes(item["PPN-DDM-Sample material"]) &&
-				selectedCollections.includes(item["PPN-DDM-Collection"]) &&
+				selectedSamples.includes(item["DDM-Sample material"]) &&
+				selectedCollections.includes(item["DDM-Collection"]) &&
 				selectedPhylogroup.includes(item["Phylogroup"])
 		);
 
@@ -189,8 +190,8 @@ export function SampleBarChart({
 						const filteredItems = filtered.filter(
 							(item) =>
 								item["Phylogroup"] === phylogroup &&
-								item["PPN-DDM-Sample material"] === sample &&
-								item["PPN-DDM-Collection"] === collection
+								item["DDM-Sample material"] === sample &&
+								item["DDM-Collection"] === collection
 						);
 
 						const counts = filteredItems.reduce(
