@@ -62,6 +62,10 @@ export function extractUniqueRegions(data: NormDataRecord[]): string[] {
 	return Array.from(new Set(data.map((record) => record.region)));
 }
 
+export function extractUniqueOpplegg(data: NormDataRecord[]): string[] {
+	return Array.from(new Set(data.map((record) => record.Opplegg)));
+}
+
 export interface EcoliRecord {
 	sample: string;
 	[key: string]: string | undefined;
