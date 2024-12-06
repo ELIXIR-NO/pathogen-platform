@@ -44,6 +44,12 @@ export const topics: DropdownMenuItem[] = [
 		description:
 			"Influenza is a public health priority in Norway, with vaccination and awareness aimed at protecting vulnerable groups.",
 	},
+	{
+		title: "Mycoplasma",
+		href: "/topics/mycoplasma",
+		description:
+			"Mycoplasma: tiny, shape-shifting bacteria without cell walls, avoiding antibiotics and thriving independently.",
+	},
 ];
 
 export const pandemicPreparednessNavItems: DropdownMenuItem[] = [
