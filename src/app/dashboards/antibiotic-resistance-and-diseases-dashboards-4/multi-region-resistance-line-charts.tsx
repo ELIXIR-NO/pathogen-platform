@@ -97,7 +97,7 @@ export function MultiRegionResistanceLineCharts({
 				(a, b) => a.year - b.year
 			);
 		});
-		console.log("dataByAntibiotic:", dataByAntibiotic)
+		console.log("dataByAntibiotic:", dataByAntibiotic);
 		return dataByAntibiotic;
 	}, [filteredData, selectedAntibiotics]);
 
@@ -107,7 +107,7 @@ export function MultiRegionResistanceLineCharts({
 	};
 
 	const chartConfig = useMemo(() => {
-		const keys = selectedRegions.map((region) => `${region}`)
+		const keys = selectedRegions.map((region) => `${region}`);
 		return keys.reduce(
 			(acc, key, index) => {
 				acc[key] = {
@@ -135,7 +135,7 @@ export function MultiRegionResistanceLineCharts({
 		all: boolean = true
 	) => {
 		const isNoData = items.length === 0;
-		console.log("isNoData:", isNoData)
+		console.log("isNoData:", isNoData);
 		return (
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
@@ -184,7 +184,8 @@ export function MultiRegionResistanceLineCharts({
 
 	const handleMouseMove = (region: string, props: any) => {
 		if (props.activeTooltipIndex !== undefined) {
-			const year = chartDataByAntibiotic[region][props.activeTooltipIndex]?.year;
+			const year =
+				chartDataByAntibiotic[region][props.activeTooltipIndex]?.year;
 			setHoveredYear(year);
 		}
 	};
@@ -210,17 +211,16 @@ export function MultiRegionResistanceLineCharts({
 	};
 
 	const handleUniqueChange = useCallback(
-		(setter: React.Dispatch<React.SetStateAction<string[]>>) => (item: string) => {
-			setSelectedAntibiotics([]);
-			setter([item]);
-		},
+		(setter: React.Dispatch<React.SetStateAction<string[]>>) =>
+			(item: string) => {
+				setSelectedAntibiotics([]);
+				setter([item]);
+			},
 		[]
-	  );
+	);
 
-	  const uniqueFiltered = useMemo(() => {
-		const uniqueSet = new Set(
-			filteredData.map((item) => item.Antibiotika)
-		);
+	const uniqueFiltered = useMemo(() => {
+		const uniqueSet = new Set(filteredData.map((item) => item.Antibiotika));
 		return Array.from(uniqueSet);
 	}, [filteredData]);
 
@@ -259,16 +259,21 @@ export function MultiRegionResistanceLineCharts({
 				</Button>
 			</div>
 			<div className="flex flex-col space-y-4">
-				{selectedSampleType.length > 0 && selectedMicrobes.length > 0 && selectedRegions.length > 0 && selectedAntibiotics.length > 0 && (
-					<h1 className="mb-2 text-lg font-semibold text-center">{selectedSampleType} / {selectedMicrobes}</h1>
-				)}
+				{selectedSampleType.length > 0 &&
+					selectedMicrobes.length > 0 &&
+					selectedRegions.length > 0 &&
+					selectedAntibiotics.length > 0 && (
+						<h1 className="mb-2 text-center text-lg font-semibold">
+							{selectedSampleType} / {selectedMicrobes}
+						</h1>
+					)}
 				{selectedAntibiotics.map((antibiotic) => (
 					<ChartContainer
 						key={antibiotic}
 						config={chartConfig}
 						className="h-[300px] w-full"
 					>
-						<div className="h-full w-full">			
+						<div className="h-full w-full">
 							<h3 className="mb-2 text-lg font-semibold">{antibiotic}</h3>
 							<ResponsiveContainer width="100%" height="90%">
 								<LineChart
@@ -279,8 +284,6 @@ export function MultiRegionResistanceLineCharts({
 									<CartesianGrid strokeDasharray="5 5" />
 									<XAxis
 										dataKey="year"
-
-										
 										tickFormatter={(value) => value.toString()}
 										tickCount={12}
 									/>
