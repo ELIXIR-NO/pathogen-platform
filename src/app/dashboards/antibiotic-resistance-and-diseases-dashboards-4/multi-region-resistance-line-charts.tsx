@@ -97,7 +97,6 @@ export function MultiRegionResistanceLineCharts({
 				(a, b) => a.year - b.year
 			);
 		});
-		console.log("dataByAntibiotic:", dataByAntibiotic);
 		return dataByAntibiotic;
 	}, [filteredData, selectedAntibiotics]);
 
@@ -135,7 +134,6 @@ export function MultiRegionResistanceLineCharts({
 		all: boolean = true
 	) => {
 		const isNoData = items.length === 0;
-		console.log("isNoData:", isNoData);
 		return (
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
