@@ -9,7 +9,9 @@ export default function AntibioticResistanceAndDiseasesDashboards3() {
 			<p>
 				Norsk overvåkingssystem for antibiotikaresistens hos mikrober (
 				<a
+				<a
 					href="https://www.unn.no/fag-og-forskning/norm-norsk-overvakingssystem-for-antibiotikaresistens-hos-mikrober"
+					className="text-primary hover:underline"
 					className="text-primary hover:underline"
 				>
 					NORM
@@ -18,8 +20,13 @@ export default function AntibioticResistanceAndDiseasesDashboards3() {
 				Microbes. The health registry collect and analyse data on antibiotic
 				resistance, working with reference labs to ensure high-quality testing
 				and data interpretation.
+				</a>
+				) is the Norwegian Surveillance System for Antimicrobial Resistance in
+				Microbes. The health registry collect and analyse data on antibiotic
+				resistance, working with reference labs to ensure high-quality testing
+				and data interpretation.
 			</p>
-			<h2 className="text-2xl font-bold">Plot occurrences:</h2>
+			<h2 className="text-2xl font-bold">Plotting filters:</h2>
 			<ul className="flex list-decimal flex-col space-y-1 pl-5">
 				<li>
 					<strong>Select Sample Type</strong> - allows only one sample type
