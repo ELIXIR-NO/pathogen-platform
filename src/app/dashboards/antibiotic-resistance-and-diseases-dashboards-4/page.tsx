@@ -26,7 +26,7 @@ export default function AntibioticResistanceAndDiseasesDashboards3() {
 				resistance, working with reference labs to ensure high-quality testing
 				and data interpretation.
 			</p>
-			<h2 className="text-2xl font-bold">Plotting filters:</h2>
+			<h2 className="text-2xl font-bold">Plot occurrences:</h2>
 			<ul className="flex list-decimal flex-col space-y-1 pl-5">
 				<li>
 					<strong>Select Sample Type</strong> - allows only one sample type
