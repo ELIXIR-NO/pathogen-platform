@@ -60,9 +60,8 @@ export function Covid19LineChart({
 		}
 	  
 		return data
-		  .filter((item) => selectedYears.includes(item.ProveAar)) // Filtrar apenas os anos selecionados
+		  .filter((item) => selectedYears.includes(item.ProveAar))
 		  .map((item) => {
-			// Criar um novo objeto contendo apenas as colunas selecionadas
 			const result: Covid19Record = {
 				ProveAar: item.ProveAar,
 				Covid19: undefined,
