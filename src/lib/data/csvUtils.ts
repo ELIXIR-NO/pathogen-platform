@@ -61,3 +61,55 @@ export function extractUniqueAntibiotics(data: NormDataRecord[]): string[] {
 export function extractUniqueRegions(data: NormDataRecord[]): string[] {
 	return Array.from(new Set(data.map((record) => record.region)));
 }
+
+export function extractUniqueOpplegg(data: NormDataRecord[]): string[] {
+	return Array.from(new Set(data.map((record) => record.Opplegg)));
+}
+
+export interface EcoliRecord {
+	sample: string;
+	[key: string]: string | undefined;
+	"DDM-Sample material": string;
+	"AMINOGLYCOSIDE/QUINOLONE": string;
+	"BETA-LACTAM": string;
+
+	QUINOLONE: string;
+	"QUATERNARY AMMONIUM": string;
+	"Mobile Colistin?": string;
+	SULFONAMIDE: string;
+	TRIMETHOPRIM: string;
+
+	"DDM-Collection": string;
+	Phylogroup: string;
+}
+
+export async function getEcoliCSVData(): Promise<EcoliRecord[]> {
+	const filePath = path.join(process.cwd(), "public", "data", "Ecoli_data.csv");
+
+	try {
+		const fileContent = await fsPromises.readFile(filePath, "utf8");
+
+		return parse(fileContent, {
+			columns: true,
+			skip_empty_lines: true,
+			delimiter: ",",
+		});
+	} catch (error) {
+		console.error("Error reading CSV file: ", error);
+		throw error;
+	}
+}
+
+export function extractUniqueSamples(data: EcoliRecord[]): string[] {
+	return Array.from(
+		new Set(data.map((record) => record["DDM-Sample material"]))
+	);
+}
+
+export function extractUniqueCollections(data: EcoliRecord[]): string[] {
+	return Array.from(new Set(data.map((record) => record["DDM-Collection"])));
+}
+
+export function extractUniquePhylogroups(data: EcoliRecord[]): string[] {
+	return Array.from(new Set(data.map((record) => record["Phylogroup"])));
+}
