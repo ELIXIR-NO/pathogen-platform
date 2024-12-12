@@ -3,11 +3,10 @@ import DataLoader from "./data-loader";
 export default function AntibioticResistanceAndDiseasesDashboards3() {
 	return (
 		<section className="flex w-full flex-col space-y-6 text-justify">
-			<h1 className="text-3xl font-bold">
-				Covid-19
-			</h1>
+			<h1 className="text-3xl font-bold">Covid-19</h1>
 			<p>
-				Occurrences and vaccination data from MSIS and SYSVAK can be displayed in two synchronised plots. 
+				Occurrences and vaccination data from MSIS and SYSVAK can be displayed
+				in two synchronised plots.
 			</p>
 			<DataLoader />
 			<p className="italic">
@@ -17,15 +16,14 @@ export default function AntibioticResistanceAndDiseasesDashboards3() {
 					className="text-primary hover:underline"
 				>
 					Meldingssystem for smittsomme sykdommer (MSIS), FHI
-				</a>
-				{" "}and{" "}
+				</a>{" "}
+				and{" "}
 				<a
 					href="https://allvis.fhi.no/sysvak/antall-vaksinerte?etter=diagnose&diagnose=COVID_19&fordeltPaa=aar"
 					className="text-primary hover:underline"
 				>
 					Nasjonalt vaksinasjonsregister (SYSVAK), FHI
 				</a>
-				
 			</p>
 		</section>
 	);
