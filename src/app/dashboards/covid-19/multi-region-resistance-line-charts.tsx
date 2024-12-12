@@ -62,29 +62,26 @@ export function Covid19LineChart({
 		}
 
 		return data
-			.filter((item) => selectedYears.includes(item.ProveAar)) // Filtrar apenas os anos selecionados
-			.map((item) => {
-				// Criar um novo objeto contendo apenas as colunas selecionadas
-				const result: Covid19Record = {
-					ProveAar: item.ProveAar,
-					Covid19: undefined,
-					Vaccine: undefined,
-				};
-
-				if (selectedType.includes("Covid-19")) {
-					result.Covid19 = item.Covid19;
-				}
-				if (selectedType.includes("Vaccine")) {
-					result.Vaccine = item.Vaccine;
-				}
-
-				return result;
-			});
-	}, [selectedYears, selectedType, data]);
-
-	const sortedData = filteredData.sort(
-		(a, b) => parseInt(a.ProveAar) - parseInt(b.ProveAar)
-	);
+		  .filter((item) => selectedYears.includes(item.ProveAar))
+		  .map((item) => {
+			const result: Covid19Record = {
+				ProveAar: item.ProveAar,
+				Covid19: undefined,
+				Vaccine: undefined
+			};
+	  
+			if (selectedType.includes("Covid-19")) {
+			  result.Covid19 = item.Covid19; 
+			}
+			if (selectedType.includes("Vaccine")) {
+			  result.Vaccine = item.Vaccine;
+			}
+	  
+			return result;
+		  });
+	  }, [selectedYears, selectedType, data]);
+	  
+	const sortedData = filteredData.sort((a, b) => parseInt(a.ProveAar) - parseInt(b.ProveAar));
 
 	const resetSelections = useCallback(() => {
 		setSelectedYears([]);
