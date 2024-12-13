@@ -208,6 +208,7 @@ export function MultiRegionResistanceLineCharts({
 		}
 		return null;
 	};
+	
 
 	const handleUniqueChange = useCallback(
 		(setter: React.Dispatch<React.SetStateAction<string[]>>) =>
