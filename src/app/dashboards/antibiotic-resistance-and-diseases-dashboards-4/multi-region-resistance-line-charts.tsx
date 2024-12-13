@@ -25,6 +25,7 @@ import {
 	ChartLegend,
 	ChartLegendContent,
 } from "@/components/ui/chart";
+import DownloadCSV from "@/lib/data/csvExport";
 
 export function MultiRegionResistanceLineCharts({
 	microbes,
@@ -74,14 +75,17 @@ export function MultiRegionResistanceLineCharts({
 	const chartDataByAntibiotic = useMemo(() => {
 		const dataByAntibiotic: Record<string, any[]> = {};
 		selectedAntibiotics.forEach((antibiotic) => {
-			const antibioticData: Record<number, Record<string, number>> = {};
+			const antibioticData: Record<number, Record<string, any>> = {};
 			filteredData
 				.filter((item) => item.Antibiotika === antibiotic)
 				.forEach((item) => {
 					const year = parseInt(item.ProveAar);
-					if (!antibioticData[year]) antibioticData[year] = { year };
+					if (!antibioticData[year]) {
+						antibioticData[year] = { year, antallByRegion: {} };
+					}
 					const key = `${item.region}`;
 					antibioticData[year][key] = item.Andel_R;
+					antibioticData[year].antallByRegion[key] = item.antall || "0";
 				});
 			dataByAntibiotic[antibiotic] = Object.values(antibioticData).sort(
 				(a, b) => a.year - b.year
@@ -184,19 +188,27 @@ export function MultiRegionResistanceLineCharts({
 
 	const CustomTooltip = ({ active, payload, label }: any) => {
 		if (active && payload && payload.length) {
+			const antallByRegion = payload[0]?.payload.antallByRegion || {};
+	
 			return (
 				<div className="rounded border bg-white p-4 shadow">
 					<p className="font-bold">{`Year: ${label}`}</p>
-					{payload.map((entry: any, index: number) => (
-						<p key={index} style={{ color: entry.color }}>
-							{`${entry.name}: ${entry.value.toFixed(2)}%`}
-						</p>
-					))}
+					{payload.map((entry: any, index: number) => {
+						const count = antallByRegion[entry.name] || 0;
+						return (
+							<div key={index} style={{ color: entry.color }}>
+								<p>
+									{`${entry.name} (Occ % / Samples): ${entry.value.toFixed(2)}% / ${count}`}
+								</p>
+							</div>
+						);
+					})}
 				</div>
 			);
 		}
 		return null;
 	};
+	
 
 	const handleUniqueChange = useCallback(
 		(setter: React.Dispatch<React.SetStateAction<string[]>>) =>
@@ -211,6 +223,10 @@ export function MultiRegionResistanceLineCharts({
 		const uniqueSet = new Set(filteredData.map((item) => item.Antibiotika));
 		return Array.from(uniqueSet);
 	}, [filteredData]);
+
+	const filteredDownloadData = selectedAntibiotics.flatMap(
+		(antibiotic) => filteredData.filter((item) => item.Antibiotika === antibiotic) || []
+	);
 
 	return (
 		<div className="flex w-full flex-col space-y-4">
@@ -244,6 +260,15 @@ export function MultiRegionResistanceLineCharts({
 				)}
 				<Button variant="outline" onClick={resetSelections}>
 					Reset All
+				</Button>
+				<Button
+					variant="outline"
+					onClick={() => {
+						DownloadCSV(filteredDownloadData, "Filtered_Data");
+					}}
+					disabled={filteredDownloadData.length === 0 || selectedAntibiotics.length === 0}
+				>
+					Download Data
 				</Button>
 			</div>
 			<div className="flex flex-col space-y-4">
