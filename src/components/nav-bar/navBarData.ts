@@ -50,6 +50,12 @@ export const topics: DropdownMenuItem[] = [
 		description:
 			"Mycoplasma: tiny, shape-shifting bacteria without cell walls, avoiding antibiotics and thriving independently.",
 	},
+	{
+		title: "Escherichia coli",
+		href: "/topics/escherichia",
+		description:
+			"Escherichia coli is a gram-negative, rod-shaped bacterium commonly found in the intestines of humans and warm-blooded animals.",
+	},
 ];
 
 export const pandemicPreparednessNavItems: DropdownMenuItem[] = [
