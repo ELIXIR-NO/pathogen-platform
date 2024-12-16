@@ -189,7 +189,7 @@ export function MultiRegionResistanceLineCharts({
 	const CustomTooltip = ({ active, payload, label }: any) => {
 		if (active && payload && payload.length) {
 			const antallByRegion = payload[0]?.payload.antallByRegion || {};
-	
+
 			return (
 				<div className="rounded border bg-white p-4 shadow">
 					<p className="font-bold">{`Year: ${label}`}</p>
@@ -208,7 +208,6 @@ export function MultiRegionResistanceLineCharts({
 		}
 		return null;
 	};
-	
 
 	const handleUniqueChange = useCallback(
 		(setter: React.Dispatch<React.SetStateAction<string[]>>) =>
@@ -225,7 +224,8 @@ export function MultiRegionResistanceLineCharts({
 	}, [filteredData]);
 
 	const filteredDownloadData = selectedAntibiotics.flatMap(
-		(antibiotic) => filteredData.filter((item) => item.Antibiotika === antibiotic) || []
+		(antibiotic) =>
+			filteredData.filter((item) => item.Antibiotika === antibiotic) || []
 	);
 
 	return (
@@ -266,7 +266,10 @@ export function MultiRegionResistanceLineCharts({
 					onClick={() => {
 						DownloadCSV(filteredDownloadData, "Filtered_Data");
 					}}
-					disabled={filteredDownloadData.length === 0 || selectedAntibiotics.length === 0}
+					disabled={
+						filteredDownloadData.length === 0 ||
+						selectedAntibiotics.length === 0
+					}
 				>
 					Download Data
 				</Button>
