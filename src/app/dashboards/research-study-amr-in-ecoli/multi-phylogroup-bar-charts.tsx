@@ -23,6 +23,7 @@ import {
 	ChartLegend,
 	ChartLegendContent,
 } from "@/components/ui/chart";
+import DownloadCSV from "@/lib/data/csvExport";
 
 const generateHslColor = (index: number, total: number) => {
 	const safeHues = [330, 210, 0, 120, 30, 270, 180, 45, 60, 75, 315, 300];
@@ -320,6 +321,34 @@ export function SampleBarChart({
 		setSelectedChartType(item);
 	};
 
+	const filterFields: string[] = ["Sample ID", "ENA", "DDM-Sample material", "DDM-Collection", "Phylogroup"];
+
+	const filterAndMapData = (extraFields: string[]) => {
+		return data
+		  .filter((item) => {
+			const matchSample = selectedSamples.includes(item["DDM-Sample material"]);
+			const matchCollection = selectedCollections.includes(item["DDM-Collection"]);
+			const matchPhylogroup = selectedPhylogroup.includes(item["Phylogroup"]);
+	  
+			return matchSample && matchCollection && matchPhylogroup;
+		  })
+		  .map((item) => {
+			return [...filterFields, ...extraFields].reduce(
+			  (prev, curr) => {
+				if (item[curr] !== undefined) {
+				  prev[curr] = item[curr];
+				}
+				return prev;
+			  },
+			  {} as { [key: string]: string | number }
+			);
+		  });
+	  };
+	  
+	  const filteredDownloadGenotypeData = filterAndMapData(selectedGenotypes);
+
+	  const filteredDownloadPhenotypeData = filterAndMapData(selectedPhenotypes);
+
 	return (
 		<div className="flex w-full flex-col space-y-4">
 			<div className="flex flex-row space-x-2">
@@ -364,6 +393,19 @@ export function SampleBarChart({
 						)}
 				<Button variant="outline" onClick={resetSelections}>
 					Reset All
+				</Button>
+				<Button
+					variant="outline"
+					onClick={() => {
+						{if (selectedchartType === "Genotype"){
+							DownloadCSV(filteredDownloadGenotypeData, "Filtered_Data");
+						}else {
+							DownloadCSV(filteredDownloadPhenotypeData, "Filtered_Data");
+						}}
+					}}
+					disabled={filteredDownloadGenotypeData.length === 0 && filteredDownloadPhenotypeData.length === 0}
+				>
+					Download Data
 				</Button>
 			</div>
 
