@@ -72,13 +72,11 @@ export interface EcoliRecord {
 	"DDM-Sample material": string;
 	"AMINOGLYCOSIDE/QUINOLONE": string;
 	"BETA-LACTAM": string;
-
 	QUINOLONE: string;
 	"QUATERNARY AMMONIUM": string;
 	"Mobile Colistin?": string;
 	SULFONAMIDE: string;
 	TRIMETHOPRIM: string;
-
 	"DDM-Collection": string;
 	Phylogroup: string;
 }
