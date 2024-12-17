@@ -28,12 +28,12 @@ const DownloadCSV = (data: NormDataRecord[], fileName: string) => {
 
 	const csvContent = convertToCSV(data);
 	const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+	const url = URL.createObjectURL(blob);
 	const link = document.createElement("a");
-	link.href = URL.createObjectURL(blob);
-	link.download = `${fileName}.csv`;
-	document.body.appendChild(link);
+	link.setAttribute("href", url);
+	link.setAttribute("download", `${fileName}.csv`);
 	link.click();
-	document.body.removeChild(link);
+	URL.revokeObjectURL(url);
 };
 
 export default DownloadCSV;
