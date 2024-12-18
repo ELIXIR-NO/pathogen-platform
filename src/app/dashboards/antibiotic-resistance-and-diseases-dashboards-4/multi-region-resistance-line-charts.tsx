@@ -26,7 +26,6 @@ import {
 	ChartLegendContent,
 } from "@/components/ui/chart";
 import DownloadCSV from "@/lib/data/csvExport";
-import DownloadCSV from "@/lib/data/csvExport";
 
 export function MultiRegionResistanceLineCharts({
 	microbes,
@@ -76,7 +75,6 @@ export function MultiRegionResistanceLineCharts({
 	const chartDataByAntibiotic = useMemo(() => {
 		const dataByAntibiotic: Record<string, any[]> = {};
 		selectedAntibiotics.forEach((antibiotic) => {
-			const antibioticData: Record<number, Record<string, any>> = {};
 			const antibioticData: Record<number, Record<string, any>> = {};
 			filteredData
 				.filter((item) => item.Antibiotika === antibiotic)
