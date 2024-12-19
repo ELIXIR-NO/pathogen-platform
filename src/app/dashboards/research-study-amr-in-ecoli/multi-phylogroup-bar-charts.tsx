@@ -107,7 +107,11 @@ export function SampleBarChart({
 		[]
 	);
 
-	const collectionsSamples: string[] = ["NORM-Blood culture", "NORM-Urine", "Tromsø 7-Feces"];
+	const collectionsSamples: string[] = [
+		"NORM-Blood culture",
+		"NORM-Urine",
+		"Tromsø 7-Feces",
+	];
 
 	const filteredData = useMemo(() => {
 		if (
@@ -135,19 +139,17 @@ export function SampleBarChart({
 					phylogroup,
 				};
 
-				collectionsSamples.forEach(
-					(key) => {
-						const [collection, sample] = key.split("-");
-						sampleCounts[key] = filtered
-							.filter(
-								(item) =>
-									item["Phylogroup"] === phylogroup &&
-									item["DDM-Collection"] === collection &&
-									item["DDM-Sample material"] === sample
-							)
-							.reduce((sum, item) => sum + (Number(item[genotype]) || 0), 0);
-					}
-				);
+				collectionsSamples.forEach((key) => {
+					const [collection, sample] = key.split("-");
+					sampleCounts[key] = filtered
+						.filter(
+							(item) =>
+								item["Phylogroup"] === phylogroup &&
+								item["DDM-Collection"] === collection &&
+								item["DDM-Sample material"] === sample
+						)
+						.reduce((sum, item) => sum + (Number(item[genotype]) || 0), 0);
+				});
 
 				return sampleCounts;
 			});
@@ -187,42 +189,40 @@ export function SampleBarChart({
 					phylogroup,
 				};
 
-				collectionsSamples.forEach(
-					(key) => {
-						const [collection, sample] = key.split("-");
+				collectionsSamples.forEach((key) => {
+					const [collection, sample] = key.split("-");
 
-						const filteredItems = filtered.filter(
-							(item) =>
-								item["Phylogroup"] === phylogroup &&
-								item["DDM-Sample material"] === sample &&
-								item["DDM-Collection"] === collection
-						);
+					const filteredItems = filtered.filter(
+						(item) =>
+							item["Phylogroup"] === phylogroup &&
+							item["DDM-Sample material"] === sample &&
+							item["DDM-Collection"] === collection
+					);
 
-						const counts = filteredItems.reduce(
-							(acc, item) => {
-								const value = item[phenotype as keyof typeof item];
+					const counts = filteredItems.reduce(
+						(acc, item) => {
+							const value = item[phenotype as keyof typeof item];
 
-								if (value === "S") {
-									acc[`${collection}-${sample}-S`] += 1;
-								} else if (value === "R") {
-									acc[`${collection}-${sample}-R`] += 1;
-								} else if (value === "I") {
-									acc[`${collection}-${sample}-I`] += 1;
-								}
-								return acc;
-							},
-							{
-								[`${collection}-${sample}-S`]: 0,
-								[`${collection}-${sample}-R`]: 0,
-								[`${collection}-${sample}-I`]: 0,
+							if (value === "S") {
+								acc[`${collection}-${sample}-S`] += 1;
+							} else if (value === "R") {
+								acc[`${collection}-${sample}-R`] += 1;
+							} else if (value === "I") {
+								acc[`${collection}-${sample}-I`] += 1;
 							}
-						);
+							return acc;
+						},
+						{
+							[`${collection}-${sample}-S`]: 0,
+							[`${collection}-${sample}-R`]: 0,
+							[`${collection}-${sample}-I`]: 0,
+						}
+					);
 
-						Object.keys(counts).forEach((key) => {
-							sampleCounts[key] = counts[key];
-						});
-					}
-				);
+					Object.keys(counts).forEach((key) => {
+						sampleCounts[key] = counts[key];
+					});
+				});
 
 				return sampleCounts;
 			});
@@ -239,10 +239,10 @@ export function SampleBarChart({
 
 	const initialChartConfig = useMemo(() => {
 		const phenotypeKeys = collectionsSamples.flatMap((collection) =>
-				["S", "R", "I"].map((letter) => `${collection}-${letter}`)
+			["S", "R", "I"].map((letter) => `${collection}-${letter}`)
 		);
 
-		const genotypeKeys = collectionsSamples
+		const genotypeKeys = collectionsSamples;
 
 		const allKeys = [...phenotypeKeys, ...genotypeKeys];
 
@@ -324,11 +324,20 @@ export function SampleBarChart({
 	const filterAndMapData = () => {
 		return data
 			.filter((item) => {
-				const matchSample = selectedSamples.includes(item["DDM-Sample material"]);
-				const matchCollection = selectedCollections.includes(item["DDM-Collection"]);
+				const matchSample = selectedSamples.includes(
+					item["DDM-Sample material"]
+				);
+				const matchCollection = selectedCollections.includes(
+					item["DDM-Collection"]
+				);
 				const matchPhylogroup = selectedPhylogroup.includes(item["Phylogroup"]);
 
-				return matchSample && matchCollection && matchPhylogroup && (selectedPhenotypes.length !== 0 || selectedGenotypes.length !== 0);
+				return (
+					matchSample &&
+					matchCollection &&
+					matchPhylogroup &&
+					(selectedPhenotypes.length !== 0 || selectedGenotypes.length !== 0)
+				);
 			})
 			.map((item) => {
 				return Object.keys(item).reduce(
@@ -342,10 +351,10 @@ export function SampleBarChart({
 				);
 			});
 	};
-	  
-	  const filteredDownload = filterAndMapData();
 
-	  const handleDownload = () => {
+	const filteredDownload = filterAndMapData();
+
+	const handleDownload = () => {
 		DownloadCSV(filteredDownload, "Filtered_Data");
 	};
 
@@ -427,17 +436,15 @@ export function SampleBarChart({
 										/>
 										<Tooltip />
 										<ChartLegend content={<ChartLegendContent />} />
-										{collectionsSamples.map(
-											(key, index) => (
-												<Bar
-													key={key}
-													dataKey={key}
-													stackId="a"
-													fill={chartConfig[key]?.color || "#ccc"}
-													name={key.replace("-", " - ")}
-												/>
-											)
-										)}
+										{collectionsSamples.map((key, index) => (
+											<Bar
+												key={key}
+												dataKey={key}
+												stackId="a"
+												fill={chartConfig[key]?.color || "#ccc"}
+												name={key.replace("-", " - ")}
+											/>
+										))}
 									</BarChart>
 								</ResponsiveContainer>
 							</div>
@@ -466,23 +473,21 @@ export function SampleBarChart({
 										/>
 										<Tooltip />
 										<Legend />
-										{collectionsSamples.map(
-											(key) => (
-												<React.Fragment key={key}>
-													{["S", "R", "I"].map((letter) => (
-														<Bar
-															key={`${key}-${letter}`}
-															dataKey={`${key}-${letter}`}
-															stackId="a"
-															fill={
-																chartConfig[`${key}-${letter}`]?.color || "#ccc"
-															}
-															name={`${key.replace("-", " - ")} - ${letter}`}
-														/>
-													))}
-												</React.Fragment>
-											)
-										)}
+										{collectionsSamples.map((key) => (
+											<React.Fragment key={key}>
+												{["S", "R", "I"].map((letter) => (
+													<Bar
+														key={`${key}-${letter}`}
+														dataKey={`${key}-${letter}`}
+														stackId="a"
+														fill={
+															chartConfig[`${key}-${letter}`]?.color || "#ccc"
+														}
+														name={`${key.replace("-", " - ")} - ${letter}`}
+													/>
+												))}
+											</React.Fragment>
+										))}
 									</BarChart>
 								</ResponsiveContainer>
 							</div>
