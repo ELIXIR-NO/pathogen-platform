@@ -26,7 +26,7 @@ import {
 import DownloadCSV from "@/lib/data/csvExport";
 
 const generateHslColor = (index: number, total: number) => {
-	const safeHues = [330, 210, 0, 120, 30, 270, 180, 45, 60, 75, 315, 300];
+	const safeHues = [330, 210, 0, 120, 30, 270, 180, 45, 60, 75, 210, 0, 30];
 	const hue = safeHues[index % safeHues.length];
 	return `hsl(${hue}, 70%, 50%)`;
 };
@@ -107,6 +107,8 @@ export function SampleBarChart({
 		[]
 	);
 
+	const collectionsSamples: string[] = ["NORM-Blood culture", "NORM-Urine", "Tromsø 7-Feces"];
+
 	const filteredData = useMemo(() => {
 		if (
 			selectedSamples.length === 0 ||
@@ -133,7 +135,7 @@ export function SampleBarChart({
 					phylogroup,
 				};
 
-				["NORM-Blood culture", "NORM-Urine", "Tromsø 7-Feces"].forEach(
+				collectionsSamples.forEach(
 					(key) => {
 						const [collection, sample] = key.split("-");
 						sampleCounts[key] = filtered
@@ -163,7 +165,8 @@ export function SampleBarChart({
 		if (
 			selectedSamples.length === 0 ||
 			selectedCollections.length === 0 ||
-			selectedPhylogroup.length === 0
+			selectedPhylogroup.length === 0 ||
+			selectedPhenotypes.length === 0
 		) {
 			return [];
 		}
@@ -184,7 +187,7 @@ export function SampleBarChart({
 					phylogroup,
 				};
 
-				["NORM-Blood culture", "NORM-Urine", "Tromsø 7-Feces"].forEach(
+				collectionsSamples.forEach(
 					(key) => {
 						const [collection, sample] = key.split("-");
 
@@ -235,15 +238,11 @@ export function SampleBarChart({
 	]);
 
 	const initialChartConfig = useMemo(() => {
-		const phenotypeKeys = collections.flatMap((collection) =>
-			samples.flatMap((sample) =>
-				["S", "R", "I"].map((letter) => `${collection}-${sample}-${letter}`)
-			)
+		const phenotypeKeys = collectionsSamples.flatMap((collection) =>
+				["S", "R", "I"].map((letter) => `${collection}-${letter}`)
 		);
 
-		const genotypeKeys = collections.flatMap((collection) =>
-			samples.map((sample) => `${collection}-${sample}`)
-		);
+		const genotypeKeys = collectionsSamples
 
 		const allKeys = [...phenotypeKeys, ...genotypeKeys];
 
@@ -266,6 +265,7 @@ export function SampleBarChart({
 		setSelectedCollections([]);
 		setSelectedPhylogroup([]);
 		setSelectedGenotypes([]);
+		setSelectedPhenotypes([]);
 	}, []);
 
 	const renderDropdown = (
@@ -321,33 +321,33 @@ export function SampleBarChart({
 		setSelectedChartType(item);
 	};
 
-	const filterFields: string[] = ["Sample ID", "ENA", "DDM-Sample material", "DDM-Collection", "Phylogroup"];
-
-	const filterAndMapData = (extraFields: string[]) => {
+	const filterAndMapData = () => {
 		return data
-		  .filter((item) => {
-			const matchSample = selectedSamples.includes(item["DDM-Sample material"]);
-			const matchCollection = selectedCollections.includes(item["DDM-Collection"]);
-			const matchPhylogroup = selectedPhylogroup.includes(item["Phylogroup"]);
-	  
-			return matchSample && matchCollection && matchPhylogroup;
-		  })
-		  .map((item) => {
-			return [...filterFields, ...extraFields].reduce(
-			  (prev, curr) => {
-				if (item[curr] !== undefined) {
-				  prev[curr] = item[curr];
-				}
-				return prev;
-			  },
-			  {} as { [key: string]: string | number }
-			);
-		  });
-	  };
-	  
-	  const filteredDownloadGenotypeData = filterAndMapData(selectedGenotypes);
+			.filter((item) => {
+				const matchSample = selectedSamples.includes(item["DDM-Sample material"]);
+				const matchCollection = selectedCollections.includes(item["DDM-Collection"]);
+				const matchPhylogroup = selectedPhylogroup.includes(item["Phylogroup"]);
 
-	  const filteredDownloadPhenotypeData = filterAndMapData(selectedPhenotypes);
+				return matchSample && matchCollection && matchPhylogroup && (selectedPhenotypes.length !== 0 || selectedGenotypes.length !== 0);
+			})
+			.map((item) => {
+				return Object.keys(item).reduce(
+					(prev, curr) => {
+						if (item[curr] !== undefined) {
+							prev[curr] = item[curr];
+						}
+						return prev;
+					},
+					{} as { [key: string]: string | number }
+				);
+			});
+	};
+	  
+	  const filteredDownload = filterAndMapData();
+
+	  const handleDownload = () => {
+		DownloadCSV(filteredDownload, "Filtered_Data");
+	};
 
 	return (
 		<div className="flex w-full flex-col space-y-4">
@@ -396,14 +396,8 @@ export function SampleBarChart({
 				</Button>
 				<Button
 					variant="outline"
-					onClick={() => {
-						{if (selectedchartType === "Genotype"){
-							DownloadCSV(filteredDownloadGenotypeData, "Filtered_Data");
-						}else {
-							DownloadCSV(filteredDownloadPhenotypeData, "Filtered_Data");
-						}}
-					}}
-					disabled={filteredDownloadGenotypeData.length === 0 && filteredDownloadPhenotypeData.length === 0}
+					onClick={handleDownload}
+					disabled={filteredDownload.length === 0}
 				>
 					Download Data
 				</Button>
@@ -433,7 +427,7 @@ export function SampleBarChart({
 										/>
 										<Tooltip />
 										<ChartLegend content={<ChartLegendContent />} />
-										{["NORM-Blood culture", "NORM-Urine", "Tromsø 7-Feces"].map(
+										{collectionsSamples.map(
 											(key, index) => (
 												<Bar
 													key={key}
@@ -472,7 +466,7 @@ export function SampleBarChart({
 										/>
 										<Tooltip />
 										<Legend />
-										{["NORM-Blood culture", "NORM-Urine", "Tromsø 7-Feces"].map(
+										{collectionsSamples.map(
 											(key) => (
 												<React.Fragment key={key}>
 													{["S", "R", "I"].map((letter) => (
