@@ -275,11 +275,11 @@ export function SampleBarChart({
 		onChange: (item: string) => void,
 		all: boolean = true
 	) => (
-		<DropdownMenu>
+		<DropdownMenu modal={false}>
 			<DropdownMenuTrigger asChild>
 				<Button variant="outline">{title}</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent>
+			<DropdownMenuContent className="max-h-80 overflow-auto">
 				{all && (
 					<DropdownMenuCheckboxItem
 						key="select-all"
@@ -360,7 +360,7 @@ export function SampleBarChart({
 
 	return (
 		<div className="flex w-full flex-col space-y-4">
-			<div className="flex flex-row space-x-2">
+			<div className="flex flex-col space-y-2 lg:flex-row lg:space-x-2">
 				<h2 className="text-xl font-bold">Filters</h2>
 				{renderDropdown(
 					"Select Chart Type",

@@ -133,13 +133,13 @@ export function MultiRegionResistanceLineCharts({
 	) => {
 		const isNoData = items.length === 0;
 		return (
-			<DropdownMenu>
+			<DropdownMenu modal={false}>
 				<DropdownMenuTrigger asChild>
 					<Button variant="outline" disabled={isNoData}>
 						{isNoData ? "No options available" : title}
 					</Button>
 				</DropdownMenuTrigger>
-				<DropdownMenuContent>
+				<DropdownMenuContent className="max-h-80 overflow-auto">
 					{all && !isNoData && (
 						<DropdownMenuCheckboxItem
 							key="select-all"
@@ -244,7 +244,7 @@ export function MultiRegionResistanceLineCharts({
 
 	return (
 		<div className="flex w-full flex-col space-y-4">
-			<div className="flex flex-row space-x-2">
+			<div className="flex flex-col space-y-2 lg:flex-row lg:space-x-2">
 				<h2 className="text-xl font-bold">Filters</h2>
 				{renderDropdown(
 					"Select Sample Type",

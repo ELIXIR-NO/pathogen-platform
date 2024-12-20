@@ -112,11 +112,11 @@ export function Covid19LineChart({
 		selectedItems: string[],
 		onChange: (item: string) => void
 	) => (
-		<DropdownMenu>
+		<DropdownMenu modal={false}>
 			<DropdownMenuTrigger asChild>
 				<Button variant="outline">{title}</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent>
+			<DropdownMenuContent className="max-h-80 overflow-auto">
 				{items.map((item) => (
 					<DropdownMenuCheckboxItem
 						key={item}
@@ -133,7 +133,7 @@ export function Covid19LineChart({
 
 	return (
 		<div className="flex w-full flex-col space-y-4">
-			<div className="flex flex-row space-x-2">
+			<div className="flex flex-col space-y-2 lg:flex-row lg:space-x-2">
 				<h2 className="text-xl font-bold">Filters</h2>
 				{renderDropdown(
 					"Select Years",
