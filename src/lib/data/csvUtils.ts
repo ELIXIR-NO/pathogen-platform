@@ -143,3 +143,62 @@ export async function getCovid19CSVData(): Promise<Covid19Record[]> {
 export function extractUniqueYears(data: Covid19Record[]): string[] {
 	return Array.from(new Set(data.map((record) => record.ProveAar)));
 }
+
+export interface AnnTreeNodeRecord {
+	Node: string;
+	Label: number;
+	Phylogroup: string;
+	FimType: number;
+	"blaCTX-M-1": number;
+	"blaCTX-M-14": number;
+	"blaCTX-M-15": number;
+	"blaCTX-M-24": number;
+	"blaCTX-M-27": number;
+	"blaCTX-M-55": number;
+	"blaCTX-M-104": number;
+	"blaSHV-12": number;
+	"blaCMY-2": number;
+	"blaIMP-26": number;
+	"blaOXA-181": number;
+}
+
+export async function getTreeNodeCSVData(): Promise<AnnTreeNodeRecord[]> {
+	const filePath = path.join(process.cwd(), "public", "data", "Annotation.csv");
+
+	try {
+		const fileContent = await fsPromises.readFile(filePath, "utf8");
+
+		return parse(fileContent, {
+			columns: true,
+			skip_empty_lines: true,
+			delimiter: ",",
+			cast: (value, context) => {
+				if (context.column === "Label") {
+					return parseInt(value, 10);
+				}
+				return value;
+			},
+		});
+	} catch (error) {
+		console.error("Error reading CSV file: ", error);
+		throw error;
+	}
+}
+
+export function extractUniqueLabels(data: AnnTreeNodeRecord[]): number[] {
+	return Array.from(new Set(data.map((record) => record.Label)));
+}
+
+export function extractUniquePhylogroupsAnno(
+	data: AnnTreeNodeRecord[]
+): string[] {
+	return Array.from(new Set(data.map((record) => record.Phylogroup)));
+}
+
+export function extractUniqueFimType(data: AnnTreeNodeRecord[]): number[] {
+	return Array.from(new Set(data.map((record) => record.FimType)));
+}
+
+export function extractUniqueTreeNodes(data: AnnTreeNodeRecord[]): string[] {
+	return Array.from(new Set(data.map((record) => record.Node)));
+}
