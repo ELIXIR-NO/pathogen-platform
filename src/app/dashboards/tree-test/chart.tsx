@@ -5,6 +5,19 @@ import * as d3 from "d3";
 import { TreeNode } from "@/lib/data/newick-loader";
 import { AnnTreeNodeRecord } from "@/lib/data/csvUtils";
 
+declare module "d3" {
+	interface HierarchyNode<Datum> {
+		linkExtensionNode?: SVGPathElement;
+		linkNode?: SVGPathElement;
+	}
+}
+
+declare module "d3" {
+	interface HierarchyLink<Datum> {
+		linkNode?: SVGPathElement;
+	}
+}
+
 const useWindowSize = () => {
 	const [size, setSize] = useState<{ width: number; height: number }>({
 		width: 1000,
@@ -147,20 +160,26 @@ export function MyChart({
 		cluster(root);
 
 		const mouseovered = (active: boolean) => {
-			return (event: any, d: any) => {
+			return (
+				event: React.MouseEvent<SVGPathElement, MouseEvent>,
+				d: d3.HierarchyNode<TreeNode> | d3.HierarchyLink<TreeNode>
+			) => {
+				const node = d as d3.HierarchyNode<TreeNode>;
+				const link = d as d3.HierarchyLink<TreeNode>;
+
 				const target = event.currentTarget;
 				let totalLeaves = 0;
 
 				const nameValue =
-					(d.data && d.data.name) ||
-					(d.target && d.target.data && d.target.data.name) ||
+					(node.data && node.data.name) ||
+					(link.target && link.target.data && link.target.data.name) ||
 					"";
 				const lengthValue =
-					(d.data && d.data.length) ||
-					(d.target && d.target.data && d.target.data.length) ||
+					(node.data && node.data.length) ||
+					(link.target && link.target.data && link.target.data.length) ||
 					0;
 
-				const hierarchyNode = d.target || d.source || d;
+				const hierarchyNode = link.target || link.source || node;
 
 				d3.select(target).classed("label--active", active);
 
@@ -169,12 +188,13 @@ export function MyChart({
 					typeof hierarchyNode.descendants === "function"
 				) {
 					const descendants = hierarchyNode.descendants();
+					console.log("descendants:", descendants);
 					totalLeaves = descendants.filter(
-						(descendant: any) => !descendant.children
+						(descendant: d3.HierarchyNode<TreeNode>) => !descendant.descendants
 					).length;
 
 					if (active) {
-						descendants.forEach((descendant: any) => {
+						descendants.forEach((descendant: d3.HierarchyNode<TreeNode>) => {
 							if (descendant.linkNode) {
 								d3.select(descendant.linkNode)
 									.classed("link--active", true)
@@ -207,8 +227,8 @@ export function MyChart({
 			.selectAll("path")
 			.data(root.links().filter((d) => !d.target.children))
 			.join("path")
-			.each(function (d: any) {
-				d.target.linkExtensionNode = this;
+			.each(function (d: d3.HierarchyLink<TreeNode>) {
+				d.target.linkExtensionNode = this as SVGPathElement;
 			})
 			.attr("d", linkExtensionConstant);
 
@@ -219,8 +239,8 @@ export function MyChart({
 			.selectAll("path")
 			.data(root.links())
 			.join("path")
-			.each(function (d: any) {
-				d.target.linkNode = this;
+			.each(function (d: d3.HierarchyLink<TreeNode>) {
+				d.target.linkNode = this as SVGPathElement;
 			})
 			.attr("d", linkConstant);
 
@@ -229,8 +249,8 @@ export function MyChart({
 			.selectAll("path")
 			.data(root.links())
 			.join("path")
-			.each(function (d: any) {
-				d.target.linkNode = this;
+			.each(function (d: d3.HierarchyLink<TreeNode>) {
+				d.target.linkNode = this as SVGPathElement;
 			})
 			.attr("d", linkConstant)
 			.attr("class", "path_click")
@@ -256,18 +276,20 @@ export function MyChart({
 			.attr("dy", ".31em")
 			.attr(
 				"transform",
-				(d: any) =>
-					`rotate(${d.x - 90}) translate(${innerRadius + 4},0)${
-						d.x < 180 ? "" : " rotate(180)"
+				(d: d3.HierarchyNode<TreeNode>) =>
+					`rotate(${d.x! - 90}) translate(${innerRadius + 4},0)${
+						d.x! < 180 ? "" : " rotate(180)"
 					}`
 			)
-			.attr("text-anchor", (d: any) => (d.x < 180 ? "start" : "end"))
-			.text((d: any) => d.data.name)
+			.attr("text-anchor", (d: d3.HierarchyNode<TreeNode>) =>
+				d.x! < 180 ? "start" : "end"
+			)
+			.text((d: d3.HierarchyNode<TreeNode>) => d.data.name || "")
 			.attr("font-family", "sans-serif")
 			.on("mouseover", mouseovered(true))
 			.on("mouseout", mouseovered(false));
 
-		const labelColorMap = new Map<any, string>();
+		const labelColorMap = new Map<number, string>();
 		const phylogroupColorMap = new Map();
 		const fimTypeColorMap = new Map();
 
@@ -294,7 +316,26 @@ export function MyChart({
 			fimTypeColorMap.set(fimType, fimTypeColors[index + 1]);
 		});
 
-		const annotationMap = new Map(
+		type Annotation = {
+			Label: number;
+			Phylogroup: string;
+			FimType: number;
+			blaCTXM1: number;
+			blaCTXM14: number;
+			blaCTXM15: number;
+			blaCTXM24: number;
+			blaCTXM27: number;
+			blaCTXM55: number;
+			blaCTXM104: number;
+			blaSHV12: number;
+			blaCMY2: number;
+			blaIMP26: number;
+			blaOXA181: number;
+		};
+
+		type AnnotationMap = Map<string, Annotation>;
+
+		const annotationMap: AnnotationMap = new Map(
 			annotations.map((a: AnnTreeNodeRecord) => [
 				a.Node,
 				{
@@ -318,11 +359,11 @@ export function MyChart({
 
 		function createAnnotations(
 			chart: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
-			data: d3.HierarchyNode<any>[],
+			data: d3.HierarchyNode<TreeNode>[],
 			outerRadius: number,
-			annotationMap: Map<string, any>,
+			annotationMap: AnnotationMap,
 			annotationType: string,
-			colorMap: Map<string, string>,
+			colorMap: Map<number, string>,
 			anno_x: number,
 			anno_y: number
 		): void {
@@ -346,8 +387,8 @@ export function MyChart({
 				.selectAll("rect")
 				.data(data)
 				.join("rect")
-				.attr("transform", (d: any) => {
-					const angle = d.x - 90;
+				.attr("transform", (d: d3.HierarchyNode<TreeNode>) => {
+					const angle = d.x! - 90;
 					const radians = angle * (Math.PI / 180);
 					const x = (outerRadius - 90) * Math.cos(radians);
 					const y = (outerRadius - 90) * Math.sin(radians);
@@ -357,10 +398,13 @@ export function MyChart({
 				.attr("y", -15)
 				.attr("width", 30)
 				.attr("height", 20)
-				.attr("fill", (d: any) => {
-					const value =
-						annotationMap.get(d.data.name)?.[annotationType] || "No Annotation";
-					return colorMap.get(value) || "black";
+				.attr("fill", (d: d3.HierarchyNode<TreeNode>) => {
+					const annotation = annotationMap.get(d.data.name!);
+					if (annotation) {
+						const value = annotation[annotationType as keyof typeof annotation];
+						return colorMap.get(value as number) || "black";
+					}
+					return "black";
 				});
 
 			chart
@@ -368,17 +412,20 @@ export function MyChart({
 				.selectAll("text")
 				.data(data)
 				.join("text")
-				.attr("transform", (d: any) => {
-					const angle = d.x - 90;
+				.attr("transform", (d: d3.HierarchyNode<TreeNode>) => {
+					const angle = d.x! - 90;
 					const radians = angle * (Math.PI / 180);
 					const x = (outerRadius - 90) * Math.cos(radians);
 					const y = (outerRadius - 90) * Math.sin(radians);
 					return `translate(${x},${y}) rotate(${angle + 90})`;
 				})
-				.text(
-					(d: any) =>
-						annotationMap.get(d.data.name)?.[annotationType] || "No Annotation"
-				)
+				.text((d: d3.HierarchyNode<TreeNode>) => {
+					const annotation = annotationMap.get(d.data.name!);
+					if (annotation) {
+						return annotation[annotationType as keyof typeof annotation];
+					}
+					return "No Annotation";
+				})
 				.attr("text-anchor", "middle")
 				.attr("font-size", "11px")
 				.style("fill", "white");
@@ -419,12 +466,11 @@ export function MyChart({
 
 		function drawESBL(
 			chart: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
-			data: d3.HierarchyNode<any>[],
+			data: d3.HierarchyNode<TreeNode>[],
 			outerRadius: number,
-			annotationMap: Map<string, any>,
+			annotationMap: AnnotationMap,
 			field: string,
 			columnName: string,
-			colorMap: Map<string, string>,
 			anno_x: number,
 			anno_y: number
 		): void {
@@ -451,8 +497,8 @@ export function MyChart({
 				.selectAll("rect")
 				.data(data)
 				.join("rect")
-				.attr("transform", (d: any) => {
-					const angle = d.x - 90;
+				.attr("transform", (d: d3.HierarchyNode<TreeNode>) => {
+					const angle = d.x! - 90;
 					const radians = angle * (Math.PI / 180);
 					const x = (outerRadius - 90) * Math.cos(radians);
 					const y = (outerRadius - 90) * Math.sin(radians);
@@ -462,14 +508,21 @@ export function MyChart({
 				.attr("y", -15)
 				.attr("width", 15)
 				.attr("height", 15)
-				.attr("fill", (d: any) => {
-					const value = annotationMap.get(d.data.name)?.[field] || 0;
-					return value === "1" ? colorMap.get("1") || "#949fdb" : "none";
+				.attr("fill", (d: d3.HierarchyNode<TreeNode>) => {
+					const annotation = annotationMap.get(d.data.name!);
+					if (annotation) {
+						const value = annotation[field as keyof typeof annotation] || 0;
+						return value === "1" ? "#949fdb" : "none";
+					}
+					return null;
 				})
-				.attr("stroke", (d: any) => {
-					const value = annotationMap.get(d.data.name)?.[field] || 0;
-
-					return value === "0" ? "#949fdb" : "none";
+				.attr("stroke", (d: d3.HierarchyNode<TreeNode>) => {
+					const annotation = annotationMap.get(d.data.name!);
+					if (annotation) {
+						const value = annotation[field as keyof typeof annotation] || 0;
+						return value === "0" ? "#949fdb" : "none";
+					}
+					return null;
 				})
 				.attr("stroke-width", 1.2);
 		}
@@ -488,11 +541,6 @@ export function MyChart({
 			["blaOXA181", "blaOXA-181"],
 		]);
 
-		const colorMap = new Map<string, string>([
-			["0", "#cccccc"],
-			["1", "#949fdb"],
-		]);
-
 		let colIndex = 0;
 		columns.forEach((columnName, column) => {
 			colIndex++;
@@ -503,7 +551,6 @@ export function MyChart({
 				annotationMap,
 				column,
 				columnName,
-				colorMap,
 				-65 - colIndex * 4,
 				6
 			);
@@ -511,11 +558,11 @@ export function MyChart({
 
 		function createLegend(
 			chart: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
-			data: any[],
+			data: d3.HierarchyNode<TreeNode>[],
 			title: string,
 			colorMap: Map<string, string>,
-			position: any
-		) {
+			position: { x: number; y: number }
+		): void {
 			const legendGroup = chart
 				.append("g")
 				.attr("transform", `translate(${position.x}, ${position.y})`);
@@ -539,22 +586,22 @@ export function MyChart({
 				.append("rect")
 				.attr("width", 18)
 				.attr("height", 18)
-				.attr("fill", (d) => colorMap.get(d) || "black");
+				.attr("fill", (d) => colorMap.get(d.name) || "black");
 
 			legendItems
 				.append("text")
 				.attr("x", 24)
 				.attr("y", 9)
 				.attr("dy", "0.35em")
-				.text((d) => d);
+				.text((d) => d.name);
 		}
 
-		function linkConstant(d: any): string {
-			return linkStep(d.source.x, d.source.y, d.target.x, d.target.y);
+		function linkConstant(d: d3.HierarchyLink<TreeNode>): string {
+			return linkStep(d.source.x!, d.source.y!, d.target.x!, d.target.y!);
 		}
 
-		function linkExtensionConstant(d: any): string {
-			return linkStep(d.target.x, d.target.y, d.target.x, innerRadius);
+		function linkExtensionConstant(d: d3.HierarchyLink<TreeNode>): string {
+			return linkStep(d.target.x!, d.target.y!, d.target.x!, innerRadius);
 		}
 
 		function linkStep(
@@ -632,47 +679,23 @@ export function MyChart({
 	}, [width, height]);
 
 	return (
-		<div style={{ display: "flex", flexDirection: "row" }}>
-			<div
-				style={{ display: "flex", flexDirection: "column", marginRight: 10 }}
-			>
+		<div className="flex flex-row">
+			<div className="mr-2 flex flex-col">
 				<button
 					onClick={handleZoomIn}
-					style={{
-						border: "1px solid black",
-						padding: "10px 20px",
-						marginBottom: "10px",
-						fontSize: "24px",
-						backgroundColor: "#f0f0f0",
-						borderRadius: "8px",
-						cursor: "pointer",
-					}}
+					className="mb-2 cursor-pointer rounded-lg border border-black bg-gray-200 px-5 py-2 text-2xl"
 				>
 					+
 				</button>
 				<button
 					onClick={handleZoomOut}
-					style={{
-						border: "1px solid black",
-						padding: "10px 20px",
-						marginBottom: "10px",
-						fontSize: "24px",
-						backgroundColor: "#f0f0f0",
-						borderRadius: "8px",
-						cursor: "pointer",
-					}}
+					className="mb-2 cursor-pointer rounded-lg border border-black bg-gray-200 px-5 py-2 text-2xl"
 				>
 					-
 				</button>
 				<button
 					onClick={handleResetZoom}
-					style={{
-						padding: "10px 20px",
-						fontSize: "18px",
-						backgroundColor: "#f0f0f0",
-						borderRadius: "8px",
-						cursor: "pointer",
-					}}
+					className="cursor-pointer rounded-lg bg-gray-200 px-5 py-2 text-lg"
 				>
 					Reset
 				</button>
