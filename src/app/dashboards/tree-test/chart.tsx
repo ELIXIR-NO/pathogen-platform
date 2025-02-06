@@ -1,6 +1,14 @@
 "use client";
 
-import React, { useRef, useState, useCallback, useEffect } from "react";
+import React, {
+	useRef,
+	useState,
+	useCallback,
+	useEffect,
+	useMemo,
+	forwardRef,
+	useImperativeHandle,
+} from "react";
 import * as d3 from "d3";
 import { TreeNode } from "@/lib/data/newick-loader";
 import { AnnTreeNodeRecord } from "@/lib/data/csvUtils";
@@ -40,72 +48,111 @@ const useWindowSize = () => {
 	return size;
 };
 
-export function MyChart({
-	data,
-	annotations,
-	labels,
-	phylogroup,
-	fimtype,
-}: {
-	data: TreeNode[];
+const calculateDynamicRadius = (node: TreeNode): number => {
+	const countLeaves = (node: TreeNode): number => {
+		if (!node.branchset || node.branchset.length === 0) {
+			return 1;
+		}
+		return node.branchset.reduce((sum, child) => sum + countLeaves(child), 0);
+	};
+
+	const totalLeaves = countLeaves(node);
+	const baseRadius = 500;
+	const radiusPerLeaf = 3.2;
+
+	return baseRadius + totalLeaves * radiusPerLeaf;
+};
+
+export interface MyChartProps {
+	data: TreeNode | null;
 	annotations: AnnTreeNodeRecord[];
 	labels: number[];
 	phylogroup: string[];
 	fimtype: number[];
-}) {
-	const chartRef = useRef(null);
-	const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
-	const currentTransform = useRef(d3.zoomIdentity);
+	validNodes: string[];
+	selectedAnnotations: string[];
+}
 
-	const { width, height } = useWindowSize();
-
-	useEffect(() => {
-		if (!data || !chartRef.current) return;
-
-		const outerRadius = 960 / 1.7;
-		const innerRadius = outerRadius - 170;
-
-		d3.select(chartRef.current).selectAll("g").remove();
-
-		const svgg = d3.select(chartRef.current).append("g");
-
-		const chart = svgg.append("g");
-
-		const zoom: d3.ZoomBehavior<SVGSVGElement, unknown> = d3
-			.zoom<SVGSVGElement, unknown>()
-			.scaleExtent([0.3, 3])
-			.on("zoom", (event) => {
-				currentTransform.current = event.transform;
-				svgg.attr("transform", event.transform);
-			});
-
-		d3.select<SVGSVGElement, unknown>(chartRef.current).call(zoom);
-		zoomRef.current = zoom;
-
-		d3.select<SVGSVGElement, unknown>(chartRef.current).call(
-			zoom.transform,
-			currentTransform.current
+export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
+	(
+		{
+			data,
+			annotations,
+			labels,
+			phylogroup,
+			fimtype,
+			validNodes,
+			selectedAnnotations,
+		}: {
+			data: TreeNode | null;
+			annotations: AnnTreeNodeRecord[];
+			labels: number[];
+			phylogroup: string[];
+			fimtype: number[];
+			validNodes: string[];
+			selectedAnnotations: string[];
+		},
+		ref: React.Ref<SVGSVGElement>
+	) => {
+		const chartRef = useRef(null);
+		const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(
+			null
 		);
+		const currentTransform = useRef(d3.zoomIdentity);
 
-		const graphWidth = outerRadius * 2;
-		const graphHeight = outerRadius * 2;
+		const { width, height } = useWindowSize();
 
-		const scaleX = width / graphWidth;
-		const scaleY = height / graphHeight;
-		const scale = Math.min(scaleX, scaleY);
+		useImperativeHandle(ref, () => chartRef.current!);
 
-		const initialTransform = d3.zoomIdentity
-			.translate(width / 2.9, height / 2)
-			.scale(scale);
+		useMemo(() => {
+			if (!data || !chartRef.current) return;
 
-		d3.select<SVGSVGElement, unknown>(chartRef.current).call(
-			zoom.transform,
-			initialTransform
-		);
+			const outerRadius = calculateDynamicRadius(data);
+			const innerRadius = outerRadius - 170;
 
-		currentTransform.current = initialTransform;
+			d3.select(chartRef.current).selectAll("g").remove();
 
-		svgg.append("style").text(`
+			const svgg = d3.select(chartRef.current).append("g");
+
+			const chart = svgg.append("g");
+
+			const zoom: d3.ZoomBehavior<SVGSVGElement, unknown> = d3
+				.zoom<SVGSVGElement, unknown>()
+				.scaleExtent([0.15, 3])
+				.on("zoom", (event) => {
+					currentTransform.current = event.transform;
+					svgg.attr("transform", event.transform);
+				});
+
+			d3.select<SVGSVGElement, unknown>(chartRef.current).call(zoom);
+			zoomRef.current = zoom;
+
+			d3.select<SVGSVGElement, unknown>(chartRef.current).call(
+				zoom.transform,
+				currentTransform.current
+			);
+
+			const graphWidth = outerRadius * 2.9;
+			const graphHeight = outerRadius * 2.9;
+
+			console.log("data:", data);
+
+			const scaleX = width / graphWidth;
+			const scaleY = height / graphHeight;
+			const scale = Math.min(scaleX, scaleY);
+
+			const initialTransform = d3.zoomIdentity
+				.translate(width / 2.9, height / 2)
+				.scale(scale);
+
+			d3.select<SVGSVGElement, unknown>(chartRef.current).call(
+				zoom.transform,
+				initialTransform
+			);
+
+			currentTransform.current = initialTransform;
+
+			svgg.append("style").text(`
 
 				
 				.link--active {
@@ -144,564 +191,635 @@ export function MyChart({
 				}
 		`);
 
-		const cluster = d3
-			.cluster<TreeNode>()
-			.size([350, innerRadius])
-			.separation((a, b) => 1);
+			const cluster = d3
+				.cluster<TreeNode>()
+				.size([350, innerRadius])
+				.separation((a, b) => 1);
 
-		const root = d3
-			.hierarchy<TreeNode>(data, (d) => d.branchset)
-			.sum((d) => (d.branchset ? 0 : 1))
-			.sort(
-				(a, b) =>
-					a.value! - b.value! || d3.ascending(a.data.length, b.data.length)
-			);
+			const root = d3
+				.hierarchy<TreeNode>(data, (d) => d.branchset)
+				.sum((d) => (d.branchset ? 0 : 1))
+				.sort(
+					(a, b) =>
+						a.value! - b.value! || d3.ascending(a.data.length, b.data.length)
+				);
 
-		cluster(root);
+			root.descendants().forEach((node) => {
+				if (node.data.name && validNodes.includes(node.data.name)) {
+					node.children = node.children;
+					node.children = undefined;
+				}
+			});
 
-		const mouseovered = (active: boolean) => {
-			return (
-				event: React.MouseEvent<SVGPathElement, MouseEvent>,
-				d: d3.HierarchyNode<TreeNode> | d3.HierarchyLink<TreeNode>
-			) => {
-				const node = d as d3.HierarchyNode<TreeNode>;
-				const link = d as d3.HierarchyLink<TreeNode>;
+			cluster(root);
 
-				const target = event.currentTarget;
-				let totalLeaves = 0;
+			const mouseovered = (active: boolean) => {
+				return (
+					event: React.MouseEvent<SVGPathElement, MouseEvent>,
+					d: d3.HierarchyNode<TreeNode> | d3.HierarchyLink<TreeNode>
+				) => {
+					const node = d as d3.HierarchyNode<TreeNode>;
+					const link = d as d3.HierarchyLink<TreeNode>;
 
-				const nameValue =
-					(node.data && node.data.name) ||
-					(link.target && link.target.data && link.target.data.name) ||
-					"";
-				const lengthValue =
-					(node.data && node.data.length) ||
-					(link.target && link.target.data && link.target.data.length) ||
-					0;
+					const target = event.currentTarget;
+					let totalLeaves = 0;
 
-				const hierarchyNode = link.target || link.source || node;
+					const nameValue =
+						(node.data && node.data.name) ||
+						(link.target && link.target.data && link.target.data.name) ||
+						"";
+					const lengthValue =
+						(node.data && node.data.length) ||
+						(link.target && link.target.data && link.target.data.length) ||
+						0;
 
-				d3.select(target).classed("label--active", active);
+					const hierarchyNode = link.target || link.source || node;
 
-				if (
-					hierarchyNode.descendants &&
-					typeof hierarchyNode.descendants === "function"
-				) {
-					const descendants = hierarchyNode.descendants();
-					console.log("descendants:", descendants);
-					totalLeaves = descendants.filter(
-						(descendant: d3.HierarchyNode<TreeNode>) => !descendant.descendants
-					).length;
+					d3.select(target).classed("label--active", active);
+
+					if (
+						hierarchyNode.descendants &&
+						typeof hierarchyNode.descendants === "function"
+					) {
+						const descendants = hierarchyNode.descendants();
+
+						totalLeaves = descendants.filter(
+							(descendant: d3.HierarchyNode<TreeNode>) =>
+								!descendant.descendants
+						).length;
+
+						if (active) {
+							descendants.forEach((descendant: d3.HierarchyNode<TreeNode>) => {
+								if (descendant.linkNode) {
+									d3.select(descendant.linkNode)
+										.classed("link--active", true)
+										.raise();
+								}
+							});
+						} else {
+							d3.selectAll(".link--active").classed("link--active", false);
+						}
+					} else {
+						console.error("No method `descendants`:", hierarchyNode);
+					}
 
 					if (active) {
-						descendants.forEach((descendant: d3.HierarchyNode<TreeNode>) => {
-							if (descendant.linkNode) {
-								d3.select(descendant.linkNode)
-									.classed("link--active", true)
-									.raise();
-							}
-						});
+						tooltip
+							.style("visibility", "visible")
+							.html(
+								`<h1><strong>Node Information</strong></h1><strong>Name:</strong> ${nameValue}<br><strong>Length:</strong> ${lengthValue}<br><strong>Leaves:</strong> ${totalLeaves}<br>`
+							)
+							.style("top", event.pageY + 5 + "px")
+							.style("left", event.pageX + 5 + "px");
 					} else {
-						d3.selectAll(".link--active").classed("link--active", false);
+						tooltip.style("visibility", "hidden");
 					}
-				} else {
-					console.error("No method `descendants`:", hierarchyNode);
-				}
-
-				if (active) {
-					tooltip
-						.style("visibility", "visible")
-						.html(
-							`<h1><strong>Node Information</strong></h1><strong>Name:</strong> ${nameValue}<br><strong>Length:</strong> ${lengthValue}<br><strong>Leaves:</strong> ${totalLeaves}<br>`
-						)
-						.style("top", event.pageY + 5 + "px")
-						.style("left", event.pageX + 5 + "px");
-				} else {
-					tooltip.style("visibility", "hidden");
-				}
+				};
 			};
-		};
 
-		const linkExtension = chart
-			.append("g")
-			.selectAll("path")
-			.data(root.links().filter((d) => !d.target.children))
-			.join("path")
-			.each(function (d: d3.HierarchyLink<TreeNode>) {
-				d.target.linkExtensionNode = this as SVGPathElement;
-			})
-			.attr("d", linkExtensionConstant);
-
-		const link = chart
-			.append("g")
-			.attr("fill", "none")
-			.attr("stroke", "black")
-			.selectAll("path")
-			.data(root.links())
-			.join("path")
-			.each(function (d: d3.HierarchyLink<TreeNode>) {
-				d.target.linkNode = this as SVGPathElement;
-			})
-			.attr("d", linkConstant);
-
-		const active = chart
-			.append("g")
-			.selectAll("path")
-			.data(root.links())
-			.join("path")
-			.each(function (d: d3.HierarchyLink<TreeNode>) {
-				d.target.linkNode = this as SVGPathElement;
-			})
-			.attr("d", linkConstant)
-			.attr("class", "path_click")
-			.on("mouseover", mouseovered(true))
-			.on("mouseout", mouseovered(false));
-
-		const tooltip = d3
-			.select("body")
-			.append("div")
-			.attr("class", "tooltip")
-			.style("position", "absolute")
-			.style("visibility", "hidden")
-			.style("background-color", "#fff")
-			.style("border", "1px solid #ccc")
-			.style("padding", "5px")
-			.style("border-radius", "4px");
-
-		const active2 = chart
-			.append("g")
-			.selectAll("text")
-			.data(root.leaves())
-			.join("text")
-			.attr("dy", ".31em")
-			.attr(
-				"transform",
-				(d: d3.HierarchyNode<TreeNode>) =>
-					`rotate(${d.x! - 90}) translate(${innerRadius + 4},0)${
-						d.x! < 180 ? "" : " rotate(180)"
-					}`
-			)
-			.attr("text-anchor", (d: d3.HierarchyNode<TreeNode>) =>
-				d.x! < 180 ? "start" : "end"
-			)
-			.text((d: d3.HierarchyNode<TreeNode>) => d.data.name || "")
-			.attr("font-family", "sans-serif")
-			.on("mouseover", mouseovered(true))
-			.on("mouseout", mouseovered(false));
-
-		const labelColorMap = new Map<number, string>();
-		const phylogroupColorMap = new Map();
-		const fimTypeColorMap = new Map();
-
-		const generateColors = (count: number) => {
-			const scale = d3
-				.scaleSequential(d3.interpolateRainbow)
-				.domain([0, count - 1]);
-			return d3.range(count).map(scale);
-		};
-
-		const labelColors = generateColors(labels.length);
-		const phylogroupColors = generateColors(phylogroup.length + 1);
-		const fimTypeColors = generateColors(fimtype.length + 1);
-
-		labels.forEach((label, index) => {
-			labelColorMap.set(label, labelColors[index]);
-		});
-
-		phylogroup.forEach((phylogroup, index) => {
-			phylogroupColorMap.set(phylogroup, phylogroupColors[index + 1]);
-		});
-
-		fimtype.forEach((fimType, index) => {
-			fimTypeColorMap.set(fimType, fimTypeColors[index + 1]);
-		});
-
-		type Annotation = {
-			Label: number;
-			Phylogroup: string;
-			FimType: number;
-			blaCTXM1: number;
-			blaCTXM14: number;
-			blaCTXM15: number;
-			blaCTXM24: number;
-			blaCTXM27: number;
-			blaCTXM55: number;
-			blaCTXM104: number;
-			blaSHV12: number;
-			blaCMY2: number;
-			blaIMP26: number;
-			blaOXA181: number;
-		};
-
-		type AnnotationMap = Map<string, Annotation>;
-
-		const annotationMap: AnnotationMap = new Map(
-			annotations.map((a: AnnTreeNodeRecord) => [
-				a.Node,
-				{
-					Label: a.Label,
-					Phylogroup: a.Phylogroup,
-					FimType: a.FimType,
-					blaCTXM1: a["blaCTX-M-1"],
-					blaCTXM14: a["blaCTX-M-14"],
-					blaCTXM15: a["blaCTX-M-15"],
-					blaCTXM24: a["blaCTX-M-24"],
-					blaCTXM27: a["blaCTX-M-27"],
-					blaCTXM55: a["blaCTX-M-55"],
-					blaCTXM104: a["blaCTX-M-104"],
-					blaSHV12: a["blaSHV-12"],
-					blaCMY2: a["blaCMY-2"],
-					blaIMP26: a["blaIMP-26"],
-					blaOXA181: a["blaOXA-181"],
-				},
-			])
-		);
-
-		function createAnnotations(
-			chart: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
-			data: d3.HierarchyNode<TreeNode>[],
-			outerRadius: number,
-			annotationMap: AnnotationMap,
-			annotationType: string,
-			colorMap: Map<number, string>,
-			anno_x: number,
-			anno_y: number
-		): void {
-			chart
-				.append("text")
-				.attr("transform", () => {
-					const angle = -90;
-					const radians = angle * (Math.PI / 180);
-					const x = (outerRadius - 90) * Math.cos(radians);
-					const y = (outerRadius - 90) * Math.sin(radians);
-					return `translate(${x + anno_x},${y + anno_y}) rotate(${angle + 82})`;
-				})
-				.attr("text-anchor", "middle")
-				.attr("font-size", "14px")
-				.style("fill", "black")
-				.style("font-weight", "bold")
-				.text(annotationType);
-
-			chart
+			const linkExtension = chart
 				.append("g")
-				.selectAll("rect")
-				.data(data)
-				.join("rect")
-				.attr("transform", (d: d3.HierarchyNode<TreeNode>) => {
-					const angle = d.x! - 90;
-					const radians = angle * (Math.PI / 180);
-					const x = (outerRadius - 90) * Math.cos(radians);
-					const y = (outerRadius - 90) * Math.sin(radians);
-					return `translate(${x},${y}) rotate(${angle + 90})`;
+				.selectAll("path")
+				.data(root.links().filter((d) => !d.target.children))
+				.join("path")
+				.each(function (d: d3.HierarchyLink<TreeNode>) {
+					d.target.linkExtensionNode = this as SVGPathElement;
 				})
-				.attr("x", -15)
-				.attr("y", -15)
-				.attr("width", 30)
-				.attr("height", 20)
-				.attr("fill", (d: d3.HierarchyNode<TreeNode>) => {
-					const annotation = annotationMap.get(d.data.name!);
-					if (annotation) {
-						const value = annotation[annotationType as keyof typeof annotation];
-						return colorMap.get(value as number) || "black";
-					}
-					return "black";
-				});
+				.attr("d", linkExtensionConstant);
 
-			chart
+			const link = chart
+				.append("g")
+				.attr("fill", "none")
+				.attr("stroke", "black")
+				.selectAll("path")
+				.data(root.links())
+				.join("path")
+				.each(function (d: d3.HierarchyLink<TreeNode>) {
+					d.target.linkNode = this as SVGPathElement;
+				})
+				.attr("d", linkConstant);
+
+			const active = chart
+				.append("g")
+				.selectAll("path")
+				.data(root.links())
+				.join("path")
+				.each(function (d: d3.HierarchyLink<TreeNode>) {
+					d.target.linkNode = this as SVGPathElement;
+				})
+				.attr("d", linkConstant)
+				.attr("class", "path_click")
+				.on("mouseover", mouseovered(true))
+				.on("mouseout", mouseovered(false));
+
+			const tooltip = d3
+				.select("body")
+				.append("div")
+				.attr("class", "tooltip")
+				.style("position", "absolute")
+				.style("visibility", "hidden")
+				.style("background-color", "#fff")
+				.style("border", "1px solid #ccc")
+				.style("padding", "5px")
+				.style("border-radius", "4px");
+
+			const active2 = chart
 				.append("g")
 				.selectAll("text")
-				.data(data)
+				.data(root.leaves())
 				.join("text")
-				.attr("transform", (d: d3.HierarchyNode<TreeNode>) => {
-					const angle = d.x! - 90;
-					const radians = angle * (Math.PI / 180);
-					const x = (outerRadius - 90) * Math.cos(radians);
-					const y = (outerRadius - 90) * Math.sin(radians);
-					return `translate(${x},${y}) rotate(${angle + 90})`;
-				})
-				.text((d: d3.HierarchyNode<TreeNode>) => {
-					const annotation = annotationMap.get(d.data.name!);
-					if (annotation) {
-						return annotation[annotationType as keyof typeof annotation];
-					}
-					return "No Annotation";
-				})
-				.attr("text-anchor", "middle")
-				.attr("font-size", "11px")
-				.style("fill", "white");
-		}
+				.attr("dy", ".31em")
+				.attr(
+					"transform",
+					(d: d3.HierarchyNode<TreeNode>) =>
+						`rotate(${d.x! - 90}) translate(${innerRadius + 4},0)${
+							d.x! < 180 ? "" : " rotate(180)"
+						}`
+				)
+				.attr("text-anchor", (d: d3.HierarchyNode<TreeNode>) =>
+					d.x! < 180 ? "start" : "end"
+				)
+				.text((d: d3.HierarchyNode<TreeNode>) => d.data.name || "")
+				.attr("font-family", "sans-serif")
+				.on("mouseover", mouseovered(true))
+				.on("mouseout", mouseovered(false));
 
-		createAnnotations(
-			chart,
-			root.leaves(),
-			outerRadius,
-			annotationMap,
-			"Label",
-			labelColorMap,
-			-60,
-			3
-		);
+			const labelColorMap = new Map<number, string>();
+			const phylogroupColorMap = new Map();
+			const fimTypeColorMap = new Map();
 
-		createAnnotations(
-			chart,
-			root.leaves(),
-			outerRadius + 40,
-			annotationMap,
-			"FimType",
-			fimTypeColorMap,
-			-58,
-			3
-		);
+			const generateColors = (count: number) => {
+				const scale = d3
+					.scaleSequential(d3.interpolateRainbow)
+					.domain([0, count - 1]);
+				return d3.range(count).map(scale);
+			};
 
-		createAnnotations(
-			chart,
-			root.leaves(),
-			outerRadius + 80,
-			annotationMap,
-			"Phylogroup",
-			phylogroupColorMap,
-			-57,
-			3
-		);
+			const labelColors = generateColors(labels.length);
+			const phylogroupColors = generateColors(phylogroup.length + 1);
+			const fimTypeColors = generateColors(fimtype.length + 1);
 
-		function drawESBL(
-			chart: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
-			data: d3.HierarchyNode<TreeNode>[],
-			outerRadius: number,
-			annotationMap: AnnotationMap,
-			field: string,
-			columnName: string,
-			anno_x: number,
-			anno_y: number
-		): void {
-			const first = data.length > 0 && data[0].x !== undefined ? data[0].x : 0;
-			const firstAngle = first - 90;
-			const radians = firstAngle * (Math.PI / 180);
-			const firstX = (outerRadius - 90) * Math.cos(radians);
-			const firstY = (outerRadius - 90) * Math.sin(radians);
+			labels.forEach((label, index) => {
+				labelColorMap.set(label, labelColors[index]);
+			});
 
-			chart
-				.append("text")
-				.attr("transform", () => {
-					const xOffset = -55;
-					return `translate(${firstX + anno_x + xOffset},${firstY + anno_y}) rotate(${firstAngle + 82})`;
-				})
-				.attr("text-anchor", "start")
-				.attr("font-size", "14px")
-				.style("font-weight", "bold")
-				.style("fill", "black")
-				.text(columnName);
+			phylogroup.forEach((phylogroup, index) => {
+				phylogroupColorMap.set(phylogroup, phylogroupColors[index + 1]);
+			});
 
-			chart
-				.append("g")
-				.selectAll("rect")
-				.data(data)
-				.join("rect")
-				.attr("transform", (d: d3.HierarchyNode<TreeNode>) => {
-					const angle = d.x! - 90;
-					const radians = angle * (Math.PI / 180);
-					const x = (outerRadius - 90) * Math.cos(radians);
-					const y = (outerRadius - 90) * Math.sin(radians);
-					return `translate(${x},${y}) rotate(${angle + 90})`;
-				})
-				.attr("x", -7)
-				.attr("y", -15)
-				.attr("width", 15)
-				.attr("height", 15)
-				.attr("fill", (d: d3.HierarchyNode<TreeNode>) => {
-					const annotation = annotationMap.get(d.data.name!);
-					if (annotation) {
-						const value = annotation[field as keyof typeof annotation] || 0;
-						return value === "1" ? "#949fdb" : "none";
-					}
-					return null;
-				})
-				.attr("stroke", (d: d3.HierarchyNode<TreeNode>) => {
-					const annotation = annotationMap.get(d.data.name!);
-					if (annotation) {
-						const value = annotation[field as keyof typeof annotation] || 0;
-						return value === "0" ? "#949fdb" : "none";
-					}
-					return null;
-				})
-				.attr("stroke-width", 1.2);
-		}
+			fimtype.forEach((fimType, index) => {
+				fimTypeColorMap.set(fimType, fimTypeColors[index + 1]);
+			});
 
-		const columns = new Map<string, string>([
-			["blaCTXM1", "blaCTX-M-1"],
-			["blaCTXM14", "blaCTX-M-14"],
-			["blaCTXM15", "blaCTX-M-15"],
-			["blaCTXM24", "blaCTX-M-24"],
-			["blaCTXM27", "blaCTX-M-27"],
-			["blaCTXM55", "blaCTX-M-55"],
-			["blaCTXM104", "blaCTX-M-104"],
-			["blaSHV12", "blaSHV-12"],
-			["blaCMY2", "blaCMY-2"],
-			["blaIMP26", "blaIMP-26"],
-			["blaOXA181", "blaOXA-181"],
-		]);
+			type Annotation = {
+				Label: number;
+				Phylogroup: string;
+				FimType: number;
+				blaCTXM1: number;
+				blaCTXM3: number;
+				blaCTXM8: number;
+				blaCTXM14: number;
+				blaCTXM15: number;
+				blaCTXM24: number;
+				blaCTXM27: number;
+				blaCTXM32: number;
+				blaCTXM55: number;
+				blaCTXM101: number;
+				blaCTXM104: number;
+				blaSHV12: number;
+				blaCMY2: number;
+				blaIMP26: number;
+				blaOXA181: number;
+			};
 
-		let colIndex = 0;
-		columns.forEach((columnName, column) => {
-			colIndex++;
-			drawESBL(
-				chart,
-				root.leaves(),
-				outerRadius + 120 + colIndex * 20,
-				annotationMap,
-				column,
-				columnName,
-				-65 - colIndex * 4,
-				6
+			type AnnotationMap = Map<string, Annotation>;
+
+			const annotationMap: AnnotationMap = new Map(
+				annotations.map((a: AnnTreeNodeRecord) => [
+					a.Node,
+					{
+						Label: a.Label,
+						Phylogroup: a.Phylogroup,
+						FimType: a.FimType,
+						blaCTXM1: a["blaCTX-M-1"],
+						blaCTXM3: a["blaCTX-M-3"],
+						blaCTXM8: a["blaCTX-M-8"],
+						blaCTXM14: a["blaCTX-M-14"],
+						blaCTXM15: a["blaCTX-M-15"],
+						blaCTXM24: a["blaCTX-M-24"],
+						blaCTXM27: a["blaCTX-M-27"],
+						blaCTXM32: a["blaCTX-M-32"],
+						blaCTXM55: a["blaCTX-M-55"],
+						blaCTXM101: a["blaCTX-M-101"],
+						blaCTXM104: a["blaCTX-M-104"],
+						blaSHV12: a["blaSHV-12"],
+						blaCMY2: a["blaCMY-2"],
+						blaIMP26: a["blaIMP-26"],
+						blaOXA181: a["blaOXA-181"],
+					},
+				])
 			);
-		});
 
-		function createLegend(
-			chart: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
-			data: d3.HierarchyNode<TreeNode>[],
-			title: string,
-			colorMap: Map<string, string>,
-			position: { x: number; y: number }
-		): void {
-			const legendGroup = chart
-				.append("g")
-				.attr("transform", `translate(${position.x}, ${position.y})`);
+			function createAnnotations(
+				chart: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
+				data: d3.HierarchyNode<TreeNode>[],
+				outerRadius: number,
+				annotationMap: AnnotationMap,
+				annotationType: string,
+				colorMap: Map<number, string>
+			): void {
+				const arcHeight = 15;
 
-			legendGroup
-				.append("text")
-				.attr("x", 0)
-				.attr("y", -20)
-				.attr("text-anchor", "start")
-				.style("font-size", "14px")
-				.style("font-weight", "bold")
-				.text(title);
+				const arcGenerator = d3
+					.arc<d3.PieArcDatum<d3.HierarchyNode<TreeNode>>>()
+					.innerRadius(outerRadius - arcHeight)
+					.outerRadius(outerRadius);
 
-			const legendItems = legendGroup
-				.selectAll("g")
-				.data(data)
-				.join("g")
-				.attr("transform", (d, i) => `translate(0, ${i * 20})`);
+				const startAngle = 0 * (Math.PI / 180);
+				const endAngle = 350 * (Math.PI / 180);
 
-			legendItems
-				.append("rect")
-				.attr("width", 18)
-				.attr("height", 18)
-				.attr("fill", (d) => colorMap.get(d.name) || "black");
+				const startAngleLabel = 350 * (Math.PI / 180);
+				const endAngleLabel = 360 * (Math.PI / 180);
 
-			legendItems
-				.append("text")
-				.attr("x", 24)
-				.attr("y", 9)
-				.attr("dy", "0.35em")
-				.text((d) => d.name);
-		}
+				const pieGenerator = d3
+					.pie<d3.HierarchyNode<TreeNode>>()
+					.value(() => 1)
+					.sort(null)
+					.startAngle(startAngle)
+					.endAngle(endAngle);
 
-		function linkConstant(d: d3.HierarchyLink<TreeNode>): string {
-			return linkStep(d.source.x!, d.source.y!, d.target.x!, d.target.y!);
-		}
+				const pieGeneratorLabel = d3
+					.pie<d3.HierarchyNode<TreeNode>>()
+					.value((d) => d.x!)
+					.sort(null)
+					.startAngle(startAngleLabel)
+					.endAngle(endAngleLabel);
 
-		function linkExtensionConstant(d: d3.HierarchyLink<TreeNode>): string {
-			return linkStep(d.target.x!, d.target.y!, d.target.x!, innerRadius);
-		}
+				const arcData = pieGenerator(data);
+				const arcDataLabel = pieGeneratorLabel([data[0]]);
 
-		function linkStep(
-			startAngle: number,
-			startRadius: number,
-			endAngle: number,
-			endRadius: number
-		): string {
-			const c0 = Math.cos((startAngle = ((startAngle - 90) / 180) * Math.PI));
-			const s0 = Math.sin(startAngle);
-			const c1 = Math.cos((endAngle = ((endAngle - 90) / 180) * Math.PI));
-			const s1 = Math.sin(endAngle);
-			return (
-				"M" +
-				startRadius * c0 +
-				"," +
-				startRadius * s0 +
-				(endAngle === startAngle
-					? ""
-					: "A" +
-						startRadius +
-						"," +
-						startRadius +
-						" 0 0 " +
-						(endAngle > startAngle ? 1 : 0) +
-						" " +
-						startRadius * c1 +
-						"," +
-						startRadius * s1) +
-				"L" +
-				endRadius * c1 +
-				"," +
-				endRadius * s1
-			);
-		}
-	}, [data, width, height]);
+				const lastArc = arcDataLabel[arcDataLabel.length - 1];
 
-	const handleZoomIn = () => {
-		if (!chartRef.current || !zoomRef.current) return;
-		d3.select(chartRef.current as SVGSVGElement)
-			.transition()
-			.duration(500)
-			.call(zoomRef.current!.scaleBy, 1.2);
-	};
+				chart
+					.append("g")
+					.selectAll("path")
+					.data(arcDataLabel)
+					.join("path")
+					.attr("d", arcGenerator)
+					.attr("fill", "none")
+					.each(function (d, i) {
+						const firstArcSection = /(^.+?)L/;
+						const newArc = firstArcSection.exec(d3.select(this).attr("d"))?.[1];
+						if (newArc) {
+							const cleanedArc = newArc.replace(/,/g, " ");
+							chart
+								.append("path")
+								.attr("class", "hiddenDonutArcs")
+								.attr("id", `${annotationType}_donutArcLabel${i}`)
+								.attr("d", cleanedArc)
+								.style("fill", "none");
+						}
+					});
 
-	const handleZoomOut = () => {
-		if (!chartRef.current || !zoomRef.current) return;
-		d3.select(chartRef.current as SVGSVGElement)
-			.transition()
-			.duration(500)
-			.call(zoomRef.current!.scaleBy, 0.8);
-	};
+				chart
+					.append("g")
+					.selectAll(".annotationText")
+					.data([lastArc])
+					.enter()
+					.append("text")
+					.attr("class", "annotationText")
+					.attr("x", 5)
+					.attr("dy", 12)
+					.append("textPath")
+					.attr("href", (d, i) => `#${annotationType}_donutArcLabel${i}`)
+					.style("text-anchor", "start")
+					.text(annotationType)
+					.attr("font-size", "12px")
+					.style("font-weight", "bold")
+					.style("fill", "black");
 
-	const handleResetZoom = useCallback(() => {
-		if (!chartRef.current || !zoomRef.current) return;
+				chart
+					.append("g")
+					.selectAll("path")
+					.data(arcData)
+					.join("path")
+					.attr("d", arcGenerator)
+					.attr("fill", (d: d3.PieArcDatum<d3.HierarchyNode<TreeNode>>) => {
+						const annotation = annotationMap.get(d.data.data.name!);
+						if (annotation) {
+							const value =
+								annotation[annotationType as keyof typeof annotation];
+							return colorMap.get(value as number) || "black";
+						}
+						return "black";
+					})
+					.each(function (d, i) {
+						const firstArcSection = /(^.+?)L/;
+						const newArc = firstArcSection.exec(d3.select(this).attr("d"))?.[1];
+						if (newArc) {
+							const cleanedArc = newArc.replace(/,/g, " ");
 
-		const outerRadius = 960 / 1.7;
-		const graphWidth = outerRadius * 2;
-		const graphHeight = outerRadius * 2;
+							chart
+								.append("path")
+								.attr("class", "hiddenDonutArcs")
+								.attr("id", `${annotationType}_donutArc${i}`)
+								.attr("d", cleanedArc)
+								.style("fill", "none");
+						}
+					});
 
-		const scaleX = width / graphWidth;
-		const scaleY = height / graphHeight;
-		const scale = Math.min(scaleX, scaleY);
+				//Append the month names within the arcs
+				chart
+					.append("g")
+					.selectAll(".annotationText")
+					.data(arcData)
+					.enter()
+					.append("text")
+					.attr("class", "annotationText")
+					.attr("dy", 12)
+					.append("textPath")
+					.attr("href", (d, i) => `#${annotationType}_donutArc${i}`)
+					.attr("startOffset", "50%")
+					.style("text-anchor", "middle")
+					.text((d: d3.PieArcDatum<d3.HierarchyNode<TreeNode>>) => {
+						const annotation = annotationMap.get(d.data.data.name!);
+						return annotation
+							? annotation[annotationType as keyof typeof annotation]
+							: "No Annotation";
+					})
+					.attr("font-size", "11px")
+					.style("fill", "black");
+			}
 
-		const initialTransform = d3.zoomIdentity
-			.translate(width / 2.9, height / 2)
-			.scale(scale);
+			function drawESBL(
+				chart: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
+				data: d3.HierarchyNode<TreeNode>[],
+				outerRadius: number,
+				annotationMap: AnnotationMap,
+				field: string,
+				columnName: string,
+				anno_x: number,
+				anno_y: number
+			): void {
+				chart
+					.append("g")
+					.selectAll("text")
+					.data(data[data.length - 1])
+					.join("text")
+					.attr("transform", (d: d3.HierarchyNode<TreeNode>) => {
+						const angle = d.x! - 90;
+						const radians = angle * (Math.PI / 180);
+						const x = (outerRadius - 90) * Math.cos(radians);
+						const y = (outerRadius - 90) * Math.sin(radians);
+						return `translate(${x + 18},${y - 5}) rotate(${angle + 90})`;
+					})
+					.attr("text-anchor", "start")
+					.attr("font-size", "14px")
+					.style("font-weight", "bold")
+					.style("fill", "black")
+					.text(columnName);
 
-		d3.select(chartRef.current as SVGSVGElement)
-			.transition()
-			.duration(500)
-			.call(zoomRef.current.transform, initialTransform);
+				chart
+					.append("g")
+					.selectAll("rect")
+					.data(data)
+					.join("rect")
+					.attr("transform", (d: d3.HierarchyNode<TreeNode>) => {
+						const angle = d.x! - 90;
+						const radians = angle * (Math.PI / 180);
+						const x = (outerRadius - 90) * Math.cos(radians);
+						const y = (outerRadius - 90) * Math.sin(radians);
+						return `translate(${x},${y}) rotate(${angle + 90})`;
+					})
+					.attr("x", -7)
+					.attr("y", -12)
+					.attr("width", 15)
+					.attr("height", 15)
+					.attr("fill", (d: d3.HierarchyNode<TreeNode>) => {
+						const annotation = annotationMap.get(d.data.name!);
+						if (annotation) {
+							const value = annotation[field as keyof typeof annotation] || 0;
+							return value === "1" ? "#949fdb" : "none";
+						}
+						return null;
+					})
+					.attr("stroke", (d: d3.HierarchyNode<TreeNode>) => {
+						const annotation = annotationMap.get(d.data.name!);
+						if (annotation) {
+							const value = annotation[field as keyof typeof annotation] || 0;
+							return value === "0" ? "#949fdb" : "none";
+						}
+						return null;
+					})
+					.attr("stroke-width", 1.2);
+			}
 
-		currentTransform.current = initialTransform;
-	}, [width, height]);
+			const columns = new Map<string, string>([
+				["blaCTXM1", "blaCTX-M-1"],
+				["blaCTXM14", "blaCTX-M-14"],
+				["blaCTXM15", "blaCTX-M-15"],
+				["blaCTXM24", "blaCTX-M-24"],
+				["blaCTXM27", "blaCTX-M-27"],
+				["blaCTXM55", "blaCTX-M-55"],
+				["blaCTXM104", "blaCTX-M-104"],
+				["blaSHV12", "blaSHV-12"],
+				["blaCMY2", "blaCMY-2"],
+				["blaIMP26", "blaIMP-26"],
+				["blaOXA181", "blaOXA-181"],
+			]);
 
-	return (
-		<div className="flex flex-row">
-			<div className="mr-2 flex flex-col">
-				<button
-					onClick={handleZoomIn}
-					className="mb-2 cursor-pointer rounded-lg border border-black bg-gray-200 px-5 py-2 text-2xl"
-				>
-					+
-				</button>
-				<button
-					onClick={handleZoomOut}
-					className="mb-2 cursor-pointer rounded-lg border border-black bg-gray-200 px-5 py-2 text-2xl"
-				>
-					-
-				</button>
-				<button
-					onClick={handleResetZoom}
-					className="cursor-pointer rounded-lg bg-gray-200 px-5 py-2 text-lg"
-				>
-					Reset
-				</button>
+			const colorMaps: Record<string, Map<number, string>> = {
+				Label: labelColorMap,
+				FimType: fimTypeColorMap,
+				Phylogroup: phylogroupColorMap,
+			};
+
+			let currentOuterRadius = outerRadius - 80;
+
+			selectedAnnotations.forEach((annotation, index) => {
+				if (annotation === "ESBL") {
+					let colIndex = 0;
+					columns.forEach((columnName, column) => {
+						colIndex++;
+						drawESBL(
+							chart,
+							root.leaves(),
+							currentOuterRadius + 50 + colIndex * 20,
+							annotationMap,
+							column,
+							columnName,
+							-65 - colIndex * 4,
+							11
+						);
+					});
+					currentOuterRadius += 40 + colIndex * 20;
+				} else {
+					createAnnotations(
+						chart,
+						root.leaves(),
+						currentOuterRadius,
+						annotationMap,
+						annotation,
+						colorMaps[annotation]
+					);
+
+					currentOuterRadius += 40;
+				}
+			});
+
+			function createLegend(
+				chart: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
+				data: d3.HierarchyNode<TreeNode>[],
+				title: string,
+				colorMap: Map<string, string>,
+				position: { x: number; y: number }
+			): void {
+				const legendGroup = chart
+					.append("g")
+					.attr("transform", `translate(${position.x}, ${position.y})`);
+
+				legendGroup
+					.append("text")
+					.attr("x", 0)
+					.attr("y", -20)
+					.attr("text-anchor", "start")
+					.style("font-size", "14px")
+					.style("font-weight", "bold")
+					.text(title);
+
+				const legendItems = legendGroup
+					.selectAll("g")
+					.data(data)
+					.join("g")
+					.attr("transform", (d, i) => `translate(0, ${i * 20})`);
+
+				legendItems
+					.append("rect")
+					.attr("width", 18)
+					.attr("height", 18)
+					.attr("fill", (d) => colorMap.get(d.name) || "black");
+
+				legendItems
+					.append("text")
+					.attr("x", 24)
+					.attr("y", 9)
+					.attr("dy", "0.35em")
+					.text((d) => d.name);
+			}
+
+			function linkConstant(d: d3.HierarchyLink<TreeNode>): string {
+				return linkStep(d.source.x!, d.source.y!, d.target.x!, d.target.y!);
+			}
+
+			function linkExtensionConstant(d: d3.HierarchyLink<TreeNode>): string {
+				return linkStep(d.target.x!, d.target.y!, d.target.x!, innerRadius);
+			}
+
+			function linkStep(
+				startAngle: number,
+				startRadius: number,
+				endAngle: number,
+				endRadius: number
+			): string {
+				const c0 = Math.cos((startAngle = ((startAngle - 90) / 180) * Math.PI));
+				const s0 = Math.sin(startAngle);
+				const c1 = Math.cos((endAngle = ((endAngle - 90) / 180) * Math.PI));
+				const s1 = Math.sin(endAngle);
+				return (
+					"M" +
+					startRadius * c0 +
+					"," +
+					startRadius * s0 +
+					(endAngle === startAngle
+						? ""
+						: "A" +
+							startRadius +
+							"," +
+							startRadius +
+							" 0 0 " +
+							(endAngle > startAngle ? 1 : 0) +
+							" " +
+							startRadius * c1 +
+							"," +
+							startRadius * s1) +
+					"L" +
+					endRadius * c1 +
+					"," +
+					endRadius * s1
+				);
+			}
+		}, [data, width, height, chartRef]);
+
+		const handleZoomIn = () => {
+			if (!chartRef.current || !zoomRef.current) return;
+			d3.select(chartRef.current as SVGSVGElement)
+				.transition()
+				.duration(500)
+				.call(zoomRef.current!.scaleBy, 1.2);
+		};
+
+		const handleZoomOut = () => {
+			if (!chartRef.current || !zoomRef.current) return;
+			d3.select(chartRef.current as SVGSVGElement)
+				.transition()
+				.duration(500)
+				.call(zoomRef.current!.scaleBy, 0.8);
+		};
+
+		const handleResetZoom = useCallback(() => {
+			if (!chartRef.current || !zoomRef.current) return;
+
+			const outerRadius = calculateDynamicRadius(data!);
+			const graphWidth = outerRadius * 2.8;
+			const graphHeight = outerRadius * 2.8;
+
+			console.log("dataRESET:", data);
+
+			const scaleX = width / graphWidth;
+			const scaleY = height / graphHeight;
+			const scale = Math.min(scaleX, scaleY);
+
+			console.log(scale);
+
+			const initialTransform = d3.zoomIdentity
+				.translate(width / 2.9, height / 2)
+				.scale(scale);
+
+			d3.select(chartRef.current as SVGSVGElement)
+				.transition()
+				.duration(500)
+				.call(zoomRef.current.transform, initialTransform);
+
+			currentTransform.current = initialTransform;
+		}, [width, height, data, chartRef]);
+
+		return (
+			<div className="flex flex-row">
+				<div className="mr-2 flex flex-col">
+					<button
+						onClick={handleZoomIn}
+						className="mb-2 cursor-pointer rounded-lg border border-black bg-gray-200 px-2 py-1 text-2xl"
+					>
+						+
+					</button>
+					<button
+						onClick={handleZoomOut}
+						className="mb-2 cursor-pointer rounded-lg border border-black bg-gray-200 px-2 py-1 text-2xl"
+					>
+						-
+					</button>
+					<button
+						onClick={handleResetZoom}
+						className="cursor-pointer rounded-lg bg-gray-200 px-2 py-1 text-lg"
+					>
+						Reset
+					</button>
+				</div>
+
+				<svg ref={chartRef} width={width} height={height}></svg>
 			</div>
+		);
+	}
+);
 
-			<svg ref={chartRef} width={width} height={height}></svg>
-		</div>
-	);
-}
+MyChart.displayName = "MyChart";
