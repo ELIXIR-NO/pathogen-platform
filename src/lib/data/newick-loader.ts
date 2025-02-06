@@ -71,15 +71,6 @@ export function parseNewick(input: string): TreeNode {
 	return currentNode;
 }
 
-export function toNewick(node: TreeNode): string {
-    if (!node.branchset || node.branchset.length === 0) {
-        return node.name ? `${node.name}:${node.length || 0}` : '';
-    }
-
-    const branches = node.branchset.map(child => toNewick(child));
-    return `(${branches.join(',')})${node.name ? `:${node.length || 0}` : ''}`;
-}
-
 export async function getNewickDataToJson(): Promise<TreeNode[]> {
 	const filePath = path.join(
 		process.cwd(),
