@@ -79,8 +79,8 @@ export async function getNewickDataToJson(): Promise<TreeNode[]> {
 		"norm_t7_all_db_core_NJ.nwk"
 	);
 	try {
-		let fileContent = await fsPromises.readFile(filePath, "utf8");
-		const tree = parseNewick(fileContent);
+		let fileContentData = await fsPromises.readFile(filePath, "utf8");
+		const tree = parseNewick(fileContentData);
 		const processedTree = processTree(tree);
 		return processedTree;
 	} catch (error) {
