@@ -1,3 +1,10 @@
+import {
+	extractUniqueCollections,
+	extractUniquePhylogroups,
+	extractUniqueSamples,
+	getEcoliCSVData,
+} from "@/lib/data/csvUtils";
+import { SampleBarChart } from "./multi-phylogroup-bar-charts";
 import { getNewickDataToJson } from "@/lib/data//newick-loader";
 import {
 	extractUniqueFimType,
@@ -5,9 +12,13 @@ import {
 	extractUniquePhylogroupsAnno,
 	getTreeNodeCSVData,
 } from "@/lib/data/csvUtils";
-import { MyChart } from "./chart";
 
 export default async function DataLoader() {
+	const records = await getEcoliCSVData();
+	const samples = extractUniqueSamples(records);
+	const collections = extractUniqueCollections(records);
+	const phylogroups = extractUniquePhylogroups(records);
+	// TOL Data
 	const treeData = await getNewickDataToJson();
 	const annotationData = await getTreeNodeCSVData();
 	const labels = await extractUniqueLabels(annotationData);
@@ -15,8 +26,12 @@ export default async function DataLoader() {
 	const fimtype = await extractUniqueFimType(annotationData);
 
 	return (
-		<MyChart
-			data={treeData}
+		<SampleBarChart
+			collections={collections}
+			phylogroups={phylogroups}
+			samples={samples}
+			data={records}
+			TreeData={treeData}
 			annotations={annotationData}
 			labels={labels}
 			phylogroup={phylogroup}
