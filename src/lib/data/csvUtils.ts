@@ -150,11 +150,15 @@ export interface AnnTreeNodeRecord {
 	Phylogroup: string;
 	FimType: number;
 	"blaCTX-M-1": number;
+	"blaCTX-M-3": number;
+	"blaCTX-M-8": number;
 	"blaCTX-M-14": number;
 	"blaCTX-M-15": number;
 	"blaCTX-M-24": number;
 	"blaCTX-M-27": number;
+	"blaCTX-M-32": number;
 	"blaCTX-M-55": number;
+	"blaCTX-M-101": number;
 	"blaCTX-M-104": number;
 	"blaSHV-12": number;
 	"blaCMY-2": number;
