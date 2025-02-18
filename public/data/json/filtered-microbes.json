@@ -1,0 +1,44 @@
+{
+  "Blood": [
+    "Enterococcus faecalis",
+    "Enterococcus faecium",
+    "Escherichia coli",
+    "Klebsiella oxytoca",
+    "Klebsiella pneumoniae",
+    "Klebsiella spp",
+    "Staphylococcus aureus",
+    "Streptococcus pneumoniae",
+    "Haemophilus influenzae",
+    "Pseudomonas aeruginosa",
+    "Streptococcus pyogenes",
+    "Enterobacter",
+    "Streptococcus agalactiae",
+    "Neisseria meningitidis",
+    "Proteus mirabilis",
+    "Proteus spp",
+    "Proteus vulgaris",
+    "Klebsiella aerogenes"
+  ],
+  "Gonorrhea": ["Neisseria gonorrhoeae"],
+  "Respiratory": [
+    "Streptococcus pneumoniae",
+    "Haemophilus influenzae",
+    "Streptococcus pyogenes"
+  ],
+  "Urine": [
+    "Escherichia coli",
+    "Klebsiella oxytoca",
+    "Klebsiella pneumoniae",
+    "Proteus mirabilis",
+    "Enterococcus faecalis",
+    "Enterococcus faecium",
+    "Klebsiella spp",
+    "Enterobacter",
+    "Proteus spp",
+    "Proteus vulgaris",
+    "Pseudomonas aeruginosa",
+    "Klebsiella aerogenes"
+  ],
+  "Wound": [
+	"Staphylococcus aureus", "Streptococcus pyogenes"]
+}
