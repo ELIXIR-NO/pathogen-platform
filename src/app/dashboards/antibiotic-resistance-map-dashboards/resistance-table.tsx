@@ -74,11 +74,11 @@ export default function ResistanceTable({
 
 						function formatRegionName(regionName: string) {
 							if (regionName.toLowerCase() === "oslo-akershus") {
-							  return "Oslo-Akershus";
+								return "Oslo-Akershus";
 							}
 
 							return regionName.charAt(0).toUpperCase() + regionName.slice(1);
-						  };
+						}
 
 						return (
 							<TableRow key={regionName}>

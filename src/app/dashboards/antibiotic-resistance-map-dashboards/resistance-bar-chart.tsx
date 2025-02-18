@@ -56,7 +56,7 @@ export default function ResistanceBarChart({
 			</ResponsiveContainer>
 		);
 	}
-	
+
 	// Reformat the Oslo/Akershus label - too long to show both
 	function formatRegionLabel(r: string) {
 		const lower = r.toLowerCase();

@@ -16,7 +16,7 @@ export default function AntibioticResistanceAtlas() {
 	const [selectedYear, setSelectedYear] = useState<number | null>(2022);
 	const [showRegions, setShowRegions] = useState<boolean>(true);
 	const [showCounties, setShowCounties] = useState<boolean>(false);
-	
+
 	return (
 		<section className="flex w-full flex-col space-y-6">
 			<h1 className="dark:text-primary-light mb-4 text-center text-3xl font-bold text-primary">
@@ -69,85 +69,87 @@ export default function AntibioticResistanceAtlas() {
 				showRegions={showRegions}
 			>
 				{({
-				resistanceData,
-				geoData,
-				loading,
-				availableYears,
-				selectedRegions,
+					resistanceData,
+					geoData,
+					loading,
+					availableYears,
+					selectedRegions,
 				}) => (
-				<div className="flex flex-col space-y-6">
-					<FilterMenu
-					onSampleTypeSelect={(value) => {
-						setSelectedSampleType(value);
-						setSelectedMicrobe("");
-						setSelectedAntibiotic("");
-						setSelectedYear(null);
-					}}
-					onMicrobeSelect={(value) => {
-						setSelectedMicrobe(value);
-						setSelectedAntibiotic("");
-						setSelectedYear(null);
-					}}
-					onAntibioticSelect={setSelectedAntibiotic}
-					onReset={() => {
-						setSelectedSampleType("");
-						setSelectedMicrobe("");
-						setSelectedAntibiotic("");
-						setSelectedYear(null);
-					}}
-					selectedSampleType={selectedSampleType}
-					selectedMicrobe={selectedMicrobe}
-					selectedAntibiotic={selectedAntibiotic}
-					selectedYear={selectedYear ?? availableYears[availableYears.length - 1]}
-					availableYears={availableYears}
-					setSelectedYear={setSelectedYear}
-					/>
+					<div className="flex flex-col space-y-6">
+						<FilterMenu
+							onSampleTypeSelect={(value) => {
+								setSelectedSampleType(value);
+								setSelectedMicrobe("");
+								setSelectedAntibiotic("");
+								setSelectedYear(null);
+							}}
+							onMicrobeSelect={(value) => {
+								setSelectedMicrobe(value);
+								setSelectedAntibiotic("");
+								setSelectedYear(null);
+							}}
+							onAntibioticSelect={setSelectedAntibiotic}
+							onReset={() => {
+								setSelectedSampleType("");
+								setSelectedMicrobe("");
+								setSelectedAntibiotic("");
+								setSelectedYear(null);
+							}}
+							selectedSampleType={selectedSampleType}
+							selectedMicrobe={selectedMicrobe}
+							selectedAntibiotic={selectedAntibiotic}
+							selectedYear={
+								selectedYear ?? availableYears[availableYears.length - 1]
+							}
+							availableYears={availableYears}
+							setSelectedYear={setSelectedYear}
+						/>
 
-					<div className="grid grid-cols-1 gap-6 md:grid-cols-12">
-					<div className="md:col-span-5 col-span-1">
-						<ResistanceMap
-						geoData={geoData}
-						resistanceData={resistanceData}
-						selectedYear={selectedYear ?? 2022}
-						showCounties={showCounties}
-						/>
-						<div className="mt-3 flex justify-center">
-						<Legend
-							showRegions={showRegions}
-							onToggleShowRegions={setShowRegions}
-							showCounties={showCounties}
-							onToggleShowCounties={setShowCounties}
-							onSelectResistance={() => {}}
-						/>
+						<div className="grid grid-cols-1 gap-6 md:grid-cols-12">
+							<div className="col-span-1 md:col-span-5">
+								<ResistanceMap
+									geoData={geoData}
+									resistanceData={resistanceData}
+									selectedYear={selectedYear ?? 2022}
+									showCounties={showCounties}
+								/>
+								<div className="mt-3 flex justify-center">
+									<Legend
+										showRegions={showRegions}
+										onToggleShowRegions={setShowRegions}
+										showCounties={showCounties}
+										onToggleShowCounties={setShowCounties}
+										onSelectResistance={() => {}}
+									/>
+								</div>
+							</div>
+
+							<div className="col-span-1 flex flex-col gap-4 md:col-span-7">
+								{Object.keys(resistanceData).length > 0 ? (
+									<>
+										<ResistanceLineChart
+											resistanceData={resistanceData}
+											onRegionClick={(region) => {
+												console.log("Clicked line for region:", region);
+											}}
+										/>
+										<ResistanceBarChart
+											resistanceData={resistanceData}
+											selectedYear={selectedYear ?? 2022}
+										/>
+										<ResistanceTable
+											resistanceData={resistanceData}
+											selectedYear={selectedYear ?? 2022}
+										/>
+									</>
+								) : (
+									<p className="text-gray-500 dark:text-gray-400">
+										No data available
+									</p>
+								)}
+							</div>
 						</div>
 					</div>
-
-					<div className="md:col-span-7 col-span-1 flex flex-col gap-4">
-						{Object.keys(resistanceData).length > 0 ? (
-						<>
-							<ResistanceLineChart
-							resistanceData={resistanceData}
-							onRegionClick={(region) => {
-								console.log("Clicked line for region:", region);
-							}}
-							/>
-							<ResistanceBarChart
-							resistanceData={resistanceData}
-							selectedYear={selectedYear ?? 2022}
-							/>
-							<ResistanceTable
-							resistanceData={resistanceData}
-							selectedYear={selectedYear ?? 2022}
-							/>
-						</>
-						) : (
-						<p className="text-gray-500 dark:text-gray-400">
-							No data available
-						</p>
-						)}
-					</div>
-					</div>
-				</div>
 				)}
 			</DataLoader>
 			<p className="italic">

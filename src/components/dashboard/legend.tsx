@@ -25,7 +25,7 @@ export const Legend = ({
 	const [selectedBin, setSelectedBin] = useState<number | null>(null);
 
 	return (
-		<div className="w-full rounded-lg p-4 bg-white dark:bg-gray-800 sm:w-60">
+		<div className="w-full rounded-lg bg-white p-4 dark:bg-gray-800 sm:w-60">
 			<h3 className="mb-2 text-center text-sm font-semibold text-gray-900 dark:text-gray-100 sm:text-base">
 				Resistance (%)
 			</h3>

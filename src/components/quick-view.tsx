@@ -33,7 +33,7 @@ export default async function QuickView({
 	searchTerm,
 }: QuickViewProps) {
 	const notionPages = await fetchAllPages();
-	const searchIndex = createSearchIndex(notionPages);
+	const searchIndex = createSearchIndex([]);
 
 	let searchResults;
 	if (searchFor === "tags") {
