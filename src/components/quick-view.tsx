@@ -14,10 +14,8 @@ import {
 } from "@/components/ui/carousel";
 import { fetchAllPages } from "@/lib/notion-utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import dynamic from "next/dynamic";
 import { Suspense } from "react";
-
-const ImageCredit = dynamic(() => import("./image-credit"), { ssr: false });
+import ImageCredit from "./image-credit-dynamic";
 
 type SearchType = "tags" | "relativeLinks";
 
