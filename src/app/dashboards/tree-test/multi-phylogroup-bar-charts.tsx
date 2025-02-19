@@ -631,22 +631,20 @@ export function SampleBarChart({
 													/>
 													<Tooltip />
 													<Legend />
-													{collectionsSamples.map((key) => (
-														<React.Fragment key={key}>
-															{["S", "R", "I"].map((letter) => (
-																<Bar
-																	key={`${key}-${letter}`}
-																	dataKey={`${key}-${letter}`}
-																	stackId="a"
-																	fill={
-																		chartConfig[`${key}-${letter}`]?.color ||
-																		"#ccc"
-																	}
-																	name={`${key.replace("-", " - ")} - ${letter}`}
-																/>
-															))}
-														</React.Fragment>
-													))}
+													{collectionsSamples.map((key) =>
+														["S", "R", "I"].map((letter) => (
+															<Bar
+																key={`${key}-${letter}`}
+																dataKey={`${key}-${letter}`}
+																stackId="a"
+																fill={
+																	chartConfig[`${key}-${letter}`]?.color ||
+																	"#ccc"
+																}
+																name={`${key.replace("-", " - ")} - ${letter}`}
+															/>
+														))
+													)}
 												</BarChart>
 											</ResponsiveContainer>
 										</div>
