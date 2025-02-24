@@ -146,9 +146,9 @@ export function extractUniqueYears(data: Covid19Record[]): string[] {
 
 export interface AnnTreeNodeRecord {
 	Node: string;
-	Label: number;
+	ST: number;
 	Phylogroup: string;
-	FimType: number;
+	fimH: number;
 	"blaCTX-M-1": number;
 	"blaCTX-M-3": number;
 	"blaCTX-M-8": number;
@@ -164,6 +164,24 @@ export interface AnnTreeNodeRecord {
 	"blaCMY-2": number;
 	"blaIMP-26": number;
 	"blaOXA-181": number;
+	"aac(3)-IId": number;
+	"aac(3)-IIe": number;
+	"aac(3)-IVa": number;
+	"aac(6')-I": number;
+	"aac(6')-Ib": number;
+	"aac(6')-Ib3": number;
+	"aac(6')-Ib4": number;
+	aadA1: number;
+	aadA2: number;
+	aadA5: number;
+	"ant(2'')-Ia": number;
+	"aph(3')-Ia": number;
+	"aph(3'')-Ib": number;
+	"aph(3')-IIa": number;
+	"aph(3')-IIIa": number;
+	"aph(4)-Ia": number;
+	"aph(6)-Id": number;
+	armA: number;
 }
 
 export async function getTreeNodeCSVData(): Promise<AnnTreeNodeRecord[]> {
@@ -190,7 +208,7 @@ export async function getTreeNodeCSVData(): Promise<AnnTreeNodeRecord[]> {
 }
 
 export function extractUniqueLabels(data: AnnTreeNodeRecord[]): number[] {
-	return Array.from(new Set(data.map((record) => record.Label)));
+	return Array.from(new Set(data.map((record) => record.ST)));
 }
 
 export function extractUniquePhylogroupsAnno(
@@ -200,7 +218,7 @@ export function extractUniquePhylogroupsAnno(
 }
 
 export function extractUniqueFimType(data: AnnTreeNodeRecord[]): number[] {
-	return Array.from(new Set(data.map((record) => record.FimType)));
+	return Array.from(new Set(data.map((record) => record.fimH)));
 }
 
 export function extractUniqueTreeNodes(data: AnnTreeNodeRecord[]): string[] {
