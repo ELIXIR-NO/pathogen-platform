@@ -17,12 +17,15 @@ declare module "d3" {
 	interface HierarchyNode<Datum> {
 		linkExtensionNode?: SVGPathElement;
 		linkNode?: SVGPathElement;
+		radius?: number;
 	}
 }
 
 declare module "d3" {
 	interface HierarchyLink<Datum> {
+		linkExtensionNode?: SVGPathElement;
 		linkNode?: SVGPathElement;
+		radius?: number;
 	}
 }
 
@@ -102,10 +105,13 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 		const { width, height } = useWindowSize();
 
+		const [showLength, setShowLength] = useState(true);
+
 		useImperativeHandle(ref, () => chartRef.current!);
 
 		useMemo(() => {
-			if (!data || !chartRef.current) return;
+			if (!data || !chartRef.current)
+				return d3.select(chartRef.current).selectAll("g").remove();
 
 			const outerRadius = calculateDynamicRadius(data);
 			const innerRadius = outerRadius - 170;
@@ -212,6 +218,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			});
 
 			cluster(root);
+			setRadius(root, (root.data.length = 0), innerRadius / maxLength(root));
 
 			const mouseovered = (active: boolean) => {
 				return (
@@ -223,6 +230,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 					const target = event.currentTarget;
 					let totalLeaves = 0;
+					let text = "";
 
 					const nameValue =
 						(node.data && node.data.name) ||
@@ -245,7 +253,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 						totalLeaves = descendants.filter(
 							(descendant: d3.HierarchyNode<TreeNode>) =>
-								!descendant.descendants
+								descendant.children == null || descendant.children.length === 0
 						).length;
 
 						if (active) {
@@ -264,11 +272,14 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 					}
 
 					if (active) {
+						if (totalLeaves === 1) {
+							text = `<h1><strong>Node Information</strong></h1><strong>Name:</strong> ${nameValue}<br><strong>Length:</strong> ${lengthValue}<br>`;
+						} else {
+							text = `<h1><strong>Node Information</strong></h1><strong>Name:</strong> ${nameValue}<br><strong>Length:</strong> ${lengthValue}<br><strong>Leaves:</strong> ${totalLeaves}<br>`;
+						}
 						tooltip
 							.style("visibility", "visible")
-							.html(
-								`<h1><strong>Node Information</strong></h1><strong>Name:</strong> ${nameValue}<br><strong>Length:</strong> ${lengthValue}<br><strong>Leaves:</strong> ${totalLeaves}<br>`
-							)
+							.html(text)
 							.style("top", event.pageY + 5 + "px")
 							.style("left", event.pageX + 5 + "px");
 					} else {
@@ -279,10 +290,14 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 			const linkExtension = chart
 				.append("g")
+				.attr("fill", "none")
+				.attr("stroke", "#000")
+				.attr("stroke-opacity", 0.25)
 				.selectAll("path")
 				.data(root.links().filter((d) => !d.target.children))
 				.join("path")
 				.each(function (d: d3.HierarchyLink<TreeNode>) {
+					console.log("d:", d);
 					d.target.linkExtensionNode = this as SVGPathElement;
 				})
 				.attr("d", linkExtensionConstant);
@@ -322,6 +337,13 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				.style("border", "1px solid #ccc")
 				.style("padding", "5px")
 				.style("border-radius", "4px");
+
+			const t = d3.transition().duration(750);
+			linkExtension
+				.transition(t)
+				.attr("d", showLength ? linkExtensionVariable : linkExtensionConstant);
+			link.transition(t).attr("d", showLength ? linkVariable : linkConstant);
+			active.transition(t).attr("d", showLength ? linkVariable : linkConstant);
 
 			const active2 = chart
 				.append("g")
@@ -372,9 +394,9 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			});
 
 			type Annotation = {
-				Label: number;
+				ST: number;
 				Phylogroup: string;
-				FimType: number;
+				fimH: number;
 				blaCTXM1: number;
 				blaCTXM3: number;
 				blaCTXM8: number;
@@ -398,9 +420,9 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				annotations.map((a: AnnTreeNodeRecord) => [
 					a.Node,
 					{
-						Label: a.Label,
+						ST: a.ST,
 						Phylogroup: a.Phylogroup,
-						FimType: a.FimType,
+						fimH: a.fimH,
 						blaCTXM1: a["blaCTX-M-1"],
 						blaCTXM3: a["blaCTX-M-3"],
 						blaCTXM8: a["blaCTX-M-8"],
@@ -629,8 +651,8 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			]);
 
 			const colorMaps: Record<string, Map<number, string>> = {
-				Label: labelColorMap,
-				FimType: fimTypeColorMap,
+				ST: labelColorMap,
+				fimH: fimTypeColorMap,
 				Phylogroup: phylogroupColorMap,
 			};
 
@@ -707,12 +729,41 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 					.text((d) => d.name);
 			}
 
+			function maxLength(d: d3.HierarchyNode<TreeNode>): number {
+				return (
+					d.data.length! + (d.children ? d3.max(d.children, maxLength) : 0)!
+				);
+			}
+
+			function setRadius(d: d3.HierarchyNode<TreeNode>, y0: number, k: number) {
+				d.radius = (y0 += d.data.length!) * k;
+				if (d.children) d.children.forEach((d) => setRadius(d, y0, k));
+			}
+
 			function linkConstant(d: d3.HierarchyLink<TreeNode>): string {
 				return linkStep(d.source.x!, d.source.y!, d.target.x!, d.target.y!);
 			}
 
 			function linkExtensionConstant(d: d3.HierarchyLink<TreeNode>): string {
 				return linkStep(d.target.x!, d.target.y!, d.target.x!, innerRadius);
+			}
+
+			function linkVariable(d: d3.HierarchyLink<TreeNode>) {
+				return linkStep(
+					d.source.x!,
+					d.source.radius!,
+					d.target.x!,
+					d.target.radius!
+				);
+			}
+
+			function linkExtensionVariable(d: d3.HierarchyLink<TreeNode>) {
+				return linkStep(
+					d.target.x!,
+					d.target.radius!,
+					d.target.x!,
+					innerRadius
+				);
 			}
 
 			function linkStep(
@@ -748,7 +799,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 					endRadius * s1
 				);
 			}
-		}, [data, width, height, chartRef]);
+		}, [data, width, height, chartRef, showLength]);
 
 		const handleZoomIn = () => {
 			if (!chartRef.current || !zoomRef.current) return;
@@ -795,25 +846,42 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 		return (
 			<div className="flex flex-row">
-				<div className="mr-2 flex flex-col">
-					<button
-						onClick={handleZoomIn}
-						className="mb-2 cursor-pointer rounded-lg border border-black bg-gray-200 px-2 py-1 text-2xl"
-					>
-						+
-					</button>
-					<button
-						onClick={handleZoomOut}
-						className="mb-2 cursor-pointer rounded-lg border border-black bg-gray-200 px-2 py-1 text-2xl"
-					>
-						-
-					</button>
-					<button
-						onClick={handleResetZoom}
-						className="cursor-pointer rounded-lg bg-gray-200 px-2 py-1 text-lg"
-					>
-						Reset
-					</button>
+				<div className="flex flex-col items-start space-y-2 px-5 py-5">
+					{/* Checkbox */}
+					<label className="flex items-center font-sans text-xs">
+						<input
+							type="checkbox"
+							checked={showLength}
+							onChange={() => {
+								setShowLength(!showLength);
+								console.log("Novo valor de showLength:", !showLength);
+							}}
+							className="mr-2"
+						/>
+						<span>Show branch length</span>
+					</label>
+
+					{/* Botões de zoom */}
+					<div className="flex flex-col py-5">
+						<button
+							onClick={handleZoomIn}
+							className="mb-2 cursor-pointer rounded-lg border border-black bg-gray-200 px-2 py-1 text-2xl"
+						>
+							+
+						</button>
+						<button
+							onClick={handleZoomOut}
+							className="mb-2 cursor-pointer rounded-lg border border-black bg-gray-200 px-2 py-1 text-2xl"
+						>
+							-
+						</button>
+						<button
+							onClick={handleResetZoom}
+							className="cursor-pointer rounded-lg bg-gray-200 px-2 py-1 text-lg"
+						>
+							Reset
+						</button>
+					</div>
 				</div>
 
 				<svg ref={chartRef} width={width} height={height}></svg>
