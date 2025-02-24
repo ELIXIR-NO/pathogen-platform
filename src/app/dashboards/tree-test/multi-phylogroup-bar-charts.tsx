@@ -71,7 +71,7 @@ export function SampleBarChart({
 
 	const chartType: string[] = ["Sample BarChart", "Radial Tree Chart"];
 
-	const annotationType: string[] = ["Label", "FimType", "Phylogroup", "ESBL"];
+	const annotationType: string[] = ["ST", "fimH", "Phylogroup", "ESBL"];
 
 	const phenotypes = [
 		"Amoxicillin-clavulanic_acid_i.v.",
@@ -119,8 +119,8 @@ export function SampleBarChart({
 	]);
 
 	const [selectedAnnotations, setSelectedAnnotations] = useState<string[]>([
-		"Label",
-		"FimType",
+		"ST",
+		"fimH",
 		"Phylogroup",
 		"ESBL",
 	]);
@@ -567,106 +567,113 @@ export function SampleBarChart({
 				</DropdownMenu>
 			</div>
 			<div>
-				{selectedChartType.includes("Sample BarChart") && (
-					<>
-						<h3 className="text-lg font-bold">Sample Bar Chart</h3>
-						{selectedDataType.includes("Genotype")
-							? filteredData.map((genotypeData) => (
-									<ChartContainer
-										key={genotypeData.genotype}
-										config={chartConfig}
-										className="h-[300px] w-full"
-									>
-										<div className="h-full w-full py-3">
-											<h3 className="text-center text-lg font-bold">
-												{genotypeData.genotype}
-											</h3>
-											<ResponsiveContainer width="100%" height="100%">
-												<BarChart data={genotypeData.data}>
-													<CartesianGrid strokeDasharray="3 3" />
-													<XAxis dataKey="phylogroup" />
-													<YAxis
-														label={{
-															value: "Count",
-															angle: -90,
-															position: "insideLeft",
-														}}
-													/>
-													<Tooltip />
-													<ChartLegend content={<ChartLegendContent />} />
-													{collectionsSamples.map((key, index) => (
-														<Bar
-															key={key}
-															dataKey={key}
-															stackId="a"
-															fill={chartConfig[key]?.color || "#ccc"}
-															name={key.replace("-", " - ")}
+				<div className="flex flex-col space-y-4">
+					{selectedChartType.includes("Sample BarChart") && (
+						<div className="relative rounded-lg border-gray-300 pb-8 shadow-md">
+							<h3 className="w-full bg-gray-300 px-4 py-3 text-xl font-extrabold text-gray-800 shadow-md">
+								Sample Bar Chart
+							</h3>
+							{selectedDataType.includes("Genotype")
+								? filteredData.map((genotypeData) => (
+										<ChartContainer
+											key={genotypeData.genotype}
+											config={chartConfig}
+											className="h-[300px] w-full"
+										>
+											<div className="h-full w-full pt-8">
+												<h3 className="text-center text-lg font-bold">
+													{genotypeData.genotype}
+												</h3>
+												<ResponsiveContainer width="100%" height="100%">
+													<BarChart data={genotypeData.data}>
+														<CartesianGrid strokeDasharray="3 3" />
+														<XAxis dataKey="phylogroup" />
+														<YAxis
+															label={{
+																value: "Count",
+																angle: -90,
+																position: "insideLeft",
+															}}
 														/>
-													))}
-												</BarChart>
-											</ResponsiveContainer>
-										</div>
-									</ChartContainer>
-								))
-							: phenotypeData.map((phenotype) => (
-									<ChartContainer
-										key={phenotype.phenotype}
-										config={chartConfig}
-										className="h-[300px] w-full"
-									>
-										<div className="h-full w-full py-3">
-											<h3 className="text-center text-lg font-bold">
-												{phenotype.phenotype}
-											</h3>
-											<ResponsiveContainer width="100%" height="100%">
-												<BarChart data={phenotype.data}>
-													<CartesianGrid strokeDasharray="3 3" />
-													<XAxis dataKey="phylogroup" />
-													<YAxis
-														label={{
-															value: "Count",
-															angle: -90,
-															position: "insideLeft",
-														}}
-													/>
-													<Tooltip />
-													<Legend />
-													{collectionsSamples.map((key) =>
-														["S", "R", "I"].map((letter) => (
+														<Tooltip />
+														<ChartLegend content={<ChartLegendContent />} />
+														{collectionsSamples.map((key) => (
 															<Bar
-																key={`${key}-${letter}`}
-																dataKey={`${key}-${letter}`}
+																key={key}
+																dataKey={key}
 																stackId="a"
-																fill={
-																	chartConfig[`${key}-${letter}`]?.color ||
-																	"#ccc"
-																}
-																name={`${key.replace("-", " - ")} - ${letter}`}
+																fill={chartConfig[key]?.color || "#ccc"}
+																name={key.replace("-", " - ")}
 															/>
-														))
-													)}
-												</BarChart>
-											</ResponsiveContainer>
-										</div>
-									</ChartContainer>
-								))}
-					</>
-				)}
-				{selectedChartType.includes("Radial Tree Chart") && (
-					<div className="py-3">
-						<h3 className="py-5 text-lg font-bold">Radial Tree Chart</h3>
-						<MyChart
-							data={filteredTreeData}
-							annotations={annotations}
-							labels={labels}
-							phylogroup={phylogroup}
-							fimtype={fimtype}
-							validNodes={filteredSampleIDs}
-							selectedAnnotations={selectedAnnotations}
-							ref={chartRef}
-						/>
-					</div>
-				)}
+														))}
+													</BarChart>
+												</ResponsiveContainer>
+											</div>
+										</ChartContainer>
+									))
+								: phenotypeData.map((phenotype) => (
+										<ChartContainer
+											key={phenotype.phenotype}
+											config={chartConfig}
+											className="h-[300px] w-full"
+										>
+											<div className="h-full w-full pt-8">
+												<h3 className="text-center text-lg font-bold">
+													{phenotype.phenotype}
+												</h3>
+												<ResponsiveContainer width="100%" height="100%">
+													<BarChart data={phenotype.data}>
+														<CartesianGrid strokeDasharray="3 3" />
+														<XAxis dataKey="phylogroup" />
+														<YAxis
+															label={{
+																value: "Count",
+																angle: -90,
+																position: "insideLeft",
+															}}
+														/>
+														<Tooltip />
+														<Legend />
+														{collectionsSamples.map((key) =>
+															["S", "R", "I"].map((letter) => (
+																<Bar
+																	key={`${key}-${letter}`}
+																	dataKey={`${key}-${letter}`}
+																	stackId="a"
+																	fill={
+																		chartConfig[`${key}-${letter}`]?.color ||
+																		"#ccc"
+																	}
+																	name={`${key.replace("-", " - ")} - ${letter}`}
+																/>
+															))
+														)}
+													</BarChart>
+												</ResponsiveContainer>
+											</div>
+										</ChartContainer>
+									))}
+						</div>
+					)}
+
+					{selectedChartType.includes("Radial Tree Chart") && (
+						<div className="relative rounded-lg border-gray-300 pb-8 shadow-md">
+							<h3 className="w-full bg-gray-300 px-4 py-3 text-xl font-extrabold text-gray-800 shadow-md">
+								Radial Tree Chart
+							</h3>
+							<MyChart
+								data={filteredTreeData}
+								annotations={annotations}
+								labels={labels}
+								phylogroup={phylogroup}
+								fimtype={fimtype}
+								validNodes={filteredSampleIDs}
+								selectedAnnotations={selectedAnnotations}
+								ref={chartRef}
+							/>
+						</div>
+					)}
+				</div>
 			</div>
 		</div>
 	);
