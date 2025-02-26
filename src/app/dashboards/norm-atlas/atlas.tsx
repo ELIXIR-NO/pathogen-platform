@@ -10,6 +10,14 @@ import {
 } from "@/components/ui/accordion";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
 
 export default function Atlas({ data }: { data: NormDataRecord[] }) {
 	const [selectedMicrobe, setSelectedMicrobe] = useState<string>("");
@@ -64,29 +72,8 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 					onRegionChange={handleRegionChange}
 				/>
 			</div>
-			{/* For Dev only */}
 			<div className="col-span-3 p-4">
 				<div className="space-y-4">
-					<div>
-						<h3 className="font-medium">Selected Microbe:</h3>
-						<p>{selectedMicrobe || "None"}</p>
-					</div>
-					<div>
-						<h3 className="font-medium">Selected Antibiotic:</h3>
-						<p>{selectedAntibiotic || "None"}</p>
-					</div>
-					<div>
-						<h3 className="font-medium">Selected Regions:</h3>
-						<p>
-							{selectedRegions.length > 0 ? selectedRegions.join(", ") : "None"}
-						</p>
-					</div>
-				</div>
-				<div className="space-y-4">
-					<DataSetSelector
-						selectedDataSet={selectedDataSet}
-						onDataSetChange={setSelectedDataSet}
-					/>
 					<YearSelector
 						availableYears={availableYears}
 						selectedYear={selectedYear}
@@ -94,8 +81,20 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 					/>
 				</div>
 			</div>
-			{/* For Dev only */}
-			<div className="col-span-2">Test</div>
+			<div className="col-span-2">
+				<div className="space-y-4">
+					<DataSetSelector
+						selectedDataSet={selectedDataSet}
+						onDataSetChange={setSelectedDataSet}
+					/>
+					<TableView
+						data={data}
+						selectedMicrobe={selectedMicrobe}
+						selectedAntibiotic={selectedAntibiotic}
+						selectedYear={selectedYear}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 }
@@ -192,7 +191,7 @@ function RegionSelector({
 	return (
 		<ScrollArea className="h-[350px] rounded-md border p-4">
 			<div className="flex flex-col space-y-2">
-				<h3 className="font-medium">Select Regions</h3>
+				<h3 className="font-medium">Velg regioner</h3>
 				{regions.map((region) => (
 					<button
 						key={region}
@@ -264,6 +263,83 @@ function YearSelector({
 				</div>
 				<ScrollBar orientation="horizontal" />
 			</ScrollArea>
+		</div>
+	);
+}
+
+interface TableViewProps {
+	data: NormDataRecord[];
+	selectedMicrobe: string;
+	selectedAntibiotic: string;
+	selectedYear?: number;
+}
+
+function TableView({
+	data,
+	selectedMicrobe,
+	selectedAntibiotic,
+	selectedYear,
+}: TableViewProps) {
+	const tableData = useMemo(() => {
+		if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) {
+			return [];
+		}
+
+		const regions = ["Oslo/Akershus", "Nord", "Midt", "Vest", "Sør", "Øst"];
+
+		return regions.map((region) => {
+			const regionData = data.filter(
+				(record) =>
+					record.region === region &&
+					record.Mikrobe === selectedMicrobe &&
+					record.Antibiotika === selectedAntibiotic &&
+					parseInt(record.ProveAar) === selectedYear
+			);
+
+			const total = regionData.reduce(
+				(sum, record) => sum + (record.antall || 0),
+				0
+			);
+			const resistant = regionData.reduce(
+				(sum, record) => sum + (record.antall_R || 0),
+				0
+			);
+			const percentage =
+				total > 0 ? ((resistant / total) * 100).toFixed(1) : "0";
+
+			return {
+				region,
+				total,
+				resistant,
+				percentage,
+			};
+		});
+	}, [data, selectedMicrobe, selectedAntibiotic, selectedYear]);
+
+	return (
+		<div className="rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
+			<Table>
+				<TableHeader>
+					<TableRow>
+						<TableHead>Region</TableHead>
+						<TableHead className="text-right">Antall (n)</TableHead>
+						<TableHead className="text-right">Resistente (n)</TableHead>
+						<TableHead className="text-right">
+							%-andel ({selectedYear})
+						</TableHead>
+					</TableRow>
+				</TableHeader>
+				<TableBody>
+					{tableData.map((row) => (
+						<TableRow key={row.region}>
+							<TableCell>{row.region}</TableCell>
+							<TableCell className="text-right">{row.total}</TableCell>
+							<TableCell className="text-right">{row.resistant}</TableCell>
+							<TableCell className="text-right">{row.percentage}</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
 		</div>
 	);
 }
