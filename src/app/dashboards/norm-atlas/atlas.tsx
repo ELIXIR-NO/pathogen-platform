@@ -9,11 +9,19 @@ import {
 	AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 
 export default function Atlas({ data }: { data: NormDataRecord[] }) {
 	const [selectedMicrobe, setSelectedMicrobe] = useState<string>("");
 	const [selectedAntibiotic, setSelectedAntibiotic] = useState<string>("");
 	const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+	const [selectedDataSet, setSelectedDataSet] = useState<
+		"Blod" | "Sår" | "Urin" | "Luft"
+	>("Blod");
+
+	const filteredData = useMemo(() => {
+		return data.filter((record) => record.Opplegg === selectedDataSet);
+	}, [data, selectedDataSet]);
 
 	const handleSelectionChange = (microbe: string, antibiotic: string) => {
 		setSelectedMicrobe(microbe);
@@ -29,10 +37,10 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 	};
 
 	return (
-		<div className="grid w-screen grid-cols-6 gap-4">
+		<div className="mx-0 grid grid-cols-6 gap-4">
 			<div className="col-span-1 flex flex-col space-y-4">
 				<MicrobeSelector
-					data={data}
+					data={filteredData}
 					selectedMicrobe={selectedMicrobe}
 					selectedAntibiotic={selectedAntibiotic}
 					onSelectionChange={handleSelectionChange}
@@ -60,6 +68,10 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 						</p>
 					</div>
 				</div>
+				<DataSetSelector
+					selectedDataSet={selectedDataSet}
+					onDataSetChange={setSelectedDataSet}
+				/>
 			</div>
 			{/* For Dev only */}
 			<div className="col-span-2"></div>
@@ -103,7 +115,7 @@ export function MicrobeSelector({
 	};
 
 	return (
-		<ScrollArea className="h-[600px] w-[350px] rounded-md border p-4">
+		<ScrollArea className="h-[600px] rounded-md border p-4">
 			<Accordion type="single" collapsible className="w-full">
 				{Object.entries(microbeAntibiotics)
 					.sort()
@@ -157,7 +169,7 @@ function RegionSelector({
 	];
 
 	return (
-		<ScrollArea className="h-[350px] w-[350px] rounded-md border p-4">
+		<ScrollArea className="h-[350px] rounded-md border p-4">
 			<div className="flex flex-col space-y-2">
 				<h3 className="font-medium">Select Regions</h3>
 				{regions.map((region) => (
@@ -173,5 +185,32 @@ function RegionSelector({
 				))}
 			</div>
 		</ScrollArea>
+	);
+}
+
+interface DataSetSelectorProps {
+	selectedDataSet: "Blod" | "Sår" | "Urin" | "Luft";
+	onDataSetChange: (dataSet: "Blod" | "Sår" | "Urin" | "Luft") => void;
+}
+
+function DataSetSelector({
+	selectedDataSet,
+	onDataSetChange,
+}: DataSetSelectorProps) {
+	const dataSets = ["Blod", "Urin", "Luft", "Sår"] as const;
+
+	return (
+		<div className="flex flex-row space-x-2">
+			{dataSets.map((dataSet) => (
+				<Button
+					key={dataSet}
+					variant={selectedDataSet === dataSet ? "default" : "outline"}
+					className="w-full"
+					onClick={() => onDataSetChange(dataSet)}
+				>
+					{dataSet}
+				</Button>
+			))}
+		</div>
 	);
 }
