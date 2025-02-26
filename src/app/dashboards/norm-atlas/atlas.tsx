@@ -8,7 +8,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 
 export default function Atlas({ data }: { data: NormDataRecord[] }) {
@@ -18,10 +18,24 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 	const [selectedDataSet, setSelectedDataSet] = useState<
 		"Blod" | "Sår" | "Urin" | "Luft"
 	>("Blod");
+	const [selectedYear, setSelectedYear] = useState<number>();
 
 	const filteredData = useMemo(() => {
 		return data.filter((record) => record.Opplegg === selectedDataSet);
 	}, [data, selectedDataSet]);
+
+	const availableYears = useMemo(() => {
+		const years = new Set(
+			filteredData
+				.filter(
+					(record) =>
+						(!selectedMicrobe || record.Mikrobe === selectedMicrobe) &&
+						(!selectedAntibiotic || record.Antibiotika === selectedAntibiotic)
+				)
+				.map((record) => parseInt(record.ProveAar))
+		);
+		return Array.from(years).sort((a, b) => a - b);
+	}, [filteredData, selectedMicrobe, selectedAntibiotic]);
 
 	const handleSelectionChange = (microbe: string, antibiotic: string) => {
 		setSelectedMicrobe(microbe);
@@ -68,13 +82,20 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 						</p>
 					</div>
 				</div>
-				<DataSetSelector
-					selectedDataSet={selectedDataSet}
-					onDataSetChange={setSelectedDataSet}
-				/>
+				<div className="space-y-4">
+					<DataSetSelector
+						selectedDataSet={selectedDataSet}
+						onDataSetChange={setSelectedDataSet}
+					/>
+					<YearSelector
+						availableYears={availableYears}
+						selectedYear={selectedYear}
+						onYearChange={setSelectedYear}
+					/>
+				</div>
 			</div>
 			{/* For Dev only */}
-			<div className="col-span-2"></div>
+			<div className="col-span-2">Test</div>
 		</div>
 	);
 }
@@ -211,6 +232,38 @@ function DataSetSelector({
 					{dataSet}
 				</Button>
 			))}
+		</div>
+	);
+}
+
+interface YearSelectorProps {
+	availableYears: number[];
+	selectedYear?: number;
+	onYearChange: (year: number) => void;
+}
+
+function YearSelector({
+	availableYears,
+	selectedYear,
+	onYearChange,
+}: YearSelectorProps) {
+	return (
+		<div className="w-full">
+			<ScrollArea className="w-full whitespace-nowrap">
+				<div className="flex flex-row space-x-2 pb-2">
+					{availableYears.map((year) => (
+						<Button
+							key={year}
+							variant={selectedYear === year ? "default" : "outline"}
+							className="shrink-0"
+							onClick={() => onYearChange(year)}
+						>
+							{year}
+						</Button>
+					))}
+				</div>
+				<ScrollBar orientation="horizontal" />
+			</ScrollArea>
 		</div>
 	);
 }
