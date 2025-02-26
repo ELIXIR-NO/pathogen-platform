@@ -287,33 +287,48 @@ function TableView({
 
 		const regions = ["Oslo/Akershus", "Nord", "Midt", "Vest", "Sør", "Øst"];
 
-		return regions.map((region) => {
-			const regionData = data.filter(
-				(record) =>
-					record.region === region &&
-					record.Mikrobe === selectedMicrobe &&
-					record.Antibiotika === selectedAntibiotic &&
-					parseInt(record.ProveAar) === selectedYear
-			);
+		return regions
+			.map((region) => {
+				const regionData = data.filter(
+					(record) =>
+						record.region === region &&
+						record.Mikrobe === selectedMicrobe &&
+						record.Antibiotika === selectedAntibiotic &&
+						parseInt(record.ProveAar) === selectedYear
+				);
 
-			const total = regionData.reduce(
-				(sum, record) => sum + (record.antall || 0),
-				0
-			);
-			const resistant = regionData.reduce(
-				(sum, record) => sum + (record.antall_R || 0),
-				0
-			);
-			const percentage =
-				total > 0 ? ((resistant / total) * 100).toFixed(1) : "0";
+				if (regionData.length === 0) {
+					return {
+						region,
+						total: "Ikke data",
+						resistant: "Ikke data",
+						percentage: "Ikke data",
+					};
+				}
 
-			return {
-				region,
-				total,
-				resistant,
-				percentage,
-			};
-		});
+				const total = regionData.reduce(
+					(sum, record) => sum + (record.antall || 0),
+					0
+				);
+				const resistant = regionData.reduce(
+					(sum, record) => sum + (record.antall_R || 0),
+					0
+				);
+				const percentage =
+					total > 0 ? ((resistant / total) * 100).toFixed(1) : "0";
+
+				return {
+					region,
+					total,
+					resistant,
+					percentage,
+				};
+			})
+			.sort((a, b) => {
+				if (a.total === "Ikke data") return 1;
+				if (b.total === "Ikke data") return -1;
+				return (Number(b.total) || 0) - (Number(a.total) || 0);
+			});
 	}, [data, selectedMicrobe, selectedAntibiotic, selectedYear]);
 
 	return (
