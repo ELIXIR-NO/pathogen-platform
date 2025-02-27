@@ -100,7 +100,6 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 						selectedMicrobe={selectedMicrobe}
 						selectedAntibiotic={selectedAntibiotic}
 						selectedYear={selectedYear}
-						hoveredRegion={hoveredRegion}
 						onHover={setHoveredRegion}
 					/>
 					<TableView
@@ -391,7 +390,6 @@ interface ResistanceChartProps {
 	selectedMicrobe: string;
 	selectedAntibiotic: string;
 	selectedYear?: number;
-	hoveredRegion: string | null;
 	onHover: (region: string | null) => void;
 }
 
@@ -400,7 +398,6 @@ function ResistanceChart({
 	selectedMicrobe,
 	selectedAntibiotic,
 	selectedYear,
-	hoveredRegion,
 	onHover,
 }: ResistanceChartProps) {
 	const chartData = useMemo(() => {
