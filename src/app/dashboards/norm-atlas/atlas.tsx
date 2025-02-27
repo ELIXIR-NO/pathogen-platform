@@ -67,7 +67,7 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 	};
 
 	return (
-		<div className="mx-0 grid grid-cols-6 gap-4">
+		<div className="mx-0 grid grid-cols-6 gap-2">
 			<div className="col-span-1 flex flex-col space-y-4">
 				<MicrobeSelector
 					data={filteredData}
@@ -270,9 +270,9 @@ function YearSelector({
 	onYearChange,
 }: YearSelectorProps) {
 	return (
-		<div className="w-full">
+		<div className="rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
 			<ScrollArea className="w-full whitespace-nowrap">
-				<div className="flex flex-row space-x-2 pb-2">
+				<div className="flex flex-row justify-center space-x-2 pb-2">
 					{availableYears.map((year) => (
 						<Button
 							key={year}
@@ -584,7 +584,7 @@ function ResistanceTrendChart({
 
 	return (
 		<div className="rounded-lg border bg-card p-4">
-			<ChartContainer config={chartConfig} className="aspect-[4/3] w-full">
+			<ChartContainer config={chartConfig} className="aspect-video w-full">
 				<BarChart
 					data={chartData}
 					margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
