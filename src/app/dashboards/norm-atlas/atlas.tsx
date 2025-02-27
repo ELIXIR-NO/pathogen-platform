@@ -482,6 +482,11 @@ function ResistanceChart({
 						fontSize={12}
 						domain={[0, maxResistance]}
 						unit="%"
+						label={{
+							value: "Resistens (%)",
+							angle: -90,
+							position: "insideLeft",
+						}}
 					/>
 					<ChartTooltip content={<ChartTooltipContent />} />
 					<Bar
@@ -596,6 +601,11 @@ function ResistanceTrendChart({
 						fontSize={12}
 						domain={[0, maxResistance]}
 						unit="%"
+						label={{
+							value: "Resistens (%)",
+							angle: -90,
+							position: "insideLeft",
+						}}
 					/>
 					<ChartTooltip content={<ChartTooltipContent />} />
 					{selectedRegions.map((region) => (
