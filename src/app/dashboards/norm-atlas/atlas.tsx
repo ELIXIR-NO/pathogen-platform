@@ -34,6 +34,7 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 		"Blod" | "Sår" | "Urin" | "Luft"
 	>("Blod");
 	const [selectedYear, setSelectedYear] = useState<number>();
+	const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
 
 	const filteredData = useMemo(() => {
 		return data.filter((record) => record.Opplegg === selectedDataSet);
@@ -99,12 +100,16 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 						selectedMicrobe={selectedMicrobe}
 						selectedAntibiotic={selectedAntibiotic}
 						selectedYear={selectedYear}
+						hoveredRegion={hoveredRegion}
+						onHover={setHoveredRegion}
 					/>
 					<TableView
 						data={data}
 						selectedMicrobe={selectedMicrobe}
 						selectedAntibiotic={selectedAntibiotic}
 						selectedYear={selectedYear}
+						hoveredRegion={hoveredRegion}
+						onHover={setHoveredRegion}
 					/>
 				</div>
 			</div>
@@ -285,6 +290,8 @@ interface TableViewProps {
 	selectedMicrobe: string;
 	selectedAntibiotic: string;
 	selectedYear?: number;
+	hoveredRegion: string | null;
+	onHover: (region: string | null) => void;
 }
 
 function TableView({
@@ -292,6 +299,8 @@ function TableView({
 	selectedMicrobe,
 	selectedAntibiotic,
 	selectedYear,
+	hoveredRegion,
+	onHover,
 }: TableViewProps) {
 	const tableData = useMemo(() => {
 		if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) {
@@ -359,7 +368,12 @@ function TableView({
 				</TableHeader>
 				<TableBody>
 					{tableData.map((row) => (
-						<TableRow key={row.region}>
+						<TableRow
+							key={row.region}
+							className={hoveredRegion === row.region ? "bg-accent" : ""}
+							onMouseEnter={() => onHover(row.region)}
+							onMouseLeave={() => onHover(null)}
+						>
 							<TableCell>{row.region}</TableCell>
 							<TableCell className="text-right">{row.total}</TableCell>
 							<TableCell className="text-right">{row.resistant}</TableCell>
@@ -377,6 +391,8 @@ interface ResistanceChartProps {
 	selectedMicrobe: string;
 	selectedAntibiotic: string;
 	selectedYear?: number;
+	hoveredRegion: string | null;
+	onHover: (region: string | null) => void;
 }
 
 function ResistanceChart({
@@ -384,6 +400,8 @@ function ResistanceChart({
 	selectedMicrobe,
 	selectedAntibiotic,
 	selectedYear,
+	hoveredRegion,
+	onHover,
 }: ResistanceChartProps) {
 	const chartData = useMemo(() => {
 		if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) {
@@ -445,6 +463,7 @@ function ResistanceChart({
 					data={chartData}
 					accessibilityLayer
 					margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
+					onMouseLeave={() => onHover(null)}
 				>
 					<CartesianGrid vertical={false} />
 					<XAxis
@@ -462,7 +481,12 @@ function ResistanceChart({
 						unit="%"
 					/>
 					<ChartTooltip content={<ChartTooltipContent />} />
-					<Bar dataKey="resistance" fill="var(--color-resistance)" radius={4} />
+					<Bar
+						dataKey="resistance"
+						fill="hsl(var(--chart-1))"
+						radius={4}
+						onMouseEnter={(data) => onHover(data.region)}
+					/>
 				</BarChart>
 			</ChartContainer>
 		</div>
