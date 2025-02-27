@@ -87,6 +87,12 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 						selectedYear={selectedYear}
 						onYearChange={setSelectedYear}
 					/>
+					<ResistanceTrendChart
+						data={data}
+						selectedMicrobe={selectedMicrobe}
+						selectedAntibiotic={selectedAntibiotic}
+						selectedRegions={selectedRegions}
+					/>
 				</div>
 			</div>
 			<div className="col-span-2">
@@ -484,6 +490,123 @@ function ResistanceChart({
 						radius={4}
 						onMouseEnter={(data) => onHover(data.region)}
 					/>
+				</BarChart>
+			</ChartContainer>
+		</div>
+	);
+}
+
+interface ResistanceTrendChartProps {
+	data: NormDataRecord[];
+	selectedMicrobe: string;
+	selectedAntibiotic: string;
+	selectedRegions: string[];
+}
+
+interface YearDataEntry extends Record<string, number> {
+	year: number;
+}
+
+function ResistanceTrendChart({
+	data,
+	selectedMicrobe,
+	selectedAntibiotic,
+	selectedRegions,
+}: ResistanceTrendChartProps) {
+	const chartData = useMemo<YearDataEntry[]>(() => {
+		if (
+			!selectedMicrobe ||
+			!selectedAntibiotic ||
+			selectedRegions.length === 0
+		) {
+			return [];
+		}
+
+		const yearData = new Map<number, YearDataEntry>();
+
+		data
+			.filter(
+				(record) =>
+					record.Mikrobe === selectedMicrobe &&
+					record.Antibiotika === selectedAntibiotic &&
+					selectedRegions.includes(record.region)
+			)
+			.forEach((record) => {
+				const year = parseInt(record.ProveAar);
+				if (!yearData.has(year)) {
+					yearData.set(year, { year } as YearDataEntry);
+				}
+
+				const yearEntry = yearData.get(year)!;
+				const region = record.region;
+
+				const total = record.antall || 0;
+				const resistant = record.antall_R || 0;
+				if (total > 0) {
+					yearEntry[region] = (resistant / total) * 100;
+				}
+			});
+
+		return Array.from(yearData.values()).sort((a, b) => a.year - b.year);
+	}, [data, selectedMicrobe, selectedAntibiotic, selectedRegions]);
+
+	const maxResistance = useMemo(() => {
+		if (chartData.length === 0) return 100;
+		const maxValues = chartData.map((entry) =>
+			Math.max(...selectedRegions.map((region) => entry[region] || 0))
+		);
+		return Math.ceil(Math.max(...maxValues));
+	}, [chartData, selectedRegions]);
+
+	const regionColors: { [key: string]: string } = {
+		"Oslo/Akershus": "hsl(var(--chart-1))",
+		Nord: "hsl(var(--chart-2))",
+		Midt: "hsl(var(--chart-3))",
+		Vest: "hsl(var(--chart-4))",
+		Sør: "hsl(var(--chart-5))",
+		Øst: "hsl(var(--chart-6))",
+		Norge: "hsl(var(--chart-7))",
+	};
+
+	const chartConfig = Object.fromEntries(
+		selectedRegions.map((region) => [
+			region,
+			{
+				label: region,
+				color: regionColors[region],
+			},
+		])
+	) satisfies ChartConfig;
+
+	if (!selectedMicrobe || !selectedAntibiotic || selectedRegions.length === 0) {
+		return null;
+	}
+
+	return (
+		<div className="rounded-lg border bg-card p-4">
+			<ChartContainer config={chartConfig} className="aspect-[4/3] w-full">
+				<BarChart
+					data={chartData}
+					margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
+				>
+					<CartesianGrid vertical={false} />
+					<XAxis dataKey="year" tickLine={false} fontSize={12} />
+					<YAxis
+						tickLine={false}
+						fontSize={12}
+						domain={[0, maxResistance]}
+						unit="%"
+					/>
+					<ChartTooltip content={<ChartTooltipContent />} />
+					{selectedRegions.map((region) => (
+						<Bar
+							key={region}
+							dataKey={region}
+							name={region}
+							fill={regionColors[region]}
+							radius={4}
+						/>
+					))}
 				</BarChart>
 			</ChartContainer>
 		</div>
