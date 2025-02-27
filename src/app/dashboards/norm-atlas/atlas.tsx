@@ -18,6 +18,13 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import {
+	ChartConfig,
+	ChartContainer,
+	ChartTooltip,
+	ChartTooltipContent,
+} from "@/components/ui/chart";
+import { Bar, BarChart, XAxis, YAxis, CartesianGrid } from "recharts";
 
 export default function Atlas({ data }: { data: NormDataRecord[] }) {
 	const [selectedMicrobe, setSelectedMicrobe] = useState<string>("");
@@ -86,6 +93,12 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 					<DataSetSelector
 						selectedDataSet={selectedDataSet}
 						onDataSetChange={setSelectedDataSet}
+					/>
+					<ResistanceChart
+						data={data}
+						selectedMicrobe={selectedMicrobe}
+						selectedAntibiotic={selectedAntibiotic}
+						selectedYear={selectedYear}
 					/>
 					<TableView
 						data={data}
@@ -355,6 +368,103 @@ function TableView({
 					))}
 				</TableBody>
 			</Table>
+		</div>
+	);
+}
+
+interface ResistanceChartProps {
+	data: NormDataRecord[];
+	selectedMicrobe: string;
+	selectedAntibiotic: string;
+	selectedYear?: number;
+}
+
+function ResistanceChart({
+	data,
+	selectedMicrobe,
+	selectedAntibiotic,
+	selectedYear,
+}: ResistanceChartProps) {
+	const chartData = useMemo(() => {
+		if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) {
+			return [];
+		}
+
+		const regions = ["Oslo/Akershus", "Nord", "Midt", "Vest", "Sør", "Øst"];
+		return regions
+			.map((region) => {
+				const regionData = data.filter(
+					(record) =>
+						record.region === region &&
+						record.Mikrobe === selectedMicrobe &&
+						record.Antibiotika === selectedAntibiotic &&
+						parseInt(record.ProveAar) === selectedYear
+				);
+
+				if (regionData.length === 0) {
+					return { region, resistance: 0 };
+				}
+
+				const total = regionData.reduce(
+					(sum, record) => sum + (record.antall || 0),
+					0
+				);
+				const resistant = regionData.reduce(
+					(sum, record) => sum + (record.antall_R || 0),
+					0
+				);
+				const percentage = total > 0 ? (resistant / total) * 100 : 0;
+
+				return {
+					region,
+					resistance: Number(percentage.toFixed(1)),
+				};
+			})
+			.sort((a, b) => b.resistance - a.resistance);
+	}, [data, selectedMicrobe, selectedAntibiotic, selectedYear]);
+
+	const maxResistance = useMemo(() => {
+		return Math.ceil(Math.max(...chartData.map((d) => d.resistance)));
+	}, [chartData]);
+
+	const chartConfig = {
+		resistance: {
+			label: "Resistens",
+			color: "hsl(var(--chart-1))",
+		},
+	} satisfies ChartConfig;
+
+	if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) {
+		return null;
+	}
+
+	return (
+		<div className="rounded-lg border bg-card p-4">
+			<ChartContainer config={chartConfig} className="aspect-[4/3] w-full">
+				<BarChart
+					data={chartData}
+					accessibilityLayer
+					margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
+				>
+					<CartesianGrid vertical={false} />
+					<XAxis
+						dataKey="region"
+						tickLine={false}
+						fontSize={12}
+						angle={-45}
+						textAnchor="end"
+						height={70}
+					/>
+					<YAxis
+						tickLine={false}
+						fontSize={12}
+						domain={[0, maxResistance]}
+						unit="%"
+					/>
+					<ChartTooltip content={<ChartTooltipContent />} />
+					<Bar dataKey="resistance" fill="var(--color-resistance)" radius={4} />
+				</BarChart>
+			</ChartContainer>
 		</div>
 	);
 }
