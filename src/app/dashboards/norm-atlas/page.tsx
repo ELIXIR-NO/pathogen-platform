@@ -7,9 +7,11 @@ import {
 	TabsContent,
 } from "@/components/ui/tabs-modified";
 import AntibioticResistanceAndDiseasesDashboards3 from "../antibiotic-resistance-and-diseases-dashboards-4/page";
+import { loadGeoJSON } from "@/lib/data/geojsonLoader";
 
 export default async function NormAtlas() {
 	const data = await getNormAtlasCSVData();
+	const geoData = await loadGeoJSON();
 
 	return (
 		<Tabs defaultValue="atlas" className="w-full">
@@ -31,7 +33,7 @@ export default async function NormAtlas() {
 			</TabsList>
 			<TabsContent value="atlas">
 				<div className="-mx-[calc((100vw-75vw)/2)] mt-10 w-screen pl-2 pr-16">
-					<Atlas data={data} />
+					<Atlas data={data} geoData={geoData} />
 				</div>
 			</TabsContent>
 			<TabsContent value="trends" className="mt-10">
