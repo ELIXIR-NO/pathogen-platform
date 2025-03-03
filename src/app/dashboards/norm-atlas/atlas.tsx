@@ -109,6 +109,7 @@ export default function Atlas({
 						data={data}
 						selectedMicrobe={selectedMicrobe}
 						selectedAntibiotic={selectedAntibiotic}
+						selectedDataSet={selectedDataSet}
 						selectedYear={selectedYear}
 					/>
 					<ResistanceTrendChart
@@ -116,6 +117,7 @@ export default function Atlas({
 						selectedMicrobe={selectedMicrobe}
 						selectedAntibiotic={selectedAntibiotic}
 						selectedRegions={selectedRegions}
+						selectedDataSet={selectedDataSet}
 					/>
 				</div>
 			</div>
@@ -130,6 +132,7 @@ export default function Atlas({
 						selectedMicrobe={selectedMicrobe}
 						selectedAntibiotic={selectedAntibiotic}
 						selectedYear={selectedYear}
+						selectedDataSet={selectedDataSet}
 						onHover={setHoveredRegion}
 					/>
 					<TableView
@@ -138,6 +141,7 @@ export default function Atlas({
 						selectedAntibiotic={selectedAntibiotic}
 						selectedYear={selectedYear}
 						hoveredRegion={hoveredRegion}
+						selectedDataSet={selectedDataSet}
 						onHover={setHoveredRegion}
 					/>
 				</div>
@@ -331,6 +335,7 @@ interface TableViewProps {
 	selectedAntibiotic: string;
 	selectedYear?: number;
 	hoveredRegion: string | null;
+	selectedDataSet: string;
 	onHover: (region: string | null) => void;
 }
 
@@ -340,6 +345,7 @@ function TableView({
 	selectedAntibiotic,
 	selectedYear,
 	hoveredRegion,
+	selectedDataSet,
 	onHover,
 }: TableViewProps) {
 	const tableData = useMemo(() => {
@@ -356,6 +362,7 @@ function TableView({
 						record.region === region &&
 						record.Mikrobe === selectedMicrobe &&
 						record.Antibiotika === selectedAntibiotic &&
+						record.Opplegg === selectedDataSet &&
 						parseInt(record.ProveAar) === selectedYear
 				);
 
@@ -391,7 +398,13 @@ function TableView({
 				if (b.total === "Ikke data") return -1;
 				return (Number(b.total) || 0) - (Number(a.total) || 0);
 			});
-	}, [data, selectedMicrobe, selectedAntibiotic, selectedYear]);
+	}, [
+		data,
+		selectedMicrobe,
+		selectedAntibiotic,
+		selectedYear,
+		selectedDataSet,
+	]);
 
 	return (
 		<div className="rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
@@ -431,6 +444,7 @@ interface ResistanceChartProps {
 	selectedMicrobe: string;
 	selectedAntibiotic: string;
 	selectedYear?: number;
+	selectedDataSet: string;
 	onHover: (region: string | null) => void;
 }
 
@@ -439,6 +453,7 @@ function ResistanceChart({
 	selectedMicrobe,
 	selectedAntibiotic,
 	selectedYear,
+	selectedDataSet,
 	onHover,
 }: ResistanceChartProps) {
 	const chartData = useMemo(() => {
@@ -454,6 +469,7 @@ function ResistanceChart({
 						record.region === region &&
 						record.Mikrobe === selectedMicrobe &&
 						record.Antibiotika === selectedAntibiotic &&
+						record.Opplegg === selectedDataSet &&
 						parseInt(record.ProveAar) === selectedYear
 				);
 
@@ -478,7 +494,13 @@ function ResistanceChart({
 				};
 			})
 			.sort((a, b) => b.resistance - a.resistance);
-	}, [data, selectedMicrobe, selectedAntibiotic, selectedYear]);
+	}, [
+		data,
+		selectedMicrobe,
+		selectedAntibiotic,
+		selectedYear,
+		selectedDataSet,
+	]);
 
 	const maxResistance = useMemo(() => {
 		return Math.ceil(Math.max(...chartData.map((d) => d.resistance)));
@@ -545,6 +567,7 @@ interface ResistanceTrendChartProps {
 	selectedMicrobe: string;
 	selectedAntibiotic: string;
 	selectedRegions: string[];
+	selectedDataSet: string;
 }
 
 interface YearDataEntry extends Record<string, number> {
@@ -556,6 +579,7 @@ function ResistanceTrendChart({
 	selectedMicrobe,
 	selectedAntibiotic,
 	selectedRegions,
+	selectedDataSet,
 }: ResistanceTrendChartProps) {
 	const chartData = useMemo<YearDataEntry[]>(() => {
 		if (
@@ -573,6 +597,7 @@ function ResistanceTrendChart({
 				(record) =>
 					record.Mikrobe === selectedMicrobe &&
 					record.Antibiotika === selectedAntibiotic &&
+					record.Opplegg === selectedDataSet &&
 					selectedRegions.includes(record.region)
 			)
 			.forEach((record) => {
@@ -592,7 +617,13 @@ function ResistanceTrendChart({
 			});
 
 		return Array.from(yearData.values()).sort((a, b) => a.year - b.year);
-	}, [data, selectedMicrobe, selectedAntibiotic, selectedRegions]);
+	}, [
+		data,
+		selectedMicrobe,
+		selectedAntibiotic,
+		selectedRegions,
+		selectedDataSet,
+	]);
 
 	const maxResistance = useMemo(() => {
 		if (chartData.length === 0) return 100;
@@ -691,6 +722,7 @@ export interface MyChartProps {
 	data: NormDataRecord[];
 	selectedMicrobe: string;
 	selectedAntibiotic: string;
+	selectedDataSet: string;
 	selectedYear?: number;
 }
 
@@ -703,6 +735,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			data,
 			selectedMicrobe,
 			selectedAntibiotic,
+			selectedDataSet,
 			selectedYear,
 		},
 		ref: React.Ref<SVGSVGElement>
@@ -760,6 +793,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 						region.includes(record.region) &&
 						record.Mikrobe === selectedMicrobe &&
 						record.Antibiotika === selectedAntibiotic &&
+						record.Opplegg === selectedDataSet &&
 						parseInt(record.ProveAar) === selectedYear
 				);
 
@@ -944,6 +978,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			hoveredRegion,
 			selectedMicrobe,
 			selectedAntibiotic,
+			selectedDataSet,
 			selectedYear,
 		]);
 
