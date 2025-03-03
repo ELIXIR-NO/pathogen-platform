@@ -97,8 +97,22 @@ export default function Atlas({
 					onRegionChange={handleRegionChange}
 				/>
 			</div>
-			<div className="col-span-3 p-4">
+			<div className="col-span-3">
 				<div className="space-y-4">
+					<div className="rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
+						<div className="text-sm">
+							{selectedMicrobe && selectedAntibiotic ? (
+								<span>
+									Viser data for{" "}
+									<span className="font-semibold">{selectedMicrobe}</span> mot{" "}
+									<span className="font-semibold">{selectedAntibiotic}</span> i{" "}
+									<span className="font-semibold">{selectedYear}</span>
+								</span>
+							) : (
+								<span>Velg mikrobe og antibiotika for å se data</span>
+							)}
+						</div>
+					</div>
 					<YearSelector
 						availableYears={availableYears}
 						selectedYear={selectedYear}
