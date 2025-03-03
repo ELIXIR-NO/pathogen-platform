@@ -1,7 +1,13 @@
 "use client";
 
 import { NormDataRecord } from "@/lib/data/csvUtils";
-import React, { useMemo, useState } from "react";
+import React, {
+	forwardRef,
+	useImperativeHandle,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import {
 	Accordion,
 	AccordionContent,
@@ -24,9 +30,18 @@ import {
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, XAxis, YAxis, CartesianGrid } from "recharts";
+import { Bar, BarChart, XAxis, YAxis, CartesianGrid, Cell } from "recharts";
+import * as d3 from "d3";
+import { geoPath, geoMercator, GeoProjection } from "d3-geo";
+import { GeoJson } from "@/lib/data/geojsonLoader";
 
-export default function Atlas({ data }: { data: NormDataRecord[] }) {
+export default function Atlas({
+	data,
+	geoData,
+}: {
+	data: NormDataRecord[];
+	geoData: GeoJson;
+}) {
 	const [selectedMicrobe, setSelectedMicrobe] = useState<string>("");
 	const [selectedAntibiotic, setSelectedAntibiotic] = useState<string>("");
 	const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
@@ -87,6 +102,15 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 						selectedYear={selectedYear}
 						onYearChange={setSelectedYear}
 					/>
+					<MyChart
+						geoData={geoData}
+						hoveredRegion={hoveredRegion}
+						onHover={setHoveredRegion}
+						data={data}
+						selectedMicrobe={selectedMicrobe}
+						selectedAntibiotic={selectedAntibiotic}
+						selectedYear={selectedYear}
+					/>
 					<ResistanceTrendChart
 						data={data}
 						selectedMicrobe={selectedMicrobe}
@@ -121,6 +145,17 @@ export default function Atlas({ data }: { data: NormDataRecord[] }) {
 		</div>
 	);
 }
+
+const getGradientColor = (value: number) => {
+	if (value < 1) return "hsl(var(--red-1))";
+	if (value > 1 && value <= 2.5) return "hsl(var(--red-2))";
+	if (value > 2.5 && value <= 5) return "hsl(var(--red-3))";
+	if (value > 5 && value <= 10) return "hsl(var(--red-4))";
+	if (value > 10 && value <= 15) return "hsl(var(--red-5))";
+	if (value > 15 && value <= 25) return "hsl(var(--red-6))";
+	if (value > 25 && value <= 50) return "hsl(var(--red-7))";
+	return "hsl(var(--red-8))";
+};
 
 interface MicrobeSelectorProps {
 	data: NormDataRecord[];
@@ -439,6 +474,7 @@ function ResistanceChart({
 				return {
 					region,
 					resistance: Number(percentage.toFixed(1)),
+					fill: getGradientColor(percentage),
 				};
 			})
 			.sort((a, b) => b.resistance - a.resistance);
@@ -491,10 +527,13 @@ function ResistanceChart({
 					<ChartTooltip content={<ChartTooltipContent />} />
 					<Bar
 						dataKey="resistance"
-						fill="hsl(var(--chart-1))"
 						radius={4}
 						onMouseEnter={(data) => onHover(data.region)}
-					/>
+					>
+						{chartData.map((entry, index) => (
+							<Cell key={`cell-${index}`} fill={entry.fill} />
+						))}
+					</Bar>
 				</BarChart>
 			</ChartContainer>
 		</div>
@@ -622,3 +661,317 @@ function ResistanceTrendChart({
 		</div>
 	);
 }
+
+const useWindowSize = () => {
+	const [size, setSize] = useState<{ width: number; height: number }>({
+		width: 1000,
+		height: 800,
+	});
+
+	useMemo(() => {
+		if (typeof window === "undefined") return;
+
+		const handleResize = () => {
+			setSize({ width: window.innerWidth, height: window.innerHeight });
+		};
+
+		handleResize();
+		window.addEventListener("resize", handleResize);
+
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
+	return size;
+};
+
+export interface MyChartProps {
+	geoData: GeoJson;
+	hoveredRegion: string | null;
+	onHover: (region: string | null) => void;
+	data: NormDataRecord[];
+	selectedMicrobe: string;
+	selectedAntibiotic: string;
+	selectedYear?: number;
+}
+
+export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
+	(
+		{
+			geoData,
+			hoveredRegion,
+			onHover,
+			data,
+			selectedMicrobe,
+			selectedAntibiotic,
+			selectedYear,
+		},
+		ref: React.Ref<SVGSVGElement>
+	) => {
+		const chartRef = useRef<SVGSVGElement>(null);
+		const { width, height } = useWindowSize();
+		const [mouseOn, setMouseOn] = useState<boolean | null>(null);
+		const [tooltip, setTooltip] = useState<{
+			visible: boolean;
+			x: number;
+			y: number;
+			text: string;
+		}>({
+			visible: false,
+			x: 0,
+			y: 0,
+			text: "",
+		});
+
+		useImperativeHandle(ref, () => chartRef.current!);
+
+		useMemo(() => {
+			if (!chartRef.current || !geoData) return;
+
+			const svg = d3.select(chartRef.current);
+			svg.selectAll("g").remove();
+
+			const projection: GeoProjection = geoMercator()
+				.scale(1000)
+				.translate([100, 1900]);
+
+			const pathGenerator = geoPath(projection);
+
+			const g = svg.append("g").attr("id", "areas");
+
+			const regions: Record<string, string[]> = {
+				Nord: ["Nordland", "Troms", "Finnmark"],
+				Midt: ["Sør-Trøndelag", "Nord-Trøndelag"],
+				Vest: ["Hordaland", "Sogn og Fjordane", "Møre og Romsdal", "Rogaland"],
+				Sør: ["Telemark", "Aust-Agder", "Vest-Agder"],
+				Øst: ["Buskerud", "Oppland", "Hedmark", "Vestfold", "Østfold"],
+				"Oslo/Akershus": ["Oslo", "Akershus"],
+			};
+
+			const stateToRegion: Record<string, string> = {};
+			Object.entries(regions).forEach(([region, states]) => {
+				states.forEach((state) => {
+					stateToRegion[state] = region;
+				});
+			});
+
+			const tableData = Object.keys(regions).map((region) => {
+				const regionData = data.filter(
+					(record) =>
+						region.includes(record.region) &&
+						record.Mikrobe === selectedMicrobe &&
+						record.Antibiotika === selectedAntibiotic &&
+						parseInt(record.ProveAar) === selectedYear
+				);
+
+				if (regionData.length === 0) {
+					return {
+						region,
+						total: "Ikke data",
+						resistant: "Ikke data",
+						percentage: "Ikke data",
+					};
+				}
+
+				const total = regionData.reduce(
+					(sum, record) => sum + (record.antall || 0),
+					0
+				);
+				const resistant = regionData.reduce(
+					(sum, record) => sum + (record.antall_R || 0),
+					0
+				);
+				const percentage =
+					total > 0 ? ((resistant / total) * 100).toFixed(1) : "0";
+
+				return {
+					region,
+					total,
+					resistant,
+					percentage,
+				};
+			});
+
+			const regionResistance: Record<string, number> = tableData.reduce(
+				(acc, item) => {
+					acc[item.region] = parseFloat(item.percentage);
+					return acc;
+				},
+				{} as Record<string, number>
+			);
+
+			g.append("g")
+				.selectAll("path")
+				.data(geoData.features)
+				.enter()
+				.append("path")
+				.attr("d", (d: any) => pathGenerator(d))
+				.attr("stroke", "#000")
+				.attr("fill", "none");
+
+			const highlightedRegions = g
+				.append("g")
+				.attr("id", "highlighted-regions");
+
+			Object.entries(regions).forEach(([region, states]) => {
+				const regionFeatures = geoData.features.filter((d: any) =>
+					states.includes(d.properties.NAVN)
+				);
+
+				const regionGroup = highlightedRegions
+					.append("g")
+					.attr("id", `region-${region}`);
+
+				const regionPaths = regionGroup
+					.selectAll("path")
+					.data(regionFeatures)
+					.enter()
+					.append("path")
+					.attr("d", (d: any) => pathGenerator(d))
+					.attr("stroke", "black")
+					.attr("stroke-width", 1)
+					.attr("fill", (d: any) => {
+						const regionName = stateToRegion[d.properties.NAVN];
+						const percentage = regionResistance[regionName] || 0;
+						return getGradientColor(percentage);
+					})
+					.attr("data-region", region)
+					.attr("region", "region");
+
+				regionPaths
+					.on("mouseenter", function (event, d: any) {
+						const regionName =
+							stateToRegion[d.properties.NAVN] || hoveredRegion;
+						onHover(regionName);
+						setMouseOn(true);
+
+						const regionData = tableData.find(
+							(item) => item.region === regionName
+						);
+						const percentage = regionData
+							? `${regionData.percentage}%`
+							: "Ikke data";
+
+						d3.selectAll(`[region=region]`).style("opacity", 0.3);
+						d3.selectAll(`[data-region='${regionName}']`).style("opacity", 1);
+
+						setTooltip({
+							visible: true,
+							x: event.pageX,
+							y: event.pageY,
+							text: `${regionName}:, ${percentage}`,
+						});
+					})
+					.on("mousemove", function (event) {
+						setTooltip((prev) => ({
+							...prev,
+							x: event.pageX,
+							y: event.pageY,
+						}));
+					})
+					.on("mouseleave", function () {
+						onHover(null);
+						setMouseOn(false);
+						d3.selectAll("path").style("opacity", 1);
+						setTooltip({ visible: false, x: 0, y: 0, text: "" });
+					});
+
+				if (hoveredRegion && !mouseOn) {
+					d3.selectAll(`[region=region]`).style("opacity", 0.3);
+
+					d3.selectAll(`[data-region='${hoveredRegion}']`).style("opacity", 1);
+				} else {
+					d3.selectAll("path").style("opacity", 1);
+				}
+			});
+
+			const legendWidth = 200;
+			const legendHeight = 180;
+
+			const legend = svg.append("g").attr("transform", `translate(800, 620)`);
+
+			legend
+				.append("rect")
+				.attr("width", legendWidth)
+				.attr("height", legendHeight)
+				.attr("fill", "#fff")
+				.attr("stroke", "#000")
+				.attr("stroke-width", 1);
+
+			const colors = [
+				"hsl(var(--red-1))",
+				"hsl(var(--red-2))",
+				"hsl(var(--red-3))",
+				"hsl(var(--red-4))",
+				"hsl(var(--red-5))",
+				"hsl(var(--red-6))",
+				"hsl(var(--red-7))",
+				"hsl(var(--red-8))",
+			];
+
+			const labels = [
+				"<1%",
+				"1-2.5%",
+				"2.5-5%",
+				"5-10%",
+				"10-15%",
+				"15-25%",
+				"25-50%",
+				">50%",
+			];
+
+			labels.forEach((label, index) => {
+				legend
+					.append("rect")
+					.attr("x", 10)
+					.attr("y", 13 + index * 20)
+					.attr("width", 14)
+					.attr("height", 14)
+					.attr("fill", colors[index]);
+
+				legend
+					.append("text")
+					.attr("x", 30)
+					.attr("y", 20 + index * 20)
+					.attr("dy", ".35em")
+					.style("font-size", "16px")
+					.text(label);
+			});
+		}, [
+			geoData,
+			width,
+			height,
+			data,
+			hoveredRegion,
+			selectedMicrobe,
+			selectedAntibiotic,
+			selectedYear,
+		]);
+
+		return (
+			<div className="chart-container rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
+				<ScrollArea className="w-full whitespace-nowrap">
+					<svg
+						ref={chartRef}
+						className="chart-svg h-full w-full"
+						viewBox="0 0 1000 800"
+						preserveAspectRatio="xMidYMid meet"
+					></svg>
+				</ScrollArea>
+
+				{tooltip.visible && (
+					<div
+						className="tooltip pointer-events-none absolute z-50 rounded bg-black bg-opacity-70 p-2 text-sm text-white"
+						style={{
+							left: `${tooltip.x + 10}px`,
+							top: `${tooltip.y + 10}px`,
+						}}
+					>
+						{tooltip.text}
+					</div>
+				)}
+			</div>
+		);
+	}
+);
+
+MyChart.displayName = "MyChart";
