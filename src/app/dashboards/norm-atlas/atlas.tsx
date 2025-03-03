@@ -42,13 +42,15 @@ export default function Atlas({
 	data: NormDataRecord[];
 	geoData: GeoJson;
 }) {
-	const [selectedMicrobe, setSelectedMicrobe] = useState<string>("");
-	const [selectedAntibiotic, setSelectedAntibiotic] = useState<string>("");
-	const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+	const [selectedMicrobe, setSelectedMicrobe] =
+		useState<string>("Enterobacter");
+	const [selectedAntibiotic, setSelectedAntibiotic] =
+		useState<string>("Cefotaxim");
+	const [selectedRegions, setSelectedRegions] = useState<string[]>(["Norge"]);
 	const [selectedDataSet, setSelectedDataSet] = useState<
 		"Blod" | "Sår" | "Urin" | "Luft"
 	>("Blod");
-	const [selectedYear, setSelectedYear] = useState<number>();
+	const [selectedYear, setSelectedYear] = useState<number>(2022);
 	const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
 
 	const filteredData = useMemo(() => {
