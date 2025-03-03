@@ -17,8 +17,6 @@ const fontSans = FontSans({
 	variable: "--font-sans",
 });
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
 	title: "Pathogen Portal",
 	description: "Pathogen Portal",
