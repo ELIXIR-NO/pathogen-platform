@@ -1,3 +1,4 @@
+import HighlightPanel from "@/components/highlight-panel";
 import QuickView from "@/components/quick-view";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
 				enables sharing pathogen data and their associated
 				clinical/epidemiological metadata under controlled access.
 			</div>
+			<HighlightPanel />
 			<QuickView title="One Health" searchFor="tags" searchTerm="One health" />
 			<QuickView
 				title="Antimicrobial resistance"
