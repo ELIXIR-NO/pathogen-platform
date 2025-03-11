@@ -30,10 +30,20 @@ import {
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, XAxis, YAxis, CartesianGrid, Cell } from "recharts";
+import {
+	Bar,
+	BarChart,
+	XAxis,
+	YAxis,
+	CartesianGrid,
+	Cell,
+	ComposedChart,
+	Line,
+} from "recharts";
 import * as d3 from "d3";
 import { geoPath, geoMercator, GeoProjection } from "d3-geo";
 import { GeoJson } from "@/lib/data/geojsonLoader";
+import * as turf from "@turf/turf";
 
 export default function Atlas({
 	data,
@@ -51,7 +61,7 @@ export default function Atlas({
 		"Blod" | "Sår" | "Urin" | "Luft"
 	>("Blod");
 	const [selectedYear, setSelectedYear] = useState<number>(2022);
-	const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
+	const [hoveredRegion, setHoveredRegion] = useState<string[] | null>(null);
 
 	const filteredData = useMemo(() => {
 		return data.filter((record) => record.Opplegg === selectedDataSet);
@@ -83,6 +93,12 @@ export default function Atlas({
 		);
 	};
 
+	const handleHover = (region: string[] | null) => {
+		setHoveredRegion((prev) =>
+			prev?.join(",") !== region?.join(",") ? region : prev
+		);
+	};
+
 	return (
 		<div className="mx-0 grid grid-cols-6 gap-2">
 			<div className="col-span-1 flex flex-col space-y-4">
@@ -97,22 +113,8 @@ export default function Atlas({
 					onRegionChange={handleRegionChange}
 				/>
 			</div>
-			<div className="col-span-3">
+			<div className="col-span-3 p-4">
 				<div className="space-y-4">
-					<div className="rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
-						<div className="text-sm">
-							{selectedMicrobe && selectedAntibiotic ? (
-								<span>
-									Viser data for{" "}
-									<span className="font-semibold">{selectedMicrobe}</span> mot{" "}
-									<span className="font-semibold">{selectedAntibiotic}</span> i{" "}
-									<span className="font-semibold">{selectedYear}</span>
-								</span>
-							) : (
-								<span>Velg mikrobe og antibiotika for å se data</span>
-							)}
-						</div>
-					</div>
 					<YearSelector
 						availableYears={availableYears}
 						selectedYear={selectedYear}
@@ -121,7 +123,7 @@ export default function Atlas({
 					<MyChart
 						geoData={geoData}
 						hoveredRegion={hoveredRegion}
-						onHover={setHoveredRegion}
+						onHover={handleHover}
 						data={data}
 						selectedMicrobe={selectedMicrobe}
 						selectedAntibiotic={selectedAntibiotic}
@@ -148,6 +150,7 @@ export default function Atlas({
 						selectedMicrobe={selectedMicrobe}
 						selectedAntibiotic={selectedAntibiotic}
 						selectedYear={selectedYear}
+						hoveredRegion={hoveredRegion}
 						selectedDataSet={selectedDataSet}
 						onHover={setHoveredRegion}
 					/>
@@ -350,9 +353,9 @@ interface TableViewProps {
 	selectedMicrobe: string;
 	selectedAntibiotic: string;
 	selectedYear?: number;
-	hoveredRegion: string | null;
+	hoveredRegion: string[] | null;
 	selectedDataSet: string;
-	onHover: (region: string | null) => void;
+	onHover: (region: string[] | null) => void;
 }
 
 function TableView({
@@ -439,8 +442,8 @@ function TableView({
 					{tableData.map((row) => (
 						<TableRow
 							key={row.region}
-							className={hoveredRegion === row.region ? "bg-accent" : ""}
-							onMouseEnter={() => onHover(row.region)}
+							className={hoveredRegion?.includes(row.region) ? "bg-accent" : ""}
+							onMouseEnter={() => onHover([row.region])}
 							onMouseLeave={() => onHover(null)}
 						>
 							<TableCell>{row.region}</TableCell>
@@ -461,7 +464,8 @@ interface ResistanceChartProps {
 	selectedAntibiotic: string;
 	selectedYear?: number;
 	selectedDataSet: string;
-	onHover: (region: string | null) => void;
+	hoveredRegion: string[] | null;
+	onHover: (region: string[] | null) => void;
 }
 
 function ResistanceChart({
@@ -470,6 +474,7 @@ function ResistanceChart({
 	selectedAntibiotic,
 	selectedYear,
 	selectedDataSet,
+	hoveredRegion,
 	onHover,
 }: ResistanceChartProps) {
 	const chartData = useMemo(() => {
@@ -516,6 +521,7 @@ function ResistanceChart({
 		selectedAntibiotic,
 		selectedYear,
 		selectedDataSet,
+		hoveredRegion,
 	]);
 
 	const maxResistance = useMemo(() => {
@@ -562,7 +568,8 @@ function ResistanceChart({
 							position: "insideLeft",
 						}}
 					/>
-					<ChartTooltip content={<ChartTooltipContent />} />
+					if ({!hoveredRegion}) console.log("AQUI")
+					{<ChartTooltip content={<ChartTooltipContent />} />}
 					<Bar
 						dataKey="resistance"
 						radius={4}
@@ -607,6 +614,7 @@ function ResistanceTrendChart({
 		}
 
 		const yearData = new Map<number, YearDataEntry>();
+		console.log("yearData1:", yearData);
 
 		data
 			.filter(
@@ -618,19 +626,25 @@ function ResistanceTrendChart({
 			)
 			.forEach((record) => {
 				const year = parseInt(record.ProveAar);
+				console.log("year:", year);
 				if (!yearData.has(year)) {
 					yearData.set(year, { year } as YearDataEntry);
 				}
 
 				const yearEntry = yearData.get(year)!;
+				console.log("yearEntry1:", yearEntry);
 				const region = record.region;
+				console.log("yearEntry2:", yearEntry);
 
 				const total = record.antall || 0;
 				const resistant = record.antall_R || 0;
 				if (total > 0) {
 					yearEntry[region] = (resistant / total) * 100;
+					yearEntry[`${region}-total`] = total;
 				}
 			});
+
+		console.log(yearData.values());
 
 		return Array.from(yearData.values()).sort((a, b) => a.year - b.year);
 	}, [
@@ -645,6 +659,16 @@ function ResistanceTrendChart({
 		if (chartData.length === 0) return 100;
 		const maxValues = chartData.map((entry) =>
 			Math.max(...selectedRegions.map((region) => entry[region] || 0))
+		);
+		return Math.ceil(Math.max(...maxValues));
+	}, [chartData, selectedRegions]);
+
+	const maxTotal = useMemo(() => {
+		if (chartData.length === 0) return 250;
+		const maxValues = chartData.map((entry) =>
+			Math.max(
+				...selectedRegions.map((region) => entry[`${region}-total`] || 0)
+			)
 		);
 		return Math.ceil(Math.max(...maxValues));
 	}, [chartData, selectedRegions]);
@@ -673,10 +697,12 @@ function ResistanceTrendChart({
 		return null;
 	}
 
+	console.log("chartData:", chartData);
+
 	return (
 		<div className="rounded-lg border bg-card p-4">
 			<ChartContainer config={chartConfig} className="aspect-video w-full">
-				<BarChart
+				<ComposedChart
 					data={chartData}
 					margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
 				>
@@ -692,10 +718,25 @@ function ResistanceTrendChart({
 							angle: -90,
 							position: "insideLeft",
 						}}
+						yAxisId="left"
+						orientation="left"
+					/>
+					<YAxis
+						tickLine={false}
+						fontSize={12}
+						domain={[0, maxTotal]}
+						label={{
+							value: "Resistens",
+							angle: -90,
+							position: "insideRight",
+						}}
+						yAxisId="right"
+						orientation="right"
 					/>
 					<ChartTooltip content={<ChartTooltipContent />} />
 					{selectedRegions.map((region) => (
 						<Bar
+							yAxisId="left"
 							key={region}
 							dataKey={region}
 							name={region}
@@ -703,7 +744,16 @@ function ResistanceTrendChart({
 							radius={4}
 						/>
 					))}
-				</BarChart>
+					{selectedRegions.map((region) => (
+						<Line
+							yAxisId="right"
+							key={`${region}-total`}
+							type="monotone"
+							dataKey={`${region}-total`}
+							stroke={"red"}
+						/>
+					))}
+				</ComposedChart>
 			</ChartContainer>
 		</div>
 	);
@@ -733,8 +783,8 @@ const useWindowSize = () => {
 
 export interface MyChartProps {
 	geoData: GeoJson;
-	hoveredRegion: string | null;
-	onHover: (region: string | null) => void;
+	hoveredRegion: string[] | null;
+	onHover: (region: string[] | null) => void;
 	data: NormDataRecord[];
 	selectedMicrobe: string;
 	selectedAntibiotic: string;
@@ -785,14 +835,14 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 			const pathGenerator = geoPath(projection);
 
-			const g = svg.append("g").attr("id", "areas");
+			const g = svg.append("g");
 
 			const regions: Record<string, string[]> = {
 				Nord: ["Nordland", "Troms", "Finnmark"],
-				Midt: ["Sør-Trøndelag", "Nord-Trøndelag"],
-				Vest: ["Hordaland", "Sogn og Fjordane", "Møre og Romsdal", "Rogaland"],
-				Sør: ["Telemark", "Aust-Agder", "Vest-Agder"],
-				Øst: ["Buskerud", "Oppland", "Hedmark", "Vestfold", "Østfold"],
+				Midt: ["Trøndelag", "Møre og Romsdal"],
+				Vest: ["Vestland", "Rogaland"],
+				Sør: ["Telemark", "Agder"],
+				Øst: ["Buskerud", "Innlandet", "Vestfold", "Østfold"],
 				"Oslo/Akershus": ["Oslo", "Akershus"],
 			};
 
@@ -841,17 +891,42 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				};
 			});
 
-			const regionResistance: Record<string, number> = tableData.reduce(
+			const regionResistance: Record<string, string> = tableData.reduce(
 				(acc, item) => {
-					acc[item.region] = parseFloat(item.percentage);
+					acc[item.region] = item.percentage;
 					return acc;
 				},
-				{} as Record<string, number>
+				{} as Record<string, string>
 			);
+
+			function rewind(geo: any) {
+				{
+					const fixedGeoJSON = { ...geo };
+					fixedGeoJSON.features = fixedGeoJSON.features.map((f: any) =>
+						turf.rewind(f, { reverse: true })
+					);
+					return fixedGeoJSON;
+				}
+			}
+
+			const test = rewind(geoData);
+
+			function getLegendLabel(value: number | string): string {
+				if (value === "Ikke data") return "Ikke Data";
+				if (typeof value === "string") value = parseFloat(value);
+				if (value < 1) return "<1%";
+				if (value > 1 && value <= 2.5) return "1-2.5%";
+				if (value > 2.5 && value <= 5) return "2.5-5%";
+				if (value > 5 && value <= 10) return "5-10%";
+				if (value > 10 && value <= 15) return "10-15%";
+				if (value > 15 && value <= 25) return "15-25%";
+				if (value > 25 && value <= 50) return "25-50%";
+				return ">50%";
+			}
 
 			g.append("g")
 				.selectAll("path")
-				.data(geoData.features)
+				.data(test.features)
 				.enter()
 				.append("path")
 				.attr("d", (d: any) => pathGenerator(d))
@@ -863,8 +938,8 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				.attr("id", "highlighted-regions");
 
 			Object.entries(regions).forEach(([region, states]) => {
-				const regionFeatures = geoData.features.filter((d: any) =>
-					states.includes(d.properties.NAVN)
+				const regionFeatures = test.features.filter((d: any) =>
+					states.includes(d.properties.name)
 				);
 
 				const regionGroup = highlightedRegions
@@ -880,22 +955,29 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 					.attr("stroke", "black")
 					.attr("stroke-width", 1)
 					.attr("fill", (d: any) => {
-						const regionName = stateToRegion[d.properties.NAVN];
-						const percentage = regionResistance[regionName] || 0;
-						return getGradientColor(percentage);
+						const regionName = stateToRegion[d.properties.name];
+						const percentage = regionResistance[regionName] || "0";
+						return percentage !== "Ikke data"
+							? getGradientColor(parseFloat(percentage))
+							: "lightgrey";
 					})
 					.attr("data-region", region)
+					.attr("data-percentage", (d: any) => {
+						const regionName = stateToRegion[d.properties.name];
+						const rawValue = regionResistance[regionName] || "Ikke data";
+						return getLegendLabel(rawValue);
+					})
 					.attr("region", "region");
 
 				regionPaths
-					.on("mouseenter", function (event, d: any) {
+					.on("mouseover", function (event, d: any) {
 						const regionName =
-							stateToRegion[d.properties.NAVN] || hoveredRegion;
+							[stateToRegion[d.properties.name]] || hoveredRegion;
 						onHover(regionName);
 						setMouseOn(true);
 
 						const regionData = tableData.find(
-							(item) => item.region === regionName
+							(item) => item.region === regionName[0]
 						);
 						const percentage = regionData
 							? `${regionData.percentage}%`
@@ -904,40 +986,34 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 						d3.selectAll(`[region=region]`).style("opacity", 0.3);
 						d3.selectAll(`[data-region='${regionName}']`).style("opacity", 1);
 
-						setTooltip({
-							visible: true,
-							x: event.pageX,
-							y: event.pageY,
-							text: `${regionName}:, ${percentage}`,
-						});
+						if (hoveredRegion) {
+							setTooltip({
+								visible: true,
+								x: event.pageX,
+								y: event.pageY,
+								text: `${regionName}:, ${percentage}`,
+							});
+						}
 					})
-					.on("mousemove", function (event) {
-						setTooltip((prev) => ({
-							...prev,
-							x: event.pageX,
-							y: event.pageY,
-						}));
-					})
-					.on("mouseleave", function () {
+					.on("mouseout", function () {
 						onHover(null);
 						setMouseOn(false);
 						d3.selectAll("path").style("opacity", 1);
 						setTooltip({ visible: false, x: 0, y: 0, text: "" });
 					});
+				setTooltip({ visible: false, x: 0, y: 0, text: "" });
 
 				if (hoveredRegion && !mouseOn) {
 					d3.selectAll(`[region=region]`).style("opacity", 0.3);
 
 					d3.selectAll(`[data-region='${hoveredRegion}']`).style("opacity", 1);
-				} else {
-					d3.selectAll("path").style("opacity", 1);
 				}
 			});
 
 			const legendWidth = 200;
-			const legendHeight = 180;
+			const legendHeight = 190;
 
-			const legend = svg.append("g").attr("transform", `translate(800, 620)`);
+			const legend = svg.append("g").attr("transform", `translate(800, 610)`);
 
 			legend
 				.append("rect")
@@ -948,6 +1024,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				.attr("stroke-width", 1);
 
 			const colors = [
+				"lightgrey",
 				"hsl(var(--red-1))",
 				"hsl(var(--red-2))",
 				"hsl(var(--red-3))",
@@ -959,6 +1036,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			];
 
 			const labels = [
+				"Ikke Data",
 				"<1%",
 				"1-2.5%",
 				"2.5-5%",
@@ -973,19 +1051,59 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				legend
 					.append("rect")
 					.attr("x", 10)
-					.attr("y", 13 + index * 20)
+					.attr("y", 8 + index * 20)
 					.attr("width", 14)
 					.attr("height", 14)
-					.attr("fill", colors[index]);
+					.attr("fill", colors[index])
+					.attr("data-percentage-label", label);
 
 				legend
 					.append("text")
 					.attr("x", 30)
-					.attr("y", 20 + index * 20)
+					.attr("y", 16 + index * 20)
 					.attr("dy", ".35em")
 					.style("font-size", "16px")
-					.text(label);
+					.text(label)
+					.attr("data-percentage-label", label);
 			});
+			legend
+				.selectAll("text")
+				.on("mouseenter", function () {
+					const label = d3.select(this).attr("data-percentage-label");
+
+					if (!d3.selectAll(`[data-percentage='${label}']`).node()) {
+						d3.selectAll(`[data-percentage-label]`).style("opacity", 0.3);
+						d3.selectAll(`[data-percentage-label='${label}']`).style(
+							"opacity",
+							1
+						);
+					} else {
+						const uniqueRegions = d3
+							.selectAll(`[data-percentage='${label}']`)
+							.nodes()
+							.map((node) =>
+								node instanceof Element
+									? node.getAttribute("data-region")
+									: null
+							)
+							.filter((region): region is string => region !== null);
+
+						const uniqueRegionNames = [...new Set(uniqueRegions)];
+
+						onHover(uniqueRegionNames);
+						d3.selectAll(`[data-percentage-label]`).style("opacity", 0.3);
+						d3.selectAll(`[data-percentage-label='${label}']`).style(
+							"opacity",
+							1
+						);
+						d3.selectAll(`[data-percentage]`).style("opacity", 0.3);
+						d3.selectAll(`[data-percentage='${label}']`).style("opacity", 1);
+					}
+				})
+				.on("mouseleave", function () {
+					d3.selectAll(`[data-region]`).style("opacity", 1);
+					d3.selectAll(`[data-percentage-label]`).style("opacity", 1);
+				});
 		}, [
 			geoData,
 			width,
@@ -1009,9 +1127,11 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 					></svg>
 				</ScrollArea>
 
-				{tooltip.visible && (
+				{hoveredRegion && (
 					<div
-						className="tooltip pointer-events-none absolute z-50 rounded bg-black bg-opacity-70 p-2 text-sm text-white"
+						className={`tooltip absolute z-50 rounded bg-black bg-opacity-70 p-2 text-sm text-white ${
+							hoveredRegion ? "visible" : ""
+						}`}
 						style={{
 							left: `${tooltip.x + 10}px`,
 							top: `${tooltip.y + 10}px`,
