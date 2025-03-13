@@ -39,11 +39,13 @@ import {
 	Cell,
 	ComposedChart,
 	Line,
+	Legend,
 } from "recharts";
 import * as d3 from "d3";
 import { geoPath, geoMercator, GeoProjection } from "d3-geo";
 import { GeoJson } from "@/lib/data/geojsonLoader";
 import * as turf from "@turf/turf";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Atlas({
 	data,
@@ -62,6 +64,7 @@ export default function Atlas({
 	>("Blod");
 	const [selectedYear, setSelectedYear] = useState<number>(2022);
 	const [hoveredRegion, setHoveredRegion] = useState<string[] | null>(null);
+	const [chartCall, setChartCall] = useState<string>("");
 
 	const filteredData = useMemo(() => {
 		return data.filter((record) => record.Opplegg === selectedDataSet);
@@ -93,10 +96,11 @@ export default function Atlas({
 		);
 	};
 
-	const handleHover = (region: string[] | null) => {
+	const handleHover = (region: string[] | null, chartCall: string) => {
 		setHoveredRegion((prev) =>
 			prev?.join(",") !== region?.join(",") ? region : prev
 		);
+		setChartCall(chartCall);
 	};
 
 	return (
@@ -129,6 +133,7 @@ export default function Atlas({
 						selectedAntibiotic={selectedAntibiotic}
 						selectedDataSet={selectedDataSet}
 						selectedYear={selectedYear}
+						chartCall={chartCall}
 					/>
 					<ResistanceTrendChart
 						data={data}
@@ -152,7 +157,8 @@ export default function Atlas({
 						selectedYear={selectedYear}
 						hoveredRegion={hoveredRegion}
 						selectedDataSet={selectedDataSet}
-						onHover={setHoveredRegion}
+						onHover={handleHover}
+						chartCall={chartCall}
 					/>
 					<TableView
 						data={data}
@@ -161,7 +167,7 @@ export default function Atlas({
 						selectedYear={selectedYear}
 						hoveredRegion={hoveredRegion}
 						selectedDataSet={selectedDataSet}
-						onHover={setHoveredRegion}
+						onHover={handleHover}
 					/>
 				</div>
 			</div>
@@ -355,7 +361,7 @@ interface TableViewProps {
 	selectedYear?: number;
 	hoveredRegion: string[] | null;
 	selectedDataSet: string;
-	onHover: (region: string[] | null) => void;
+	onHover: (region: string[] | null, chartCall: string) => void;
 }
 
 function TableView({
@@ -367,6 +373,7 @@ function TableView({
 	selectedDataSet,
 	onHover,
 }: TableViewProps) {
+	const call = "Table";
 	const tableData = useMemo(() => {
 		if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) {
 			return [];
@@ -443,8 +450,8 @@ function TableView({
 						<TableRow
 							key={row.region}
 							className={hoveredRegion?.includes(row.region) ? "bg-accent" : ""}
-							onMouseEnter={() => onHover([row.region])}
-							onMouseLeave={() => onHover(null)}
+							onMouseEnter={() => onHover([row.region], call)}
+							onMouseLeave={() => onHover(null, "")}
 						>
 							<TableCell>{row.region}</TableCell>
 							<TableCell className="text-right">{row.total}</TableCell>
@@ -465,7 +472,8 @@ interface ResistanceChartProps {
 	selectedYear?: number;
 	selectedDataSet: string;
 	hoveredRegion: string[] | null;
-	onHover: (region: string[] | null) => void;
+	onHover: (region: string[] | null, chartCall: string) => void;
+	chartCall: string;
 }
 
 function ResistanceChart({
@@ -476,7 +484,9 @@ function ResistanceChart({
 	selectedDataSet,
 	hoveredRegion,
 	onHover,
+	chartCall,
 }: ResistanceChartProps) {
+	const call = "Bar";
 	const chartData = useMemo(() => {
 		if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) {
 			return [];
@@ -522,6 +532,7 @@ function ResistanceChart({
 		selectedYear,
 		selectedDataSet,
 		hoveredRegion,
+		chartCall,
 	]);
 
 	const maxResistance = useMemo(() => {
@@ -546,7 +557,7 @@ function ResistanceChart({
 					data={chartData}
 					accessibilityLayer
 					margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
-					onMouseLeave={() => onHover(null)}
+					onMouseLeave={() => onHover(null, "")}
 				>
 					<CartesianGrid vertical={false} />
 					<XAxis
@@ -568,12 +579,28 @@ function ResistanceChart({
 							position: "insideLeft",
 						}}
 					/>
-					if ({!hoveredRegion}) console.log("AQUI")
-					{<ChartTooltip content={<ChartTooltipContent />} />}
+					{hoveredRegion?.length !== undefined ? (
+						chartCall !== call ? (
+							<ChartTooltip
+								content={<ChartTooltipContent />}
+								defaultIndex={chartData.findIndex(
+									(item) =>
+										item.region ===
+										(Array.isArray(hoveredRegion)
+											? hoveredRegion[0]
+											: (hoveredRegion ?? ""))
+								)}
+							/>
+						) : (
+							<ChartTooltip content={<ChartTooltipContent />} />
+						)
+					) : (
+						<ChartTooltip active={false} />
+					)}
 					<Bar
 						dataKey="resistance"
 						radius={4}
-						onMouseEnter={(data) => onHover(data.region)}
+						onMouseEnter={(data) => onHover([data.region], call)}
 					>
 						{chartData.map((entry, index) => (
 							<Cell key={`cell-${index}`} fill={entry.fill} />
@@ -604,6 +631,8 @@ function ResistanceTrendChart({
 	selectedRegions,
 	selectedDataSet,
 }: ResistanceTrendChartProps) {
+	const [showLineChart, setShowLineChart] = useState(true);
+
 	const chartData = useMemo<YearDataEntry[]>(() => {
 		if (
 			!selectedMicrobe ||
@@ -614,7 +643,6 @@ function ResistanceTrendChart({
 		}
 
 		const yearData = new Map<number, YearDataEntry>();
-		console.log("yearData1:", yearData);
 
 		data
 			.filter(
@@ -626,25 +654,21 @@ function ResistanceTrendChart({
 			)
 			.forEach((record) => {
 				const year = parseInt(record.ProveAar);
-				console.log("year:", year);
 				if (!yearData.has(year)) {
 					yearData.set(year, { year } as YearDataEntry);
 				}
 
 				const yearEntry = yearData.get(year)!;
-				console.log("yearEntry1:", yearEntry);
 				const region = record.region;
-				console.log("yearEntry2:", yearEntry);
 
 				const total = record.antall || 0;
 				const resistant = record.antall_R || 0;
+
 				if (total > 0) {
 					yearEntry[region] = (resistant / total) * 100;
 					yearEntry[`${region}-total`] = total;
 				}
 			});
-
-		console.log(yearData.values());
 
 		return Array.from(yearData.values()).sort((a, b) => a.year - b.year);
 	}, [
@@ -697,10 +721,22 @@ function ResistanceTrendChart({
 		return null;
 	}
 
-	console.log("chartData:", chartData);
-
 	return (
 		<div className="rounded-lg border bg-card p-4">
+			<div className="mb-4 flex items-center space-x-2">
+				<Checkbox
+					id="show-line-chart"
+					className="peer rounded-none border-2 border-gray-400"
+					checked={showLineChart}
+					onCheckedChange={(checked) => setShowLineChart(checked === true)}
+				/>
+				<label
+					htmlFor="show-line-chart"
+					className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+				>
+					Show line graph(Total Samples)
+				</label>
+			</div>
 			<ChartContainer config={chartConfig} className="aspect-video w-full">
 				<ComposedChart
 					data={chartData}
@@ -734,6 +770,7 @@ function ResistanceTrendChart({
 						orientation="right"
 					/>
 					<ChartTooltip content={<ChartTooltipContent />} />
+					<Legend></Legend>
 					{selectedRegions.map((region) => (
 						<Bar
 							yAxisId="left"
@@ -742,17 +779,19 @@ function ResistanceTrendChart({
 							name={region}
 							fill={regionColors[region]}
 							radius={4}
+							opacity={0.7}
 						/>
 					))}
-					{selectedRegions.map((region) => (
-						<Line
-							yAxisId="right"
-							key={`${region}-total`}
-							type="monotone"
-							dataKey={`${region}-total`}
-							stroke={"red"}
-						/>
-					))}
+					{showLineChart &&
+						selectedRegions.map((region) => (
+							<Line
+								yAxisId="right"
+								key={`${region}-total`}
+								type="monotone"
+								dataKey={`${region}-total`}
+								stroke={regionColors[region]}
+							/>
+						))}
 				</ComposedChart>
 			</ChartContainer>
 		</div>
@@ -784,12 +823,13 @@ const useWindowSize = () => {
 export interface MyChartProps {
 	geoData: GeoJson;
 	hoveredRegion: string[] | null;
-	onHover: (region: string[] | null) => void;
+	onHover: (region: string[] | null, chartCall: string) => void;
 	data: NormDataRecord[];
 	selectedMicrobe: string;
 	selectedAntibiotic: string;
 	selectedDataSet: string;
 	selectedYear?: number;
+	chartCall: string;
 }
 
 export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
@@ -803,12 +843,12 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			selectedAntibiotic,
 			selectedDataSet,
 			selectedYear,
+			chartCall,
 		},
 		ref: React.Ref<SVGSVGElement>
 	) => {
 		const chartRef = useRef<SVGSVGElement>(null);
 		const { width, height } = useWindowSize();
-		const [mouseOn, setMouseOn] = useState<boolean | null>(null);
 		const [tooltip, setTooltip] = useState<{
 			visible: boolean;
 			x: number;
@@ -820,6 +860,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			y: 0,
 			text: "",
 		});
+		const call = "Map";
 
 		useImperativeHandle(ref, () => chartRef.current!);
 
@@ -973,8 +1014,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 					.on("mouseover", function (event, d: any) {
 						const regionName =
 							[stateToRegion[d.properties.name]] || hoveredRegion;
-						onHover(regionName);
-						setMouseOn(true);
+						onHover(regionName, call);
 
 						const regionData = tableData.find(
 							(item) => item.region === regionName[0]
@@ -996,14 +1036,13 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 						}
 					})
 					.on("mouseout", function () {
-						onHover(null);
-						setMouseOn(false);
+						onHover(null, "");
 						d3.selectAll("path").style("opacity", 1);
 						setTooltip({ visible: false, x: 0, y: 0, text: "" });
 					});
 				setTooltip({ visible: false, x: 0, y: 0, text: "" });
 
-				if (hoveredRegion && !mouseOn) {
+				if (hoveredRegion && chartCall !== call) {
 					d3.selectAll(`[region=region]`).style("opacity", 0.3);
 
 					d3.selectAll(`[data-region='${hoveredRegion}']`).style("opacity", 1);
@@ -1090,7 +1129,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 						const uniqueRegionNames = [...new Set(uniqueRegions)];
 
-						onHover(uniqueRegionNames);
+						onHover(uniqueRegionNames, call);
 						d3.selectAll(`[data-percentage-label]`).style("opacity", 0.3);
 						d3.selectAll(`[data-percentage-label='${label}']`).style(
 							"opacity",
@@ -1103,6 +1142,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				.on("mouseleave", function () {
 					d3.selectAll(`[data-region]`).style("opacity", 1);
 					d3.selectAll(`[data-percentage-label]`).style("opacity", 1);
+					onHover(null, "");
 				});
 		}, [
 			geoData,
@@ -1127,7 +1167,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 					></svg>
 				</ScrollArea>
 
-				{hoveredRegion && (
+				{hoveredRegion && tooltip.visible && (
 					<div
 						className={`tooltip absolute z-50 rounded bg-black bg-opacity-70 p-2 text-sm text-white ${
 							hoveredRegion ? "visible" : ""
