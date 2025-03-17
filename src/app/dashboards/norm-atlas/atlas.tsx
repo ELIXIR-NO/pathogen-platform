@@ -3,6 +3,7 @@
 import { NormDataRecord } from "@/lib/data/csvUtils";
 import React, {
 	forwardRef,
+	useEffect,
 	useImperativeHandle,
 	useMemo,
 	useRef,
@@ -46,6 +47,7 @@ import { geoPath, geoMercator, GeoProjection } from "d3-geo";
 import { GeoJson } from "@/lib/data/geojsonLoader";
 import * as turf from "@turf/turf";
 import { Checkbox } from "@/components/ui/checkbox";
+import { SimpleLinearRegression } from "ml-regression-simple-linear";
 
 export default function Atlas({
 	data,
@@ -574,9 +576,10 @@ function ResistanceChart({
 						domain={[0, maxResistance]}
 						unit="%"
 						label={{
-							value: "Resistens (%)",
+							value: "Prosent resistente isolater",
 							angle: -90,
-							position: "insideLeft",
+							position: "center",
+							dx: -20,
 						}}
 					/>
 					{hoveredRegion?.length !== undefined ? (
@@ -632,6 +635,24 @@ function ResistanceTrendChart({
 	selectedDataSet,
 }: ResistanceTrendChartProps) {
 	const [showLineChart, setShowLineChart] = useState(true);
+	const [showRegression, setShowRegression] = useState(false);
+
+	const generateRegressionData = (data: YearDataEntry[]) => {
+		const years = data.map((entry) => entry.year);
+
+		return selectedRegions.map((region, index) => {
+			const regionDataX = years;
+			const regionDataY = data.map((entry) => entry.y);
+
+			const regression = new SimpleLinearRegression(regionDataX, regionDataY);
+			const regressionLine = regionDataX.map((xValue) => ({
+				year: xValue,
+				y: regression.predict(xValue),
+			}));
+
+			return { region, regressionLine };
+		});
+	};
 
 	const chartData = useMemo<YearDataEntry[]>(() => {
 		if (
@@ -665,12 +686,43 @@ function ResistanceTrendChart({
 				const resistant = record.antall_R || 0;
 
 				if (total > 0) {
-					yearEntry[region] = (resistant / total) * 100;
+					yearEntry[region] = Number(((resistant / total) * 100).toFixed(1));
 					yearEntry[`${region}-total`] = total;
 				}
 			});
 
-		return Array.from(yearData.values()).sort((a, b) => a.year - b.year);
+		const yearArray = Array.from(yearData.values()).sort(
+			(a, b) => a.year - b.year
+		);
+
+		selectedRegions.forEach((region) => {
+			const regionData = yearArray
+				.map((entry) => ({
+					year: entry.year,
+					y: entry[region] ?? 0,
+				}))
+				.filter((point) => point.y !== 0);
+
+			const regressionLine = generateRegressionData(regionData).find(
+				(line) => line.region === region
+			)?.regressionLine;
+
+			if (regressionLine && regressionLine.length > 1) {
+				const firstPoint = regressionLine.at(0);
+				const lastPoint = regressionLine.at(-1);
+
+				[firstPoint, lastPoint].forEach((point) => {
+					if (point) {
+						const yearEntry = yearData.get(point.year);
+						if (yearEntry) {
+							yearEntry[`${region}-regression`] = point.y;
+						}
+					}
+				});
+			}
+		});
+
+		return yearArray;
 	}, [
 		data,
 		selectedMicrobe,
@@ -721,22 +773,62 @@ function ResistanceTrendChart({
 		return null;
 	}
 
+	const handleLineChartChange = (checked: boolean) => {
+		if (checked) {
+			setShowLineChart(true);
+			setShowRegression(false);
+		} else {
+			setShowLineChart(false);
+		}
+	};
+
+	const handleRegressionChange = (checked: boolean) => {
+		if (checked) {
+			setShowRegression(true);
+			setShowLineChart(false);
+		} else {
+			setShowRegression(false);
+		}
+	};
+
 	return (
 		<div className="rounded-lg border bg-card p-4">
-			<div className="mb-4 flex items-center space-x-2">
-				<Checkbox
-					id="show-line-chart"
-					className="peer rounded-none border-2 border-gray-400"
-					checked={showLineChart}
-					onCheckedChange={(checked) => setShowLineChart(checked === true)}
-				/>
-				<label
-					htmlFor="show-line-chart"
-					className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-				>
-					Show line graph(Total Samples)
-				</label>
+			<div className="mb-4 flex items-center space-x-4">
+				<div className="flex items-center space-x-2">
+					<Checkbox
+						id="show-line-chart"
+						className="peer rounded-none border-2 border-gray-400"
+						checked={showLineChart}
+						onCheckedChange={(checked) =>
+							handleLineChartChange(checked === true)
+						}
+					/>
+					<label
+						htmlFor="show-line-chart"
+						className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+					>
+						Antall prøveisolater
+					</label>
+				</div>
+
+				<div className="flex items-center space-x-2">
+					<Checkbox
+						id="show-regression-line"
+						className="peer rounded-none border-2 border-gray-400"
+						checked={showRegression}
+						onCheckedChange={(checked) =>
+							handleRegressionChange(checked === true)
+						}
+					/>
+					<label
+						htmlFor="show-regression-line"
+						className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+					>
+						Lineær regresjon
+					</label>
+				</div>
 			</div>
+
 			<ChartContainer config={chartConfig} className="aspect-video w-full">
 				<ComposedChart
 					data={chartData}
@@ -750,26 +842,31 @@ function ResistanceTrendChart({
 						domain={[0, maxResistance]}
 						unit="%"
 						label={{
-							value: "Resistens (%)",
+							value: "Prosent resistente isolater",
 							angle: -90,
-							position: "insideLeft",
+							position: "center",
+							dx: -20,
 						}}
 						yAxisId="left"
 						orientation="left"
 					/>
-					<YAxis
-						tickLine={false}
-						fontSize={12}
-						domain={[0, maxTotal]}
-						label={{
-							value: "Resistens",
-							angle: -90,
-							position: "insideRight",
-						}}
-						yAxisId="right"
-						orientation="right"
-					/>
-					<ChartTooltip content={<ChartTooltipContent />} />
+					{showLineChart && (
+						<YAxis
+							tickLine={false}
+							fontSize={12}
+							domain={[0, maxTotal]}
+							label={{
+								value: "Antall prøveisolater",
+								angle: -90,
+								position: "center",
+								dx: 20,
+							}}
+							yAxisId="right"
+							orientation="right"
+						/>
+					)}
+					<ChartTooltip content={<ChartTooltipContent trendChart={true} />} />
+
 					<Legend></Legend>
 					{selectedRegions.map((region) => (
 						<Bar
@@ -782,6 +879,7 @@ function ResistanceTrendChart({
 							opacity={0.7}
 						/>
 					))}
+
 					{showLineChart &&
 						selectedRegions.map((region) => (
 							<Line
@@ -790,6 +888,23 @@ function ResistanceTrendChart({
 								type="monotone"
 								dataKey={`${region}-total`}
 								stroke={regionColors[region]}
+								legendType="none"
+								tooltipType="none"
+								strokeWidth={2}
+							/>
+						))}
+
+					{showRegression &&
+						selectedRegions.map((region) => (
+							<Line
+								yAxisId="left"
+								key={`${region}-regression`}
+								type="monotone"
+								dataKey={`${region}-regression`}
+								stroke={regionColors[region]}
+								strokeWidth={2}
+								legendType="none"
+								connectNulls={true}
 							/>
 						))}
 				</ComposedChart>
@@ -863,6 +978,12 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 		const call = "Map";
 
 		useImperativeHandle(ref, () => chartRef.current!);
+
+		const [forceRender, setForceRender] = useState(false);
+
+		useEffect(() => {
+			setForceRender(true);
+		}, []);
 
 		useMemo(() => {
 			if (!chartRef.current || !geoData) return;
@@ -1154,6 +1275,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			selectedAntibiotic,
 			selectedDataSet,
 			selectedYear,
+			forceRender,
 		]);
 
 		return (
