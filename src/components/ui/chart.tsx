@@ -111,6 +111,7 @@ const ChartTooltipContent = React.forwardRef<
 			indicator?: "line" | "dot" | "dashed";
 			nameKey?: string;
 			labelKey?: string;
+			trendChart?: boolean;
 		}
 >(
 	(
@@ -128,6 +129,7 @@ const ChartTooltipContent = React.forwardRef<
 			color,
 			nameKey,
 			labelKey,
+			trendChart = false,
 		},
 		ref
 	) => {
@@ -167,11 +169,21 @@ const ChartTooltipContent = React.forwardRef<
 			labelClassName,
 			config,
 			labelKey,
+			trendChart,
 		]);
 
 		if (!active || !payload?.length) {
 			return null;
 		}
+
+		const processedPayload = trendChart
+			? payload.filter(
+					(item) =>
+						typeof item.dataKey === "string" &&
+						!item.dataKey.includes("-total") &&
+						!item.dataKey.includes("-regression")
+				)
+			: payload;
 
 		const nestLabel = payload.length === 1 && indicator !== "dot";
 
@@ -185,7 +197,7 @@ const ChartTooltipContent = React.forwardRef<
 			>
 				{!nestLabel ? tooltipLabel : null}
 				<div className="grid gap-1.5">
-					{payload.map((item, index) => {
+					{processedPayload.map((item, index) => {
 						const key = `${nameKey || item.name || item.dataKey || "value"}`;
 						const itemConfig = getPayloadConfigFromPayload(config, item, key);
 						const indicatorColor = color || item.payload.fill || item.color;
@@ -238,9 +250,11 @@ const ChartTooltipContent = React.forwardRef<
 													{itemConfig?.label || item.name}
 												</span>
 											</div>
-											{item.value && (
+											{item.value != null && (
 												<span className="font-mono font-medium tabular-nums text-foreground">
-													{item.value.toLocaleString()}
+													{!trendChart
+														? item.value.toLocaleString()
+														: `\u00A0${item.value.toLocaleString()}% (${item.payload[`${item.name}-total`]})`}
 												</span>
 											)}
 										</div>
