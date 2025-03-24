@@ -48,6 +48,15 @@ import { GeoJson } from "@/lib/data/geojsonLoader";
 import * as turf from "@turf/turf";
 import { Checkbox } from "@/components/ui/checkbox";
 import { SimpleLinearRegression } from "ml-regression-simple-linear";
+import { Info } from "lucide-react";
+import {
+	Tooltip,
+	TooltipArrow,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { getDescription } from "@/hooks/getMicrobeDescription";
 
 export default function Atlas({
 	data,
@@ -230,8 +239,28 @@ export function MicrobeSelector({
 					.sort()
 					.map(([microbe, antibiotics]) => (
 						<AccordionItem key={microbe} value={microbe}>
-							<AccordionTrigger className="rounded-md px-2 text-sm hover:bg-accent/50 hover:no-underline">
-								{microbe}
+							<AccordionTrigger className="inline-flex items-center justify-between gap-2 rounded-md px-2 text-sm hover:bg-accent/50 hover:no-underline">
+								<div className="flex items-center gap-2">
+									<span>{microbe}</span>
+
+									<TooltipProvider>
+										<Tooltip>
+											<TooltipTrigger asChild>
+												<div className="justify-self-end">
+													<Info size={16} />
+												</div>
+											</TooltipTrigger>
+											<TooltipContent side="right">
+												{getDescription(microbe)}
+												<TooltipArrow
+													className="-my-px border-none fill-[var(--tooltip-color)] drop-shadow-[0_1px_0_white]"
+													width={11}
+													height={5}
+												/>
+											</TooltipContent>
+										</Tooltip>
+									</TooltipProvider>
+								</div>
 							</AccordionTrigger>
 							<AccordionContent>
 								<div className="flex flex-col space-y-1">
@@ -824,7 +853,7 @@ function ResistanceTrendChart({
 						htmlFor="show-regression-line"
 						className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 					>
-						Lineær regresjon
+						Trend
 					</label>
 				</div>
 			</div>
@@ -1173,7 +1202,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			const legendWidth = 200;
 			const legendHeight = 190;
 
-			const legend = svg.append("g").attr("transform", `translate(800, 610)`);
+			const legend = svg.append("g").attr("transform", `translate(790, 610)`);
 
 			legend
 				.append("rect")
@@ -1279,7 +1308,11 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 		]);
 
 		return (
-			<div className="chart-container rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
+			<div className="chart-container rounded-lg border bg-card pb-4 text-card-foreground shadow-sm">
+				<h3 className="w-full rounded-t-lg bg-gray-300 px-4 py-3 font-bold text-gray-800 shadow-md">
+					{selectedDataSet} (Andel R): {selectedMicrobe} - {selectedAntibiotic}{" "}
+					({selectedYear})
+				</h3>
 				<ScrollArea className="w-full whitespace-nowrap">
 					<svg
 						ref={chartRef}
