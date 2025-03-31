@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
@@ -24,6 +24,10 @@ import {
 	ChartLegendContent,
 } from "@/components/ui/chart";
 import DownloadCSV from "@/lib/data/csvExport";
+import { MyChart } from "./chart";
+import { TreeNode } from "@/lib/data/newick-loader";
+import { DownloadNewick, serializeSVG } from "@/lib/data/newick-save";
+import { AnnTreeNodeRecord } from "@/lib/data/csvUtils";
 
 const generateHslColor = (index: number, total: number) => {
 	const safeHues = [330, 210, 0, 120, 30, 270, 180, 45, 60, 75, 210, 0, 30];
@@ -36,12 +40,23 @@ export function SampleBarChart({
 	phylogroups,
 	samples,
 	data,
+	TreeData,
+	annotations,
+	labels,
+	phylogroup,
+	fimtype,
 }: {
 	collections: string[];
 	phylogroups: string[];
 	samples: string[];
 	data: any[];
+	TreeData: TreeNode[];
+	annotations: AnnTreeNodeRecord[];
+	labels: number[];
+	phylogroup: string[];
+	fimtype: number[];
 }) {
+	const chartRef = useRef<SVGSVGElement | null>(null);
 	const genotypes = [
 		"AMINOGLYCOSIDE",
 		"AMINOGLYCOSIDE/QUINOLONE",
@@ -52,7 +67,11 @@ export function SampleBarChart({
 		"SULFONAMIDE",
 		"TRIMETHOPRIM",
 	];
-	const chartType: string[] = ["Phenotype", "Genotype"];
+	const dataType: string[] = ["Phenotype", "Genotype"];
+
+	const chartType: string[] = ["Sample BarChart", "Radial Tree Chart"];
+
+	const annotationType: string[] = ["Label", "FimType", "Phylogroup", "ESBL"];
 
 	const phenotypes = [
 		"Amoxicillin-clavulanic_acid_i.v.",
@@ -94,8 +113,17 @@ export function SampleBarChart({
 	const [selectedPhenotypes, setSelectedPhenotypes] = useState<string[]>([
 		"Amoxicillin-clavulanic_acid_i.v.",
 	]);
-	const [selectedchartType, setSelectedChartType] =
-		useState<string>("Phenotype");
+	const [selectedDataType, setSelectedDataType] = useState<string>("Phenotype");
+	const [selectedChartType, setSelectedChartType] = useState<string[]>([
+		"Sample BarChart",
+	]);
+
+	const [selectedAnnotations, setSelectedAnnotations] = useState<string[]>([
+		"Label",
+		"FimType",
+		"Phylogroup",
+		"ESBL",
+	]);
 
 	const handleSelectionChange = useCallback(
 		(setter: React.Dispatch<React.SetStateAction<string[]>>) =>
@@ -266,6 +294,7 @@ export function SampleBarChart({
 		setSelectedPhylogroup([]);
 		setSelectedGenotypes([]);
 		setSelectedPhenotypes([]);
+		setSelectedChartType([]);
 	}, []);
 
 	const renderDropdown = (
@@ -317,8 +346,8 @@ export function SampleBarChart({
 		</DropdownMenu>
 	);
 
-	const handleChartTypeChange = (item: string) => {
-		setSelectedChartType(item);
+	const handleDataTypeChange = (item: string) => {
+		setSelectedDataType(item);
 	};
 
 	const filterAndMapData = () => {
@@ -354,19 +383,100 @@ export function SampleBarChart({
 
 	const filteredDownload = filterAndMapData();
 
+	const filterTreeData = (
+		treeData: TreeNode,
+		sampleIDs: string[]
+	): TreeNode | null => {
+		const hasMatchingSampleID = (node: TreeNode): boolean => {
+			if (sampleIDs.includes(node.name || "")) {
+				return true;
+			}
+			if (node.branchset) {
+				return node.branchset.some((child) => hasMatchingSampleID(child));
+			}
+			return false;
+		};
+
+		const filterNode = (node: TreeNode): TreeNode | null => {
+			if (hasMatchingSampleID(node)) {
+				const filteredNode: TreeNode = {
+					name: node.name,
+					length: node.length,
+				};
+
+				if (node.branchset) {
+					filteredNode.branchset = node.branchset
+						.map((child) => filterNode(child))
+						.filter((child): child is TreeNode => child !== null);
+				}
+
+				return filteredNode;
+			}
+
+			return null;
+		};
+
+		return filterNode(treeData);
+	};
+
+	const filteredSampleIDs: string[] = filteredDownload
+		.map((entry) => entry["Sample ID"])
+		.filter((id): id is string => typeof id === "string");
+
+	const filteredTreeData = useMemo(() => {
+		return filterTreeData(TreeData, filteredSampleIDs);
+	}, [TreeData, filteredSampleIDs]);
+
+	const filterAnnotationsBySampleID = (
+		annotations: any[],
+		filteredSampleIDs: string[]
+	) => {
+		return annotations.filter((row) => filteredSampleIDs.includes(row.Node));
+	};
+
 	const handleDownload = () => {
 		DownloadCSV(filteredDownload, "Filtered_Data");
+	};
+
+	const handleDownloadNewick = () => {
+		DownloadNewick(filteredTreeData!, "Newick_Filtered_Data");
+	};
+
+	const handleDownloadAnnotation = () => {
+		DownloadCSV(
+			filterAnnotationsBySampleID(annotations, filteredSampleIDs),
+			"Filtered_Annoation"
+		);
+	};
+
+	const handleExportSVG = () => {
+		if (chartRef.current) {
+			const svgBlob = serializeSVG(chartRef.current);
+
+			const url = URL.createObjectURL(svgBlob);
+			const a = document.createElement("a");
+			a.href = url;
+			a.download = "chart.svg";
+			a.click();
+			URL.revokeObjectURL(url);
+		}
 	};
 
 	return (
 		<div className="flex w-full flex-col space-y-4">
 			<div className="flex flex-col space-y-2 lg:flex-row lg:space-x-2">
-				<h2 className="text-xl font-bold">Filters</h2>
+				<h2 className="py-3 text-xl font-bold">Filters</h2>
 				{renderDropdown(
 					"Select Chart Type",
 					chartType,
-					[selectedchartType],
-					handleChartTypeChange,
+					selectedChartType,
+					handleSelectionChange(setSelectedChartType)
+				)}
+				{renderDropdown(
+					"Select Data Type",
+					dataType,
+					[selectedDataType],
+					handleDataTypeChange,
 					false
 				)}
 				{renderDropdown(
@@ -387,7 +497,7 @@ export function SampleBarChart({
 					selectedPhylogroup,
 					handleSelectionChange(setSelectedPhylogroup)
 				)}
-				{selectedchartType.includes("Genotype")
+				{selectedDataType.includes("Genotype")
 					? renderDropdown(
 							"Select Genotypes",
 							genotypes,
@@ -400,99 +510,164 @@ export function SampleBarChart({
 							selectedPhenotypes,
 							handleSelectionChange(setSelectedPhenotypes)
 						)}
+				{selectedChartType.includes("Radial Tree Chart") &&
+					renderDropdown(
+						"Select Annotations",
+						annotationType,
+						selectedAnnotations,
+						handleSelectionChange(setSelectedAnnotations)
+					)}
 				<Button variant="outline" onClick={resetSelections}>
 					Reset All
 				</Button>
-				<Button
-					variant="outline"
-					onClick={handleDownload}
-					disabled={filteredDownload.length === 0}
-				>
-					Download Data
-				</Button>
+				<DropdownMenu modal={false}>
+					<DropdownMenuTrigger asChild>
+						<Button variant="outline" disabled={filteredDownload.length === 0}>
+							Download Data
+						</Button>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent className="flex max-h-80 flex-col gap-2 overflow-auto p-2">
+						<Button
+							variant="outline"
+							disabled={
+								filteredDownload === null || filteredDownload.length === 0
+							}
+							onClick={handleDownload}
+							className="w-full"
+						>
+							Download Barchart Data
+						</Button>
+						<Button
+							variant="outline"
+							disabled={filteredTreeData === null}
+							onClick={handleDownloadNewick}
+							className="w-full"
+						>
+							Download Radial Tree Data
+						</Button>
+						<Button
+							variant="outline"
+							disabled={
+								filteredDownload === null || filteredDownload.length === 0
+							}
+							onClick={handleDownloadAnnotation}
+							className="w-full"
+						>
+							Download Annotation Data
+						</Button>
+						<Button
+							variant="outline"
+							disabled={filteredTreeData === null}
+							onClick={handleExportSVG}
+							className="w-full"
+						>
+							Download Radial Tree(SVG)
+						</Button>
+					</DropdownMenuContent>
+				</DropdownMenu>
 			</div>
-
-			{selectedchartType.includes("Genotype")
-				? filteredData.map((genotypeData) => (
-						<ChartContainer
-							key={genotypeData.genotype}
-							config={chartConfig}
-							className="h-[300px] w-full"
-						>
-							<div className="h-full w-full py-3">
-								<h3 className="text-center text-lg font-bold">
-									{genotypeData.genotype}
-								</h3>
-								<ResponsiveContainer width="100%" height="100%">
-									<BarChart data={genotypeData.data}>
-										<CartesianGrid strokeDasharray="3 3" />
-										<XAxis dataKey="phylogroup" />
-										<YAxis
-											label={{
-												value: "Count",
-												angle: -90,
-												position: "insideLeft",
-											}}
-										/>
-										<Tooltip />
-										<ChartLegend content={<ChartLegendContent />} />
-										{collectionsSamples.map((key, index) => (
-											<Bar
-												key={key}
-												dataKey={key}
-												stackId="a"
-												fill={chartConfig[key]?.color || "#ccc"}
-												name={key.replace("-", " - ")}
-											/>
-										))}
-									</BarChart>
-								</ResponsiveContainer>
-							</div>
-						</ChartContainer>
-					))
-				: phenotypeData.map((phenotype) => (
-						<ChartContainer
-							key={phenotype.phenotype}
-							config={chartConfig}
-							className="h-[300px] w-full"
-						>
-							<div className="h-full w-full py-3">
-								<h3 className="text-center text-lg font-bold">
-									{phenotype.phenotype}
-								</h3>
-								<ResponsiveContainer width="100%" height="100%">
-									<BarChart data={phenotype.data}>
-										<CartesianGrid strokeDasharray="3 3" />
-										<XAxis dataKey="phylogroup" />
-										<YAxis
-											label={{
-												value: "Count",
-												angle: -90,
-												position: "insideLeft",
-											}}
-										/>
-										<Tooltip />
-										<Legend />
-										{collectionsSamples.map((key) => (
-											<React.Fragment key={key}>
-												{["S", "R", "I"].map((letter) => (
-													<Bar
-														key={`${key}-${letter}`}
-														dataKey={`${key}-${letter}`}
-														stackId="a"
-														fill={
-															chartConfig[`${key}-${letter}`]?.color || "#ccc"
-														}
-														name={`${key.replace("-", " - ")} - ${letter}`}
+			<div>
+				{selectedChartType.includes("Sample BarChart") && (
+					<>
+						<h3 className="text-lg font-bold">Sample Bar Chart</h3>
+						{selectedDataType.includes("Genotype")
+							? filteredData.map((genotypeData) => (
+									<ChartContainer
+										key={genotypeData.genotype}
+										config={chartConfig}
+										className="h-[300px] w-full"
+									>
+										<div className="h-full w-full py-3">
+											<h3 className="text-center text-lg font-bold">
+												{genotypeData.genotype}
+											</h3>
+											<ResponsiveContainer width="100%" height="100%">
+												<BarChart data={genotypeData.data}>
+													<CartesianGrid strokeDasharray="3 3" />
+													<XAxis dataKey="phylogroup" />
+													<YAxis
+														label={{
+															value: "Count",
+															angle: -90,
+															position: "insideLeft",
+														}}
 													/>
-												))}
-											</React.Fragment>
-										))}
-									</BarChart>
-								</ResponsiveContainer>
-							</div>
-						</ChartContainer>
-					))}
+													<Tooltip />
+													<ChartLegend content={<ChartLegendContent />} />
+													{collectionsSamples.map((key, index) => (
+														<Bar
+															key={key}
+															dataKey={key}
+															stackId="a"
+															fill={chartConfig[key]?.color || "#ccc"}
+															name={key.replace("-", " - ")}
+														/>
+													))}
+												</BarChart>
+											</ResponsiveContainer>
+										</div>
+									</ChartContainer>
+								))
+							: phenotypeData.map((phenotype) => (
+									<ChartContainer
+										key={phenotype.phenotype}
+										config={chartConfig}
+										className="h-[300px] w-full"
+									>
+										<div className="h-full w-full py-3">
+											<h3 className="text-center text-lg font-bold">
+												{phenotype.phenotype}
+											</h3>
+											<ResponsiveContainer width="100%" height="100%">
+												<BarChart data={phenotype.data}>
+													<CartesianGrid strokeDasharray="3 3" />
+													<XAxis dataKey="phylogroup" />
+													<YAxis
+														label={{
+															value: "Count",
+															angle: -90,
+															position: "insideLeft",
+														}}
+													/>
+													<Tooltip />
+													<Legend />
+													{collectionsSamples.map((key) =>
+														["S", "R", "I"].map((letter) => (
+															<Bar
+																key={`${key}-${letter}`}
+																dataKey={`${key}-${letter}`}
+																stackId="a"
+																fill={
+																	chartConfig[`${key}-${letter}`]?.color ||
+																	"#ccc"
+																}
+																name={`${key.replace("-", " - ")} - ${letter}`}
+															/>
+														))
+													)}
+												</BarChart>
+											</ResponsiveContainer>
+										</div>
+									</ChartContainer>
+								))}
+					</>
+				)}
+				{selectedChartType.includes("Radial Tree Chart") && (
+					<div className="py-3">
+						<h3 className="py-5 text-lg font-bold">Radial Tree Chart</h3>
+						<MyChart
+							data={filteredTreeData}
+							annotations={annotations}
+							labels={labels}
+							phylogroup={phylogroup}
+							fimtype={fimtype}
+							validNodes={filteredSampleIDs}
+							selectedAnnotations={selectedAnnotations}
+							ref={chartRef}
+						/>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }
