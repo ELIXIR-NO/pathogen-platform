@@ -3,6 +3,7 @@ import AntibioticResistanceAndDiseasesDashboards3 from "../../antibiotic-resista
 import Atlas from "../atlas";
 import { loadGeoJSON } from "@/lib/data/geojsonLoader";
 import TabsNorm from "../tabsNorm";
+import { Suspense } from "react";
 
 export default async function DataLoader() {
 	const data = await getNormAtlasCSVData();
@@ -10,10 +11,12 @@ export default async function DataLoader() {
 
 	return (
 		<div>
-			<TabsNorm>
-				<Atlas data={data} geoData={geoData} />
-				<AntibioticResistanceAndDiseasesDashboards3 />
-			</TabsNorm>
+			<Suspense>
+				<TabsNorm>
+					<Atlas data={data} geoData={geoData} />
+					<AntibioticResistanceAndDiseasesDashboards3 />
+				</TabsNorm>
+			</Suspense>
 		</div>
 	);
 }
