@@ -136,7 +136,7 @@ export function MultiRegionResistanceLineCharts({
 			<DropdownMenu modal={false}>
 				<DropdownMenuTrigger asChild>
 					<Button variant="outline" disabled={isNoData}>
-						{isNoData ? "No options available" : title}
+						{isNoData ? "Ingen valg tilgjengelig" : title}
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="max-h-80 overflow-auto">
@@ -247,33 +247,33 @@ export function MultiRegionResistanceLineCharts({
 			<div className="flex flex-col space-y-2 lg:flex-row lg:space-x-2">
 				<h2 className="text-xl font-bold">Filters</h2>
 				{renderDropdown(
-					"Select Sample Type",
+					"Velg prøvetype",
 					sampleType,
 					selectedSampleType,
 					handleUniqueChange(setSelectedSampleType),
 					false
 				)}
 				{renderDropdown(
-					"Select Microbes",
+					"Velg mikrober",
 					microbes,
 					selectedMicrobes,
 					handleUniqueChange(setSelectedMicrobes),
 					false
 				)}
 				{renderDropdown(
-					"Select Regions",
+					"Velg regioner",
 					regions,
 					selectedRegions,
 					handleSelectionChange(setSelectedRegions)
 				)}
 				{renderDropdown(
-					"Select Antibiotics",
+					"Velg antibiotika",
 					uniqueFiltered,
 					selectedAntibiotics,
 					handleSelectionChange(setSelectedAntibiotics)
 				)}
 				<Button variant="outline" onClick={resetSelections}>
-					Reset All
+					Tilbakestill
 				</Button>
 				<Button
 					variant="outline"
@@ -285,7 +285,7 @@ export function MultiRegionResistanceLineCharts({
 						selectedAntibiotics.length === 0
 					}
 				>
-					Download Data
+					Last ned data
 				</Button>
 			</div>
 			<div className="flex flex-col space-y-4">
