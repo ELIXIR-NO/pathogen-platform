@@ -9,6 +9,7 @@ import Partners from "@/app/about/partners";
 import ContactUs from "@/app/about/contact-us";
 import { Suspense } from "react";
 import Overview from "@/app/about/overview";
+import Organisation from "./organisation";
 
 export default function About() {
 	return (
@@ -38,6 +39,13 @@ export default function About() {
 							Partners
 						</TabsTrigger>
 						<TabsTrigger
+							value="projects"
+							variant="underline"
+							className="text-lg font-semibold text-gray-500 hover:text-foreground"
+						>
+							Projects and organisations
+						</TabsTrigger>
+						<TabsTrigger
 							value="contact-us"
 							variant="underline"
 							className="text-lg font-semibold text-gray-500 hover:text-foreground"
@@ -53,6 +61,9 @@ export default function About() {
 					</TabsContent>
 					<TabsContent value="partners">
 						<Partners />
+					</TabsContent>
+					<TabsContent value="projects">
+						<Organisation />
 					</TabsContent>
 					<TabsContent value="contact-us">
 						<ContactUs />
