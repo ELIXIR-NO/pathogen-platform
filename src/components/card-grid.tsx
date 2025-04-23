@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export type CardGridData = {
 	title: string;
@@ -15,9 +16,20 @@ export type CardGridData = {
 	link: string;
 };
 
-export default function CardGrid({ data }: { data: CardGridData[] }) {
+export default function CardGrid({
+	data,
+	className = "",
+}: {
+	data: CardGridData[];
+	className?: string;
+}) {
 	return (
-		<div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		<div
+			className={cn(
+				"mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3",
+				className
+			)}
+		>
 			{data.map((item) => (
 				<Card
 					key={item.title}
