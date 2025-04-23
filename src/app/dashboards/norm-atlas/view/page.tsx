@@ -10,13 +10,8 @@ export default async function DataLoader() {
 	const geoData = await loadGeoJSON();
 
 	return (
-		<div>
-			<Suspense>
-				<TabsNorm>
-					<Atlas data={data} geoData={geoData} />
-					<AntibioticResistanceAndDiseasesDashboards3 />
-				</TabsNorm>
-			</Suspense>
+		<div className="-mx-[calc((100vw-75vw)/2)] mt-10 w-full w-screen pl-2 pr-16">
+			<Atlas data={data} geoData={geoData} />
 		</div>
 	);
 }
