@@ -6,6 +6,7 @@ import {
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import Image from "next/image";
+import Link from "next/link";
 
 const resources: CardGridData[] = [
 	{
@@ -14,25 +15,37 @@ const resources: CardGridData[] = [
 		link: "/dashboards/norm-atlas/view?tab=atlas",
 		image: "/logos/map-view.png",
 	},
-	{
-		title: "NORM data trender",
-		description: "",
-		link: "/dashboards/norm-atlas/view?tab=trends",
-		image: "/logos/trends.png",
-	},
+	//{
+	//	title: "NORM data trender",
+	//	description: "",
+	//	link: "/dashboards/norm-atlas/view?tab=trends",
+	//	image: "/logos/trends.png",
+	//},
 	{
 		title: "NORM side på UNN",
 		description:
 			"Norsk overvåkingssystem for antibiotikaresistens hos mikrober.",
 		link: "https://www.unn.no/fag-og-forskning/norm-norsk-overvakingssystem-for-antibiotikaresistens-hos-mikrober",
-		image: "/logos/norm.png",
+		image: "/logos/norm_card.png",
 	},
 ];
 
 export default function NormAtlas() {
 	return (
 		<section className="flex w-full flex-col space-y-6 text-justify">
-			<h1 className="text-3xl font-bold">NORM-atlas</h1>
+			<Link
+				key="Norm"
+				href="https://www.unn.no/fag-og-forskning/norm-norsk-overvakingssystem-for-antibiotikaresistens-hos-mikrober"
+				className="inline-block"
+			>
+				<Image
+					src="/logos/norm.png"
+					alt="Norm"
+					width={350}
+					height={220}
+					className="rounded-md object-cover"
+				/>
+			</Link>
 			<div className="w-full">
 				<HoverCard>
 					<HoverCardTrigger asChild>
@@ -76,7 +89,7 @@ export default function NormAtlas() {
 			</div>
 
 			<div className="rounded-md bg-gray-100 px-6 pb-6">
-				<CardGrid data={resources} />
+				<CardGrid data={resources} className="lg:grid-cols-2" />
 			</div>
 
 			<div className="mt-6 grid w-full place-items-center gap-6">
