@@ -48,7 +48,7 @@ import { GeoJson } from "@/lib/data/geojsonLoader";
 import * as turf from "@turf/turf";
 import { Checkbox } from "@/components/ui/checkbox";
 import { SimpleLinearRegression } from "ml-regression-simple-linear";
-import { Info } from "lucide-react";
+import { Download, Info, Maximize2 } from "lucide-react";
 import {
 	Tooltip,
 	TooltipArrow,
@@ -57,6 +57,12 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { getDescription } from "@/hooks/getMicrobeDescription";
+import {
+	ChartDialog,
+	exportChartImage,
+	ExportOptionsDialog,
+} from "@/lib/exportImageUtils";
+import DownloadCSV from "@/lib/data/csvExport";
 
 export default function Atlas({
 	data,
@@ -474,6 +480,16 @@ function TableView({
 						<TableHead className="text-right">
 							%-andel ({selectedYear})
 						</TableHead>
+						<TableHead className="px-0 text-center">
+							<Button
+								onClick={() => {
+									DownloadCSV(tableData, "tableData");
+								}}
+								variant="ghost"
+							>
+								<Download />
+							</Button>
+						</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
@@ -518,6 +534,24 @@ function ResistanceChart({
 	chartCall,
 }: ResistanceChartProps) {
 	const call = "Bar";
+	const chartRef = useRef<HTMLDivElement>(null);
+	const [dialogOpen, setDialogOpen] = useState(false);
+	const [exportOptionsOpen, setExportOptionsOpen] = useState(false);
+	const saveName = "ResistanceChart";
+
+	const handleExport = (format: "png" | "svg", resolution: 1 | 2) => {
+		exportChartImage(
+			"ResistanceChart-id",
+			format === "svg",
+			saveName,
+			resolution
+		);
+	};
+
+	const openChartInDialog = () => {
+		setDialogOpen(true);
+	};
+
 	const chartData = useMemo(() => {
 		if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) {
 			return [];
@@ -581,65 +615,91 @@ function ResistanceChart({
 		return null;
 	}
 
+	const renderChart = (aspect: string) => (
+		<ChartContainer config={chartConfig} className={`${aspect} w-full`}>
+			<BarChart
+				data={chartData}
+				accessibilityLayer
+				margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
+				onMouseLeave={() => onHover(null, "")}
+			>
+				<CartesianGrid vertical={false} />
+				<XAxis
+					dataKey="region"
+					tickLine={false}
+					fontSize={12}
+					angle={-45}
+					textAnchor="end"
+					height={70}
+				/>
+				<YAxis
+					tickLine={false}
+					fontSize={12}
+					domain={[0, maxResistance]}
+					unit="%"
+					label={{
+						value: "Prosent resistente isolater",
+						angle: -90,
+						position: "center",
+						dx: -20,
+					}}
+				/>
+				{hoveredRegion?.length !== undefined ? (
+					chartCall !== call ? (
+						<ChartTooltip
+							content={<ChartTooltipContent />}
+							defaultIndex={chartData.findIndex(
+								(item) =>
+									item.region ===
+									(Array.isArray(hoveredRegion)
+										? hoveredRegion[0]
+										: (hoveredRegion ?? ""))
+							)}
+						/>
+					) : (
+						<ChartTooltip content={<ChartTooltipContent />} />
+					)
+				) : (
+					<ChartTooltip active={false} />
+				)}
+				<Bar
+					dataKey="resistance"
+					radius={4}
+					onMouseEnter={(data) => onHover([data.region], call)}
+				>
+					{chartData.map((entry, index) => (
+						<Cell key={`cell-${index}`} fill={entry.fill} />
+					))}
+				</Bar>
+			</BarChart>
+		</ChartContainer>
+	);
+
 	return (
 		<div className="rounded-lg border bg-card p-4">
-			<ChartContainer config={chartConfig} className="aspect-[4/3] w-full">
-				<BarChart
-					data={chartData}
-					accessibilityLayer
-					margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
-					onMouseLeave={() => onHover(null, "")}
-				>
-					<CartesianGrid vertical={false} />
-					<XAxis
-						dataKey="region"
-						tickLine={false}
-						fontSize={12}
-						angle={-45}
-						textAnchor="end"
-						height={70}
-					/>
-					<YAxis
-						tickLine={false}
-						fontSize={12}
-						domain={[0, maxResistance]}
-						unit="%"
-						label={{
-							value: "Prosent resistente isolater",
-							angle: -90,
-							position: "center",
-							dx: -20,
-						}}
-					/>
-					{hoveredRegion?.length !== undefined ? (
-						chartCall !== call ? (
-							<ChartTooltip
-								content={<ChartTooltipContent />}
-								defaultIndex={chartData.findIndex(
-									(item) =>
-										item.region ===
-										(Array.isArray(hoveredRegion)
-											? hoveredRegion[0]
-											: (hoveredRegion ?? ""))
-								)}
-							/>
-						) : (
-							<ChartTooltip content={<ChartTooltipContent />} />
-						)
-					) : (
-						<ChartTooltip active={false} />
-					)}
-					<Bar
-						dataKey="resistance"
-						radius={4}
-						onMouseEnter={(data) => onHover([data.region], call)}
-					>
-						{chartData.map((entry, index) => (
-							<Cell key={`cell-${index}`} fill={entry.fill} />
-						))}
-					</Bar>
-				</BarChart>
-			</ChartContainer>
+			<div className="mb-2 flex justify-end">
+				<Button onClick={() => setExportOptionsOpen(true)} variant="ghost">
+					<Download />
+				</Button>
+				<Button onClick={openChartInDialog} variant="ghost">
+					<Maximize2 />
+				</Button>
+			</div>
+			<ExportOptionsDialog
+				open={exportOptionsOpen}
+				onOpenChange={setExportOptionsOpen}
+				onConfirm={handleExport}
+			/>
+			<div id="ResistanceChart-id" ref={chartRef}>
+				{renderChart("aspect-[4/3]")}
+			</div>
+			<ChartDialog
+				open={dialogOpen}
+				onOpenChange={setDialogOpen}
+				saveName={saveName}
+			>
+				{dialogOpen && <div>{renderChart("aspect-[5/2]")}</div>}
+			</ChartDialog>
 		</div>
 	);
 }
@@ -665,6 +725,22 @@ function ResistanceTrendChart({
 }: ResistanceTrendChartProps) {
 	const [showLineChart, setShowLineChart] = useState(true);
 	const [showRegression, setShowRegression] = useState(false);
+	const [dialogOpen, setDialogOpen] = useState(false);
+	const [exportOptionsOpen, setExportOptionsOpen] = useState(false);
+	const saveName = "ResistanceTrendChart";
+
+	const handleExport = (format: "png" | "svg", resolution: 1 | 2) => {
+		exportChartImage(
+			"ResistanceTrendChart-id",
+			format === "svg",
+			saveName,
+			resolution
+		);
+	};
+
+	const openChartInDialog = () => {
+		setDialogOpen(true);
+	};
 
 	const generateRegressionData = (data: YearDataEntry[]) => {
 		const years = data.map((entry) => entry.year);
@@ -820,8 +896,8 @@ function ResistanceTrendChart({
 		}
 	};
 
-	return (
-		<div className="rounded-lg border bg-card p-4">
+	const renderChart = (aspect: string) => (
+		<div>
 			<div className="mb-4 flex items-center space-x-4">
 				<div className="flex items-center space-x-2">
 					<Checkbox
@@ -858,7 +934,7 @@ function ResistanceTrendChart({
 				</div>
 			</div>
 
-			<ChartContainer config={chartConfig} className="aspect-video w-full">
+			<ChartContainer config={chartConfig} className={`${aspect} w-full`}>
 				<ComposedChart
 					data={chartData}
 					margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
@@ -940,6 +1016,32 @@ function ResistanceTrendChart({
 			</ChartContainer>
 		</div>
 	);
+
+	return (
+		<div className="rounded-lg border bg-card p-4">
+			<div className="mb-2 flex justify-end">
+				<Button onClick={() => setExportOptionsOpen(true)} variant="ghost">
+					<Download />
+				</Button>
+				<Button onClick={openChartInDialog} variant="ghost">
+					<Maximize2 />
+				</Button>
+			</div>
+			<ExportOptionsDialog
+				open={exportOptionsOpen}
+				onOpenChange={setExportOptionsOpen}
+				onConfirm={handleExport}
+			/>
+			<div id="ResistanceTrendChart-id">{renderChart("aspect-video")}</div>
+			<ChartDialog
+				open={dialogOpen}
+				onOpenChange={setDialogOpen}
+				saveName={saveName}
+			>
+				{dialogOpen && <div>{renderChart("aspect-[5/2]")}</div>}
+			</ChartDialog>
+		</div>
+	);
 }
 
 const useWindowSize = () => {
@@ -1005,6 +1107,16 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			text: "",
 		});
 		const call = "Map";
+		const [exportOptionsOpen, setExportOptionsOpen] = useState(false);
+
+		const handleExport = (format: "png" | "svg", resolution: 1 | 2) => {
+			exportChartImage(
+				"map-chart-id",
+				format === "svg",
+				"map-chart",
+				resolution
+			);
+		};
 
 		useImperativeHandle(ref, () => chartRef.current!);
 
@@ -1021,8 +1133,8 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			svg.selectAll("g").remove();
 
 			const projection: GeoProjection = geoMercator()
-				.scale(1000)
-				.translate([100, 1900]);
+				.scale(1350)
+				.translate([100, 2450]);
 
 			const pathGenerator = geoPath(projection);
 
@@ -1199,10 +1311,10 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				}
 			});
 
-			const legendWidth = 200;
-			const legendHeight = 190;
+			const legendWidth = 230;
+			const legendHeight = 230;
 
-			const legend = svg.append("g").attr("transform", `translate(790, 610)`);
+			const legend = svg.append("g").attr("transform", `translate(855, 565)`);
 
 			legend
 				.append("rect")
@@ -1211,6 +1323,26 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				.attr("fill", "#fff")
 				.attr("stroke", "#000")
 				.attr("stroke-width", 1);
+
+			const titleHeight = 30;
+			const titlePadding = 10;
+
+			legend
+				.append("rect")
+				.attr("x", 0)
+				.attr("y", 0)
+				.attr("width", legendWidth)
+				.attr("height", 30)
+				.attr("fill", "#d1d5db");
+
+			legend
+				.append("text")
+				.attr("x", titlePadding)
+				.attr("y", titleHeight / 2)
+				.attr("dy", ".35em")
+				.style("font-size", "16px")
+				.style("font-weight", "bold")
+				.text("Kategorier: %-andeler");
 
 			const colors = [
 				"lightgrey",
@@ -1240,7 +1372,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				legend
 					.append("rect")
 					.attr("x", 10)
-					.attr("y", 8 + index * 20)
+					.attr("y", 40 + index * 20)
 					.attr("width", 14)
 					.attr("height", 14)
 					.attr("fill", colors[index])
@@ -1249,7 +1381,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				legend
 					.append("text")
 					.attr("x", 30)
-					.attr("y", 16 + index * 20)
+					.attr("y", 47 + index * 20)
 					.attr("dy", ".35em")
 					.style("font-size", "16px")
 					.text(label)
@@ -1309,15 +1441,34 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 		return (
 			<div className="chart-container rounded-lg border bg-card pb-4 text-card-foreground shadow-sm">
-				<h3 className="w-full rounded-t-lg bg-gray-300 px-4 py-3 font-bold text-gray-800 shadow-md">
-					{selectedDataSet} (Andel R): {selectedMicrobe} - {selectedAntibiotic}{" "}
-					({selectedYear})
-				</h3>
+				<div className="mb-2">
+					<div className="flex items-center justify-between rounded-t-lg bg-gray-300 px-4 py-3 font-bold text-gray-800 shadow-md">
+						<span>
+							{selectedDataSet} (Andel R): {selectedMicrobe} -{" "}
+							{selectedAntibiotic} ({selectedYear})
+						</span>
+						<div className="flex gap-2">
+							<Button
+								onClick={() => setExportOptionsOpen(true)}
+								variant="ghost"
+							>
+								<Download />
+							</Button>
+						</div>
+					</div>
+				</div>
+				<ExportOptionsDialog
+					open={exportOptionsOpen}
+					onOpenChange={setExportOptionsOpen}
+					onConfirm={handleExport}
+				/>
+
 				<ScrollArea className="w-full whitespace-nowrap">
 					<svg
+						id="map-chart-id"
 						ref={chartRef}
 						className="chart-svg h-full w-full"
-						viewBox="0 0 1000 800"
+						viewBox="0 0 1100 800"
 						preserveAspectRatio="xMidYMid meet"
 					></svg>
 				</ScrollArea>
