@@ -46,7 +46,7 @@
     "d3": "^7.9.0",
     "d3-geo": "^3.1.1",
     "embla-carousel-react": "^8.5.2",
-    "framer-motion": "^11.3.29",
+    "framer-motion": "^12.12.1",
     "html-to-image": "^1.11.13",
     "install": "^0.13.0",
     "lucide-react": "^0.379.0",
