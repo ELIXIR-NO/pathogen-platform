@@ -6,7 +6,7 @@ import React from "react";
 interface Partner {
 	title: string;
 	logo: { light: string; dark: string };
-	description: (string | JSX.Element)[];
+	description: (string | React.JSX.Element)[];
 }
 
 const partners: Partner[] = [

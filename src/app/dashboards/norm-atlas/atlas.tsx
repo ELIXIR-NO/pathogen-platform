@@ -1274,12 +1274,13 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 				regionPaths
 					.on("mouseover", function (event, d: any) {
-						const regionName =
-							[stateToRegion[d.properties.name]] || hoveredRegion;
+						const regionName = stateToRegion[d.properties.name]
+							? [stateToRegion[d.properties.name]]
+							: hoveredRegion;
 						onHover(regionName, call);
 
 						const regionData = tableData.find(
-							(item) => item.region === regionName[0]
+							(item) => item.region === regionName?.[0]
 						);
 						const percentage = regionData
 							? `${regionData.percentage}%`
