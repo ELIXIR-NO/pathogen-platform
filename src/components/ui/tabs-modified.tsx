@@ -134,10 +134,12 @@ const TabsWithUrlSync: React.FC<TabsUrlSyncProps> = ({
 		const tabFromUrl = searchParams.get(urlParamName);
 		if (
 			tabFromUrl &&
-			React.Children.toArray(children).some(
-				(child) =>
-					React.isValidElement(child) && child.props.value === tabFromUrl
-			)
+			React.Children.toArray(children).some((child) => {
+				if (React.isValidElement(child)) {
+					return (child as React.ReactElement<any>).props.value === tabFromUrl;
+				}
+				return false;
+			})
 		) {
 			setValue(tabFromUrl);
 		} else if (!tabFromUrl) {
