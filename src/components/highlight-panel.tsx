@@ -12,6 +12,7 @@ import { createSearchIndex, exactTagSearch } from "@/lib/searchUtils";
 import { fetchAllPages } from "@/lib/notion-utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Suspense } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default async function HighlightPanel() {
 	const notionPages = await fetchAllPages();
@@ -32,50 +33,52 @@ export default async function HighlightPanel() {
 					<SheetDescription></SheetDescription>
 				</SheetHeader>
 
-				<div className="flex flex-col space-y-3">
-					{searchResults.length > 0 ? (
-						searchResults.map((item) => (
-							<Link
-								key={item.pageId}
-								href={`${item.relativeLink}/${item.slug}`}
-							>
-								<Card className="cursor-pointer transition-all duration-200 hover:shadow-md">
-									<CardHeader>
-										<CardTitle className="text-lg">{item.title}</CardTitle>
-									</CardHeader>
-									<CardContent className="flex flex-col">
-										{item.imageUrl ? (
-											<Suspense
-												fallback={
-													<div className="flex h-full w-full items-center justify-center bg-gray-200">
-														Loading...
-													</div>
-												}
-											>
-												<Image
-													src={item.imageUrl}
-													alt={item.title}
-													width={400}
-													height={300}
-													className="h-full w-full object-cover"
-												/>
-											</Suspense>
-										) : (
-											<div className="flex h-48 items-center justify-center rounded-md bg-gray-200">
-												No image
-											</div>
-										)}
-										<p className="mt-2 text-sm">
-											{contractSummary(item.summary)}
-										</p>
-									</CardContent>
-								</Card>
-							</Link>
-						))
-					) : (
-						<p className="text-center text-gray-500">No highlights found.</p>
-					)}
-				</div>
+				<ScrollArea className="h-[80vh] rounded-md border p-4">
+					<div className="flex flex-col space-y-3">
+						{searchResults.length > 0 ? (
+							searchResults.map((item) => (
+								<Link
+									key={item.pageId}
+									href={`${item.relativeLink}/${item.slug}`}
+								>
+									<Card className="cursor-pointer transition-all duration-200 hover:shadow-md">
+										<CardHeader>
+											<CardTitle className="text-lg">{item.title}</CardTitle>
+										</CardHeader>
+										<CardContent className="flex flex-col">
+											{item.imageUrl ? (
+												<Suspense
+													fallback={
+														<div className="flex h-full w-full items-center justify-center bg-gray-200">
+															Loading...
+														</div>
+													}
+												>
+													<Image
+														src={item.imageUrl}
+														alt={item.title}
+														width={400}
+														height={300}
+														className="h-full w-full object-cover"
+													/>
+												</Suspense>
+											) : (
+												<div className="flex h-48 items-center justify-center rounded-md bg-gray-200">
+													No image
+												</div>
+											)}
+											<p className="mt-2 text-sm">
+												{contractSummary(item.summary)}
+											</p>
+										</CardContent>
+									</Card>
+								</Link>
+							))
+						) : (
+							<p className="text-center text-gray-500">No highlights found.</p>
+						)}
+					</div>
+				</ScrollArea>
 			</SheetContent>
 		</Sheet>
 	);
