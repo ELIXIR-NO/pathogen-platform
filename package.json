@@ -51,7 +51,7 @@
     "install": "^0.13.0",
     "lucide-react": "^0.379.0",
     "ml-regression-simple-linear": "^3.0.1",
-    "newick": "^2.0.0",
+    "newick": "^3.0.0",
     "next": "15.3.2",
     "next-themes": "^0.3.0",
     "nodemailer": "^6.9.14",
