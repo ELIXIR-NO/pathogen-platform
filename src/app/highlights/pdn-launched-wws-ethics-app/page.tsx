@@ -1,15 +1,9 @@
-import ContributorsPanel from "@/components/contributors-panel";
-import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/components/ui/hover-card";
+import { HoverCard, HoverCardTrigger } from "@/components/ui/hover-card";
 import CentralImage from "@/components/central-image";
 
 export default function EnterococcusPage() {
 	return (
 		<>
-			<ContributorsPanel contributors={["dorota"]} />
 			<section className="flex flex-col space-y-6 text-justify">
 				<HoverCard>
 					<HoverCardTrigger asChild>
