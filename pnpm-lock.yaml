@@ -126,8 +126,8 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       newick:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^3.0.0
+        version: 3.0.1
       next:
         specifier: 15.3.2
         version: 15.3.2(@babel/core@7.25.2)(babel-plugin-react-compiler@19.0.0-beta-40c6c23-20250301)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -4103,8 +4103,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  newick@2.0.0:
-    resolution: {integrity: sha512-WzIBgGkSUxoOx9pjZq4YhdcflCZqL50PJAXl46hrnrgGdkV4gB0B7//6Zy9pIRb0BnJly5cUFQqRG9sKgnZkkg==}
+  newick@3.0.1:
+    resolution: {integrity: sha512-rbjjOWpgJ6k00a3CjMIgfKwoz3oO7XovUYE0nkMykhT0t/sq+V6j20DaQ90QKj2GJyiDqvSaaFuCTHwZCFNYCw==}
 
   next-themes@0.3.0:
     resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
@@ -9904,7 +9904,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  newick@2.0.0: {}
+  newick@3.0.1: {}
 
   next-themes@0.3.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
