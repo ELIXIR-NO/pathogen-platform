@@ -33,7 +33,7 @@ export default async function HighlightPanel() {
 					<SheetDescription></SheetDescription>
 				</SheetHeader>
 
-				<ScrollArea className="h-[80vh] rounded-md border p-4">
+				<ScrollArea className="h-[90vh] rounded-md border p-4">
 					<div className="flex flex-col space-y-3">
 						{searchResults.length > 0 ? (
 							searchResults.map((item) => (
