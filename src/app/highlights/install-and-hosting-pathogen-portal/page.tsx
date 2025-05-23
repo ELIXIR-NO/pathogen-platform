@@ -1,4 +1,3 @@
-import ContributorsPanel from "@/components/contributors-panel";
 import {
 	HoverCard,
 	HoverCardContent,
@@ -9,7 +8,6 @@ import CentralImage from "@/components/central-image";
 export default function EnterococcusPage() {
 	return (
 		<>
-			<ContributorsPanel contributors={["dorota"]} />
 			<section className="flex flex-col space-y-6 text-justify">
 				<h2 className="text-3xl font-bold">
 					Installing and hosting a Pathogen Portal node
