@@ -49,7 +49,7 @@
     "framer-motion": "^12.12.1",
     "html-to-image": "^1.11.13",
     "install": "^0.13.0",
-    "lucide-react": "^0.511.0",
+    "lucide-react": "^0.514.0",
     "ml-regression-simple-linear": "^3.0.1",
     "newick": "^3.0.0",
     "next": "15.3.3",
@@ -85,5 +85,5 @@
     "typescript": "^5.5.4",
     "vitest": "^3.0.0"
   },
-  "packageManager": "pnpm@10.11.0"
+  "packageManager": "pnpm@10.12.1"
 }
