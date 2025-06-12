@@ -71,15 +71,13 @@ export default function Atlas({
 	data: NormDataRecord[];
 	geoData: GeoJson;
 }) {
-	const [selectedMicrobe, setSelectedMicrobe] =
-		useState<string>("Enterobacter");
-	const [selectedAntibiotic, setSelectedAntibiotic] =
-		useState<string>("Cefotaxim");
+	const [selectedMicrobe, setSelectedMicrobe] = useState<string>();
+	const [selectedAntibiotic, setSelectedAntibiotic] = useState<string>();
 	const [selectedRegions, setSelectedRegions] = useState<string[]>(["Norge"]);
 	const [selectedDataSet, setSelectedDataSet] = useState<
 		"Blod" | "Sår" | "Urin" | "Luft"
 	>("Blod");
-	const [selectedYear, setSelectedYear] = useState<number>(2022);
+	const [selectedYear, setSelectedYear] = useState<number>();
 	const [hoveredRegion, setHoveredRegion] = useState<string[] | null>(null);
 	const [chartCall, setChartCall] = useState<string>("");
 
@@ -99,6 +97,53 @@ export default function Atlas({
 		);
 		return Array.from(years).sort((a, b) => a - b);
 	}, [filteredData, selectedMicrobe, selectedAntibiotic]);
+
+	useEffect(() => {
+		if (availableYears.length > 0) {
+			setSelectedYear(availableYears[availableYears.length - 1]);
+		}
+	}, [availableYears]);
+
+	useEffect(() => {
+		if (filteredData.length === 0) return;
+
+		const microbes = Array.from(
+			new Set(filteredData.map((r) => r.Mikrobe))
+		).sort();
+
+		if (microbes.length === 0) return;
+
+		const firstMicrobe = microbes[0];
+
+		const antibioticsForMicrobe = Array.from(
+			new Set(
+				filteredData
+					.filter((r) => r.Mikrobe === firstMicrobe)
+					.map((r) => r.Antibiotika)
+			)
+		).sort();
+
+		const firstAntibiotic = antibioticsForMicrobe[0] ?? "";
+
+		const years = Array.from(
+			new Set(
+				filteredData
+					.filter(
+						(r) =>
+							r.Mikrobe === firstMicrobe && r.Antibiotika === firstAntibiotic
+					)
+					.map((r) => parseInt(r.ProveAar))
+			)
+		).sort((a, b) => a - b);
+
+		const latestYear = years[years.length - 1] ?? 2022;
+
+		setSelectedMicrobe(firstMicrobe);
+		setSelectedAntibiotic(firstAntibiotic);
+		setSelectedYear(latestYear);
+	}, [filteredData]);
+
+	if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) return null;
 
 	const handleSelectionChange = (microbe: string, antibiotic: string) => {
 		setSelectedMicrobe(microbe);
@@ -238,36 +283,49 @@ export function MicrobeSelector({
 		onSelectionChange(microbe, antibiotic);
 	};
 
+	const [openMicrobe, setOpenMicrobe] = useState<string | undefined>(
+		selectedMicrobe
+	);
+
+	useMemo(() => {
+		setOpenMicrobe(selectedMicrobe);
+	}, [selectedMicrobe]);
+
 	return (
 		<ScrollArea className="h-[600px] rounded-md border p-4">
-			<Accordion type="single" collapsible className="w-full">
+			<Accordion
+				type="single"
+				collapsible
+				className="w-full"
+				value={openMicrobe}
+				onValueChange={setOpenMicrobe}
+			>
 				{Object.entries(microbeAntibiotics)
 					.sort()
 					.map(([microbe, antibiotics]) => (
 						<AccordionItem key={microbe} value={microbe}>
-							<AccordionTrigger className="inline-flex items-center justify-between gap-2 rounded-md px-2 text-sm hover:bg-accent/50 hover:no-underline">
-								<div className="flex items-center gap-2">
-									<span>{microbe}</span>
+							<AccordionTrigger className="inline-flex items-center justify-start gap-2 rounded-md px-2 text-sm hover:bg-accent/50 hover:no-underline">
+								<span>{microbe}</span>
 
-									<TooltipProvider>
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<div className="justify-self-end">
-													<Info size={16} />
-												</div>
-											</TooltipTrigger>
-											<TooltipContent side="right">
-												{getDescription(microbe)}
-												<TooltipArrow
-													className="-my-px border-none fill-[var(--tooltip-color)] drop-shadow-[0_1px_0_white]"
-													width={11}
-													height={5}
-												/>
-											</TooltipContent>
-										</Tooltip>
-									</TooltipProvider>
-								</div>
+								<TooltipProvider>
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<div className="ml-auto">
+												<Info size={16} />
+											</div>
+										</TooltipTrigger>
+										<TooltipContent side="right">
+											{getDescription(microbe)}
+											<TooltipArrow
+												className="-my-px border-none fill-[var(--tooltip-color)] drop-shadow-[0_1px_0_white]"
+												width={11}
+												height={5}
+											/>
+										</TooltipContent>
+									</Tooltip>
+								</TooltipProvider>
 							</AccordionTrigger>
+
 							<AccordionContent>
 								<div className="flex flex-col space-y-1">
 									{antibiotics.map((antibiotic) => (
