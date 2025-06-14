@@ -254,7 +254,7 @@ const ChartTooltipContent = React.forwardRef<
 												<span className="font-mono font-medium tabular-nums text-foreground">
 													{!trendChart
 														? item.value.toLocaleString()
-														: `\u00A0${item.value.toLocaleString()}% (${item.payload[`${item.name}-total`]})`}
+														: `\u00A0${item.value.toLocaleString()}% (Count ${item.payload[`${item.name}-total`]})`}
 												</span>
 											)}
 										</div>
