@@ -541,7 +541,7 @@ function TableView({
 						<TableHead className="px-0 text-center">
 							<Button
 								onClick={() => {
-									DownloadCSV(tableData, "tableData");
+									DownloadCSV(tableData, "tableData", true);
 								}}
 								variant="ghost"
 							>
@@ -1005,7 +1005,7 @@ function ResistanceTrendChart({
 						domain={[0, maxResistance]}
 						unit="%"
 						label={{
-							value: "Prosent resistente isolater",
+							value: "Prosent resistente isolater (bars)",
 							angle: -90,
 							position: "center",
 							dx: -20,
@@ -1019,7 +1019,7 @@ function ResistanceTrendChart({
 							fontSize={12}
 							domain={[0, maxTotal]}
 							label={{
-								value: "Antall prøveisolater",
+								value: "Antall prøveisolater (line)",
 								angle: -90,
 								position: "center",
 								dx: 20,
