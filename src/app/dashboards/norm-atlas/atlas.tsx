@@ -62,7 +62,7 @@ import {
 	exportChartImage,
 	ExportOptionsDialog,
 } from "@/lib/exportImageUtils";
-import DownloadCSV from "@/lib/data/csvExport";
+import DownloadCSV from "@/lib/data/dataExport";
 
 export default function Atlas({
 	data,

@@ -23,7 +23,7 @@ import {
 	ChartLegend,
 	ChartLegendContent,
 } from "@/components/ui/chart";
-import DownloadCSV from "@/lib/data/csvExport";
+import DownloadCSV from "@/lib/data/dataExport";
 import { MyChart } from "./chart";
 import { TreeNode } from "@/lib/data/newick-loader";
 import { DownloadNewick, serializeSVG } from "@/lib/data/newick-save";

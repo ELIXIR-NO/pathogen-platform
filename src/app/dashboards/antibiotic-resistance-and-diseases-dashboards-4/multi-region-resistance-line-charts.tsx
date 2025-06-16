@@ -25,7 +25,7 @@ import {
 	ChartLegend,
 	ChartLegendContent,
 } from "@/components/ui/chart";
-import DownloadCSV from "@/lib/data/csvExport";
+import DownloadCSV from "@/lib/data/dataExport";
 
 export function MultiRegionResistanceLineCharts({
 	microbes,
