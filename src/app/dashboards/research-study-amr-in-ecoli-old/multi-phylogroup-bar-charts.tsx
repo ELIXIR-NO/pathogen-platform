@@ -23,7 +23,7 @@ import {
 	ChartLegend,
 	ChartLegendContent,
 } from "@/components/ui/chart";
-import DownloadCSV from "@/lib/data/csvExport";
+import DownloadCSV from "@/lib/data/dataExport";
 
 const generateHslColor = (index: number, total: number) => {
 	const safeHues = [330, 210, 0, 120, 30, 270, 180, 45, 60, 75, 210, 0, 30];
