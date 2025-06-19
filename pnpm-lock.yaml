@@ -165,6 +165,15 @@ importers:
         specifier: ^3.25.7
         version: 3.25.67
     devDependencies:
+      '@eslint/eslintrc':
+        specifier: ^3.3.1
+        version: 3.3.1
+      '@eslint/js':
+        specifier: ^9.29.0
+        version: 9.29.0
+      '@next/eslint-plugin-next':
+        specifier: ^15.3.4
+        version: 15.3.4
       '@tanstack/eslint-plugin-query':
         specifier: ^5.60.1
         version: 5.78.0(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3)
@@ -198,6 +207,9 @@ importers:
       eslint-config-prettier:
         specifier: ^10.0.0
         version: 10.1.5(eslint@9.29.0(jiti@1.21.7))
+      eslint-plugin-react-hooks:
+        specifier: ^5.2.0
+        version: 5.2.0(eslint@9.29.0(jiti@1.21.7))
       jsdom:
         specifier: ^26.1.0
         version: 26.1.0
