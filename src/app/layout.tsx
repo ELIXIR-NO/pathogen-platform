@@ -11,6 +11,7 @@ import { createSearchIndex } from "@/lib/searchUtils";
 import SearchPanel from "@/components/search-panel";
 import Footer from "@/components/footer";
 import NavBarMobile from "@/components/nav-bar/nav-bar-mobile";
+import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = FontSans({
 	subsets: ["latin"],
@@ -50,6 +51,7 @@ export default async function RootLayout({
 					</header>
 					<main className="mx-auto min-h-[95vh] w-3/4 py-10 pt-24">
 						{children}
+						<Toaster position="top-center" />
 					</main>
 					<Footer />
 					<Analytics />
