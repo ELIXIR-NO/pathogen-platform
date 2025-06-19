@@ -239,7 +239,7 @@ export default function Atlas({
 
 const getGradientColor = (value: number) => {
 	if (value < 1) return "hsl(var(--red-1))";
-	if (value > 1 && value <= 2.5) return "hsl(var(--red-2))";
+	if (value >= 1 && value <= 2.5) return "hsl(var(--red-2))";
 	if (value > 2.5 && value <= 5) return "hsl(var(--red-3))";
 	if (value > 5 && value <= 10) return "hsl(var(--red-4))";
 	if (value > 10 && value <= 15) return "hsl(var(--red-5))";
@@ -1276,7 +1276,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				if (value === "Ikke data") return "Ikke Data";
 				if (typeof value === "string") value = parseFloat(value);
 				if (value < 1) return "<1%";
-				if (value > 1 && value <= 2.5) return "1-2.5%";
+				if (value >= 1 && value <= 2.5) return "1-2.5%";
 				if (value > 2.5 && value <= 5) return "2.5-5%";
 				if (value > 5 && value <= 10) return "5-10%";
 				if (value > 10 && value <= 15) return "10-15%";
