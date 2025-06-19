@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "format:check": "prettier --check ./src",
     "format:write": "prettier ./src --write",
-    "prebuild": "pnpm run lint"
+    "prebuild": "bun run lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.0",
@@ -90,5 +90,9 @@
     "typescript": "^5.5.4",
     "vitest": "^3.0.0"
   },
-  "packageManager": "pnpm@10.12.1"
+  "trustedDependencies": [
+    "esbuild",
+    "sharp",
+    "unrs-resolver"
+  ]
 }
