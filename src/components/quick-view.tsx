@@ -45,6 +45,13 @@ export default async function QuickView({
 		return text;
 	};
 
+	const checkNormVetLink = (relativeLink: string, slug: string) => {
+		if (slug == "norm-vet")
+			return "https://connect.posit.vetinst.no/normvet_utforsker/";
+
+		return `${relativeLink}/${slug}`;
+	};
+
 	return (
 		<div className="p-6">
 			<div className="mb-6 flex items-center justify-between">
@@ -57,7 +64,7 @@ export default async function QuickView({
 							key={item.pageId}
 							className="pl-2 md:basis-1/2 md:pl-4 lg:basis-1/3"
 						>
-							<Link href={`${item.relativeLink}/${item.slug}`}>
+							<Link href={checkNormVetLink(item.relativeLink, item.slug)}>
 								<Card className="h-full transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
 									<CardHeader>
 										<CardTitle className="text-left text-lg">
