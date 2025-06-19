@@ -84,7 +84,7 @@ export function createSearchIndex(pages: PageObjectResponse[]): SearchIndex {
 						.join("") || ""
 				: "";
 
-		const imageUrl =
+		const imageUrlPreProxy =
 			page.properties.card_image.type === "files"
 				? page.properties.card_image.files[0]?.type === "file"
 					? page.properties.card_image.files[0].file.url
@@ -92,6 +92,10 @@ export function createSearchIndex(pages: PageObjectResponse[]): SearchIndex {
 						? page.properties.card_image.files[0].external.url
 						: ""
 				: "";
+
+		const imageUrl = imageUrlPreProxy
+			? `/api/notion-images?url=${encodeURIComponent(imageUrlPreProxy)}`
+			: undefined;
 
 		const imageCredit =
 			page.properties.card_image_credit.type === "rich_text"
