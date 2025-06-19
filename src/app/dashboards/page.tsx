@@ -1,4 +1,7 @@
 import QuickView from "@/components/quick-view";
+import { Suspense } from "react";
+
+export const experimental_ppr = true;
 
 export default function DashboardPage() {
 	return (
@@ -13,11 +16,13 @@ export default function DashboardPage() {
 				Pathogen Portal, the data has been filtered for a specific topic and put
 				into to a context.
 			</p>
-			<QuickView
-				title="Dashboards"
-				searchFor="relativeLinks"
-				searchTerm="dashboards"
-			/>
+			<Suspense>
+				<QuickView
+					title="Dashboards"
+					searchFor="relativeLinks"
+					searchTerm="dashboards"
+				/>
+			</Suspense>
 		</section>
 	);
 }

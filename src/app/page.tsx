@@ -1,5 +1,8 @@
 import HighlightPanel from "@/components/highlight-panel";
 import QuickView from "@/components/quick-view";
+import { Suspense } from "react";
+
+export const experimental_ppr = true;
 
 export default function Home() {
 	return (
@@ -17,17 +20,27 @@ export default function Home() {
 				clinical/epidemiological metadata under controlled access.
 			</div>
 			<HighlightPanel />
-			<QuickView title="One Health" searchFor="tags" searchTerm="One health" />
-			<QuickView
-				title="Antimicrobial resistance"
-				searchFor="tags"
-				searchTerm="Antimicrobial resistance"
-			/>
-			<QuickView
-				title="Infectious disease"
-				searchFor="tags"
-				searchTerm="Infectious disease"
-			/>
+			<Suspense>
+				<QuickView
+					title="One Health"
+					searchFor="tags"
+					searchTerm="One health"
+				/>
+			</Suspense>
+			<Suspense>
+				<QuickView
+					title="Antimicrobial resistance"
+					searchFor="tags"
+					searchTerm="Antimicrobial resistance"
+				/>
+			</Suspense>
+			<Suspense>
+				<QuickView
+					title="Infectious disease"
+					searchFor="tags"
+					searchTerm="Infectious disease"
+				/>
+			</Suspense>
 		</main>
 	);
 }
