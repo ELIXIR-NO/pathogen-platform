@@ -17,7 +17,7 @@ export async function sendEmailToElixir(values: ContactUsFormSchema) {
 	try {
 		const { data, error } = await resend.emails.send({
 			to: ["support@elixir.no"],
-			from: "request@pathogens.no",
+			from: "Pathogen Portal Norway <no-reply@pathogens.no>",
 			subject: validatedValues.data.subject,
 			react: EmailTemplate({
 				firstName: validatedValues.data.firstName,
