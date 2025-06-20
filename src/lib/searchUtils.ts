@@ -1,4 +1,5 @@
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import path from "path";
 
 export interface IndexItem {
 	pageId: string;
@@ -84,18 +85,31 @@ export function createSearchIndex(pages: PageObjectResponse[]): SearchIndex {
 						.join("") || ""
 				: "";
 
-		const imageUrlPreProxy =
+		const files =
 			page.properties.card_image.type === "files"
-				? page.properties.card_image.files[0]?.type === "file"
-					? page.properties.card_image.files[0].file.url
-					: page.properties.card_image.files[0]?.type === "external"
-						? page.properties.card_image.files[0].external.url
-						: ""
-				: "";
+				? page.properties.card_image.files
+				: [];
 
-		const imageUrl = imageUrlPreProxy
-			? `/api/notion-images?url=${encodeURIComponent(imageUrlPreProxy)}`
-			: undefined;
+		let imageUrl: string | undefined;
+		if (files[0]) {
+			const fileObj = files[0];
+
+			let rawUrl: string;
+			if (fileObj.type === "file") {
+				rawUrl = fileObj.file.url;
+			} else if (fileObj.type === "external") {
+				rawUrl = fileObj.external.url;
+			} else {
+				console.warn(
+					`skipping file_upload for page ${page.id}: no URL available`
+				);
+				rawUrl = "";
+			}
+
+			const ext = path.extname(new URL(rawUrl).pathname) || ".jpg";
+
+			imageUrl = `/notion-images/${page.id}${ext}`;
+		}
 
 		const imageCredit =
 			page.properties.card_image_credit.type === "rich_text"
