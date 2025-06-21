@@ -18,6 +18,7 @@ import contactUsFormSchema, {
 } from "@/app/about/contactUsFormSchema";
 import { Textarea } from "@/components/ui/textarea";
 import { sendEmailToElixir } from "@/app/about/actions";
+import { toast } from "sonner";
 
 export default function ContactUsForm() {
 	const form = useForm<ContactUsFormSchema>({
@@ -33,7 +34,39 @@ export default function ContactUsForm() {
 
 	const onSubmit = async (values: ContactUsFormSchema) => {
 		const serverResponse = await sendEmailToElixir(values);
-		console.log(serverResponse);
+
+		if (!serverResponse.error) {
+			toast.success("Message sent successfully!", {
+				description: "We’ll get back to you soon.",
+				action: {
+					label: "Close",
+					onClick: () => {},
+				},
+			});
+			form.reset();
+		} else {
+			let errorMessage = "An unexpected error occurred.";
+
+			if (
+				typeof serverResponse.error === "object" &&
+				serverResponse.error !== null &&
+				"message" in serverResponse.error
+			) {
+				errorMessage = String(
+					(serverResponse.error as { message: string }).message
+				);
+			} else {
+				errorMessage = String(serverResponse.error);
+			}
+
+			toast.error("Message has not been sent", {
+				description: errorMessage,
+				action: {
+					label: "Close",
+					onClick: () => {},
+				},
+			});
+		}
 	};
 
 	return (
