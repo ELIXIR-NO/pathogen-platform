@@ -11,11 +11,12 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Escherichia coli",
 		description: (
 			<p className={textSettings}>
-				<i>E. coli</i> er den vanligste bakteriearten som påvises i blod ved sepsis i Norge. 
-				I de fleste tilfeller har infeksjonen utgangspunkt i urinveier eller
-				gastrointestinaltraktus, men <i>E. coli</i> kan påvises ved en rekke
-				forskjellige kliniske tilstander. Over hele verden ser man raskt økende
-				forekomst av <i>E. coli</i> med bredspektret betalaktamaseproduksjon (
+				<i>E. coli</i> er den vanligste bakteriearten som påvises i blod ved
+				sepsis i Norge. I de fleste tilfeller har infeksjonen utgangspunkt i
+				urinveier eller gastrointestinaltraktus, men <i>E. coli</i> kan påvises
+				ved en rekke forskjellige kliniske tilstander. Over hele verden ser man
+				raskt økende forekomst av <i>E. coli</i> med bredspektret
+				betalaktamaseproduksjon (
 				<a
 					href="https://www.fhi.no/sm/smittevernhandboka/sykdommer-a-a/esbl/?term="
 					target="_blank"
@@ -355,15 +356,17 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Acinetobacter baumannii/calcoaceticus complex",
 		description: (
 			<p className={textSettings}>
-				<em>Acinetobacter</em> er en slekt av miljømikrober som har fått økt klinisk betydning 
-				de siste tiårene. De kan ofte påvises i fuktige miljøer, og på sykehus er det 
-				spesielt alvorlig syke pasienter på intensivavdelinger som rammes. De fleste 
-				infeksjonene er i luftveier (spesielt ved respiratorbehandling) og urinveier 
-				(spesielt ved urinveiskateter). Det har vært mye uklarhet om inndelingen av{" "}
-				<em>Acinetobacter</em>, og eldre litteratur vil ofte bruke <em>Acinetobacter baumannii</em> om 
-				en rekke arter som nå har fått egne navn. Alle <em>Acinetobacter</em> er naturlig 
-				resistente mot mange antibiotikatyper og erverver også resistens mot de 
-				midlene som tradisjonelt har vært brukt. Det er spesielt stor bekymring for 
+				<em>Acinetobacter</em> er en slekt av miljømikrober som har fått økt
+				klinisk betydning de siste tiårene. De kan ofte påvises i fuktige
+				miljøer, og på sykehus er det spesielt alvorlig syke pasienter på
+				intensivavdelinger som rammes. De fleste infeksjonene er i luftveier
+				(spesielt ved respiratorbehandling) og urinveier (spesielt ved
+				urinveiskateter). Det har vært mye uklarhet om inndelingen av{" "}
+				<em>Acinetobacter</em>, og eldre litteratur vil ofte bruke{" "}
+				<em>Acinetobacter baumannii</em> om en rekke arter som nå har fått egne
+				navn. Alle <em>Acinetobacter</em> er naturlig resistente mot mange
+				antibiotikatyper og erverver også resistens mot de midlene som
+				tradisjonelt har vært brukt. Det er spesielt stor bekymring for
 				spredningen av resistens mot karbapenemer (meropenem).
 			</p>
 		),
@@ -372,15 +375,17 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Acinetobacter lwoffii",
 		description: (
 			<p className={textSettings}>
-				<em>Acinetobacter</em> er en slekt av miljømikrober som har fått økt klinisk betydning 
-				de siste tiårene. De kan ofte påvises i fuktige miljøer, og på sykehus er det 
-				spesielt alvorlig syke pasienter på intensivavdelinger som rammes. De fleste 
-				infeksjonene er i luftveier (spesielt ved respiratorbehandling) og urinveier 
-				(spesielt ved urinveiskateter). Det har vært mye uklarhet om inndelingen av 
-				<em>Acinetobacter</em>, og eldre litteratur vil ofte bruke <em>Acinetobacter baumannii</em> om 
-				en rekke arter som nå har fått egne navn. Alle <em>Acinetobacter</em> er naturlig 
-				resistente mot mange antibiotikatyper og erverver også resistens mot de 
-				midlene som tradisjonelt har vært brukt. Det er spesielt stor bekymring for 
+				<em>Acinetobacter</em> er en slekt av miljømikrober som har fått økt
+				klinisk betydning de siste tiårene. De kan ofte påvises i fuktige
+				miljøer, og på sykehus er det spesielt alvorlig syke pasienter på
+				intensivavdelinger som rammes. De fleste infeksjonene er i luftveier
+				(spesielt ved respiratorbehandling) og urinveier (spesielt ved
+				urinveiskateter). Det har vært mye uklarhet om inndelingen av
+				<em>Acinetobacter</em>, og eldre litteratur vil ofte bruke{" "}
+				<em>Acinetobacter baumannii</em> om en rekke arter som nå har fått egne
+				navn. Alle <em>Acinetobacter</em> er naturlig resistente mot mange
+				antibiotikatyper og erverver også resistens mot de midlene som
+				tradisjonelt har vært brukt. Det er spesielt stor bekymring for
 				spredningen av resistens mot karbapenemer (meropenem).
 			</p>
 		),
@@ -389,15 +394,17 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Acinetobacter spp.",
 		description: (
 			<p className={textSettings}>
-				<em>Acinetobacter</em> er en familie av miljømikrober som har fått økt klinisk betydning 
-				de siste tiårene. De kan ofte påvises i fuktige miljøer, og på sykehus er det 
-				spesielt alvorlig syke pasienter på intensivavdelinger som rammes. De fleste 
-				infeksjonene er i luftveier (spesielt ved respiratorbehandling) og urinveier 
-				(spesielt ved urinveiskateter). Det har vært mye uklarhet om inndelingen av 
-				<em>Acinetobacter</em>, og eldre litteratur vil ofte bruke <em>Acinetobacter baumannii</em> om 
-				en rekke arter som nå har fått egne navn. Alle <em>Acinetobacter</em> er naturlig 
-				resistente mot mange antibiotikatyper og erverver også resistens mot de 
-				midlene som tradisjonelt har vært brukt. Det er spesielt stor bekymring for 
+				<em>Acinetobacter</em> er en familie av miljømikrober som har fått økt
+				klinisk betydning de siste tiårene. De kan ofte påvises i fuktige
+				miljøer, og på sykehus er det spesielt alvorlig syke pasienter på
+				intensivavdelinger som rammes. De fleste infeksjonene er i luftveier
+				(spesielt ved respiratorbehandling) og urinveier (spesielt ved
+				urinveiskateter). Det har vært mye uklarhet om inndelingen av
+				<em>Acinetobacter</em>, og eldre litteratur vil ofte bruke{" "}
+				<em>Acinetobacter baumannii</em> om en rekke arter som nå har fått egne
+				navn. Alle <em>Acinetobacter</em> er naturlig resistente mot mange
+				antibiotikatyper og erverver også resistens mot de midlene som
+				tradisjonelt har vært brukt. Det er spesielt stor bekymring for
 				spredningen av resistens mot karbapenemer (meropenem).
 			</p>
 		),
@@ -406,15 +413,19 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Bacteroides fragilis gruppen",
 		description: (
 			<p className={textSettings}>
-				<em>Bacteroides</em> er en slekt av Gram negative bakteriearter som finnes naturlig i tarmens økosystem. 
-				Mikrobene er anaerobe og trenger derfor ikke oksygen for å leve, og mange arter dør selv ved lave 
-				oksygenkonsentrasjoner. Infeksjoner med anaerobe bakterier sees spesielt ved sykdomsprosesser eller 
-				inngrep i buken. Slekten deles inn i <em>Bacteroides fragilis gruppen</em> og{" "} 
-				<em>Bacteroides non-fragilis gruppen</em>, men dette har liten klinisk betydning. Anaerobe infeksjoner 
-				behandles vanligvis med det spesifikt anaerobe middelet metronidazol, eller med mer bredspektrede 
-				alternativer som dekker både aerobe og anaerobe mikrober. Det er foreløpig kun rapportert enkelte 
-				tilfeller av metronidazolresistens, mens klindamycinresistens er økende i mange land. Overførbar 
-				resistens mot karbapenemer (meropenem) er påvist også i Norge.
+				<em>Bacteroides</em> er en slekt av Gram negative bakteriearter som
+				finnes naturlig i tarmens økosystem. Mikrobene er anaerobe og trenger
+				derfor ikke oksygen for å leve, og mange arter dør selv ved lave
+				oksygenkonsentrasjoner. Infeksjoner med anaerobe bakterier sees spesielt
+				ved sykdomsprosesser eller inngrep i buken. Slekten deles inn i{" "}
+				<em>Bacteroides fragilis gruppen</em> og{" "}
+				<em>Bacteroides non-fragilis gruppen</em>, men dette har liten klinisk
+				betydning. Anaerobe infeksjoner behandles vanligvis med det spesifikt
+				anaerobe middelet metronidazol, eller med mer bredspektrede alternativer
+				som dekker både aerobe og anaerobe mikrober. Det er foreløpig kun
+				rapportert enkelte tilfeller av metronidazolresistens, mens
+				klindamycinresistens er økende i mange land. Overførbar resistens mot
+				karbapenemer (meropenem) er påvist også i Norge.
 			</p>
 		),
 	},
@@ -422,15 +433,19 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Bacteroides non-fragilis gruppen",
 		description: (
 			<p className={textSettings}>
-				<em>Bacteroides</em> er en slekt av Gram negative bakteriearter som finnes naturlig i tarmens økosystem. 
-				Mikrobene er anaerobe og trenger derfor ikke oksygen for å leve, og mange arter dør selv ved lave 
-				oksygenkonsentrasjoner. Infeksjoner med anaerobe bakterier sees spesielt ved sykdomsprosesser eller 
-				inngrep i buken. Slekten deles inn i <em>Bacteroides fragilis gruppen</em> og{" "} 
-				<em>Bacteroides non-fragilis gruppen</em>, men dette har liten klinisk betydning. Anaerobe infeksjoner 
-				behandles vanligvis med det spesifikt anaerobe middelet metronidazol, eller med mer bredspektrede 
-				alternativer som dekker både aerobe og anaerobe mikrober. Det er foreløpig kun rapportert enkelte 
-				tilfeller av metronidazolresistens, mens klindamycinresistens er økende i mange land. Overførbar 
-				resistens mot karbapenemer (meropenem) er påvist også i Norge.
+				<em>Bacteroides</em> er en slekt av Gram negative bakteriearter som
+				finnes naturlig i tarmens økosystem. Mikrobene er anaerobe og trenger
+				derfor ikke oksygen for å leve, og mange arter dør selv ved lave
+				oksygenkonsentrasjoner. Infeksjoner med anaerobe bakterier sees spesielt
+				ved sykdomsprosesser eller inngrep i buken. Slekten deles inn i{" "}
+				<em>Bacteroides fragilis gruppen</em> og{" "}
+				<em>Bacteroides non-fragilis gruppen</em>, men dette har liten klinisk
+				betydning. Anaerobe infeksjoner behandles vanligvis med det spesifikt
+				anaerobe middelet metronidazol, eller med mer bredspektrede alternativer
+				som dekker både aerobe og anaerobe mikrober. Det er foreløpig kun
+				rapportert enkelte tilfeller av metronidazolresistens, mens
+				klindamycinresistens er økende i mange land. Overførbar resistens mot
+				karbapenemer (meropenem) er påvist også i Norge.
 			</p>
 		),
 	},
@@ -438,13 +453,16 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Citrobacter freundii complex",
 		description: (
 			<p className={textSettings}>
-				<em>Citrobacter</em> er beslektet med blant andre <em>Escherichia coli</em>,{" "}
-				<em>Klebsiella spp.</em> og <em>Enterobacter spp.</em> innenfor familien <em>Enterobacteriaceae</em>. 
-				I likhet med andre Gram negative tarmbakterier kan de forårsake infeksjoner i urinveiene og i 
-				buken, spesielt ved underliggende sykdom eller kirurgiske inngrep. Mange arter innenfor{" "}
-				<em>Citrobacter</em> har naturlig høy produksjon av AmpC-enzymer tilsvarende 
-				Enterobacter, og de er da resistente mot ulike beta-laktamantibiotika inkludert cefalosporiner.{" "}
-				<em>Citrobacter</em> kan ofte motta og overføre resistensgener til andre beslektede mikrober.
+				<em>Citrobacter</em> er beslektet med blant andre{" "}
+				<em>Escherichia coli</em>, <em>Klebsiella spp.</em> og{" "}
+				<em>Enterobacter spp.</em> innenfor familien <em>Enterobacteriaceae</em>
+				. I likhet med andre Gram negative tarmbakterier kan de forårsake
+				infeksjoner i urinveiene og i buken, spesielt ved underliggende sykdom
+				eller kirurgiske inngrep. Mange arter innenfor <em>Citrobacter</em> har
+				naturlig høy produksjon av AmpC-enzymer tilsvarende Enterobacter, og de
+				er da resistente mot ulike beta-laktamantibiotika inkludert
+				cefalosporiner. <em>Citrobacter</em> kan ofte motta og overføre
+				resistensgener til andre beslektede mikrober.
 			</p>
 		),
 	},
@@ -452,13 +470,16 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Citrobacter spp.",
 		description: (
 			<p className={textSettings}>
-				<em>Citrobacter</em> er beslektet med blant andre <em>Escherichia coli</em>,{" "}
-				<em>Klebsiella spp.</em> og <em>Enterobacter spp.</em> innenfor familien <em>Enterobacteriaceae</em>. 
-				I likhet med andre Gram negative tarmbakterier kan de forårsake infeksjoner i urinveiene og i 
-				buken, spesielt ved underliggende sykdom eller kirurgiske inngrep. Mange arter innenfor{" "}
-				<em>Citrobacter</em> har naturlig høy produksjon av AmpC-enzymer tilsvarende 
-				Enterobacter, og de er da resistente mot ulike beta-laktamantibiotika inkludert cefalosporiner.{" "}
-				<em>Citrobacter</em> kan ofte motta og overføre resistensgener til andre beslektede mikrober.
+				<em>Citrobacter</em> er beslektet med blant andre{" "}
+				<em>Escherichia coli</em>, <em>Klebsiella spp.</em> og{" "}
+				<em>Enterobacter spp.</em> innenfor familien <em>Enterobacteriaceae</em>
+				. I likhet med andre Gram negative tarmbakterier kan de forårsake
+				infeksjoner i urinveiene og i buken, spesielt ved underliggende sykdom
+				eller kirurgiske inngrep. Mange arter innenfor <em>Citrobacter</em> har
+				naturlig høy produksjon av AmpC-enzymer tilsvarende Enterobacter, og de
+				er da resistente mot ulike beta-laktamantibiotika inkludert
+				cefalosporiner. <em>Citrobacter</em> kan ofte motta og overføre
+				resistensgener til andre beslektede mikrober.
 			</p>
 		),
 	},
@@ -466,13 +487,17 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Clostridium spp.",
 		description: (
 			<p className={textSettings}>
-				<em>Clostridium</em> er en slekt av Gram positive bakteriearter som finnes naturlig i tarmens økosystem. 
-				Mikrobene er anaerobe og trenger derfor ikke oksygen for å leve, og mange arter dør selv ved lave 
-				oksygenkonsentrasjoner. Infeksjoner med anaerobe bakterier sees spesielt ved sykdomsprosesser eller inngrep 
-				i buken. Slekten omfatter mange ulike arter med varierende følsomhet for antibiotika. Anaerobe infeksjoner 
-				behandles vanligvis med det spesifikt anaerobe middelet metronidazol, eller med mer bredspektrede alternativer 
-				som dekker både aerobe og anaerobe mikrober. En del arter innenfor <em>Clostridium</em> har redusert følsomhet for 
-				metronidazol, og det er også påvist tilfeller av resistens mot mer bredspektrede midler.
+				<em>Clostridium</em> er en slekt av Gram positive bakteriearter som
+				finnes naturlig i tarmens økosystem. Mikrobene er anaerobe og trenger
+				derfor ikke oksygen for å leve, og mange arter dør selv ved lave
+				oksygenkonsentrasjoner. Infeksjoner med anaerobe bakterier sees spesielt
+				ved sykdomsprosesser eller inngrep i buken. Slekten omfatter mange ulike
+				arter med varierende følsomhet for antibiotika. Anaerobe infeksjoner
+				behandles vanligvis med det spesifikt anaerobe middelet metronidazol,
+				eller med mer bredspektrede alternativer som dekker både aerobe og
+				anaerobe mikrober. En del arter innenfor <em>Clostridium</em> har
+				redusert følsomhet for metronidazol, og det er også påvist tilfeller av
+				resistens mot mer bredspektrede midler.
 			</p>
 		),
 	},
@@ -480,12 +505,15 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Cutibacterium acnes",
 		description: (
 			<p className={textSettings}>
-				<em>Cutibacterium acnes</em> (tidligere <em>Propionibacterium acnes</em>) vokser best ved redusert 
-				oksygenkonsentrasjon, men er ikke egentlig anaerob. Den er derfor ikke følsom for metronidazol.{" "}
-				<em>C. acnes</em> finnes naturlig i dype hudstrukturer som hårfollikler, og mikroben er assosiert 
-				med aknesykdom hos predisponerte individer. <em>C. acnes</em> kan også påvises ved infeksjon i 
-				ortopediske proteser og andre fremmedlegemer. Ved funn i blodkultur er det ofte spørsmål om forurensing. 
-				Bortsett fra metronidazol er <em>C. acnes</em> vanligvis følsom for alle aktuelle antibiotika.
+				<em>Cutibacterium acnes</em> (tidligere <em>Propionibacterium acnes</em>
+				) vokser best ved redusert oksygenkonsentrasjon, men er ikke egentlig
+				anaerob. Den er derfor ikke følsom for metronidazol. <em>C. acnes</em>{" "}
+				finnes naturlig i dype hudstrukturer som hårfollikler, og mikroben er
+				assosiert med aknesykdom hos predisponerte individer. <em>C. acnes</em>{" "}
+				kan også påvises ved infeksjon i ortopediske proteser og andre
+				fremmedlegemer. Ved funn i blodkultur er det ofte spørsmål om
+				forurensing. Bortsett fra metronidazol er <em>C. acnes</em> vanligvis
+				følsom for alle aktuelle antibiotika.
 			</p>
 		),
 	},
@@ -493,12 +521,14 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Fusobacterium spp.",
 		description: (
 			<p className={textSettings}>
-				<em>Fusobacterium</em> er en slekt av Gram negative bakteriearter som finnes naturlig både i munnhulen 
-				og i tarmen. Mikrobene er anaerobe og trenger derfor ikke oksygen for å leve, og mange arter dør selv 
-				ved lave oksygenkonsentrasjoner. Infeksjoner med <em>Fusobacterium</em> sees både i hode/hals og i buken. 
-				Periodontitt, peritonsillære abscesser og Lemiérre syndrom er ofte forårsaket av <em>Fusobacterium spp</em>. 
-				De fleste stammene er følsomme for aktuelle antibiotika inkludert penicillin, metronidazol og klndamycin, 
-				men resistens kan forekomme.
+				<em>Fusobacterium</em> er en slekt av Gram negative bakteriearter som
+				finnes naturlig både i munnhulen og i tarmen. Mikrobene er anaerobe og
+				trenger derfor ikke oksygen for å leve, og mange arter dør selv ved lave
+				oksygenkonsentrasjoner. Infeksjoner med <em>Fusobacterium</em> sees både
+				i hode/hals og i buken. Periodontitt, peritonsillære abscesser og
+				Lemiérre syndrom er ofte forårsaket av <em>Fusobacterium spp</em>. De
+				fleste stammene er følsomme for aktuelle antibiotika inkludert
+				penicillin, metronidazol og klndamycin, men resistens kan forekomme.
 			</p>
 		),
 	},
@@ -506,12 +536,15 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Serratia marcescens",
 		description: (
 			<p className={textSettings}>
-				<em>Serratia</em> er beslektet med blant andre <em>Escherichia coli</em>, <em>Klebsiella spp.</em> og{" "}
-				<em>Enterobacter spp.</em> innenfor familien <em>Enterobacteriaceae</em>. I likhet med andre Gram negative 
-				tarmbakterier kan de forårsake infeksjoner i urinveiene og i buken, spesielt ved underliggende sykdom eller 
-				kirurgiske inngrep. <em>Serratia</em> har naturlig høy produksjon av AmpC-enzymer tilsvarende <em>Enterobacter</em>, 
-				og de er da resistente mot mange beta-laktamantibiotika inkludert cefalosporiner. Serratia kan ofte motta og 
-				overføre resistensgener til andre beslektede mikrober.
+				<em>Serratia</em> er beslektet med blant andre <em>Escherichia coli</em>
+				, <em>Klebsiella spp.</em> og <em>Enterobacter spp.</em> innenfor
+				familien <em>Enterobacteriaceae</em>. I likhet med andre Gram negative
+				tarmbakterier kan de forårsake infeksjoner i urinveiene og i buken,
+				spesielt ved underliggende sykdom eller kirurgiske inngrep.{" "}
+				<em>Serratia</em> har naturlig høy produksjon av AmpC-enzymer
+				tilsvarende <em>Enterobacter</em>, og de er da resistente mot mange
+				beta-laktamantibiotika inkludert cefalosporiner. Serratia kan ofte motta
+				og overføre resistensgener til andre beslektede mikrober.
 			</p>
 		),
 	},
@@ -519,12 +552,15 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Serratia spp.",
 		description: (
 			<p className={textSettings}>
-				<em>Serratia</em> er beslektet med blant andre <em>Escherichia coli</em>, <em>Klebsiella spp.</em> og{" "}
-				<em>Enterobacter spp.</em> innenfor familien <em>Enterobacteriaceae</em>. I likhet med andre Gram negative 
-				tarmbakterier kan de forårsake infeksjoner i urinveiene og i buken, spesielt ved underliggende sykdom eller 
-				kirurgiske inngrep. <em>Serratia</em> har naturlig høy produksjon av AmpC-enzymer tilsvarende <em>Enterobacter</em>, 
-				og de er da resistente mot mange beta-laktamantibiotika inkludert cefalosporiner. Serratia kan ofte motta og 
-				overføre resistensgener til andre beslektede mikrober.
+				<em>Serratia</em> er beslektet med blant andre <em>Escherichia coli</em>
+				, <em>Klebsiella spp.</em> og <em>Enterobacter spp.</em> innenfor
+				familien <em>Enterobacteriaceae</em>. I likhet med andre Gram negative
+				tarmbakterier kan de forårsake infeksjoner i urinveiene og i buken,
+				spesielt ved underliggende sykdom eller kirurgiske inngrep.{" "}
+				<em>Serratia</em> har naturlig høy produksjon av AmpC-enzymer
+				tilsvarende <em>Enterobacter</em>, og de er da resistente mot mange
+				beta-laktamantibiotika inkludert cefalosporiner. Serratia kan ofte motta
+				og overføre resistensgener til andre beslektede mikrober.
 			</p>
 		),
 	},
@@ -532,11 +568,14 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Staphylococcus lugdunensis",
 		description: (
 			<p className={textSettings}>
-				<em>Lugdunensis</em> er mindre sykdomsfremkallende enn <em>S. aureus</em>, men sees oftere ved sårinfeksjoner 
-				enn andre såkalt hvite (koagulase negative) stafylokokker. Mikroben har derfor en mellomstilling innenfor gruppen 
-				av stafylokokker. Over de senere år er det økende interesse for betydningen av <em>S. lugdunensis</em> som årsak 
-				til sykdom. Resistensmekanismene er de samme som for øvrige stafylokokker, men det finnes lite overvåkingsdata 
-				man kan sammenlikne med.
+				<em>Lugdunensis</em> er mindre sykdomsfremkallende enn{" "}
+				<em>S. aureus</em>, men sees oftere ved sårinfeksjoner enn andre såkalt
+				hvite (koagulase negative) stafylokokker. Mikroben har derfor en
+				mellomstilling innenfor gruppen av stafylokokker. Over de senere år er
+				det økende interesse for betydningen av <em>S. lugdunensis</em> som
+				årsak til sykdom. Resistensmekanismene er de samme som for øvrige
+				stafylokokker, men det finnes lite overvåkingsdata man kan sammenlikne
+				med.
 			</p>
 		),
 	},
@@ -544,13 +583,17 @@ const MicrobeDescriptions: MicrobeDescription[] = [
 		name: "Streptococcus dysgalactiae",
 		description: (
 			<p className={textSettings}>
-				<em>Dysgalactiae</em> er beta-hemolytiske streptokokker som har C eller G antigen og derfor benevnes gruppe C eller 
-				gruppe G streptokokker. Det er nå vist at det er snakk om samme art, men med en underart{" "}
-				(<em>S. dysgalactiae</em> subspecies <em>equisimilis</em>) som vanligvis påvises hos mennesker og en annen{" "}
-				(<em>S. dysgalactiae</em> subspecies <em>dysgalactiae</em>) som nesten bare påvises hos dyr.{" "}
-				<em>S. dysgalactiae</em> forårsaker stort sett de samme typer infeksjoner som <em>S. pyogenes</em> (gruppe A streptokokker), 
-				dvs halsbetennelse, sårinfeksjoner og sepsis. Det er ikke påvist resistens mot penicillin, men forekomsten 
-				av resistens mot makrolider (erytromycin), klindamycin og tetracyklin er på rundt 10-20%.
+				<em>Dysgalactiae</em> er beta-hemolytiske streptokokker som har C eller
+				G antigen og derfor benevnes gruppe C eller gruppe G streptokokker. Det
+				er nå vist at det er snakk om samme art, men med en underart (
+				<em>S. dysgalactiae</em> subspecies <em>equisimilis</em>) som vanligvis
+				påvises hos mennesker og en annen (<em>S. dysgalactiae</em> subspecies{" "}
+				<em>dysgalactiae</em>) som nesten bare påvises hos dyr.{" "}
+				<em>S. dysgalactiae</em> forårsaker stort sett de samme typer
+				infeksjoner som <em>S. pyogenes</em> (gruppe A streptokokker), dvs
+				halsbetennelse, sårinfeksjoner og sepsis. Det er ikke påvist resistens
+				mot penicillin, men forekomsten av resistens mot makrolider
+				(erytromycin), klindamycin og tetracyklin er på rundt 10-20%.
 			</p>
 		),
 	},
