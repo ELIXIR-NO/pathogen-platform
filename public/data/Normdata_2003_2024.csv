@@ -2082,42 +2082,42 @@ ProveAar;Opplegg;Mikrobe;Antibiotika;region;antall;Andel_R;Andel_S_I;antall_R;an
 2005;Luft;Streptococcus pneumoniae;Trimetoprim - sulfa;Vest;122;2.4590163934;97.540983607;3;119
 2005;Luft;Streptococcus pneumoniae;Trimetoprim - sulfa;Nord;64;7.8125;92.1875;5;59
 2005;Luft;Streptococcus pneumoniae;Trimetoprim - sulfa;Midt;95;3.1578947368;96.842105263;3;92
-2006;Blod;Enterobacter;Cefotaxim;Øst;1;100;0;1;0
-2006;Blod;Enterobacter;Cefotaxim;Sør;3;66.666666667;33.333333333;2;1
-2006;Blod;Enterobacter;Cefotaxim;Midt;1;0;100;0;1
-2006;Blod;Enterobacter;Cefotaxim;Oslo/Akershus;15;33.333333333;66.666666667;5;10
-2006;Blod;Enterobacter;Cefotaxim;Vest;21;19.047619048;80.952380952;4;17
-2006;Blod;Enterobacter;Cefotaxim;Norge;41;29.268292683;70.731707317;12;29
-2006;Blod;Enterobacter;Ceftazidim;Norge;41;26.829268293;73.170731707;11;30
-2006;Blod;Enterobacter;Ceftazidim;Oslo/Akershus;15;33.333333333;66.666666667;5;10
-2006;Blod;Enterobacter;Ceftazidim;Øst;1;100;0;1;0
-2006;Blod;Enterobacter;Ceftazidim;Vest;21;19.047619048;80.952380952;4;17
-2006;Blod;Enterobacter;Ceftazidim;Midt;1;0;100;0;1
-2006;Blod;Enterobacter;Ceftazidim;Sør;3;33.333333333;66.666666667;1;2
-2006;Blod;Enterobacter;Ciprofloxacin;Oslo/Akershus;15;0;100;0;15
-2006;Blod;Enterobacter;Ciprofloxacin;Øst;1;0;100;0;1
-2006;Blod;Enterobacter;Ciprofloxacin;Sør;3;33.333333333;66.666666667;1;2
-2006;Blod;Enterobacter;Ciprofloxacin;Vest;21;4.7619047619;95.238095238;1;20
-2006;Blod;Enterobacter;Ciprofloxacin;Midt;1;0;100;0;1
-2006;Blod;Enterobacter;Ciprofloxacin;Norge;41;4.8780487805;95.12195122;2;39
-2006;Blod;Enterobacter;Gentamicin;Norge;41;0;100;0;41
-2006;Blod;Enterobacter;Gentamicin;Øst;1;0;100;0;1
-2006;Blod;Enterobacter;Gentamicin;Oslo/Akershus;15;0;100;0;15
-2006;Blod;Enterobacter;Gentamicin;Sør;3;0;100;0;3
-2006;Blod;Enterobacter;Gentamicin;Midt;1;0;100;0;1
-2006;Blod;Enterobacter;Gentamicin;Vest;21;0;100;0;21
-2006;Blod;Enterobacter;Piperacillin - tazobactam;Oslo/Akershus;15;33.333333333;66.666666667;5;10
-2006;Blod;Enterobacter;Piperacillin - tazobactam;Øst;1;100;0;1;0
-2006;Blod;Enterobacter;Piperacillin - tazobactam;Vest;21;9.5238095238;90.476190476;2;19
-2006;Blod;Enterobacter;Piperacillin - tazobactam;Midt;1;0;100;0;1
-2006;Blod;Enterobacter;Piperacillin - tazobactam;Sør;3;33.333333333;66.666666667;1;2
-2006;Blod;Enterobacter;Piperacillin - tazobactam;Norge;41;21.951219512;78.048780488;9;32
-2006;Blod;Enterobacter;Trimetoprim - sulfa;Norge;41;7.3170731707;92.682926829;3;38
-2006;Blod;Enterobacter;Trimetoprim - sulfa;Oslo/Akershus;15;6.6666666667;93.333333333;1;14
-2006;Blod;Enterobacter;Trimetoprim - sulfa;Sør;3;33.333333333;66.666666667;1;2
-2006;Blod;Enterobacter;Trimetoprim - sulfa;Vest;21;4.7619047619;95.238095238;1;20
-2006;Blod;Enterobacter;Trimetoprim - sulfa;Øst;1;0;100;0;1
-2006;Blod;Enterobacter;Trimetoprim - sulfa;Midt;1;0;100;0;1
+2006;Blod;Enterobacter spp.;Cefotaxim;Øst;1;100;0;1;0
+2006;Blod;Enterobacter spp.;Cefotaxim;Sør;3;66.666666667;33.333333333;2;1
+2006;Blod;Enterobacter spp.;Cefotaxim;Midt;1;0;100;0;1
+2006;Blod;Enterobacter spp.;Cefotaxim;Oslo/Akershus;15;33.333333333;66.666666667;5;10
+2006;Blod;Enterobacter spp.;Cefotaxim;Vest;21;19.047619048;80.952380952;4;17
+2006;Blod;Enterobacter spp.;Cefotaxim;Norge;41;29.268292683;70.731707317;12;29
+2006;Blod;Enterobacter spp.;Ceftazidim;Norge;41;26.829268293;73.170731707;11;30
+2006;Blod;Enterobacter spp.;Ceftazidim;Oslo/Akershus;15;33.333333333;66.666666667;5;10
+2006;Blod;Enterobacter spp.;Ceftazidim;Øst;1;100;0;1;0
+2006;Blod;Enterobacter spp.;Ceftazidim;Vest;21;19.047619048;80.952380952;4;17
+2006;Blod;Enterobacter spp.;Ceftazidim;Midt;1;0;100;0;1
+2006;Blod;Enterobacter spp.;Ceftazidim;Sør;3;33.333333333;66.666666667;1;2
+2006;Blod;Enterobacter spp.;Ciprofloxacin;Oslo/Akershus;15;0;100;0;15
+2006;Blod;Enterobacter spp.;Ciprofloxacin;Øst;1;0;100;0;1
+2006;Blod;Enterobacter spp.;Ciprofloxacin;Sør;3;33.333333333;66.666666667;1;2
+2006;Blod;Enterobacter spp.;Ciprofloxacin;Vest;21;4.7619047619;95.238095238;1;20
+2006;Blod;Enterobacter spp.;Ciprofloxacin;Midt;1;0;100;0;1
+2006;Blod;Enterobacter spp.;Ciprofloxacin;Norge;41;4.8780487805;95.12195122;2;39
+2006;Blod;Enterobacter spp.;Gentamicin;Norge;41;0;100;0;41
+2006;Blod;Enterobacter spp.;Gentamicin;Øst;1;0;100;0;1
+2006;Blod;Enterobacter spp.;Gentamicin;Oslo/Akershus;15;0;100;0;15
+2006;Blod;Enterobacter spp.;Gentamicin;Sør;3;0;100;0;3
+2006;Blod;Enterobacter spp.;Gentamicin;Midt;1;0;100;0;1
+2006;Blod;Enterobacter spp.;Gentamicin;Vest;21;0;100;0;21
+2006;Blod;Enterobacter spp.;Piperacillin - tazobactam;Oslo/Akershus;15;33.333333333;66.666666667;5;10
+2006;Blod;Enterobacter spp.;Piperacillin - tazobactam;Øst;1;100;0;1;0
+2006;Blod;Enterobacter spp.;Piperacillin - tazobactam;Vest;21;9.5238095238;90.476190476;2;19
+2006;Blod;Enterobacter spp.;Piperacillin - tazobactam;Midt;1;0;100;0;1
+2006;Blod;Enterobacter spp.;Piperacillin - tazobactam;Sør;3;33.333333333;66.666666667;1;2
+2006;Blod;Enterobacter spp.;Piperacillin - tazobactam;Norge;41;21.951219512;78.048780488;9;32
+2006;Blod;Enterobacter spp.;Trimetoprim - sulfa;Norge;41;7.3170731707;92.682926829;3;38
+2006;Blod;Enterobacter spp.;Trimetoprim - sulfa;Oslo/Akershus;15;6.6666666667;93.333333333;1;14
+2006;Blod;Enterobacter spp.;Trimetoprim - sulfa;Sør;3;33.333333333;66.666666667;1;2
+2006;Blod;Enterobacter spp.;Trimetoprim - sulfa;Vest;21;4.7619047619;95.238095238;1;20
+2006;Blod;Enterobacter spp.;Trimetoprim - sulfa;Øst;1;0;100;0;1
+2006;Blod;Enterobacter spp.;Trimetoprim - sulfa;Midt;1;0;100;0;1
 2006;Blod;Enterococcus faecalis;Ampicillin;Midt;37;0;100;0;37
 2006;Blod;Enterococcus faecalis;Ampicillin;Oslo/Akershus;57;0;100;0;57
 2006;Blod;Enterococcus faecalis;Ampicillin;Sør;50;2;98;1;49
@@ -2795,36 +2795,36 @@ ProveAar;Opplegg;Mikrobe;Antibiotika;region;antall;Andel_R;Andel_S_I;antall_R;an
 2006;Gonorre;Neisseria gonorrhoeae;Penicillin G;Nord;167;32.335329341;67.664670659;54;113
 2006;Gonorre;Neisseria gonorrhoeae;Tetracyklin;Nord;167;51.497005988;48.502994012;86;81
 2006;Gonorre;Neisseria gonorrhoeae;Tetracyklin;Norge;167;51.497005988;48.502994012;86;81
-2007;Blod;Enterobacter;Cefotaxim;Norge;44;20.454545455;79.545454545;9;35
-2007;Blod;Enterobacter;Cefotaxim;Oslo/Akershus;25;24;76;6;19
-2007;Blod;Enterobacter;Cefotaxim;Øst;4;50;50;2;2
-2007;Blod;Enterobacter;Cefotaxim;Sør;5;20;80;1;4
-2007;Blod;Enterobacter;Cefotaxim;Vest;10;0;100;0;10
-2007;Blod;Enterobacter;Ceftazidim;Oslo/Akershus;25;24;76;6;19
-2007;Blod;Enterobacter;Ceftazidim;Øst;4;50;50;2;2
-2007;Blod;Enterobacter;Ceftazidim;Sør;5;20;80;1;4
-2007;Blod;Enterobacter;Ceftazidim;Vest;10;0;100;0;10
-2007;Blod;Enterobacter;Ceftazidim;Norge;44;20.454545455;79.545454545;9;35
-2007;Blod;Enterobacter;Ciprofloxacin;Norge;44;4.5454545455;95.454545455;2;42
-2007;Blod;Enterobacter;Ciprofloxacin;Øst;4;0;100;0;4
-2007;Blod;Enterobacter;Ciprofloxacin;Sør;5;0;100;0;5
-2007;Blod;Enterobacter;Ciprofloxacin;Oslo/Akershus;25;8;92;2;23
-2007;Blod;Enterobacter;Ciprofloxacin;Vest;10;0;100;0;10
-2007;Blod;Enterobacter;Gentamicin;Oslo/Akershus;25;0;100;0;25
-2007;Blod;Enterobacter;Gentamicin;Sør;5;0;100;0;5
-2007;Blod;Enterobacter;Gentamicin;Vest;10;0;100;0;10
-2007;Blod;Enterobacter;Gentamicin;Øst;4;0;100;0;4
-2007;Blod;Enterobacter;Gentamicin;Norge;44;0;100;0;44
-2007;Blod;Enterobacter;Piperacillin - tazobactam;Norge;44;15.909090909;84.090909091;7;37
-2007;Blod;Enterobacter;Piperacillin - tazobactam;Oslo/Akershus;25;20;80;5;20
-2007;Blod;Enterobacter;Piperacillin - tazobactam;Øst;4;25;75;1;3
-2007;Blod;Enterobacter;Piperacillin - tazobactam;Sør;5;20;80;1;4
-2007;Blod;Enterobacter;Piperacillin - tazobactam;Vest;10;0;100;0;10
-2007;Blod;Enterobacter;Trimetoprim - sulfa;Oslo/Akershus;25;8;92;2;23
-2007;Blod;Enterobacter;Trimetoprim - sulfa;Øst;4;0;100;0;4
-2007;Blod;Enterobacter;Trimetoprim - sulfa;Sør;5;0;100;0;5
-2007;Blod;Enterobacter;Trimetoprim - sulfa;Vest;10;10;90;1;9
-2007;Blod;Enterobacter;Trimetoprim - sulfa;Norge;44;6.8181818182;93.181818182;3;41
+2007;Blod;Enterobacter spp.;Cefotaxim;Norge;44;20.454545455;79.545454545;9;35
+2007;Blod;Enterobacter spp.;Cefotaxim;Oslo/Akershus;25;24;76;6;19
+2007;Blod;Enterobacter spp.;Cefotaxim;Øst;4;50;50;2;2
+2007;Blod;Enterobacter spp.;Cefotaxim;Sør;5;20;80;1;4
+2007;Blod;Enterobacter spp.;Cefotaxim;Vest;10;0;100;0;10
+2007;Blod;Enterobacter spp.;Ceftazidim;Oslo/Akershus;25;24;76;6;19
+2007;Blod;Enterobacter spp.;Ceftazidim;Øst;4;50;50;2;2
+2007;Blod;Enterobacter spp.;Ceftazidim;Sør;5;20;80;1;4
+2007;Blod;Enterobacter spp.;Ceftazidim;Vest;10;0;100;0;10
+2007;Blod;Enterobacter spp.;Ceftazidim;Norge;44;20.454545455;79.545454545;9;35
+2007;Blod;Enterobacter spp.;Ciprofloxacin;Norge;44;4.5454545455;95.454545455;2;42
+2007;Blod;Enterobacter spp.;Ciprofloxacin;Øst;4;0;100;0;4
+2007;Blod;Enterobacter spp.;Ciprofloxacin;Sør;5;0;100;0;5
+2007;Blod;Enterobacter spp.;Ciprofloxacin;Oslo/Akershus;25;8;92;2;23
+2007;Blod;Enterobacter spp.;Ciprofloxacin;Vest;10;0;100;0;10
+2007;Blod;Enterobacter spp.;Gentamicin;Oslo/Akershus;25;0;100;0;25
+2007;Blod;Enterobacter spp.;Gentamicin;Sør;5;0;100;0;5
+2007;Blod;Enterobacter spp.;Gentamicin;Vest;10;0;100;0;10
+2007;Blod;Enterobacter spp.;Gentamicin;Øst;4;0;100;0;4
+2007;Blod;Enterobacter spp.;Gentamicin;Norge;44;0;100;0;44
+2007;Blod;Enterobacter spp.;Piperacillin - tazobactam;Norge;44;15.909090909;84.090909091;7;37
+2007;Blod;Enterobacter spp.;Piperacillin - tazobactam;Oslo/Akershus;25;20;80;5;20
+2007;Blod;Enterobacter spp.;Piperacillin - tazobactam;Øst;4;25;75;1;3
+2007;Blod;Enterobacter spp.;Piperacillin - tazobactam;Sør;5;20;80;1;4
+2007;Blod;Enterobacter spp.;Piperacillin - tazobactam;Vest;10;0;100;0;10
+2007;Blod;Enterobacter spp.;Trimetoprim - sulfa;Oslo/Akershus;25;8;92;2;23
+2007;Blod;Enterobacter spp.;Trimetoprim - sulfa;Øst;4;0;100;0;4
+2007;Blod;Enterobacter spp.;Trimetoprim - sulfa;Sør;5;0;100;0;5
+2007;Blod;Enterobacter spp.;Trimetoprim - sulfa;Vest;10;10;90;1;9
+2007;Blod;Enterobacter spp.;Trimetoprim - sulfa;Norge;44;6.8181818182;93.181818182;3;41
 2007;Blod;Enterococcus faecalis;Ampicillin;Norge;303;0;100;0;303
 2007;Blod;Enterococcus faecalis;Ampicillin;Vest;72;0;100;0;72
 2007;Blod;Enterococcus faecalis;Ampicillin;Oslo/Akershus;66;0;100;0;66
@@ -3430,48 +3430,48 @@ ProveAar;Opplegg;Mikrobe;Antibiotika;region;antall;Andel_R;Andel_S_I;antall_R;an
 2007;Luft;Streptococcus pneumoniae;Trimetoprim - sulfa;Vest;65;3.0769230769;96.923076923;2;63
 2007;Luft;Streptococcus pneumoniae;Trimetoprim - sulfa;Midt;74;5.4054054054;94.594594595;4;70
 2007;Luft;Streptococcus pneumoniae;Trimetoprim - sulfa;Nord;21;0;100;0;21
-2008;Blod;Enterobacter;Cefotaxim;Oslo/Akershus;30;33.333333333;66.666666667;10;20
-2008;Blod;Enterobacter;Cefotaxim;Øst;42;16.666666667;83.333333333;7;35
-2008;Blod;Enterobacter;Cefotaxim;Sør;32;25;75;8;24
-2008;Blod;Enterobacter;Cefotaxim;Vest;37;35.135135135;64.864864865;13;24
-2008;Blod;Enterobacter;Cefotaxim;Midt;8;12.5;87.5;1;7
-2008;Blod;Enterobacter;Cefotaxim;Nord;28;28.571428571;71.428571429;8;20
-2008;Blod;Enterobacter;Cefotaxim;Norge;177;26.553672316;73.446327684;47;130
-2008;Blod;Enterobacter;Ceftazidim;Norge;177;24.293785311;75.706214689;43;134
-2008;Blod;Enterobacter;Ceftazidim;Oslo/Akershus;30;30;70;9;21
-2008;Blod;Enterobacter;Ceftazidim;Øst;42;14.285714286;85.714285714;6;36
-2008;Blod;Enterobacter;Ceftazidim;Sør;32;25;75;8;24
-2008;Blod;Enterobacter;Ceftazidim;Vest;37;29.72972973;70.27027027;11;26
-2008;Blod;Enterobacter;Ceftazidim;Midt;8;12.5;87.5;1;7
-2008;Blod;Enterobacter;Ceftazidim;Nord;28;28.571428571;71.428571429;8;20
-2008;Blod;Enterobacter;Ciprofloxacin;Oslo/Akershus;30;3.3333333333;96.666666667;1;29
-2008;Blod;Enterobacter;Ciprofloxacin;Øst;42;4.7619047619;95.238095238;2;40
-2008;Blod;Enterobacter;Ciprofloxacin;Sør;32;0;100;0;32
-2008;Blod;Enterobacter;Ciprofloxacin;Vest;37;0;100;0;37
-2008;Blod;Enterobacter;Ciprofloxacin;Midt;8;0;100;0;8
-2008;Blod;Enterobacter;Ciprofloxacin;Nord;28;0;100;0;28
-2008;Blod;Enterobacter;Ciprofloxacin;Norge;177;1.6949152542;98.305084746;3;174
-2008;Blod;Enterobacter;Gentamicin;Norge;177;0;100;0;177
-2008;Blod;Enterobacter;Gentamicin;Oslo/Akershus;30;0;100;0;30
-2008;Blod;Enterobacter;Gentamicin;Øst;42;0;100;0;42
-2008;Blod;Enterobacter;Gentamicin;Sør;32;0;100;0;32
-2008;Blod;Enterobacter;Gentamicin;Vest;37;0;100;0;37
-2008;Blod;Enterobacter;Gentamicin;Midt;8;0;100;0;8
-2008;Blod;Enterobacter;Gentamicin;Nord;28;0;100;0;28
-2008;Blod;Enterobacter;Piperacillin - tazobactam;Oslo/Akershus;30;26.666666667;73.333333333;8;22
-2008;Blod;Enterobacter;Piperacillin - tazobactam;Øst;42;9.5238095238;90.476190476;4;38
-2008;Blod;Enterobacter;Piperacillin - tazobactam;Sør;32;12.5;87.5;4;28
-2008;Blod;Enterobacter;Piperacillin - tazobactam;Vest;37;2.7027027027;97.297297297;1;36
-2008;Blod;Enterobacter;Piperacillin - tazobactam;Midt;8;12.5;87.5;1;7
-2008;Blod;Enterobacter;Piperacillin - tazobactam;Nord;28;21.428571429;78.571428571;6;22
-2008;Blod;Enterobacter;Piperacillin - tazobactam;Norge;177;13.559322034;86.440677966;24;153
-2008;Blod;Enterobacter;Trimetoprim - sulfa;Norge;177;3.9548022599;96.04519774;7;170
-2008;Blod;Enterobacter;Trimetoprim - sulfa;Oslo/Akershus;30;0;100;0;30
-2008;Blod;Enterobacter;Trimetoprim - sulfa;Øst;42;9.5238095238;90.476190476;4;38
-2008;Blod;Enterobacter;Trimetoprim - sulfa;Sør;32;0;100;0;32
-2008;Blod;Enterobacter;Trimetoprim - sulfa;Vest;37;2.7027027027;97.297297297;1;36
-2008;Blod;Enterobacter;Trimetoprim - sulfa;Midt;8;12.5;87.5;1;7
-2008;Blod;Enterobacter;Trimetoprim - sulfa;Nord;28;3.5714285714;96.428571429;1;27
+2008;Blod;Enterobacter spp.;Cefotaxim;Oslo/Akershus;30;33.333333333;66.666666667;10;20
+2008;Blod;Enterobacter spp.;Cefotaxim;Øst;42;16.666666667;83.333333333;7;35
+2008;Blod;Enterobacter spp.;Cefotaxim;Sør;32;25;75;8;24
+2008;Blod;Enterobacter spp.;Cefotaxim;Vest;37;35.135135135;64.864864865;13;24
+2008;Blod;Enterobacter spp.;Cefotaxim;Midt;8;12.5;87.5;1;7
+2008;Blod;Enterobacter spp.;Cefotaxim;Nord;28;28.571428571;71.428571429;8;20
+2008;Blod;Enterobacter spp.;Cefotaxim;Norge;177;26.553672316;73.446327684;47;130
+2008;Blod;Enterobacter spp.;Ceftazidim;Norge;177;24.293785311;75.706214689;43;134
+2008;Blod;Enterobacter spp.;Ceftazidim;Oslo/Akershus;30;30;70;9;21
+2008;Blod;Enterobacter spp.;Ceftazidim;Øst;42;14.285714286;85.714285714;6;36
+2008;Blod;Enterobacter spp.;Ceftazidim;Sør;32;25;75;8;24
+2008;Blod;Enterobacter spp.;Ceftazidim;Vest;37;29.72972973;70.27027027;11;26
+2008;Blod;Enterobacter spp.;Ceftazidim;Midt;8;12.5;87.5;1;7
+2008;Blod;Enterobacter spp.;Ceftazidim;Nord;28;28.571428571;71.428571429;8;20
+2008;Blod;Enterobacter spp.;Ciprofloxacin;Oslo/Akershus;30;3.3333333333;96.666666667;1;29
+2008;Blod;Enterobacter spp.;Ciprofloxacin;Øst;42;4.7619047619;95.238095238;2;40
+2008;Blod;Enterobacter spp.;Ciprofloxacin;Sør;32;0;100;0;32
+2008;Blod;Enterobacter spp.;Ciprofloxacin;Vest;37;0;100;0;37
+2008;Blod;Enterobacter spp.;Ciprofloxacin;Midt;8;0;100;0;8
+2008;Blod;Enterobacter spp.;Ciprofloxacin;Nord;28;0;100;0;28
+2008;Blod;Enterobacter spp.;Ciprofloxacin;Norge;177;1.6949152542;98.305084746;3;174
+2008;Blod;Enterobacter spp.;Gentamicin;Norge;177;0;100;0;177
+2008;Blod;Enterobacter spp.;Gentamicin;Oslo/Akershus;30;0;100;0;30
+2008;Blod;Enterobacter spp.;Gentamicin;Øst;42;0;100;0;42
+2008;Blod;Enterobacter spp.;Gentamicin;Sør;32;0;100;0;32
+2008;Blod;Enterobacter spp.;Gentamicin;Vest;37;0;100;0;37
+2008;Blod;Enterobacter spp.;Gentamicin;Midt;8;0;100;0;8
+2008;Blod;Enterobacter spp.;Gentamicin;Nord;28;0;100;0;28
+2008;Blod;Enterobacter spp.;Piperacillin - tazobactam;Oslo/Akershus;30;26.666666667;73.333333333;8;22
+2008;Blod;Enterobacter spp.;Piperacillin - tazobactam;Øst;42;9.5238095238;90.476190476;4;38
+2008;Blod;Enterobacter spp.;Piperacillin - tazobactam;Sør;32;12.5;87.5;4;28
+2008;Blod;Enterobacter spp.;Piperacillin - tazobactam;Vest;37;2.7027027027;97.297297297;1;36
+2008;Blod;Enterobacter spp.;Piperacillin - tazobactam;Midt;8;12.5;87.5;1;7
+2008;Blod;Enterobacter spp.;Piperacillin - tazobactam;Nord;28;21.428571429;78.571428571;6;22
+2008;Blod;Enterobacter spp.;Piperacillin - tazobactam;Norge;177;13.559322034;86.440677966;24;153
+2008;Blod;Enterobacter spp.;Trimetoprim - sulfa;Norge;177;3.9548022599;96.04519774;7;170
+2008;Blod;Enterobacter spp.;Trimetoprim - sulfa;Oslo/Akershus;30;0;100;0;30
+2008;Blod;Enterobacter spp.;Trimetoprim - sulfa;Øst;42;9.5238095238;90.476190476;4;38
+2008;Blod;Enterobacter spp.;Trimetoprim - sulfa;Sør;32;0;100;0;32
+2008;Blod;Enterobacter spp.;Trimetoprim - sulfa;Vest;37;2.7027027027;97.297297297;1;36
+2008;Blod;Enterobacter spp.;Trimetoprim - sulfa;Midt;8;12.5;87.5;1;7
+2008;Blod;Enterobacter spp.;Trimetoprim - sulfa;Nord;28;3.5714285714;96.428571429;1;27
 2008;Blod;Enterococcus faecalis;Ampicillin;Oslo/Akershus;67;0;100;0;67
 2008;Blod;Enterococcus faecalis;Ampicillin;Øst;66;1.5151515152;98.484848485;1;65
 2008;Blod;Enterococcus faecalis;Ampicillin;Sør;39;0;100;0;39
@@ -9985,62 +9985,62 @@ ProveAar;Opplegg;Mikrobe;Antibiotika;region;antall;Andel_R;Andel_S_I;antall_R;an
 2015;Gonorre;Neisseria gonorrhoeae;Tetracyklin;Vest;55;56.363636364;43.636363636;31;24
 2015;Gonorre;Neisseria gonorrhoeae;Tetracyklin;Midt;4;50;50;2;2
 2015;Gonorre;Neisseria gonorrhoeae;Tetracyklin;Nord;14;85.714285714;14.285714286;12;2
-2016;Blod;Enterobacter;Cefepim;Oslo/Akershus;37;2.7027027027;97.297297297;1;36
-2016;Blod;Enterobacter;Cefepim;Øst;20;10;90;2;18
-2016;Blod;Enterobacter;Cefepim;Sør;29;3.4482758621;96.551724138;1;28
-2016;Blod;Enterobacter;Cefepim;Vest;29;13.793103448;86.206896552;4;25
-2016;Blod;Enterobacter;Cefepim;Midt;15;6.6666666667;93.333333333;1;14
-2016;Blod;Enterobacter;Cefepim;Nord;22;22.727272727;77.272727273;5;17
-2016;Blod;Enterobacter;Cefepim;Norge;152;9.2105263158;90.789473684;14;138
-2016;Blod;Enterobacter;Cefotaxim;Norge;152;22.368421053;77.631578947;34;118
-2016;Blod;Enterobacter;Cefotaxim;Oslo/Akershus;37;10.810810811;89.189189189;4;33
-2016;Blod;Enterobacter;Cefotaxim;Øst;20;25;75;5;15
-2016;Blod;Enterobacter;Cefotaxim;Sør;29;13.793103448;86.206896552;4;25
-2016;Blod;Enterobacter;Cefotaxim;Vest;29;27.586206897;72.413793103;8;21
-2016;Blod;Enterobacter;Cefotaxim;Midt;15;26.666666667;73.333333333;4;11
-2016;Blod;Enterobacter;Cefotaxim;Nord;22;40.909090909;59.090909091;9;13
-2016;Blod;Enterobacter;Ceftazidim;Oslo/Akershus;37;10.810810811;89.189189189;4;33
-2016;Blod;Enterobacter;Ceftazidim;Øst;20;25;75;5;15
-2016;Blod;Enterobacter;Ceftazidim;Sør;29;13.793103448;86.206896552;4;25
-2016;Blod;Enterobacter;Ceftazidim;Vest;29;27.586206897;72.413793103;8;21
-2016;Blod;Enterobacter;Ceftazidim;Midt;15;20;80;3;12
-2016;Blod;Enterobacter;Ceftazidim;Nord;22;40.909090909;59.090909091;9;13
-2016;Blod;Enterobacter;Ceftazidim;Norge;152;21.710526316;78.289473684;33;119
-2016;Blod;Enterobacter;Ciprofloxacin;Norge;152;6.5789473684;93.421052632;10;142
-2016;Blod;Enterobacter;Ciprofloxacin;Oslo/Akershus;37;5.4054054054;94.594594595;2;35
-2016;Blod;Enterobacter;Ciprofloxacin;Øst;20;10;90;2;18
-2016;Blod;Enterobacter;Ciprofloxacin;Sør;29;10.344827586;89.655172414;3;26
-2016;Blod;Enterobacter;Ciprofloxacin;Vest;29;6.8965517241;93.103448276;2;27
-2016;Blod;Enterobacter;Ciprofloxacin;Midt;15;0;100;0;15
-2016;Blod;Enterobacter;Ciprofloxacin;Nord;22;4.5454545455;95.454545455;1;21
-2016;Blod;Enterobacter;Gentamicin;Oslo/Akershus;37;2.7027027027;97.297297297;1;36
-2016;Blod;Enterobacter;Gentamicin;Øst;20;5;95;1;19
-2016;Blod;Enterobacter;Gentamicin;Sør;29;0;100;0;29
-2016;Blod;Enterobacter;Gentamicin;Vest;29;10.344827586;89.655172414;3;26
-2016;Blod;Enterobacter;Gentamicin;Midt;15;0;100;0;15
-2016;Blod;Enterobacter;Gentamicin;Nord;22;0;100;0;22
-2016;Blod;Enterobacter;Gentamicin;Norge;152;3.2894736842;96.710526316;5;147
-2016;Blod;Enterobacter;Meropenem;Norge;152;0;100;0;152
-2016;Blod;Enterobacter;Meropenem;Oslo/Akershus;37;0;100;0;37
-2016;Blod;Enterobacter;Meropenem;Øst;20;0;100;0;20
-2016;Blod;Enterobacter;Meropenem;Sør;29;0;100;0;29
-2016;Blod;Enterobacter;Meropenem;Vest;29;0;100;0;29
-2016;Blod;Enterobacter;Meropenem;Midt;15;0;100;0;15
-2016;Blod;Enterobacter;Meropenem;Nord;22;0;100;0;22
-2016;Blod;Enterobacter;Piperacillin - tazobactam;Oslo/Akershus;37;10.810810811;89.189189189;4;33
-2016;Blod;Enterobacter;Piperacillin - tazobactam;Øst;20;20;80;4;16
-2016;Blod;Enterobacter;Piperacillin - tazobactam;Sør;29;10.344827586;89.655172414;3;26
-2016;Blod;Enterobacter;Piperacillin - tazobactam;Vest;29;20.689655172;79.310344828;6;23
-2016;Blod;Enterobacter;Piperacillin - tazobactam;Midt;15;26.666666667;73.333333333;4;11
-2016;Blod;Enterobacter;Piperacillin - tazobactam;Nord;22;50;50;11;11
-2016;Blod;Enterobacter;Piperacillin - tazobactam;Norge;152;21.052631579;78.947368421;32;120
-2016;Blod;Enterobacter;Trimetoprim - sulfa;Norge;152;8.5526315789;91.447368421;13;139
-2016;Blod;Enterobacter;Trimetoprim - sulfa;Oslo/Akershus;37;2.7027027027;97.297297297;1;36
-2016;Blod;Enterobacter;Trimetoprim - sulfa;Øst;20;5;95;1;19
-2016;Blod;Enterobacter;Trimetoprim - sulfa;Sør;29;10.344827586;89.655172414;3;26
-2016;Blod;Enterobacter;Trimetoprim - sulfa;Vest;29;20.689655172;79.310344828;6;23
-2016;Blod;Enterobacter;Trimetoprim - sulfa;Midt;15;0;100;0;15
-2016;Blod;Enterobacter;Trimetoprim - sulfa;Nord;22;9.0909090909;90.909090909;2;20
+2016;Blod;Enterobacter spp.;Cefepim;Oslo/Akershus;37;2.7027027027;97.297297297;1;36
+2016;Blod;Enterobacter spp.;Cefepim;Øst;20;10;90;2;18
+2016;Blod;Enterobacter spp.;Cefepim;Sør;29;3.4482758621;96.551724138;1;28
+2016;Blod;Enterobacter spp.;Cefepim;Vest;29;13.793103448;86.206896552;4;25
+2016;Blod;Enterobacter spp.;Cefepim;Midt;15;6.6666666667;93.333333333;1;14
+2016;Blod;Enterobacter spp.;Cefepim;Nord;22;22.727272727;77.272727273;5;17
+2016;Blod;Enterobacter spp.;Cefepim;Norge;152;9.2105263158;90.789473684;14;138
+2016;Blod;Enterobacter spp.;Cefotaxim;Norge;152;22.368421053;77.631578947;34;118
+2016;Blod;Enterobacter spp.;Cefotaxim;Oslo/Akershus;37;10.810810811;89.189189189;4;33
+2016;Blod;Enterobacter spp.;Cefotaxim;Øst;20;25;75;5;15
+2016;Blod;Enterobacter spp.;Cefotaxim;Sør;29;13.793103448;86.206896552;4;25
+2016;Blod;Enterobacter spp.;Cefotaxim;Vest;29;27.586206897;72.413793103;8;21
+2016;Blod;Enterobacter spp.;Cefotaxim;Midt;15;26.666666667;73.333333333;4;11
+2016;Blod;Enterobacter spp.;Cefotaxim;Nord;22;40.909090909;59.090909091;9;13
+2016;Blod;Enterobacter spp.;Ceftazidim;Oslo/Akershus;37;10.810810811;89.189189189;4;33
+2016;Blod;Enterobacter spp.;Ceftazidim;Øst;20;25;75;5;15
+2016;Blod;Enterobacter spp.;Ceftazidim;Sør;29;13.793103448;86.206896552;4;25
+2016;Blod;Enterobacter spp.;Ceftazidim;Vest;29;27.586206897;72.413793103;8;21
+2016;Blod;Enterobacter spp.;Ceftazidim;Midt;15;20;80;3;12
+2016;Blod;Enterobacter spp.;Ceftazidim;Nord;22;40.909090909;59.090909091;9;13
+2016;Blod;Enterobacter spp.;Ceftazidim;Norge;152;21.710526316;78.289473684;33;119
+2016;Blod;Enterobacter spp.;Ciprofloxacin;Norge;152;6.5789473684;93.421052632;10;142
+2016;Blod;Enterobacter spp.;Ciprofloxacin;Oslo/Akershus;37;5.4054054054;94.594594595;2;35
+2016;Blod;Enterobacter spp.;Ciprofloxacin;Øst;20;10;90;2;18
+2016;Blod;Enterobacter spp.;Ciprofloxacin;Sør;29;10.344827586;89.655172414;3;26
+2016;Blod;Enterobacter spp.;Ciprofloxacin;Vest;29;6.8965517241;93.103448276;2;27
+2016;Blod;Enterobacter spp.;Ciprofloxacin;Midt;15;0;100;0;15
+2016;Blod;Enterobacter spp.;Ciprofloxacin;Nord;22;4.5454545455;95.454545455;1;21
+2016;Blod;Enterobacter spp.;Gentamicin;Oslo/Akershus;37;2.7027027027;97.297297297;1;36
+2016;Blod;Enterobacter spp.;Gentamicin;Øst;20;5;95;1;19
+2016;Blod;Enterobacter spp.;Gentamicin;Sør;29;0;100;0;29
+2016;Blod;Enterobacter spp.;Gentamicin;Vest;29;10.344827586;89.655172414;3;26
+2016;Blod;Enterobacter spp.;Gentamicin;Midt;15;0;100;0;15
+2016;Blod;Enterobacter spp.;Gentamicin;Nord;22;0;100;0;22
+2016;Blod;Enterobacter spp.;Gentamicin;Norge;152;3.2894736842;96.710526316;5;147
+2016;Blod;Enterobacter spp.;Meropenem;Norge;152;0;100;0;152
+2016;Blod;Enterobacter spp.;Meropenem;Oslo/Akershus;37;0;100;0;37
+2016;Blod;Enterobacter spp.;Meropenem;Øst;20;0;100;0;20
+2016;Blod;Enterobacter spp.;Meropenem;Sør;29;0;100;0;29
+2016;Blod;Enterobacter spp.;Meropenem;Vest;29;0;100;0;29
+2016;Blod;Enterobacter spp.;Meropenem;Midt;15;0;100;0;15
+2016;Blod;Enterobacter spp.;Meropenem;Nord;22;0;100;0;22
+2016;Blod;Enterobacter spp.;Piperacillin - tazobactam;Oslo/Akershus;37;10.810810811;89.189189189;4;33
+2016;Blod;Enterobacter spp.;Piperacillin - tazobactam;Øst;20;20;80;4;16
+2016;Blod;Enterobacter spp.;Piperacillin - tazobactam;Sør;29;10.344827586;89.655172414;3;26
+2016;Blod;Enterobacter spp.;Piperacillin - tazobactam;Vest;29;20.689655172;79.310344828;6;23
+2016;Blod;Enterobacter spp.;Piperacillin - tazobactam;Midt;15;26.666666667;73.333333333;4;11
+2016;Blod;Enterobacter spp.;Piperacillin - tazobactam;Nord;22;50;50;11;11
+2016;Blod;Enterobacter spp.;Piperacillin - tazobactam;Norge;152;21.052631579;78.947368421;32;120
+2016;Blod;Enterobacter spp.;Trimetoprim - sulfa;Norge;152;8.5526315789;91.447368421;13;139
+2016;Blod;Enterobacter spp.;Trimetoprim - sulfa;Oslo/Akershus;37;2.7027027027;97.297297297;1;36
+2016;Blod;Enterobacter spp.;Trimetoprim - sulfa;Øst;20;5;95;1;19
+2016;Blod;Enterobacter spp.;Trimetoprim - sulfa;Sør;29;10.344827586;89.655172414;3;26
+2016;Blod;Enterobacter spp.;Trimetoprim - sulfa;Vest;29;20.689655172;79.310344828;6;23
+2016;Blod;Enterobacter spp.;Trimetoprim - sulfa;Midt;15;0;100;0;15
+2016;Blod;Enterobacter spp.;Trimetoprim - sulfa;Nord;22;9.0909090909;90.909090909;2;20
 2016;Blod;Enterococcus faecalis;Ampicillin;Oslo/Akershus;96;0;100;0;96
 2016;Blod;Enterococcus faecalis;Ampicillin;Øst;51;0;100;0;51
 2016;Blod;Enterococcus faecalis;Ampicillin;Sør;66;0;100;0;66
@@ -10705,69 +10705,69 @@ ProveAar;Opplegg;Mikrobe;Antibiotika;region;antall;Andel_R;Andel_S_I;antall_R;an
 2016;Sår;Staphylococcus aureus;Trimetoprim - sulfa;Midt;145;0;100;0;145
 2016;Sår;Staphylococcus aureus;Trimetoprim - sulfa;Nord;111;0.9009009009;99.099099099;1;110
 2016;Sår;Staphylococcus aureus;Trimetoprim - sulfa;Norge;1013;0.3948667325;99.605133268;4;1009
-2016;Urin;Enterobacter;Cefepim;Norge;144;4.8611111111;95.138888889;7;137
-2016;Urin;Enterobacter;Cefepim;Oslo/Akershus;31;0;100;0;31
-2016;Urin;Enterobacter;Cefepim;Øst;12;16.666666667;83.333333333;2;10
-2016;Urin;Enterobacter;Cefepim;Sør;23;0;100;0;23
-2016;Urin;Enterobacter;Cefepim;Vest;21;9.5238095238;90.476190476;2;19
-2016;Urin;Enterobacter;Cefepim;Midt;43;2.3255813953;97.674418605;1;42
-2016;Urin;Enterobacter;Cefepim;Nord;14;14.285714286;85.714285714;2;12
-2016;Urin;Enterobacter;Cefotaxim;Oslo/Akershus;31;3.2258064516;96.774193548;1;30
-2016;Urin;Enterobacter;Cefotaxim;Øst;12;25;75;3;9
-2016;Urin;Enterobacter;Cefotaxim;Sør;23;13.043478261;86.956521739;3;20
-2016;Urin;Enterobacter;Cefotaxim;Vest;21;23.80952381;76.19047619;5;16
-2016;Urin;Enterobacter;Cefotaxim;Midt;43;9.3023255814;90.697674419;4;39
-2016;Urin;Enterobacter;Cefotaxim;Nord;14;14.285714286;85.714285714;2;12
-2016;Urin;Enterobacter;Cefotaxim;Norge;144;12.5;87.5;18;126
-2016;Urin;Enterobacter;Ceftazidim;Norge;144;13.194444444;86.805555556;19;125
-2016;Urin;Enterobacter;Ceftazidim;Oslo/Akershus;31;6.4516129032;93.548387097;2;29
-2016;Urin;Enterobacter;Ceftazidim;Øst;12;16.666666667;83.333333333;2;10
-2016;Urin;Enterobacter;Ceftazidim;Sør;23;13.043478261;86.956521739;3;20
-2016;Urin;Enterobacter;Ceftazidim;Vest;21;23.80952381;76.19047619;5;16
-2016;Urin;Enterobacter;Ceftazidim;Midt;43;11.627906977;88.372093023;5;38
-2016;Urin;Enterobacter;Ceftazidim;Nord;14;14.285714286;85.714285714;2;12
-2016;Urin;Enterobacter;Ciprofloxacin;Oslo/Akershus;23;0;100;0;23
-2016;Urin;Enterobacter;Ciprofloxacin;Øst;12;16.666666667;83.333333333;2;10
-2016;Urin;Enterobacter;Ciprofloxacin;Sør;16;0;100;0;16
-2016;Urin;Enterobacter;Ciprofloxacin;Vest;20;0;100;0;20
-2016;Urin;Enterobacter;Ciprofloxacin;Midt;43;0;100;0;43
-2016;Urin;Enterobacter;Ciprofloxacin;Nord;14;0;100;0;14
-2016;Urin;Enterobacter;Ciprofloxacin;Norge;128;1.5625;98.4375;2;126
-2016;Urin;Enterobacter;Gentamicin;Norge;144;1.3888888889;98.611111111;2;142
-2016;Urin;Enterobacter;Gentamicin;Oslo/Akershus;31;0;100;0;31
-2016;Urin;Enterobacter;Gentamicin;Øst;12;16.666666667;83.333333333;2;10
-2016;Urin;Enterobacter;Gentamicin;Sør;23;0;100;0;23
-2016;Urin;Enterobacter;Gentamicin;Vest;21;0;100;0;21
-2016;Urin;Enterobacter;Gentamicin;Midt;43;0;100;0;43
-2016;Urin;Enterobacter;Gentamicin;Nord;14;0;100;0;14
-2016;Urin;Enterobacter;Meropenem;Oslo/Akershus;31;0;100;0;31
-2016;Urin;Enterobacter;Meropenem;Øst;12;0;100;0;12
-2016;Urin;Enterobacter;Meropenem;Sør;23;0;100;0;23
-2016;Urin;Enterobacter;Meropenem;Vest;21;0;100;0;21
-2016;Urin;Enterobacter;Meropenem;Midt;43;0;100;0;43
-2016;Urin;Enterobacter;Meropenem;Nord;14;0;100;0;14
-2016;Urin;Enterobacter;Meropenem;Norge;144;0;100;0;144
-2016;Urin;Enterobacter;Piperacillin - tazobactam;Norge;144;13.194444444;86.805555556;19;125
-2016;Urin;Enterobacter;Piperacillin - tazobactam;Oslo/Akershus;31;3.2258064516;96.774193548;1;30
-2016;Urin;Enterobacter;Piperacillin - tazobactam;Øst;12;8.3333333333;91.666666667;1;11
-2016;Urin;Enterobacter;Piperacillin - tazobactam;Sør;23;13.043478261;86.956521739;3;20
-2016;Urin;Enterobacter;Piperacillin - tazobactam;Vest;21;33.333333333;66.666666667;7;14
-2016;Urin;Enterobacter;Piperacillin - tazobactam;Midt;43;11.627906977;88.372093023;5;38
-2016;Urin;Enterobacter;Piperacillin - tazobactam;Nord;14;14.285714286;85.714285714;2;12
-2016;Urin;Enterobacter;Trimetoprim;Oslo/Akershus;23;17.391304348;82.608695652;4;19
-2016;Urin;Enterobacter;Trimetoprim;Øst;12;25;75;3;9
-2016;Urin;Enterobacter;Trimetoprim;Sør;16;6.25;93.75;1;15
-2016;Urin;Enterobacter;Trimetoprim;Vest;20;20;80;4;16
-2016;Urin;Enterobacter;Trimetoprim;Midt;43;9.3023255814;90.697674419;4;39
-2016;Urin;Enterobacter;Trimetoprim;Nord;14;14.285714286;85.714285714;2;12
-2016;Urin;Enterobacter;Trimetoprim;Norge;128;14.0625;85.9375;18;110
-2016;Urin;Enterobacter;Trimetoprim - sulfa;Norge;128;8.59375;91.40625;11;117
-2016;Urin;Enterobacter;Trimetoprim - sulfa;Oslo/Akershus;23;17.391304348;82.608695652;4;19
-2016;Urin;Enterobacter;Trimetoprim - sulfa;Øst;12;16.666666667;83.333333333;2;10
-2016;Urin;Enterobacter;Trimetoprim - sulfa;Sør;16;6.25;93.75;1;15
-2016;Urin;Enterobacter;Trimetoprim - sulfa;Vest;20;10;90;2;18
-2016;Urin;Enterobacter;Trimetoprim - sulfa;Midt;43;0;100;0;43
-2016;Urin;Enterobacter;Trimetoprim - sulfa;Nord;14;14.285714286;85.714285714;2;12
+2016;Urin;Enterobacter spp.;Cefepim;Norge;144;4.8611111111;95.138888889;7;137
+2016;Urin;Enterobacter spp.;Cefepim;Oslo/Akershus;31;0;100;0;31
+2016;Urin;Enterobacter spp.;Cefepim;Øst;12;16.666666667;83.333333333;2;10
+2016;Urin;Enterobacter spp.;Cefepim;Sør;23;0;100;0;23
+2016;Urin;Enterobacter spp.;Cefepim;Vest;21;9.5238095238;90.476190476;2;19
+2016;Urin;Enterobacter spp.;Cefepim;Midt;43;2.3255813953;97.674418605;1;42
+2016;Urin;Enterobacter spp.;Cefepim;Nord;14;14.285714286;85.714285714;2;12
+2016;Urin;Enterobacter spp.;Cefotaxim;Oslo/Akershus;31;3.2258064516;96.774193548;1;30
+2016;Urin;Enterobacter spp.;Cefotaxim;Øst;12;25;75;3;9
+2016;Urin;Enterobacter spp.;Cefotaxim;Sør;23;13.043478261;86.956521739;3;20
+2016;Urin;Enterobacter spp.;Cefotaxim;Vest;21;23.80952381;76.19047619;5;16
+2016;Urin;Enterobacter spp.;Cefotaxim;Midt;43;9.3023255814;90.697674419;4;39
+2016;Urin;Enterobacter spp.;Cefotaxim;Nord;14;14.285714286;85.714285714;2;12
+2016;Urin;Enterobacter spp.;Cefotaxim;Norge;144;12.5;87.5;18;126
+2016;Urin;Enterobacter spp.;Ceftazidim;Norge;144;13.194444444;86.805555556;19;125
+2016;Urin;Enterobacter spp.;Ceftazidim;Oslo/Akershus;31;6.4516129032;93.548387097;2;29
+2016;Urin;Enterobacter spp.;Ceftazidim;Øst;12;16.666666667;83.333333333;2;10
+2016;Urin;Enterobacter spp.;Ceftazidim;Sør;23;13.043478261;86.956521739;3;20
+2016;Urin;Enterobacter spp.;Ceftazidim;Vest;21;23.80952381;76.19047619;5;16
+2016;Urin;Enterobacter spp.;Ceftazidim;Midt;43;11.627906977;88.372093023;5;38
+2016;Urin;Enterobacter spp.;Ceftazidim;Nord;14;14.285714286;85.714285714;2;12
+2016;Urin;Enterobacter spp.;Ciprofloxacin;Oslo/Akershus;23;0;100;0;23
+2016;Urin;Enterobacter spp.;Ciprofloxacin;Øst;12;16.666666667;83.333333333;2;10
+2016;Urin;Enterobacter spp.;Ciprofloxacin;Sør;16;0;100;0;16
+2016;Urin;Enterobacter spp.;Ciprofloxacin;Vest;20;0;100;0;20
+2016;Urin;Enterobacter spp.;Ciprofloxacin;Midt;43;0;100;0;43
+2016;Urin;Enterobacter spp.;Ciprofloxacin;Nord;14;0;100;0;14
+2016;Urin;Enterobacter spp.;Ciprofloxacin;Norge;128;1.5625;98.4375;2;126
+2016;Urin;Enterobacter spp.;Gentamicin;Norge;144;1.3888888889;98.611111111;2;142
+2016;Urin;Enterobacter spp.;Gentamicin;Oslo/Akershus;31;0;100;0;31
+2016;Urin;Enterobacter spp.;Gentamicin;Øst;12;16.666666667;83.333333333;2;10
+2016;Urin;Enterobacter spp.;Gentamicin;Sør;23;0;100;0;23
+2016;Urin;Enterobacter spp.;Gentamicin;Vest;21;0;100;0;21
+2016;Urin;Enterobacter spp.;Gentamicin;Midt;43;0;100;0;43
+2016;Urin;Enterobacter spp.;Gentamicin;Nord;14;0;100;0;14
+2016;Urin;Enterobacter spp.;Meropenem;Oslo/Akershus;31;0;100;0;31
+2016;Urin;Enterobacter spp.;Meropenem;Øst;12;0;100;0;12
+2016;Urin;Enterobacter spp.;Meropenem;Sør;23;0;100;0;23
+2016;Urin;Enterobacter spp.;Meropenem;Vest;21;0;100;0;21
+2016;Urin;Enterobacter spp.;Meropenem;Midt;43;0;100;0;43
+2016;Urin;Enterobacter spp.;Meropenem;Nord;14;0;100;0;14
+2016;Urin;Enterobacter spp.;Meropenem;Norge;144;0;100;0;144
+2016;Urin;Enterobacter spp.;Piperacillin - tazobactam;Norge;144;13.194444444;86.805555556;19;125
+2016;Urin;Enterobacter spp.;Piperacillin - tazobactam;Oslo/Akershus;31;3.2258064516;96.774193548;1;30
+2016;Urin;Enterobacter spp.;Piperacillin - tazobactam;Øst;12;8.3333333333;91.666666667;1;11
+2016;Urin;Enterobacter spp.;Piperacillin - tazobactam;Sør;23;13.043478261;86.956521739;3;20
+2016;Urin;Enterobacter spp.;Piperacillin - tazobactam;Vest;21;33.333333333;66.666666667;7;14
+2016;Urin;Enterobacter spp.;Piperacillin - tazobactam;Midt;43;11.627906977;88.372093023;5;38
+2016;Urin;Enterobacter spp.;Piperacillin - tazobactam;Nord;14;14.285714286;85.714285714;2;12
+2016;Urin;Enterobacter spp.;Trimetoprim;Oslo/Akershus;23;17.391304348;82.608695652;4;19
+2016;Urin;Enterobacter spp.;Trimetoprim;Øst;12;25;75;3;9
+2016;Urin;Enterobacter spp.;Trimetoprim;Sør;16;6.25;93.75;1;15
+2016;Urin;Enterobacter spp.;Trimetoprim;Vest;20;20;80;4;16
+2016;Urin;Enterobacter spp.;Trimetoprim;Midt;43;9.3023255814;90.697674419;4;39
+2016;Urin;Enterobacter spp.;Trimetoprim;Nord;14;14.285714286;85.714285714;2;12
+2016;Urin;Enterobacter spp.;Trimetoprim;Norge;128;14.0625;85.9375;18;110
+2016;Urin;Enterobacter spp.;Trimetoprim - sulfa;Norge;128;8.59375;91.40625;11;117
+2016;Urin;Enterobacter spp.;Trimetoprim - sulfa;Oslo/Akershus;23;17.391304348;82.608695652;4;19
+2016;Urin;Enterobacter spp.;Trimetoprim - sulfa;Øst;12;16.666666667;83.333333333;2;10
+2016;Urin;Enterobacter spp.;Trimetoprim - sulfa;Sør;16;6.25;93.75;1;15
+2016;Urin;Enterobacter spp.;Trimetoprim - sulfa;Vest;20;10;90;2;18
+2016;Urin;Enterobacter spp.;Trimetoprim - sulfa;Midt;43;0;100;0;43
+2016;Urin;Enterobacter spp.;Trimetoprim - sulfa;Nord;14;14.285714286;85.714285714;2;12
 2016;Urin;Escherichia coli;Cefotaxim;Oslo/Akershus;374;3.2085561497;96.79144385;12;362
 2016;Urin;Escherichia coli;Cefotaxim;Øst;234;3.4188034188;96.581196581;8;226
 2016;Urin;Escherichia coli;Cefotaxim;Sør;226;3.982300885;96.017699115;9;217
@@ -16235,20 +16235,20 @@ ProveAar;Opplegg;Mikrobe;Antibiotika;region;antall;Andel_R;Andel_S_I;antall_R;an
 2021;Urin;Klebsiella pneumoniae;Trimetoprim - sulfa;Midt;166;9.6385542169;90.361445783;16;150
 2021;Urin;Klebsiella pneumoniae;Trimetoprim - sulfa;Nord;80;15;85;12;68
 2021;Urin;Klebsiella pneumoniae;Trimetoprim - sulfa;Norge;674;11.721068249;88.278931751;79;595
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Amikacin;Sør;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Amikacin;Norge;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Ciprofloxacin;Sør;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Ciprofloxacin;Norge;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Gentamicin;Sør;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Gentamicin;Norge;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Imipenem;Sør;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Imipenem;Norge;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Meropenem;Sør;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Meropenem;Norge;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Tobramycin;Sør;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Tobramycin;Norge;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Trimetoprim - sulfa;Sør;1;0;100;0;1
-2022;Blod;Acinetobacter baumannii/calocaceticus complex;Trimetoprim - sulfa;Norge;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Amikacin;Sør;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Amikacin;Norge;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Ciprofloxacin;Sør;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Ciprofloxacin;Norge;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Gentamicin;Sør;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Gentamicin;Norge;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Imipenem;Sør;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Imipenem;Norge;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Meropenem;Sør;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Meropenem;Norge;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Tobramycin;Sør;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Tobramycin;Norge;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Trimetoprim - sulfa;Sør;1;0;100;0;1
+2022;Blod;Acinetobacter baumannii/calcoaceticus complex;Trimetoprim - sulfa;Norge;1;0;100;0;1
 2022;Blod;Citrobacter freundii complex;Cefepim;Oslo/Akershus;6;16.666666667;83.333333333;1;5
 2022;Blod;Citrobacter freundii complex;Cefepim;Øst;10;40;60;4;6
 2022;Blod;Citrobacter freundii complex;Cefepim;Sør;11;9.0909090909;90.909090909;1;10
@@ -16361,62 +16361,62 @@ ProveAar;Opplegg;Mikrobe;Antibiotika;region;antall;Andel_R;Andel_S_I;antall_R;an
 2022;Blod;Citrobacter spp.;Trimetoprim - sulfa;Midt;4;25;75;1;3
 2022;Blod;Citrobacter spp.;Trimetoprim - sulfa;Nord;2;0;100;0;2
 2022;Blod;Citrobacter spp.;Trimetoprim - sulfa;Norge;28;3.5714285714;96.428571429;1;27
-2022;Blod;Enterobacter;Cefepim;Oslo/Akershus;61;9.8360655738;90.163934426;6;55
-2022;Blod;Enterobacter;Cefepim;Øst;45;6.6666666667;93.333333333;3;42
-2022;Blod;Enterobacter;Cefepim;Sør;35;2.8571428571;97.142857143;1;34
-2022;Blod;Enterobacter;Cefepim;Vest;64;9.375;90.625;6;58
-2022;Blod;Enterobacter;Cefepim;Midt;24;8.3333333333;91.666666667;2;22
-2022;Blod;Enterobacter;Cefepim;Nord;25;12;88;3;22
-2022;Blod;Enterobacter;Cefepim;Norge;254;8.2677165354;91.732283465;21;233
-2022;Blod;Enterobacter;Cefotaxim;Oslo/Akershus;61;27.868852459;72.131147541;17;44
-2022;Blod;Enterobacter;Cefotaxim;Øst;45;17.777777778;82.222222222;8;37
-2022;Blod;Enterobacter;Cefotaxim;Sør;35;14.285714286;85.714285714;5;30
-2022;Blod;Enterobacter;Cefotaxim;Vest;64;23.4375;76.5625;15;49
-2022;Blod;Enterobacter;Cefotaxim;Midt;24;8.3333333333;91.666666667;2;22
-2022;Blod;Enterobacter;Cefotaxim;Nord;25;20;80;5;20
-2022;Blod;Enterobacter;Cefotaxim;Norge;254;20.472440945;79.527559055;52;202
-2022;Blod;Enterobacter;Ceftazidim;Oslo/Akershus;61;29.508196721;70.491803279;18;43
-2022;Blod;Enterobacter;Ceftazidim;Øst;45;20;80;9;36
-2022;Blod;Enterobacter;Ceftazidim;Sør;35;14.285714286;85.714285714;5;30
-2022;Blod;Enterobacter;Ceftazidim;Vest;64;23.4375;76.5625;15;49
-2022;Blod;Enterobacter;Ceftazidim;Midt;24;8.3333333333;91.666666667;2;22
-2022;Blod;Enterobacter;Ceftazidim;Nord;25;16;84;4;21
-2022;Blod;Enterobacter;Ceftazidim;Norge;254;20.866141732;79.133858268;53;201
-2022;Blod;Enterobacter;Ciprofloxacin;Oslo/Akershus;61;9.8360655738;90.163934426;6;55
-2022;Blod;Enterobacter;Ciprofloxacin;Øst;45;4.4444444444;95.555555556;2;43
-2022;Blod;Enterobacter;Ciprofloxacin;Sør;35;0;100;0;35
-2022;Blod;Enterobacter;Ciprofloxacin;Vest;64;1.5625;98.4375;1;63
-2022;Blod;Enterobacter;Ciprofloxacin;Midt;24;4.1666666667;95.833333333;1;23
-2022;Blod;Enterobacter;Ciprofloxacin;Nord;25;0;100;0;25
-2022;Blod;Enterobacter;Ciprofloxacin;Norge;254;3.937007874;96.062992126;10;244
-2022;Blod;Enterobacter;Gentamicin;Oslo/Akershus;61;8.1967213115;91.803278689;5;56
-2022;Blod;Enterobacter;Gentamicin;Øst;45;4.4444444444;95.555555556;2;43
-2022;Blod;Enterobacter;Gentamicin;Sør;35;0;100;0;35
-2022;Blod;Enterobacter;Gentamicin;Vest;64;1.5625;98.4375;1;63
-2022;Blod;Enterobacter;Gentamicin;Midt;24;4.1666666667;95.833333333;1;23
-2022;Blod;Enterobacter;Gentamicin;Nord;25;0;100;0;25
-2022;Blod;Enterobacter;Gentamicin;Norge;254;3.5433070866;96.456692913;9;245
-2022;Blod;Enterobacter;Meropenem;Oslo/Akershus;61;0;100;0;61
-2022;Blod;Enterobacter;Meropenem;Øst;45;0;100;0;45
-2022;Blod;Enterobacter;Meropenem;Sør;35;0;100;0;35
-2022;Blod;Enterobacter;Meropenem;Vest;64;0;100;0;64
-2022;Blod;Enterobacter;Meropenem;Midt;24;0;100;0;24
-2022;Blod;Enterobacter;Meropenem;Nord;25;0;100;0;25
-2022;Blod;Enterobacter;Meropenem;Norge;254;0;100;0;254
-2022;Blod;Enterobacter;Piperacillin - tazobactam;Oslo/Akershus;61;24.590163934;75.409836066;15;46
-2022;Blod;Enterobacter;Piperacillin - tazobactam;Øst;45;8.8888888889;91.111111111;4;41
-2022;Blod;Enterobacter;Piperacillin - tazobactam;Sør;35;11.428571429;88.571428571;4;31
-2022;Blod;Enterobacter;Piperacillin - tazobactam;Vest;64;25;75;16;48
-2022;Blod;Enterobacter;Piperacillin - tazobactam;Midt;24;8.3333333333;91.666666667;2;22
-2022;Blod;Enterobacter;Piperacillin - tazobactam;Nord;25;24;76;6;19
-2022;Blod;Enterobacter;Piperacillin - tazobactam;Norge;254;18.503937008;81.496062992;47;207
-2022;Blod;Enterobacter;Trimetoprim - sulfa;Oslo/Akershus;61;14.754098361;85.245901639;9;52
-2022;Blod;Enterobacter;Trimetoprim - sulfa;Øst;45;11.111111111;88.888888889;5;40
-2022;Blod;Enterobacter;Trimetoprim - sulfa;Sør;35;14.285714286;85.714285714;5;30
-2022;Blod;Enterobacter;Trimetoprim - sulfa;Vest;64;9.375;90.625;6;58
-2022;Blod;Enterobacter;Trimetoprim - sulfa;Midt;24;16.666666667;83.333333333;4;20
-2022;Blod;Enterobacter;Trimetoprim - sulfa;Nord;25;8;92;2;23
-2022;Blod;Enterobacter;Trimetoprim - sulfa;Norge;254;12.204724409;87.795275591;31;223
+2022;Blod;Enterobacter spp.;Cefepim;Oslo/Akershus;61;9.8360655738;90.163934426;6;55
+2022;Blod;Enterobacter spp.;Cefepim;Øst;45;6.6666666667;93.333333333;3;42
+2022;Blod;Enterobacter spp.;Cefepim;Sør;35;2.8571428571;97.142857143;1;34
+2022;Blod;Enterobacter spp.;Cefepim;Vest;64;9.375;90.625;6;58
+2022;Blod;Enterobacter spp.;Cefepim;Midt;24;8.3333333333;91.666666667;2;22
+2022;Blod;Enterobacter spp.;Cefepim;Nord;25;12;88;3;22
+2022;Blod;Enterobacter spp.;Cefepim;Norge;254;8.2677165354;91.732283465;21;233
+2022;Blod;Enterobacter spp.;Cefotaxim;Oslo/Akershus;61;27.868852459;72.131147541;17;44
+2022;Blod;Enterobacter spp.;Cefotaxim;Øst;45;17.777777778;82.222222222;8;37
+2022;Blod;Enterobacter spp.;Cefotaxim;Sør;35;14.285714286;85.714285714;5;30
+2022;Blod;Enterobacter spp.;Cefotaxim;Vest;64;23.4375;76.5625;15;49
+2022;Blod;Enterobacter spp.;Cefotaxim;Midt;24;8.3333333333;91.666666667;2;22
+2022;Blod;Enterobacter spp.;Cefotaxim;Nord;25;20;80;5;20
+2022;Blod;Enterobacter spp.;Cefotaxim;Norge;254;20.472440945;79.527559055;52;202
+2022;Blod;Enterobacter spp.;Ceftazidim;Oslo/Akershus;61;29.508196721;70.491803279;18;43
+2022;Blod;Enterobacter spp.;Ceftazidim;Øst;45;20;80;9;36
+2022;Blod;Enterobacter spp.;Ceftazidim;Sør;35;14.285714286;85.714285714;5;30
+2022;Blod;Enterobacter spp.;Ceftazidim;Vest;64;23.4375;76.5625;15;49
+2022;Blod;Enterobacter spp.;Ceftazidim;Midt;24;8.3333333333;91.666666667;2;22
+2022;Blod;Enterobacter spp.;Ceftazidim;Nord;25;16;84;4;21
+2022;Blod;Enterobacter spp.;Ceftazidim;Norge;254;20.866141732;79.133858268;53;201
+2022;Blod;Enterobacter spp.;Ciprofloxacin;Oslo/Akershus;61;9.8360655738;90.163934426;6;55
+2022;Blod;Enterobacter spp.;Ciprofloxacin;Øst;45;4.4444444444;95.555555556;2;43
+2022;Blod;Enterobacter spp.;Ciprofloxacin;Sør;35;0;100;0;35
+2022;Blod;Enterobacter spp.;Ciprofloxacin;Vest;64;1.5625;98.4375;1;63
+2022;Blod;Enterobacter spp.;Ciprofloxacin;Midt;24;4.1666666667;95.833333333;1;23
+2022;Blod;Enterobacter spp.;Ciprofloxacin;Nord;25;0;100;0;25
+2022;Blod;Enterobacter spp.;Ciprofloxacin;Norge;254;3.937007874;96.062992126;10;244
+2022;Blod;Enterobacter spp.;Gentamicin;Oslo/Akershus;61;8.1967213115;91.803278689;5;56
+2022;Blod;Enterobacter spp.;Gentamicin;Øst;45;4.4444444444;95.555555556;2;43
+2022;Blod;Enterobacter spp.;Gentamicin;Sør;35;0;100;0;35
+2022;Blod;Enterobacter spp.;Gentamicin;Vest;64;1.5625;98.4375;1;63
+2022;Blod;Enterobacter spp.;Gentamicin;Midt;24;4.1666666667;95.833333333;1;23
+2022;Blod;Enterobacter spp.;Gentamicin;Nord;25;0;100;0;25
+2022;Blod;Enterobacter spp.;Gentamicin;Norge;254;3.5433070866;96.456692913;9;245
+2022;Blod;Enterobacter spp.;Meropenem;Oslo/Akershus;61;0;100;0;61
+2022;Blod;Enterobacter spp.;Meropenem;Øst;45;0;100;0;45
+2022;Blod;Enterobacter spp.;Meropenem;Sør;35;0;100;0;35
+2022;Blod;Enterobacter spp.;Meropenem;Vest;64;0;100;0;64
+2022;Blod;Enterobacter spp.;Meropenem;Midt;24;0;100;0;24
+2022;Blod;Enterobacter spp.;Meropenem;Nord;25;0;100;0;25
+2022;Blod;Enterobacter spp.;Meropenem;Norge;254;0;100;0;254
+2022;Blod;Enterobacter spp.;Piperacillin - tazobactam;Oslo/Akershus;61;24.590163934;75.409836066;15;46
+2022;Blod;Enterobacter spp.;Piperacillin - tazobactam;Øst;45;8.8888888889;91.111111111;4;41
+2022;Blod;Enterobacter spp.;Piperacillin - tazobactam;Sør;35;11.428571429;88.571428571;4;31
+2022;Blod;Enterobacter spp.;Piperacillin - tazobactam;Vest;64;25;75;16;48
+2022;Blod;Enterobacter spp.;Piperacillin - tazobactam;Midt;24;8.3333333333;91.666666667;2;22
+2022;Blod;Enterobacter spp.;Piperacillin - tazobactam;Nord;25;24;76;6;19
+2022;Blod;Enterobacter spp.;Piperacillin - tazobactam;Norge;254;18.503937008;81.496062992;47;207
+2022;Blod;Enterobacter spp.;Trimetoprim - sulfa;Oslo/Akershus;61;14.754098361;85.245901639;9;52
+2022;Blod;Enterobacter spp.;Trimetoprim - sulfa;Øst;45;11.111111111;88.888888889;5;40
+2022;Blod;Enterobacter spp.;Trimetoprim - sulfa;Sør;35;14.285714286;85.714285714;5;30
+2022;Blod;Enterobacter spp.;Trimetoprim - sulfa;Vest;64;9.375;90.625;6;58
+2022;Blod;Enterobacter spp.;Trimetoprim - sulfa;Midt;24;16.666666667;83.333333333;4;20
+2022;Blod;Enterobacter spp.;Trimetoprim - sulfa;Nord;25;8;92;2;23
+2022;Blod;Enterobacter spp.;Trimetoprim - sulfa;Norge;254;12.204724409;87.795275591;31;223
 2022;Blod;Enterococcus faecalis;Ampicillin;Oslo/Akershus;117;0;100;0;117
 2022;Blod;Enterococcus faecalis;Ampicillin;Øst;101;0;100;0;101
 2022;Blod;Enterococcus faecalis;Ampicillin;Sør;85;0;100;0;85
@@ -17296,76 +17296,76 @@ ProveAar;Opplegg;Mikrobe;Antibiotika;region;antall;Andel_R;Andel_S_I;antall_R;an
 2022;Urin;Citrobacter spp.;Trimetoprim - sulfa;Midt;15;0;100;0;15
 2022;Urin;Citrobacter spp.;Trimetoprim - sulfa;Nord;16;0;100;0;16
 2022;Urin;Citrobacter spp.;Trimetoprim - sulfa;Norge;89;1.1235955056;98.876404494;1;88
-2022;Urin;Enterobacter;Cefepim;Oslo/Akershus;17;0;100;0;17
-2022;Urin;Enterobacter;Cefepim;Øst;25;0;100;0;25
-2022;Urin;Enterobacter;Cefepim;Sør;9;22.222222222;77.777777778;2;7
-2022;Urin;Enterobacter;Cefepim;Vest;23;0;100;0;23
-2022;Urin;Enterobacter;Cefepim;Midt;21;4.7619047619;95.238095238;1;20
-2022;Urin;Enterobacter;Cefepim;Nord;8;12.5;87.5;1;7
-2022;Urin;Enterobacter;Cefepim;Norge;103;3.8834951456;96.116504854;4;99
-2022;Urin;Enterobacter;Cefotaxim;Oslo/Akershus;17;0;100;0;17
-2022;Urin;Enterobacter;Cefotaxim;Øst;25;4;96;1;24
-2022;Urin;Enterobacter;Cefotaxim;Sør;9;11.111111111;88.888888889;1;8
-2022;Urin;Enterobacter;Cefotaxim;Vest;23;4.347826087;95.652173913;1;22
-2022;Urin;Enterobacter;Cefotaxim;Midt;21;9.5238095238;90.476190476;2;19
-2022;Urin;Enterobacter;Cefotaxim;Nord;8;12.5;87.5;1;7
-2022;Urin;Enterobacter;Cefotaxim;Norge;103;5.8252427184;94.174757282;6;97
-2022;Urin;Enterobacter;Ceftazidim;Oslo/Akershus;17;0;100;0;17
-2022;Urin;Enterobacter;Ceftazidim;Øst;25;4;96;1;24
-2022;Urin;Enterobacter;Ceftazidim;Sør;9;11.111111111;88.888888889;1;8
-2022;Urin;Enterobacter;Ceftazidim;Vest;23;4.347826087;95.652173913;1;22
-2022;Urin;Enterobacter;Ceftazidim;Midt;21;9.5238095238;90.476190476;2;19
-2022;Urin;Enterobacter;Ceftazidim;Nord;8;12.5;87.5;1;7
-2022;Urin;Enterobacter;Ceftazidim;Norge;103;5.8252427184;94.174757282;6;97
-2022;Urin;Enterobacter;Ciprofloxacin;Oslo/Akershus;14;0;100;0;14
-2022;Urin;Enterobacter;Ciprofloxacin;Øst;22;0;100;0;22
-2022;Urin;Enterobacter;Ciprofloxacin;Sør;9;11.111111111;88.888888889;1;8
-2022;Urin;Enterobacter;Ciprofloxacin;Vest;23;0;100;0;23
-2022;Urin;Enterobacter;Ciprofloxacin;Midt;20;0;100;0;20
-2022;Urin;Enterobacter;Ciprofloxacin;Nord;8;12.5;87.5;1;7
-2022;Urin;Enterobacter;Ciprofloxacin;Norge;96;2.0833333333;97.916666667;2;94
-2022;Urin;Enterobacter;Gentamicin;Oslo/Akershus;17;0;100;0;17
-2022;Urin;Enterobacter;Gentamicin;Øst;25;0;100;0;25
-2022;Urin;Enterobacter;Gentamicin;Sør;9;11.111111111;88.888888889;1;8
-2022;Urin;Enterobacter;Gentamicin;Vest;23;4.347826087;95.652173913;1;22
-2022;Urin;Enterobacter;Gentamicin;Midt;21;0;100;0;21
-2022;Urin;Enterobacter;Gentamicin;Nord;8;0;100;0;8
-2022;Urin;Enterobacter;Gentamicin;Norge;103;1.9417475728;98.058252427;2;101
-2022;Urin;Enterobacter;Mecillinam;Oslo/Akershus;14;7.1428571429;92.857142857;1;13
-2022;Urin;Enterobacter;Mecillinam;Øst;22;4.5454545455;95.454545455;1;21
-2022;Urin;Enterobacter;Mecillinam;Sør;9;0;100;0;9
-2022;Urin;Enterobacter;Mecillinam;Vest;23;0;100;0;23
-2022;Urin;Enterobacter;Mecillinam;Midt;20;5;95;1;19
-2022;Urin;Enterobacter;Mecillinam;Nord;8;0;100;0;8
-2022;Urin;Enterobacter;Mecillinam;Norge;96;3.125;96.875;3;93
-2022;Urin;Enterobacter;Meropenem;Oslo/Akershus;17;0;100;0;17
-2022;Urin;Enterobacter;Meropenem;Øst;25;0;100;0;25
-2022;Urin;Enterobacter;Meropenem;Sør;9;0;100;0;9
-2022;Urin;Enterobacter;Meropenem;Vest;23;0;100;0;23
-2022;Urin;Enterobacter;Meropenem;Midt;21;0;100;0;21
-2022;Urin;Enterobacter;Meropenem;Nord;8;0;100;0;8
-2022;Urin;Enterobacter;Meropenem;Norge;103;0;100;0;103
-2022;Urin;Enterobacter;Piperacillin - tazobactam;Oslo/Akershus;17;5.8823529412;94.117647059;1;16
-2022;Urin;Enterobacter;Piperacillin - tazobactam;Øst;25;4;96;1;24
-2022;Urin;Enterobacter;Piperacillin - tazobactam;Sør;9;11.111111111;88.888888889;1;8
-2022;Urin;Enterobacter;Piperacillin - tazobactam;Vest;23;0;100;0;23
-2022;Urin;Enterobacter;Piperacillin - tazobactam;Midt;21;4.7619047619;95.238095238;1;20
-2022;Urin;Enterobacter;Piperacillin - tazobactam;Nord;8;12.5;87.5;1;7
-2022;Urin;Enterobacter;Piperacillin - tazobactam;Norge;103;4.854368932;95.145631068;5;98
-2022;Urin;Enterobacter;Trimetoprim;Oslo/Akershus;14;14.285714286;85.714285714;2;12
-2022;Urin;Enterobacter;Trimetoprim;Øst;22;22.727272727;77.272727273;5;17
-2022;Urin;Enterobacter;Trimetoprim;Sør;9;11.111111111;88.888888889;1;8
-2022;Urin;Enterobacter;Trimetoprim;Vest;23;4.347826087;95.652173913;1;22
-2022;Urin;Enterobacter;Trimetoprim;Midt;20;5;95;1;19
-2022;Urin;Enterobacter;Trimetoprim;Nord;8;25;75;2;6
-2022;Urin;Enterobacter;Trimetoprim;Norge;96;12.5;87.5;12;84
-2022;Urin;Enterobacter;Trimetoprim - sulfa;Oslo/Akershus;14;14.285714286;85.714285714;2;12
-2022;Urin;Enterobacter;Trimetoprim - sulfa;Øst;22;18.181818182;81.818181818;4;18
-2022;Urin;Enterobacter;Trimetoprim - sulfa;Sør;9;11.111111111;88.888888889;1;8
-2022;Urin;Enterobacter;Trimetoprim - sulfa;Vest;23;0;100;0;23
-2022;Urin;Enterobacter;Trimetoprim - sulfa;Midt;20;0;100;0;20
-2022;Urin;Enterobacter;Trimetoprim - sulfa;Nord;8;12.5;87.5;1;7
-2022;Urin;Enterobacter;Trimetoprim - sulfa;Norge;96;8.3333333333;91.666666667;8;88
+2022;Urin;Enterobacter spp.;Cefepim;Oslo/Akershus;17;0;100;0;17
+2022;Urin;Enterobacter spp.;Cefepim;Øst;25;0;100;0;25
+2022;Urin;Enterobacter spp.;Cefepim;Sør;9;22.222222222;77.777777778;2;7
+2022;Urin;Enterobacter spp.;Cefepim;Vest;23;0;100;0;23
+2022;Urin;Enterobacter spp.;Cefepim;Midt;21;4.7619047619;95.238095238;1;20
+2022;Urin;Enterobacter spp.;Cefepim;Nord;8;12.5;87.5;1;7
+2022;Urin;Enterobacter spp.;Cefepim;Norge;103;3.8834951456;96.116504854;4;99
+2022;Urin;Enterobacter spp.;Cefotaxim;Oslo/Akershus;17;0;100;0;17
+2022;Urin;Enterobacter spp.;Cefotaxim;Øst;25;4;96;1;24
+2022;Urin;Enterobacter spp.;Cefotaxim;Sør;9;11.111111111;88.888888889;1;8
+2022;Urin;Enterobacter spp.;Cefotaxim;Vest;23;4.347826087;95.652173913;1;22
+2022;Urin;Enterobacter spp.;Cefotaxim;Midt;21;9.5238095238;90.476190476;2;19
+2022;Urin;Enterobacter spp.;Cefotaxim;Nord;8;12.5;87.5;1;7
+2022;Urin;Enterobacter spp.;Cefotaxim;Norge;103;5.8252427184;94.174757282;6;97
+2022;Urin;Enterobacter spp.;Ceftazidim;Oslo/Akershus;17;0;100;0;17
+2022;Urin;Enterobacter spp.;Ceftazidim;Øst;25;4;96;1;24
+2022;Urin;Enterobacter spp.;Ceftazidim;Sør;9;11.111111111;88.888888889;1;8
+2022;Urin;Enterobacter spp.;Ceftazidim;Vest;23;4.347826087;95.652173913;1;22
+2022;Urin;Enterobacter spp.;Ceftazidim;Midt;21;9.5238095238;90.476190476;2;19
+2022;Urin;Enterobacter spp.;Ceftazidim;Nord;8;12.5;87.5;1;7
+2022;Urin;Enterobacter spp.;Ceftazidim;Norge;103;5.8252427184;94.174757282;6;97
+2022;Urin;Enterobacter spp.;Ciprofloxacin;Oslo/Akershus;14;0;100;0;14
+2022;Urin;Enterobacter spp.;Ciprofloxacin;Øst;22;0;100;0;22
+2022;Urin;Enterobacter spp.;Ciprofloxacin;Sør;9;11.111111111;88.888888889;1;8
+2022;Urin;Enterobacter spp.;Ciprofloxacin;Vest;23;0;100;0;23
+2022;Urin;Enterobacter spp.;Ciprofloxacin;Midt;20;0;100;0;20
+2022;Urin;Enterobacter spp.;Ciprofloxacin;Nord;8;12.5;87.5;1;7
+2022;Urin;Enterobacter spp.;Ciprofloxacin;Norge;96;2.0833333333;97.916666667;2;94
+2022;Urin;Enterobacter spp.;Gentamicin;Oslo/Akershus;17;0;100;0;17
+2022;Urin;Enterobacter spp.;Gentamicin;Øst;25;0;100;0;25
+2022;Urin;Enterobacter spp.;Gentamicin;Sør;9;11.111111111;88.888888889;1;8
+2022;Urin;Enterobacter spp.;Gentamicin;Vest;23;4.347826087;95.652173913;1;22
+2022;Urin;Enterobacter spp.;Gentamicin;Midt;21;0;100;0;21
+2022;Urin;Enterobacter spp.;Gentamicin;Nord;8;0;100;0;8
+2022;Urin;Enterobacter spp.;Gentamicin;Norge;103;1.9417475728;98.058252427;2;101
+2022;Urin;Enterobacter spp.;Mecillinam;Oslo/Akershus;14;7.1428571429;92.857142857;1;13
+2022;Urin;Enterobacter spp.;Mecillinam;Øst;22;4.5454545455;95.454545455;1;21
+2022;Urin;Enterobacter spp.;Mecillinam;Sør;9;0;100;0;9
+2022;Urin;Enterobacter spp.;Mecillinam;Vest;23;0;100;0;23
+2022;Urin;Enterobacter spp.;Mecillinam;Midt;20;5;95;1;19
+2022;Urin;Enterobacter spp.;Mecillinam;Nord;8;0;100;0;8
+2022;Urin;Enterobacter spp.;Mecillinam;Norge;96;3.125;96.875;3;93
+2022;Urin;Enterobacter spp.;Meropenem;Oslo/Akershus;17;0;100;0;17
+2022;Urin;Enterobacter spp.;Meropenem;Øst;25;0;100;0;25
+2022;Urin;Enterobacter spp.;Meropenem;Sør;9;0;100;0;9
+2022;Urin;Enterobacter spp.;Meropenem;Vest;23;0;100;0;23
+2022;Urin;Enterobacter spp.;Meropenem;Midt;21;0;100;0;21
+2022;Urin;Enterobacter spp.;Meropenem;Nord;8;0;100;0;8
+2022;Urin;Enterobacter spp.;Meropenem;Norge;103;0;100;0;103
+2022;Urin;Enterobacter spp.;Piperacillin - tazobactam;Oslo/Akershus;17;5.8823529412;94.117647059;1;16
+2022;Urin;Enterobacter spp.;Piperacillin - tazobactam;Øst;25;4;96;1;24
+2022;Urin;Enterobacter spp.;Piperacillin - tazobactam;Sør;9;11.111111111;88.888888889;1;8
+2022;Urin;Enterobacter spp.;Piperacillin - tazobactam;Vest;23;0;100;0;23
+2022;Urin;Enterobacter spp.;Piperacillin - tazobactam;Midt;21;4.7619047619;95.238095238;1;20
+2022;Urin;Enterobacter spp.;Piperacillin - tazobactam;Nord;8;12.5;87.5;1;7
+2022;Urin;Enterobacter spp.;Piperacillin - tazobactam;Norge;103;4.854368932;95.145631068;5;98
+2022;Urin;Enterobacter spp.;Trimetoprim;Oslo/Akershus;14;14.285714286;85.714285714;2;12
+2022;Urin;Enterobacter spp.;Trimetoprim;Øst;22;22.727272727;77.272727273;5;17
+2022;Urin;Enterobacter spp.;Trimetoprim;Sør;9;11.111111111;88.888888889;1;8
+2022;Urin;Enterobacter spp.;Trimetoprim;Vest;23;4.347826087;95.652173913;1;22
+2022;Urin;Enterobacter spp.;Trimetoprim;Midt;20;5;95;1;19
+2022;Urin;Enterobacter spp.;Trimetoprim;Nord;8;25;75;2;6
+2022;Urin;Enterobacter spp.;Trimetoprim;Norge;96;12.5;87.5;12;84
+2022;Urin;Enterobacter spp.;Trimetoprim - sulfa;Oslo/Akershus;14;14.285714286;85.714285714;2;12
+2022;Urin;Enterobacter spp.;Trimetoprim - sulfa;Øst;22;18.181818182;81.818181818;4;18
+2022;Urin;Enterobacter spp.;Trimetoprim - sulfa;Sør;9;11.111111111;88.888888889;1;8
+2022;Urin;Enterobacter spp.;Trimetoprim - sulfa;Vest;23;0;100;0;23
+2022;Urin;Enterobacter spp.;Trimetoprim - sulfa;Midt;20;0;100;0;20
+2022;Urin;Enterobacter spp.;Trimetoprim - sulfa;Nord;8;12.5;87.5;1;7
+2022;Urin;Enterobacter spp.;Trimetoprim - sulfa;Norge;96;8.3333333333;91.666666667;8;88
 2022;Urin;Escherichia coli;Cefalexin;Oslo/Akershus;238;9.6638655462;90.336134454;23;215
 2022;Urin;Escherichia coli;Cefalexin;Øst;172;6.976744186;93.023255814;12;160
 2022;Urin;Escherichia coli;Cefalexin;Sør;205;5.3658536585;94.634146341;11;194
@@ -17893,55 +17893,55 @@ ProveAar;Opplegg;Mikrobe;Antibiotika;region;antall;Andel_R;Andel_S_I;antall_R;an
 2022;Luft;Haemophilus influenzae;Trimetoprim - sulfa;Midt;20;50;50;10;10
 2022;Luft;Haemophilus influenzae;Trimetoprim - sulfa;Nord;15;40;60;6;9
 2022;Luft;Haemophilus influenzae;Trimetoprim - sulfa;Norge;217;27.649769585;72.350230415;60;157
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Amikacin;Oslo/Akershus;8;0;100;0;8
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Amikacin;Øst;6;0;100;0;6
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Amikacin;Sør;5;20;80;1;4
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Amikacin;Vest;11;18.181818182;81.818181818;2;9
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Amikacin;Midt;1;0;100;0;1
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Amikacin;Nord;3;0;100;0;3
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Amikacin;Norge;34;8.8235294118;91.176470588;3;31
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Ciprofloxacin;Oslo/Akershus;8;0;100;0;8
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Ciprofloxacin;Øst;6;0;100;0;6
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Ciprofloxacin;Sør;5;0;100;0;5
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Ciprofloxacin;Vest;11;0;100;0;11
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Ciprofloxacin;Midt;1;0;100;0;1
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Ciprofloxacin;Nord;3;0;100;0;3
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Ciprofloxacin;Norge;34;0;100;0;34
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Gentamicin;Oslo/Akershus;8;0;100;0;8
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Gentamicin;Øst;6;0;100;0;6
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Gentamicin;Sør;5;20;80;1;4
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Gentamicin;Vest;11;18.181818182;81.818181818;2;9
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Gentamicin;Midt;1;0;100;0;1
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Gentamicin;Nord;3;0;100;0;3
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Gentamicin;Norge;34;8.8235294118;91.176470588;3;31
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Imipenem;Oslo/Akershus;8;0;100;0;8
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Imipenem;Øst;6;0;100;0;6
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Imipenem;Sør;5;0;100;0;5
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Imipenem;Vest;11;9.0909090909;90.909090909;1;10
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Imipenem;Midt;1;0;100;0;1
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Imipenem;Nord;3;0;100;0;3
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Imipenem;Norge;34;2.9411764706;97.058823529;1;33
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Meropenem;Oslo/Akershus;8;0;100;0;8
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Meropenem;Øst;6;0;100;0;6
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Meropenem;Sør;5;0;100;0;5
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Meropenem;Vest;11;9.0909090909;90.909090909;1;10
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Meropenem;Midt;1;0;100;0;1
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Meropenem;Nord;3;0;100;0;3
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Meropenem;Norge;34;2.9411764706;97.058823529;1;33
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Tobramycin;Oslo/Akershus;8;0;100;0;8
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Tobramycin;Øst;6;0;100;0;6
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Tobramycin;Sør;5;20;80;1;4
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Tobramycin;Vest;11;9.0909090909;90.909090909;1;10
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Tobramycin;Midt;1;0;100;0;1
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Tobramycin;Nord;3;0;100;0;3
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Tobramycin;Norge;34;5.8823529412;94.117647059;2;32
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Trimetoprim - sulfa;Oslo/Akershus;8;0;100;0;8
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Trimetoprim - sulfa;Øst;6;0;100;0;6
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Trimetoprim - sulfa;Sør;5;0;100;0;5
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Trimetoprim - sulfa;Vest;11;0;100;0;11
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Trimetoprim - sulfa;Midt;1;0;100;0;1
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Trimetoprim - sulfa;Nord;3;0;100;0;3
-2023;Blod;Acinetobacter baumannii/calocaceticus complex;Trimetoprim - sulfa;Norge;34;0;100;0;34
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Amikacin;Oslo/Akershus;8;0;100;0;8
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Amikacin;Øst;6;0;100;0;6
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Amikacin;Sør;5;20;80;1;4
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Amikacin;Vest;11;18.181818182;81.818181818;2;9
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Amikacin;Midt;1;0;100;0;1
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Amikacin;Nord;3;0;100;0;3
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Amikacin;Norge;34;8.8235294118;91.176470588;3;31
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Ciprofloxacin;Oslo/Akershus;8;0;100;0;8
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Ciprofloxacin;Øst;6;0;100;0;6
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Ciprofloxacin;Sør;5;0;100;0;5
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Ciprofloxacin;Vest;11;0;100;0;11
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Ciprofloxacin;Midt;1;0;100;0;1
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Ciprofloxacin;Nord;3;0;100;0;3
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Ciprofloxacin;Norge;34;0;100;0;34
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Gentamicin;Oslo/Akershus;8;0;100;0;8
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Gentamicin;Øst;6;0;100;0;6
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Gentamicin;Sør;5;20;80;1;4
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Gentamicin;Vest;11;18.181818182;81.818181818;2;9
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Gentamicin;Midt;1;0;100;0;1
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Gentamicin;Nord;3;0;100;0;3
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Gentamicin;Norge;34;8.8235294118;91.176470588;3;31
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Imipenem;Oslo/Akershus;8;0;100;0;8
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Imipenem;Øst;6;0;100;0;6
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Imipenem;Sør;5;0;100;0;5
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Imipenem;Vest;11;9.0909090909;90.909090909;1;10
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Imipenem;Midt;1;0;100;0;1
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Imipenem;Nord;3;0;100;0;3
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Imipenem;Norge;34;2.9411764706;97.058823529;1;33
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Meropenem;Oslo/Akershus;8;0;100;0;8
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Meropenem;Øst;6;0;100;0;6
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Meropenem;Sør;5;0;100;0;5
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Meropenem;Vest;11;9.0909090909;90.909090909;1;10
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Meropenem;Midt;1;0;100;0;1
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Meropenem;Nord;3;0;100;0;3
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Meropenem;Norge;34;2.9411764706;97.058823529;1;33
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Tobramycin;Oslo/Akershus;8;0;100;0;8
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Tobramycin;Øst;6;0;100;0;6
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Tobramycin;Sør;5;20;80;1;4
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Tobramycin;Vest;11;9.0909090909;90.909090909;1;10
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Tobramycin;Midt;1;0;100;0;1
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Tobramycin;Nord;3;0;100;0;3
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Tobramycin;Norge;34;5.8823529412;94.117647059;2;32
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Trimetoprim - sulfa;Oslo/Akershus;8;0;100;0;8
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Trimetoprim - sulfa;Øst;6;0;100;0;6
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Trimetoprim - sulfa;Sør;5;0;100;0;5
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Trimetoprim - sulfa;Vest;11;0;100;0;11
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Trimetoprim - sulfa;Midt;1;0;100;0;1
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Trimetoprim - sulfa;Nord;3;0;100;0;3
+2023;Blod;Acinetobacter baumannii/calcoaceticus complex;Trimetoprim - sulfa;Norge;34;0;100;0;34
 2023;Blod;Acinetobacter lwoffii;Amikacin;Oslo/Akershus;1;0;100;0;1
 2023;Blod;Acinetobacter lwoffii;Amikacin;Øst;1;0;100;0;1
 2023;Blod;Acinetobacter lwoffii;Amikacin;Sør;1;0;100;0;1

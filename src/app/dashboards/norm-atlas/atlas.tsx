@@ -33,7 +33,6 @@ import {
 } from "@/components/ui/chart";
 import {
 	Bar,
-	BarChart,
 	XAxis,
 	YAxis,
 	CartesianGrid,
@@ -239,7 +238,7 @@ export default function Atlas({
 
 const getGradientColor = (value: number) => {
 	if (value < 1) return "hsl(var(--red-1))";
-	if (value > 1 && value <= 2.5) return "hsl(var(--red-2))";
+	if (value >= 1 && value <= 2.5) return "hsl(var(--red-2))";
 	if (value > 2.5 && value <= 5) return "hsl(var(--red-3))";
 	if (value > 5 && value <= 10) return "hsl(var(--red-4))";
 	if (value > 10 && value <= 15) return "hsl(var(--red-5))";
@@ -595,6 +594,7 @@ function ResistanceChart({
 	const chartRef = useRef<HTMLDivElement>(null);
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [exportOptionsOpen, setExportOptionsOpen] = useState(false);
+	const [showAverageLineChart, setShowAverageLineChart] = useState(true);
 	const saveName = "ResistanceChart";
 
 	const handleExport = (format: "png" | "svg", resolution: 1 | 2) => {
@@ -641,10 +641,31 @@ function ResistanceChart({
 				);
 				const percentage = total > 0 ? (resistant / total) * 100 : 0;
 
+				const norge = data.filter(
+					(record) =>
+						record.region === "Norge" &&
+						record.Mikrobe === selectedMicrobe &&
+						record.Antibiotika === selectedAntibiotic &&
+						record.Opplegg === selectedDataSet &&
+						parseInt(record.ProveAar) === selectedYear
+				);
+
+				const total_norge = norge.reduce(
+					(sum, record) => sum + (record.antall || 0),
+					0
+				);
+				const resistant_norge = norge.reduce(
+					(sum, record) => sum + (record.antall_R || 0),
+					0
+				);
+				const percentage_norge =
+					total_norge > 0 ? (resistant_norge / total_norge) * 100 : 0;
+
 				return {
 					region,
 					resistance: Number(percentage.toFixed(1)),
 					fill: getGradientColor(percentage),
+					norgeResistance: Number(percentage_norge.toFixed(1)),
 				};
 			})
 			.sort((a, b) => b.resistance - a.resistance);
@@ -665,7 +686,10 @@ function ResistanceChart({
 	const chartConfig = {
 		resistance: {
 			label: "Resistens",
-			color: "hsl(var(--chart-1))",
+		},
+		norgeResistance: {
+			label: "Gjennomsnitt Norge",
+			color: "hsl(var(--chart-7))",
 		},
 	} satisfies ChartConfig;
 
@@ -673,64 +697,117 @@ function ResistanceChart({
 		return null;
 	}
 
+	const handleAverageLineChartChange = (checked: boolean) => {
+		if (checked) {
+			setShowAverageLineChart(true);
+		} else {
+			setShowAverageLineChart(false);
+		}
+	};
+
 	const renderChart = (aspect: string) => (
-		<ChartContainer config={chartConfig} className={`${aspect} w-full`}>
-			<BarChart
-				data={chartData}
-				accessibilityLayer
-				margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
-				onMouseLeave={() => onHover(null, "")}
-			>
-				<CartesianGrid vertical={false} />
-				<XAxis
-					dataKey="region"
-					tickLine={false}
-					fontSize={12}
-					angle={-45}
-					textAnchor="end"
-					height={70}
+		<div>
+			<div className="flex items-center space-x-2 pb-4">
+				<Checkbox
+					id="show-average-line-chart"
+					className="peer rounded-none border-2 border-gray-400"
+					checked={showAverageLineChart}
+					onCheckedChange={(checked) =>
+						handleAverageLineChartChange(checked === true)
+					}
 				/>
-				<YAxis
-					tickLine={false}
-					fontSize={12}
-					domain={[0, maxResistance]}
-					unit="%"
-					label={{
-						value: "Prosent resistente isolater",
-						angle: -90,
-						position: "center",
-						dx: -20,
-					}}
-				/>
-				{hoveredRegion?.length !== undefined ? (
-					chartCall !== call ? (
-						<ChartTooltip
-							content={<ChartTooltipContent />}
-							defaultIndex={chartData.findIndex(
-								(item) =>
-									item.region ===
-									(Array.isArray(hoveredRegion)
-										? hoveredRegion[0]
-										: (hoveredRegion ?? ""))
-							)}
-						/>
-					) : (
-						<ChartTooltip content={<ChartTooltipContent />} />
-					)
-				) : (
-					<ChartTooltip active={false} />
-				)}
-				<Bar
-					dataKey="resistance"
-					radius={4}
-					onMouseEnter={(data) => onHover([data.region], call)}
+				<label
+					htmlFor="show-average-line-chart"
+					className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 				>
-					{chartData.map((entry, index) => (
-						<Cell key={`cell-${index}`} fill={entry.fill} />
-					))}
-				</Bar>
-			</BarChart>
-		</ChartContainer>
+					Norges gjennomsnitt
+				</label>
+			</div>
+			<ChartContainer config={chartConfig} className={`${aspect} w-full`}>
+				<ComposedChart
+					data={chartData}
+					accessibilityLayer
+					margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
+					onMouseLeave={() => onHover(null, "")}
+				>
+					<CartesianGrid vertical={false} />
+					<XAxis
+						dataKey="region"
+						tickLine={false}
+						fontSize={12}
+						angle={-45}
+						textAnchor="end"
+						height={70}
+						xAxisId={1}
+					/>
+					<XAxis
+						dataKey="region"
+						tickLine={false}
+						fontSize={12}
+						angle={-45}
+						textAnchor="end"
+						height={70}
+						xAxisId={2}
+						scale={"point"}
+						hide={true}
+					/>
+					<YAxis
+						tickLine={false}
+						fontSize={12}
+						domain={[0, maxResistance]}
+						unit="%"
+						label={{
+							value: "Prosent resistente isolater",
+							angle: -90,
+							position: "center",
+							dx: -20,
+						}}
+					/>
+					{hoveredRegion?.length !== undefined ? (
+						chartCall !== call ? (
+							<ChartTooltip
+								content={<ChartTooltipContent />}
+								defaultIndex={chartData.findIndex(
+									(item) =>
+										item.region ===
+										(Array.isArray(hoveredRegion)
+											? hoveredRegion[0]
+											: (hoveredRegion ?? ""))
+								)}
+							/>
+						) : (
+							<ChartTooltip content={<ChartTooltipContent />} />
+						)
+					) : (
+						<ChartTooltip active={false} />
+					)}
+					<Bar
+						xAxisId={1}
+						dataKey="resistance"
+						radius={4}
+						onMouseEnter={(data) => onHover([data.region], call)}
+					>
+						{chartData.map((entry, index) => (
+							<Cell key={`cell-${index}`} fill={entry.fill} />
+						))}
+					</Bar>
+
+					{showAverageLineChart && (
+						<Line
+							xAxisId={2}
+							key="norgeResistance"
+							type="monotone"
+							dataKey="norgeResistance"
+							stroke="var(--color-norgeResistance)"
+							strokeWidth={2}
+							dot={false}
+							activeDot={false}
+							connectNulls
+						/>
+					)}
+				</ComposedChart>
+			</ChartContainer>
+		</div>
 	);
 
 	return (
@@ -1276,7 +1353,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 				if (value === "Ikke data") return "Ikke Data";
 				if (typeof value === "string") value = parseFloat(value);
 				if (value < 1) return "<1%";
-				if (value > 1 && value <= 2.5) return "1-2.5%";
+				if (value >= 1 && value <= 2.5) return "1-2.5%";
 				if (value > 2.5 && value <= 5) return "2.5-5%";
 				if (value > 5 && value <= 10) return "5-10%";
 				if (value > 10 && value <= 15) return "10-15%";

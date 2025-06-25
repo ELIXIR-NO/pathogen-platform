@@ -38,3 +38,7 @@ next-env.d.ts
 # IDE configs
 .idea/
 .vscode/
+
+# Notion images
+public/notion-images/
+public/search-index.json
