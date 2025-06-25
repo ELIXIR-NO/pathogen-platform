@@ -138,7 +138,9 @@ export default function ContactUsForm() {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit">Submit</Button>
+				<Button type="submit" disabled={form.formState.isSubmitting}>
+					{form.formState.isSubmitting ? "Sending..." : "Submit"}
+				</Button>
 			</form>
 		</Form>
 	);
