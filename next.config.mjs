@@ -23,7 +23,7 @@ const nextConfig = {
 						value: "norm-atlas.no",
 					},
 				],
-				destination: "https://metatrack.no/dashboards/norm-atlas",
+				destination: "https://pathogens.no/dashboards/norm-atlas",
 				permanent: true,
 			},
 		];
