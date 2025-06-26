@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
 	eslint: {
 		ignoreDuringBuilds: true,
@@ -12,6 +12,21 @@ const nextConfig = {
 				pathname: "**",
 			},
 		],
+	},
+	async redirects() {
+		return [
+			{
+				source: "/:path*",
+				has: [
+					{
+						type: "host",
+						value: "norm-atlas.no",
+					},
+				],
+				destination: "https://metatrack.no/dashboards/norm-atlas",
+				permanent: true,
+			},
+		];
 	},
 	experimental: {
 		reactCompiler: true,
