@@ -27,14 +27,14 @@ const resources: CardGridData[] = [
 		description:
 			"The health registry NORM (Norsk overvåkingssystem for antibiotikaresistens hos mikrober) monitors antibiotic resistance in pathogenic bacteria from humans. It collaborates closely with the NORM-VET program to produce annual reports on antibiotic resistance in both humans and animals.",
 		link: "https://www.unn.no/fag-og-forskning/norm-norsk-overvakingssystem-for-antibiotikaresistens-hos-mikrober",
-		image: "/logos/norm.png",
+		image: "/logos/norm_card.png",
 	},
 	{
 		title: "NORM-VET",
 		description:
 			"The surveillance program NORM-VET (Norsk overvåkingsprogram for antibiotikaresistens i mikrober fra fôr, dyr og næringsmidler) focuses on antibiotic resistance in microbes originating from feed, animals, and food.",
 		link: "https://www.vetinst.no/overvaking/antibiotikaresistens-norm-vet",
-		image: "/logos/VI.png",
+		image: "/logos/norm_vet_logo.png",
 	},
 ];
 

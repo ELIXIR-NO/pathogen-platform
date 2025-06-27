@@ -14,21 +14,21 @@ const resources: CardGridData[] = [
 		description:
 			"Norsk overvåkingssystem for antibiotikaresistens hos mikrober (NORM) is the Norwegian Surveillance System for Antimicrobial Resistance in Microbes. This health registry collect and analyse data on antibiotic resistance, working with reference labs to ensure high-quality testing and data interpretation.",
 		link: "https://www.unn.no/fag-og-forskning/norm-norsk-overvakingssystem-for-antibiotikaresistens-hos-mikrober",
-		image: "/logos/norm.png",
+		image: "/logos/norm_card.png",
 	},
 	{
 		title: "NORM atlas",
 		description:
 			"The NORM Atlas provides access to the NORM database for selected bacterial species and antibiotics over time and across regions. The tool displays the proportion of resistant microbes.",
 		link: "https://norm-atlas.no/",
-		image: "/logos/norm.png",
+		image: "/logos/norm_card.png",
 	},
 	{
 		title: "NSAS and ASP",
 		description:
 			"Nasjonalt senter for antibiotikabruk i sykehus (NSAS) supports Norwegian hospitals in the proper use of antibiotics. Antibiotikasenteret for primærmedisin (ASP) aims of promoting the rational and limited use of antibiotics in primary healthcare, thereby reducing the development of antibiotic resistance in Norway.",
 		link: "https://www.antibiotika.no/",
-		image: "/logos/antibiotika-no.png",
+		image: "/logos/logo-antibiotika.svg",
 	},
 	{
 		title: "K-res",
