@@ -51,7 +51,7 @@ const surveillanceSystemsCardData: CardGridData[] = [
 			"NORM - Norsk overvåkingssystem for antibiotikaresistens hos mikrober",
 		description:
 			"NORM is the Norwegian Surveillance System for Antimicrobial Drug Resistance. This health registry collect and analyse data on antibiotic resistance",
-		image: "/logos/norm.png",
+		image: "/logos/norm_card.png",
 		link: "https://www.unn.no/fag-og-forskning/norm-norsk-overvakingssystem-for-antibiotikaresistens-hos-mikrober",
 	},
 	{
@@ -81,7 +81,7 @@ const surveillanceSystemsCardData: CardGridData[] = [
 			"NORM-VET - Norsk overvåkingsprogram for antibiotikaresistens i mikrober fra fôr, dyr og næringsmidler",
 		description:
 			"The surveillance program NORM-VET focuses on antibiotic resistance in microbes originating from feed, animals, and food. Annual reports are made publicly available in joint annual reports with NORM.",
-		image: "/logos/VI.png",
+		image: "/logos/norm_vet_logo.png",
 		link: "https://www.vetinst.no/en",
 	},
 	{

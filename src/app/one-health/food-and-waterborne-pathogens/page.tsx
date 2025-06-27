@@ -34,7 +34,7 @@ const resources: CardGridData[] = [
 		description:
 			"The surveillance program NORM-VET (Norsk overvåkingsprogram for antibiotikaresistens i mikrober fra fôr, dyr og næringsmidler) focuses on antibiotic resistance in microbes originating from feed, animals, and food. It works in conjunction with NORM to provide a comprehensive overview of antibiotic resistance trends across human and animal populations.",
 		link: "https://www.vetinst.no/overvaking/antibiotikaresistens-norm-vet",
-		image: "/logos/norm.png",
+		image: "/logos/norm_vet_logo.png",
 	},
 	{
 		title: "VI - Veterinærinstituttet",
