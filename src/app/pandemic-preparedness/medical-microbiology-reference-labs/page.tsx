@@ -12,7 +12,7 @@ const resources: CardGridData[] = [
 		title: "National reference laboratories",
 		description:
 			"The Norwegian Health Directorate (Helsedirektoratet) maintain a comprehensive list of microbiology reference laboratories.",
-		image: "/logos/helsedirektoratet.png",
+		image: "/logos/Hdir_logo.svg",
 		link: "https://www.helsedirektoratet.no/tema/smittevern/referansefunksjoner-i-medisinsk-mikrobiologi",
 	},
 	{
@@ -40,7 +40,7 @@ const resources: CardGridData[] = [
 		title: "NORM and NORM-VET Programs",
 		description:
 			"These surveillance programs, while not labs themselves, are closely linked to reference laboratories across Norway. NORM (for human health) and NORM-VET (for animal health and food) collect and analyze data on antibiotic resistance, working with reference labs to ensure high-quality testing and data interpretation.",
-		image: "/logos/norm.png",
+		image: "/logos/norm_card.png",
 		link: "https://www.unn.no/fag-og-forskning/norm-norsk-overvakingssystem-for-antibiotikaresistens-hos-mikrober",
 	},
 	{
