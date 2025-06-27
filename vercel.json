@@ -1,0 +1,26 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "norm-atlas.no"
+        }
+      ],
+      "destination": "https://pathogens.no/dashboards/norm-atlas",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "norm-atlas.no"
+        }
+      ],
+      "destination": "https://pathogens.no/dashboards/norm-atlas",
+      "permanent": true
+    }
+  ]
+}
