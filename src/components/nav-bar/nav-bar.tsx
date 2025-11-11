@@ -35,9 +35,9 @@ const NavItems: NavItem[] = [
 export function NavBar() {
 	return (
 		<nav className="fixed left-0 right-0 top-0 z-10 h-fit py-2 backdrop-blur-sm">
-			<div className="container flex flex-row items-center justify-between gap-x-4 pt-2">
-				<ul className="flex flex-row items-center justify-center gap-x-4">
-					<li>
+			<div className="container flex flex-row items-center justify-between pt-2">
+				<ul className="flex flex-row items-center justify-center">
+					<li className="pr-4">
 						<Link href="/">
 							<LogoModeToggle />
 						</Link>
@@ -166,7 +166,7 @@ const NavBarItem: FC<NavItem> = ({ pageUrl, pageName }) => {
 		<li>
 			<Link
 				className={cn(
-					"px-3 text-lg hover:underline hover:decoration-primary hover:underline-offset-4",
+					"rounded-md bg-background px-3 py-2 text-lg hover:underline hover:decoration-primary hover:underline-offset-4",
 					pathName === `${pageUrl}` && "font-semibold text-primary"
 				)}
 				href={pageUrl}
