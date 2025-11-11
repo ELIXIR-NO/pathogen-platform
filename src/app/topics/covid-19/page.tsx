@@ -16,20 +16,6 @@ const norwegianResources: CardGridData[] = [
 		link: "https://www.regjeringen.no/en/topics/koronavirus-covid-19/timeline-for-news-from-norwegian-ministries-about-the-coronavirus-disease-covid-19/id2692402/",
 	},
 	{
-		title: "National COVID-19 portal",
-		description:
-			"ELIXIR Norway host the Norwegian COVID-19 Data Portal to enable Norwegian scientists to share and access research data on the coronavirus disease.",
-		image: "/logos/covid-19-data-portal.png",
-		link: "https://covid19dataportal.no/",
-	},
-	{
-		title: "Data repositories",
-		description:
-			"SARS-CoV-2 Database is a knowledge database for SARS-CoV-2 virus research compiled from publicly available resources. It consists of two databases, the SARS-CoV-2 contextual and sequence database and the SARS-CoV-2 BLAST database.",
-		image: "/logos/SARS-CoV-2DB.png",
-		link: "https://covid19.sfb.uit.no/",
-	},
-	{
 		title: "Helsedirektoratet",
 		description:
 			"Helsedirektoratet (The Directorate of Health) was a key player in managing the health system's response to COVID-19. Helsedirektoratet collaborates with FHI to implement national health strategies, ensure hospital preparedness, and disseminate public health information.",
