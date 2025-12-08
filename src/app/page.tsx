@@ -2,8 +2,6 @@ import HighlightPanel from "@/components/highlight-panel";
 import QuickView from "@/components/quick-view";
 import { Suspense } from "react";
 
-export const experimental_ppr = true;
-
 export default function Home() {
 	return (
 		<main className="flex w-full flex-col gap-y-3">

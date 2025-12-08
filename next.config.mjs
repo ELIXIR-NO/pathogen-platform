@@ -28,9 +28,9 @@ const nextConfig = {
 			},
 		];
 	},
+	cacheComponents: true,
 	experimental: {
 		reactCompiler: true,
-		ppr: "incremental",
 	},
 };
 
