@@ -1,8 +1,6 @@
 import QuickView from "@/components/quick-view";
 import { Suspense } from "react";
 
-export const experimental_ppr = true;
-
 export default function DashboardPage() {
 	return (
 		<section className="flex w-full flex-col space-y-6 text-justify">
