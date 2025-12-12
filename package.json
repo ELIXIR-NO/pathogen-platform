@@ -50,7 +50,7 @@
     "framer-motion": "^12.12.1",
     "html-to-image": "^1.11.13",
     "install": "^0.13.0",
-    "lucide-react": "^0.556.0",
+    "lucide-react": "^0.561.0",
     "ml-regression-simple-linear": "^3.0.1",
     "newick": "^3.0.0",
     "next": "15.5.9",
