@@ -1,66 +1,23 @@
 "use client";
 
 import { NormDataRecord } from "@/lib/data/csvUtils";
-import React, {
-	forwardRef,
-	useEffect,
-	useImperativeHandle,
-	useMemo,
-	useRef,
-	useState,
-} from "react";
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/components/ui/accordion";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState, } from "react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
-import {
-	ChartConfig,
-	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent,
-} from "@/components/ui/chart";
-import {
-	Bar,
-	XAxis,
-	YAxis,
-	CartesianGrid,
-	Cell,
-	ComposedChart,
-	Line,
-	Legend,
-} from "recharts";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table";
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent, } from "@/components/ui/chart";
+import { Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, XAxis, YAxis, } from "recharts";
 import * as d3 from "d3";
-import { geoPath, geoMercator, GeoProjection } from "d3-geo";
+import { geoMercator, geoPath, GeoProjection } from "d3-geo";
 import { GeoJson } from "@/lib/data/geojsonLoader";
 import * as turf from "@turf/turf";
 import { Checkbox } from "@/components/ui/checkbox";
 import { SimpleLinearRegression } from "ml-regression-simple-linear";
 import { Download, Info, Maximize2 } from "lucide-react";
-import {
-	Tooltip,
-	TooltipArrow,
-	TooltipContent,
-	TooltipProvider,
-	TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipArrow, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/components/ui/tooltip";
 import { getDescription } from "@/hooks/getMicrobeDescription";
-import {
-	ChartDialog,
-	exportChartImage,
-	ExportOptionsDialog,
-} from "@/lib/exportImageUtils";
+import { ChartDialog, exportChartImage, ExportOptionsDialog, } from "@/lib/exportImageUtils";
 import DownloadCSV from "@/lib/data/dataExport";
 
 export default function Atlas({
@@ -80,11 +37,11 @@ export default function Atlas({
 	const [hoveredRegion, setHoveredRegion] = useState<string[] | null>(null);
 	const [chartCall, setChartCall] = useState<string>("");
 
-	const filteredData = useMemo(() => {
-		return data.filter((record) => record.Opplegg === selectedDataSet);
-	}, [data, selectedDataSet]);
+	const filteredData = data.filter(
+		(record) => record.Opplegg === selectedDataSet
+	);
 
-	const availableYears = useMemo(() => {
+	const availableYears = (() => {
 		const years = new Set(
 			filteredData
 				.filter(
@@ -95,7 +52,7 @@ export default function Atlas({
 				.map((record) => parseInt(record.ProveAar))
 		);
 		return Array.from(years).sort((a, b) => a - b);
-	}, [filteredData, selectedMicrobe, selectedAntibiotic]);
+	})();
 
 	useEffect(() => {
 		if (availableYears.length > 0) {
@@ -260,7 +217,7 @@ export function MicrobeSelector({
 	selectedAntibiotic,
 	onSelectionChange,
 }: MicrobeSelectorProps) {
-	const microbeAntibiotics = useMemo(() => {
+	const microbeAntibiotics = (() => {
 		const mapping: { [key: string]: Set<string> } = {};
 
 		data.forEach((record) => {
@@ -276,7 +233,7 @@ export function MicrobeSelector({
 				Array.from(antibiotics).sort(),
 			])
 		);
-	}, [data]);
+	})();
 
 	const handleAntibioticClick = (microbe: string, antibiotic: string) => {
 		onSelectionChange(microbe, antibiotic);
@@ -286,7 +243,7 @@ export function MicrobeSelector({
 		selectedMicrobe
 	);
 
-	useMemo(() => {
+	useEffect(() => {
 		setOpenMicrobe(selectedMicrobe);
 	}, [selectedMicrobe]);
 
@@ -468,7 +425,7 @@ function TableView({
 	onHover,
 }: TableViewProps) {
 	const call = "Table";
-	const tableData = useMemo(() => {
+	const tableData = (() => {
 		if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) {
 			return [];
 		}
@@ -518,13 +475,7 @@ function TableView({
 				if (b.total === "Ikke data") return -1;
 				return (Number(b.total) || 0) - (Number(a.total) || 0);
 			});
-	}, [
-		data,
-		selectedMicrobe,
-		selectedAntibiotic,
-		selectedYear,
-		selectedDataSet,
-	]);
+	})();
 
 	return (
 		<div className="rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
@@ -610,7 +561,7 @@ function ResistanceChart({
 		setDialogOpen(true);
 	};
 
-	const chartData = useMemo(() => {
+	const chartData = (() => {
 		if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) {
 			return [];
 		}
@@ -669,19 +620,11 @@ function ResistanceChart({
 				};
 			})
 			.sort((a, b) => b.resistance - a.resistance);
-	}, [
-		data,
-		selectedMicrobe,
-		selectedAntibiotic,
-		selectedYear,
-		selectedDataSet,
-		hoveredRegion,
-		chartCall,
-	]);
+	})();
 
-	const maxResistance = useMemo(() => {
-		return Math.ceil(Math.max(...chartData.map((d) => d.resistance)));
-	}, [chartData]);
+	const maxResistance = Math.ceil(
+		Math.max(...chartData.map((d) => d.resistance))
+	);
 
 	const chartConfig = {
 		resistance: {
@@ -894,7 +837,7 @@ function ResistanceTrendChart({
 		});
 	};
 
-	const chartData = useMemo<YearDataEntry[]>(() => {
+	const chartData = (() => {
 		if (
 			!selectedMicrobe ||
 			!selectedAntibiotic ||
@@ -963,23 +906,17 @@ function ResistanceTrendChart({
 		});
 
 		return yearArray;
-	}, [
-		data,
-		selectedMicrobe,
-		selectedAntibiotic,
-		selectedRegions,
-		selectedDataSet,
-	]);
+	})();
 
-	const maxResistance = useMemo(() => {
+	const maxResistance = (() => {
 		if (chartData.length === 0) return 100;
 		const maxValues = chartData.map((entry) =>
 			Math.max(...selectedRegions.map((region) => entry[region] || 0))
 		);
 		return Math.ceil(Math.max(...maxValues));
-	}, [chartData, selectedRegions]);
+	})();
 
-	const maxTotal = useMemo(() => {
+	const maxTotal = (() => {
 		if (chartData.length === 0) return 250;
 		const maxValues = chartData.map((entry) =>
 			Math.max(
@@ -987,7 +924,7 @@ function ResistanceTrendChart({
 			)
 		);
 		return Math.ceil(Math.max(...maxValues));
-	}, [chartData, selectedRegions]);
+	})();
 
 	const regionColors: { [key: string]: string } = {
 		"Oslo/Akershus": "hsl(var(--chart-1))",
@@ -1185,7 +1122,7 @@ const useWindowSize = () => {
 		height: 800,
 	});
 
-	useMemo(() => {
+	useEffect(() => {
 		if (typeof window === "undefined") return;
 
 		const handleResize = () => {
@@ -1261,7 +1198,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			setForceRender(true);
 		}, []);
 
-		useMemo(() => {
+		useEffect(() => {
 			if (!chartRef.current || !geoData) return;
 
 			const svg = d3.select(chartRef.current);
@@ -1573,6 +1510,8 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 			selectedDataSet,
 			selectedYear,
 			forceRender,
+			onHover,
+			chartCall,
 		]);
 
 		return (

@@ -3,7 +3,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpDown } from "lucide-react";
-import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 
 export type Resource = {
@@ -24,7 +23,7 @@ const stringToColor = (str: string) => {
 };
 
 const ColoredBadge = ({ content }: { content: string }) => {
-	const backgroundColor = useMemo(() => stringToColor(content), [content]);
+	const backgroundColor = stringToColor(content);
 	return (
 		<Badge
 			variant="secondary"

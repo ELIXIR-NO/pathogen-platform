@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
@@ -10,20 +10,19 @@ import {
 import { Button } from "@/components/ui/button";
 import { Covid19Record } from "@/lib/data/csvUtils";
 import {
-	Line,
-	XAxis,
-	YAxis,
+	Bar,
 	CartesianGrid,
+	ComposedChart,
+	Line,
 	ResponsiveContainer,
 	Tooltip,
-	ComposedChart,
-	Bar,
+	XAxis,
+	YAxis,
 } from "recharts";
 import {
 	ChartConfig,
 	ChartContainer,
 	ChartLegend,
-	ChartLegendContent,
 } from "@/components/ui/chart";
 
 export function Covid19LineChart({
@@ -56,7 +55,7 @@ export function Covid19LineChart({
 		[]
 	);
 
-	const filteredData = useMemo(() => {
+	const filteredData = (() => {
 		if (selectedYears.length === 0 || selectedType.length === 0) {
 			return [];
 		}
@@ -79,7 +78,7 @@ export function Covid19LineChart({
 
 				return result;
 			});
-	}, [selectedYears, selectedType, data]);
+	})();
 
 	const sortedData = filteredData.sort(
 		(a, b) => parseInt(a.ProveAar) - parseInt(b.ProveAar)

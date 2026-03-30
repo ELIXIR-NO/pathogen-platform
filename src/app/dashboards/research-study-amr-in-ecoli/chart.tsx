@@ -1,13 +1,12 @@
 "use client";
 
 import React, {
-	useRef,
-	useState,
+	forwardRef,
 	useCallback,
 	useEffect,
-	useMemo,
-	forwardRef,
 	useImperativeHandle,
+	useRef,
+	useState,
 } from "react";
 import * as d3 from "d3";
 import { TreeNode } from "@/lib/data/newick-loader";
@@ -104,7 +103,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 		useImperativeHandle(ref, () => chartRef.current!);
 
-		useMemo(() => {
+		useEffect(() => {
 			if (!data || !chartRef.current) return;
 
 			const outerRadius = calculateDynamicRadius(data);
@@ -748,7 +747,17 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 					endRadius * s1
 				);
 			}
-		}, [data, width, height, chartRef]);
+		}, [
+			data,
+			width,
+			height,
+			annotations,
+			labels,
+			phylogroup,
+			fimtype,
+			validNodes,
+			selectedAnnotations,
+		]);
 
 		const handleZoomIn = () => {
 			if (!chartRef.current || !zoomRef.current) return;

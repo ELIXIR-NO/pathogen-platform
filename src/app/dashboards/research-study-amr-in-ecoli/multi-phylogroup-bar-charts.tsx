@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
@@ -9,14 +9,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import {
-	BarChart,
 	Bar,
-	XAxis,
-	YAxis,
+	BarChart,
 	CartesianGrid,
+	Legend,
 	ResponsiveContainer,
 	Tooltip,
-	Legend,
+	XAxis,
+	YAxis,
 } from "recharts";
 import {
 	ChartContainer,
@@ -141,7 +141,7 @@ export function SampleBarChart({
 		"Tromsø 7-Feces",
 	];
 
-	const filteredData = useMemo(() => {
+	const filteredData = (() => {
 		if (
 			selectedSamples.length === 0 ||
 			selectedCollections.length === 0 ||
@@ -183,15 +183,9 @@ export function SampleBarChart({
 			});
 			return { genotype, data: groupedByPhylogroup };
 		});
-	}, [
-		data,
-		selectedSamples,
-		selectedGenotypes,
-		selectedCollections,
-		selectedPhylogroup,
-	]);
+	})();
 
-	const phenotypeData = useMemo(() => {
+	const phenotypeData = (() => {
 		if (
 			selectedSamples.length === 0 ||
 			selectedCollections.length === 0 ||
@@ -257,15 +251,9 @@ export function SampleBarChart({
 
 			return { phenotype, data: groupedByPhylogroup };
 		});
-	}, [
-		data,
-		selectedSamples,
-		selectedCollections,
-		selectedPhylogroup,
-		selectedPhenotypes,
-	]);
+	})();
 
-	const initialChartConfig = useMemo(() => {
+	const initialChartConfig = (() => {
 		const phenotypeKeys = collectionsSamples.flatMap((collection) =>
 			["S", "R", "I"].map((letter) => `${collection}-${letter}`)
 		);
@@ -284,7 +272,7 @@ export function SampleBarChart({
 			},
 			{} as Record<string, { label: string; color: string }>
 		);
-	}, [collections, samples]);
+	})();
 
 	const chartConfig = initialChartConfig;
 
@@ -423,9 +411,7 @@ export function SampleBarChart({
 		.map((entry) => entry["Sample ID"])
 		.filter((id): id is string => typeof id === "string");
 
-	const filteredTreeData = useMemo(() => {
-		return filterTreeData(TreeData, filteredSampleIDs);
-	}, [TreeData, filteredSampleIDs]);
+	const filteredTreeData = filterTreeData(TreeData, filteredSampleIDs);
 
 	const filterAnnotationsBySampleID = (
 		annotations: any[],
