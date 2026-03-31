@@ -9,7 +9,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { fuzzySearchIndex, IndexItem, SearchIndex } from "@/lib/searchUtils";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -24,14 +24,14 @@ export default function SearchPanel({
 
 	const [searchTerm, setSearchTerm] = useState("");
 
-	const uniqueSearchResult = useMemo<IndexItem[]>(() => {
+	const uniqueSearchResult = (() => {
 		const searchResult = fuzzySearchIndex(searchTerm, contentIndex);
 		const uniqueMap = new Map<string, IndexItem>();
 		searchResult.forEach((item) => {
 			uniqueMap.set(item.pageId, item);
 		});
 		return Array.from(uniqueMap.values());
-	}, [searchTerm, contentIndex]);
+	})();
 
 	const getShortSummary = (summary: string) => {
 		if (summary.length > 50) {

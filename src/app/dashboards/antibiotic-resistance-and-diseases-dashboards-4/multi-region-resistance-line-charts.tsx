@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
@@ -10,20 +10,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { NormDataRecord } from "@/lib/data/csvUtils";
 import {
+	CartesianGrid,
 	Line,
 	LineChart,
+	ReferenceLine,
+	ResponsiveContainer,
 	XAxis,
 	YAxis,
-	CartesianGrid,
-	ResponsiveContainer,
-	ReferenceLine,
 } from "recharts";
 import {
-	ChartContainer,
-	ChartTooltip,
 	ChartConfig,
+	ChartContainer,
 	ChartLegend,
 	ChartLegendContent,
+	ChartTooltip,
 } from "@/components/ui/chart";
 import DownloadCSV from "@/lib/data/dataExport";
 
@@ -56,7 +56,7 @@ export function MultiRegionResistanceLineCharts({
 		[]
 	);
 
-	const filteredData = useMemo(() => {
+	const filteredData = (() => {
 		if (
 			selectedMicrobes.length === 0 ||
 			selectedSampleType.length === 0 ||
@@ -70,9 +70,9 @@ export function MultiRegionResistanceLineCharts({
 			const sampleTypeMatch = selectedSampleType.includes(item.Opplegg);
 			return regionMatch && microbeMatch && sampleTypeMatch;
 		});
-	}, [selectedRegions, selectedMicrobes, selectedSampleType, data]);
+	})();
 
-	const chartDataByAntibiotic = useMemo(() => {
+	const chartDataByAntibiotic = (() => {
 		const dataByAntibiotic: Record<string, any[]> = {};
 		selectedAntibiotics.forEach((antibiotic) => {
 			const antibioticData: Record<number, Record<string, any>> = {};
@@ -96,14 +96,14 @@ export function MultiRegionResistanceLineCharts({
 			);
 		});
 		return dataByAntibiotic;
-	}, [filteredData, selectedAntibiotics]);
+	})();
 
 	const generateHslColor = (index: number, total: number) => {
 		const hue = (index * 360) / total;
 		return `hsl(${hue}, 70%, 50%)`;
 	};
 
-	const chartConfig = useMemo(() => {
+	const chartConfig = (() => {
 		const keys = selectedRegions.map((region) => `${region}`);
 		return keys.reduce(
 			(acc, key, index) => {
@@ -115,7 +115,7 @@ export function MultiRegionResistanceLineCharts({
 			},
 			{} as Record<string, { label: string; color: string }>
 		);
-	}, [selectedRegions]) satisfies ChartConfig;
+	})() satisfies ChartConfig;
 
 	const resetSelections = useCallback(() => {
 		setSelectedAntibiotics([]);
@@ -232,10 +232,10 @@ export function MultiRegionResistanceLineCharts({
 		[]
 	);
 
-	const uniqueFiltered = useMemo(() => {
+	const uniqueFiltered = (() => {
 		const uniqueSet = new Set(filteredData.map((item) => item.Antibiotika));
 		return Array.from(uniqueSet);
-	}, [filteredData]);
+	})();
 
 	const filteredDownloadData = selectedAntibiotics.flatMap(
 		(antibiotic) =>

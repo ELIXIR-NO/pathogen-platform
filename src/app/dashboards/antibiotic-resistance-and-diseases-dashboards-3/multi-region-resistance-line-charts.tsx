@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
@@ -10,20 +10,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { NormDataRecord } from "@/lib/data/csvUtils";
 import {
+	CartesianGrid,
 	Line,
 	LineChart,
+	ReferenceLine,
+	ResponsiveContainer,
 	XAxis,
 	YAxis,
-	CartesianGrid,
-	ResponsiveContainer,
-	ReferenceLine,
 } from "recharts";
 import {
-	ChartContainer,
-	ChartTooltip,
 	ChartConfig,
+	ChartContainer,
 	ChartLegend,
 	ChartLegendContent,
+	ChartTooltip,
 } from "@/components/ui/chart";
 
 export function MultiRegionResistanceLineCharts({
@@ -60,7 +60,7 @@ export function MultiRegionResistanceLineCharts({
 		[]
 	);
 
-	const filteredData = useMemo(() => {
+	const filteredData = (() => {
 		if (
 			selectedMicrobes.length === 0 ||
 			selectedAntibiotics.length === 0 ||
@@ -74,9 +74,9 @@ export function MultiRegionResistanceLineCharts({
 			const microbeMatch = selectedMicrobes.includes(item.Mikrobe);
 			return antibioticMatch && regionMatch && microbeMatch;
 		});
-	}, [selectedAntibiotics, selectedRegions, selectedMicrobes, data]);
+	})();
 
-	const chartDataByRegion = useMemo(() => {
+	const chartDataByRegion = (() => {
 		const dataByRegion: Record<string, any[]> = {};
 		selectedRegions.forEach((region) => {
 			const regionData: Record<number, Record<string, number>> = {};
@@ -93,14 +93,14 @@ export function MultiRegionResistanceLineCharts({
 			);
 		});
 		return dataByRegion;
-	}, [filteredData, selectedRegions]);
+	})();
 
 	const generateHslColor = (index: number, total: number) => {
 		const hue = (index * 360) / total;
 		return `hsl(${hue}, 70%, 50%)`;
 	};
 
-	const chartConfig = useMemo(() => {
+	const chartConfig = (() => {
 		const keys = selectedMicrobes.flatMap((microbe) =>
 			selectedAntibiotics.map((antibiotic) => `${microbe}-${antibiotic}`)
 		);
@@ -114,7 +114,7 @@ export function MultiRegionResistanceLineCharts({
 			},
 			{} as Record<string, { label: string; color: string }>
 		);
-	}, [selectedMicrobes, selectedAntibiotics]) satisfies ChartConfig;
+	})() satisfies ChartConfig;
 
 	const resetSelections = useCallback(() => {
 		setSelectedAntibiotics([]);
