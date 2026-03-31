@@ -20,7 +20,7 @@ export async function getNormAtlasCSVData(): Promise<NormDataRecord[]> {
 		process.cwd(),
 		"public",
 		"data",
-		"Normdata_2003_2025.csv"
+		"Normdata_2003_2026.csv"
 	);
 
 	try {
