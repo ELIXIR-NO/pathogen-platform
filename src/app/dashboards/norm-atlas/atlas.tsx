@@ -1,13 +1,45 @@
 "use client";
 
 import { NormDataRecord } from "@/lib/data/csvUtils";
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState, } from "react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion";
+import React, {
+	forwardRef,
+	useEffect,
+	useImperativeHandle,
+	useRef,
+	useState,
+} from "react";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/components/ui/accordion";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent, } from "@/components/ui/chart";
-import { Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, XAxis, YAxis, } from "recharts";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
+import {
+	ChartConfig,
+	ChartContainer,
+	ChartTooltip,
+	ChartTooltipContent,
+} from "@/components/ui/chart";
+import {
+	Bar,
+	CartesianGrid,
+	Cell,
+	ComposedChart,
+	Legend,
+	Line,
+	XAxis,
+	YAxis,
+} from "recharts";
 import * as d3 from "d3";
 import { geoMercator, geoPath, GeoProjection } from "d3-geo";
 import { GeoJson } from "@/lib/data/geojsonLoader";
@@ -15,9 +47,19 @@ import * as turf from "@turf/turf";
 import { Checkbox } from "@/components/ui/checkbox";
 import { SimpleLinearRegression } from "ml-regression-simple-linear";
 import { Download, Info, Maximize2 } from "lucide-react";
-import { Tooltip, TooltipArrow, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/components/ui/tooltip";
+import {
+	Tooltip,
+	TooltipArrow,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { getDescription } from "@/hooks/getMicrobeDescription";
-import { ChartDialog, exportChartImage, ExportOptionsDialog, } from "@/lib/exportImageUtils";
+import {
+	ChartDialog,
+	exportChartImage,
+	ExportOptionsDialog,
+} from "@/lib/exportImageUtils";
 import DownloadCSV from "@/lib/data/dataExport";
 
 export default function Atlas({
