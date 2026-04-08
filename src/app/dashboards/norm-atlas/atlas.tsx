@@ -1,45 +1,13 @@
 "use client";
 
 import { NormDataRecord } from "@/lib/data/csvUtils";
-import React, {
-	forwardRef,
-	useEffect,
-	useImperativeHandle,
-	useRef,
-	useState,
-} from "react";
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/components/ui/accordion";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState, } from "react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
-import {
-	ChartConfig,
-	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent,
-} from "@/components/ui/chart";
-import {
-	Bar,
-	CartesianGrid,
-	Cell,
-	ComposedChart,
-	Legend,
-	Line,
-	XAxis,
-	YAxis,
-} from "recharts";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table";
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent, } from "@/components/ui/chart";
+import { Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, XAxis, YAxis, } from "recharts";
 import * as d3 from "d3";
 import { geoMercator, geoPath, GeoProjection } from "d3-geo";
 import { GeoJson } from "@/lib/data/geojsonLoader";
@@ -47,19 +15,9 @@ import * as turf from "@turf/turf";
 import { Checkbox } from "@/components/ui/checkbox";
 import { SimpleLinearRegression } from "ml-regression-simple-linear";
 import { Download, Info, Maximize2 } from "lucide-react";
-import {
-	Tooltip,
-	TooltipArrow,
-	TooltipContent,
-	TooltipProvider,
-	TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipArrow, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/components/ui/tooltip";
 import { getDescription } from "@/hooks/getMicrobeDescription";
-import {
-	ChartDialog,
-	exportChartImage,
-	ExportOptionsDialog,
-} from "@/lib/exportImageUtils";
+import { ChartDialog, exportChartImage, ExportOptionsDialog, } from "@/lib/exportImageUtils";
 import DownloadCSV from "@/lib/data/dataExport";
 
 export default function Atlas({
@@ -98,9 +56,14 @@ export default function Atlas({
 
 	useEffect(() => {
 		if (availableYears.length > 0) {
-			setSelectedYear(availableYears[availableYears.length - 1]);
+			if (
+				selectedYear === undefined ||
+				!availableYears.includes(selectedYear)
+			) {
+				setSelectedYear(availableYears[availableYears.length - 1]);
+			}
 		}
-	}, [availableYears]);
+	}, [availableYears, selectedYear]);
 
 	useEffect(() => {
 		if (filteredData.length === 0) return;
@@ -111,35 +74,32 @@ export default function Atlas({
 
 		if (microbes.length === 0) return;
 
-		const firstMicrobe = microbes[0];
+		const currentMicrobeValid =
+			selectedMicrobe && microbes.includes(selectedMicrobe);
+
+		const microbeToUse = currentMicrobeValid
+			? (selectedMicrobe as string)
+			: microbes[0];
 
 		const antibioticsForMicrobe = Array.from(
 			new Set(
 				filteredData
-					.filter((r) => r.Mikrobe === firstMicrobe)
+					.filter((r) => r.Mikrobe === microbeToUse)
 					.map((r) => r.Antibiotika)
 			)
 		).sort();
 
-		const firstAntibiotic = antibioticsForMicrobe[0] ?? "";
+		const currentAntibioticValid =
+			selectedAntibiotic && antibioticsForMicrobe.includes(selectedAntibiotic);
 
-		const years = Array.from(
-			new Set(
-				filteredData
-					.filter(
-						(r) =>
-							r.Mikrobe === firstMicrobe && r.Antibiotika === firstAntibiotic
-					)
-					.map((r) => parseInt(r.ProveAar))
-			)
-		).sort((a, b) => a - b);
+		if (!currentMicrobeValid) {
+			setSelectedMicrobe(microbeToUse);
+		}
 
-		const latestYear = years[years.length - 1] ?? 2022;
-
-		setSelectedMicrobe(firstMicrobe);
-		setSelectedAntibiotic(firstAntibiotic);
-		setSelectedYear(latestYear);
-	}, [filteredData]);
+		if (!currentAntibioticValid) {
+			setSelectedAntibiotic(antibioticsForMicrobe[0] ?? "");
+		}
+	}, [selectedDataSet]);
 
 	if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) return null;
 
