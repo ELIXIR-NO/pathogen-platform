@@ -708,103 +708,103 @@ function ResistanceChart({
 					)
 				: undefined;
 		return (
-		<div>
-			<div className="flex items-center space-x-2 pb-4">
-				<Checkbox
-					id="show-average-line-chart"
-					className="peer rounded-none border-2 border-gray-400"
-					checked={showAverageLineChart}
-					onCheckedChange={(checked) =>
-						handleAverageLineChartChange(checked === true)
-					}
-				/>
-				<label
-					htmlFor="show-average-line-chart"
-					className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-				>
-					Norges gjennomsnitt
-				</label>
-			</div>
-			<ChartContainer config={chartConfig} className={`${aspect} w-full`}>
-				<ComposedChart
-					data={chartData}
-					accessibilityLayer
-					margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
-					onMouseLeave={() => onHover(null, "")}
-				>
-					<CartesianGrid vertical={false} />
-					<XAxis
-						dataKey="region"
-						tickLine={false}
-						fontSize={12}
-						angle={-45}
-						textAnchor="end"
-						height={70}
-						xAxisId={1}
+			<div>
+				<div className="flex items-center space-x-2 pb-4">
+					<Checkbox
+						id="show-average-line-chart"
+						className="peer rounded-none border-2 border-gray-400"
+						checked={showAverageLineChart}
+						onCheckedChange={(checked) =>
+							handleAverageLineChartChange(checked === true)
+						}
 					/>
-					<XAxis
-						dataKey="region"
-						tickLine={false}
-						fontSize={12}
-						angle={-45}
-						textAnchor="end"
-						height={70}
-						xAxisId={2}
-						scale={"point"}
-						hide={true}
-					/>
-					<YAxis
-						tickLine={false}
-						fontSize={12}
-						domain={[0, maxResistance]}
-						unit="%"
-						label={{
-							value: "Prosent resistente isolater",
-							angle: -90,
-							position: "center",
-							dx: -20,
-						}}
-					/>
-					{hoveredRegion?.length !== undefined ? (
-						chartCall !== call ? (
-							<ChartTooltip
-								key={activeIndex}
-								content={<ChartTooltipContent />}
-								defaultIndex={activeIndex}
-							/>
-						) : (
-							<ChartTooltip content={<ChartTooltipContent />} />
-						)
-					) : (
-						<ChartTooltip active={false} />
-					)}
-					<Bar
-						xAxisId={1}
-						dataKey="resistance"
-						radius={4}
-						onMouseEnter={(data) => onHover([data.payload.region], call)}
+					<label
+						htmlFor="show-average-line-chart"
+						className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 					>
-						{chartData.map((entry, index) => (
-							<Cell key={`cell-${index}`} fill={entry.fill} />
-						))}
-					</Bar>
-
-					{showAverageLineChart && (
-						<Line
-							xAxisId={2}
-							key="norgeResistance"
-							type="monotone"
-							dataKey="norgeResistance"
-							stroke="var(--color-norgeResistance)"
-							strokeWidth={2}
-							dot={false}
-							activeDot={false}
-							connectNulls
+						Norges gjennomsnitt
+					</label>
+				</div>
+				<ChartContainer config={chartConfig} className={`${aspect} w-full`}>
+					<ComposedChart
+						data={chartData}
+						accessibilityLayer
+						margin={{ top: 5, right: 5, bottom: 5, left: 0 }}
+						onMouseLeave={() => onHover(null, "")}
+					>
+						<CartesianGrid vertical={false} />
+						<XAxis
+							dataKey="region"
+							tickLine={false}
+							fontSize={12}
+							angle={-45}
+							textAnchor="end"
+							height={70}
+							xAxisId={1}
 						/>
-					)}
-				</ComposedChart>
-			</ChartContainer>
-		</div>
+						<XAxis
+							dataKey="region"
+							tickLine={false}
+							fontSize={12}
+							angle={-45}
+							textAnchor="end"
+							height={70}
+							xAxisId={2}
+							scale={"point"}
+							hide={true}
+						/>
+						<YAxis
+							tickLine={false}
+							fontSize={12}
+							domain={[0, maxResistance]}
+							unit="%"
+							label={{
+								value: "Prosent resistente isolater",
+								angle: -90,
+								position: "center",
+								dx: -20,
+							}}
+						/>
+						{hoveredRegion?.length !== undefined ? (
+							chartCall !== call ? (
+								<ChartTooltip
+									key={activeIndex}
+									content={<ChartTooltipContent />}
+									defaultIndex={activeIndex}
+								/>
+							) : (
+								<ChartTooltip content={<ChartTooltipContent />} />
+							)
+						) : (
+							<ChartTooltip active={false} />
+						)}
+						<Bar
+							xAxisId={1}
+							dataKey="resistance"
+							radius={4}
+							onMouseEnter={(data) => onHover([data.payload.region], call)}
+						>
+							{chartData.map((entry, index) => (
+								<Cell key={`cell-${index}`} fill={entry.fill} />
+							))}
+						</Bar>
+
+						{showAverageLineChart && (
+							<Line
+								xAxisId={2}
+								key="norgeResistance"
+								type="monotone"
+								dataKey="norgeResistance"
+								stroke="var(--color-norgeResistance)"
+								strokeWidth={2}
+								dot={false}
+								activeDot={false}
+								connectNulls
+							/>
+						)}
+					</ComposedChart>
+				</ChartContainer>
+			</div>
 		);
 	};
 
