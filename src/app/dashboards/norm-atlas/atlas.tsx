@@ -5,6 +5,7 @@ import React, {
 	forwardRef,
 	useEffect,
 	useImperativeHandle,
+	useMemo,
 	useRef,
 	useState,
 } from "react";
@@ -83,7 +84,7 @@ export default function Atlas({
 		(record) => record.Opplegg === selectedDataSet
 	);
 
-	const availableYears = (() => {
+	const availableYears = useMemo(() => {
 		const years = new Set(
 			filteredData
 				.filter(
@@ -94,7 +95,7 @@ export default function Atlas({
 				.map((record) => parseInt(record.ProveAar))
 		);
 		return Array.from(years).sort((a, b) => a - b);
-	})();
+	}, [filteredData, selectedMicrobe, selectedAntibiotic]);
 
 	useEffect(() => {
 		if (availableYears.length > 0) {
@@ -141,6 +142,7 @@ export default function Atlas({
 		if (!currentAntibioticValid) {
 			setSelectedAntibiotic(antibioticsForMicrobe[0] ?? "");
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedDataSet]);
 
 	if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) return null;

@@ -2,11 +2,11 @@
 
 import {
 	Tabs,
-	TabsTrigger,
-	TabsList,
 	TabsContent,
+	TabsList,
+	TabsTrigger,
 } from "@/components/ui/tabs-modified";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import RegionsPanel from "@/components/regions-panel";
 
@@ -17,17 +17,10 @@ export default function TabsNorm({
 }) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const [activeTab, setActiveTab] = useState("atlas");
-
-	useEffect(() => {
-		const tab = searchParams.get("tab");
-		console.log("tab:", tab);
-
-		if (tab) setActiveTab(tab);
-	}, [searchParams]);
+	const tabFromUrl = searchParams.get("tab");
+	const activeTab = tabFromUrl || "atlas";
 
 	const handleTabChange = (value: string) => {
-		setActiveTab(value);
 		router.push(`?tab=${value}`, { scroll: false });
 	};
 
