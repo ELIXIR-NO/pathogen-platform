@@ -680,7 +680,7 @@ function ResistanceChart({
 		},
 		norgeResistance: {
 			label: "Gjennomsnitt Norge",
-			color: "hsl(var(--chart-7))",
+			color: "var(--chart-7)",
 		},
 	} satisfies ChartConfig;
 
@@ -696,7 +696,18 @@ function ResistanceChart({
 		}
 	};
 
-	const renderChart = (aspect: string) => (
+	const renderChart = (aspect: string) => {
+		const activeIndex =
+			hoveredRegion?.length !== undefined && chartCall !== call
+				? chartData.findIndex(
+						(item) =>
+							item.region ===
+							(Array.isArray(hoveredRegion)
+								? hoveredRegion[0]
+								: (hoveredRegion ?? ""))
+					)
+				: undefined;
+		return (
 		<div>
 			<div className="flex items-center space-x-2 pb-4">
 				<Checkbox
@@ -757,14 +768,9 @@ function ResistanceChart({
 					{hoveredRegion?.length !== undefined ? (
 						chartCall !== call ? (
 							<ChartTooltip
+								key={activeIndex}
 								content={<ChartTooltipContent />}
-								defaultIndex={chartData.findIndex(
-									(item) =>
-										item.region ===
-										(Array.isArray(hoveredRegion)
-											? hoveredRegion[0]
-											: (hoveredRegion ?? ""))
-								)}
+								defaultIndex={activeIndex}
 							/>
 						) : (
 							<ChartTooltip content={<ChartTooltipContent />} />
@@ -776,7 +782,7 @@ function ResistanceChart({
 						xAxisId={1}
 						dataKey="resistance"
 						radius={4}
-						onMouseEnter={(data) => onHover([data.region], call)}
+						onMouseEnter={(data) => onHover([data.payload.region], call)}
 					>
 						{chartData.map((entry, index) => (
 							<Cell key={`cell-${index}`} fill={entry.fill} />
@@ -799,7 +805,8 @@ function ResistanceChart({
 				</ComposedChart>
 			</ChartContainer>
 		</div>
-	);
+		);
+	};
 
 	return (
 		<div className="bg-card rounded-lg border p-4">
@@ -975,13 +982,13 @@ function ResistanceTrendChart({
 	})();
 
 	const regionColors: { [key: string]: string } = {
-		"Oslo/Akershus": "hsl(var(--chart-1))",
-		Nord: "hsl(var(--chart-2))",
-		Midt: "hsl(var(--chart-3))",
-		Vest: "hsl(var(--chart-4))",
-		Sør: "hsl(var(--chart-5))",
-		Øst: "hsl(var(--chart-6))",
-		Norge: "hsl(var(--chart-7))",
+		"Oslo/Akershus": "var(--chart-1)",
+		Nord: "var(--chart-2)",
+		Midt: "var(--chart-3)",
+		Vest: "var(--chart-4)",
+		Sør: "var(--chart-5)",
+		Øst: "var(--chart-6)",
+		Norge: "var(--chart-7)",
 	};
 
 	const chartConfig = Object.fromEntries(
