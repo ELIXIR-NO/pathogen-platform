@@ -5,6 +5,7 @@ import React, {
 	forwardRef,
 	useEffect,
 	useImperativeHandle,
+	useMemo,
 	useRef,
 	useState,
 } from "react";
@@ -83,7 +84,7 @@ export default function Atlas({
 		(record) => record.Opplegg === selectedDataSet
 	);
 
-	const availableYears = (() => {
+	const availableYears = useMemo(() => {
 		const years = new Set(
 			filteredData
 				.filter(
@@ -94,13 +95,18 @@ export default function Atlas({
 				.map((record) => parseInt(record.ProveAar))
 		);
 		return Array.from(years).sort((a, b) => a - b);
-	})();
+	}, [filteredData, selectedMicrobe, selectedAntibiotic]);
 
 	useEffect(() => {
 		if (availableYears.length > 0) {
-			setSelectedYear(availableYears[availableYears.length - 1]);
+			if (
+				selectedYear === undefined ||
+				!availableYears.includes(selectedYear)
+			) {
+				setSelectedYear(availableYears[availableYears.length - 1]);
+			}
 		}
-	}, [availableYears]);
+	}, [availableYears, selectedYear]);
 
 	useEffect(() => {
 		if (filteredData.length === 0) return;
@@ -111,35 +117,33 @@ export default function Atlas({
 
 		if (microbes.length === 0) return;
 
-		const firstMicrobe = microbes[0];
+		const currentMicrobeValid =
+			selectedMicrobe && microbes.includes(selectedMicrobe);
+
+		const microbeToUse = currentMicrobeValid
+			? (selectedMicrobe as string)
+			: microbes[0];
 
 		const antibioticsForMicrobe = Array.from(
 			new Set(
 				filteredData
-					.filter((r) => r.Mikrobe === firstMicrobe)
+					.filter((r) => r.Mikrobe === microbeToUse)
 					.map((r) => r.Antibiotika)
 			)
 		).sort();
 
-		const firstAntibiotic = antibioticsForMicrobe[0] ?? "";
+		const currentAntibioticValid =
+			selectedAntibiotic && antibioticsForMicrobe.includes(selectedAntibiotic);
 
-		const years = Array.from(
-			new Set(
-				filteredData
-					.filter(
-						(r) =>
-							r.Mikrobe === firstMicrobe && r.Antibiotika === firstAntibiotic
-					)
-					.map((r) => parseInt(r.ProveAar))
-			)
-		).sort((a, b) => a - b);
+		if (!currentMicrobeValid) {
+			setSelectedMicrobe(microbeToUse);
+		}
 
-		const latestYear = years[years.length - 1] ?? 2022;
-
-		setSelectedMicrobe(firstMicrobe);
-		setSelectedAntibiotic(firstAntibiotic);
-		setSelectedYear(latestYear);
-	}, [filteredData]);
+		if (!currentAntibioticValid) {
+			setSelectedAntibiotic(antibioticsForMicrobe[0] ?? "");
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedDataSet]);
 
 	if (!selectedMicrobe || !selectedAntibiotic || !selectedYear) return null;
 

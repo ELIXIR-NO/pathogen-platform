@@ -2,12 +2,12 @@
 
 import {
 	ColumnDef,
-	SortingState,
 	ColumnFiltersState,
 	flexRender,
 	getCoreRowModel,
-	getSortedRowModel,
 	getFilteredRowModel,
+	getSortedRowModel,
+	SortingState,
 	useReactTable,
 } from "@tanstack/react-table";
 import {
@@ -33,6 +33,7 @@ export function DataTable<TData, TValue>({
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
+	// eslint-disable-next-line react-hooks/incompatible-library
 	const table = useReactTable({
 		data,
 		columns,
