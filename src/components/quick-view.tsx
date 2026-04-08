@@ -97,7 +97,7 @@ export default async function QuickView({
 												</div>
 											)}
 										</div>
-										<p className="flex-grow text-sm">
+										<p className="grow text-sm">
 											{contractSummary(item.summary)}
 										</p>
 									</CardContent>

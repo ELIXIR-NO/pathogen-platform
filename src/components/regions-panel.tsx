@@ -59,10 +59,10 @@ export default function RegionsPanel() {
 							className="flex flex-row items-center justify-start space-x-6"
 						>
 							<div className="flex flex-col">
-								<p className="flex-grow text-justify text-lg font-semibold">
+								<p className="grow text-justify text-lg font-semibold">
 									{region.region}
 								</p>
-								<p className="flex-grow text-justify text-sm">
+								<p className="grow text-justify text-sm">
 									{region.description}
 								</p>
 							</div>

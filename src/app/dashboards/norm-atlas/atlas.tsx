@@ -1598,7 +1598,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 
 				{hoveredRegion && tooltip.visible && (
 					<div
-						className={`tooltip absolute z-50 rounded bg-black bg-opacity-70 p-2 text-sm text-white ${
+						className={`tooltip absolute z-50 rounded bg-black/70 p-2 text-sm text-white ${
 							hoveredRegion ? "visible" : ""
 						}`}
 						style={{
