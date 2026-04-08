@@ -42,7 +42,7 @@ export const regions: Region[] = [
 export default function RegionsPanel() {
 	return (
 		<Sheet>
-			<SheetTrigger className="fixed right-[-56px] top-80 z-10 flex h-[45px] w-[140px] -rotate-90 justify-center rounded-t-2xl bg-primary px-4 py-1 text-lg font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:right-[-50px] md:h-[80px] md:hover:right-[-30px]">
+			<SheetTrigger className="bg-primary text-primary-foreground fixed top-80 right-[-56px] z-10 flex h-[45px] w-[140px] -rotate-90 justify-center rounded-t-2xl px-4 py-1 text-lg font-semibold shadow-md transition-all duration-200 hover:right-[-50px] md:h-[80px] md:hover:right-[-30px]">
 				Regionene
 			</SheetTrigger>
 			<SheetContent>
@@ -59,10 +59,10 @@ export default function RegionsPanel() {
 							className="flex flex-row items-center justify-start space-x-6"
 						>
 							<div className="flex flex-col">
-								<p className="flex-grow text-justify text-lg font-semibold">
+								<p className="grow text-justify text-lg font-semibold">
 									{region.region}
 								</p>
-								<p className="flex-grow text-justify text-sm">
+								<p className="grow text-justify text-sm">
 									{region.description}
 								</p>
 							</div>

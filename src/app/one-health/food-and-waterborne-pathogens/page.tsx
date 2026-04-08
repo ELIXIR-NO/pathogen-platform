@@ -48,7 +48,7 @@ const resources: CardGridData[] = [
 export default function FoodWaterbornePathogensPage() {
 	return (
 		<>
-			<div className="fixed right-12 top-32 z-10">
+			<div className="fixed top-32 right-12 z-10">
 				<div className="flex flex-col space-y-2">
 					<ContributorsPanel contributors={["author1", "author2", "author3"]} />
 				</div>

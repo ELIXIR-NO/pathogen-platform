@@ -20,35 +20,35 @@ export default function About() {
 						<TabsTrigger
 							value="overview"
 							variant="underline"
-							className="text-lg font-semibold text-gray-500 hover:text-foreground"
+							className="hover:text-foreground text-lg font-semibold text-gray-500"
 						>
 							Overview
 						</TabsTrigger>
 						<TabsTrigger
 							value="people"
 							variant="underline"
-							className="text-lg font-semibold text-gray-500 hover:text-foreground"
+							className="hover:text-foreground text-lg font-semibold text-gray-500"
 						>
 							People
 						</TabsTrigger>
 						<TabsTrigger
 							value="partners"
 							variant="underline"
-							className="text-lg font-semibold text-gray-500 hover:text-foreground"
+							className="hover:text-foreground text-lg font-semibold text-gray-500"
 						>
 							Partners
 						</TabsTrigger>
 						<TabsTrigger
 							value="projects"
 							variant="underline"
-							className="text-lg font-semibold text-gray-500 hover:text-foreground"
+							className="hover:text-foreground text-lg font-semibold text-gray-500"
 						>
 							Projects and organisations
 						</TabsTrigger>
 						<TabsTrigger
 							value="contact-us"
 							variant="underline"
-							className="text-lg font-semibold text-gray-500 hover:text-foreground"
+							className="hover:text-foreground text-lg font-semibold text-gray-500"
 						>
 							Contact Us
 						</TabsTrigger>

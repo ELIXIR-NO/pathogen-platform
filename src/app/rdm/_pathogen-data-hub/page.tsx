@@ -3,7 +3,7 @@ import ContributorsPanel from "@/components/contributors-panel";
 export default function PathogenDataHubPage() {
 	return (
 		<>
-			<div className="fixed right-12 top-32 z-10">
+			<div className="fixed top-32 right-12 z-10">
 				<div className="flex flex-col space-y-2">
 					<ContributorsPanel contributors={["erik"]} />
 				</div>

@@ -42,7 +42,7 @@ export default function SearchPanel({
 
 	return (
 		<Sheet>
-			<SheetTrigger className="fixed right-[-56px] top-32 z-10 flex h-[45px] w-[140px] -rotate-90 justify-center rounded-t-2xl bg-primary px-4 py-1 text-lg font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:right-[-50px] md:h-[80px] md:hover:right-[-30px]">
+			<SheetTrigger className="bg-primary text-primary-foreground fixed top-32 right-[-56px] z-10 flex h-[45px] w-[140px] -rotate-90 justify-center rounded-t-2xl px-4 py-1 text-lg font-semibold shadow-md transition-all duration-200 hover:right-[-50px] md:h-[80px] md:hover:right-[-30px]">
 				Search
 			</SheetTrigger>
 			<SheetContent>
@@ -61,7 +61,7 @@ export default function SearchPanel({
 							{uniqueSearchResult.map((item) => (
 								<div
 									key={item.pageId}
-									className="flex cursor-pointer flex-row items-center space-x-2 p-1 hover:rounded-md hover:bg-accent"
+									className="hover:bg-accent flex cursor-pointer flex-row items-center space-x-2 p-1 hover:rounded-md"
 									onClick={() => {
 										router.push(`${item.relativeLink}/${item.slug}`);
 									}}

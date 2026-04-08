@@ -67,7 +67,7 @@ export default function ContributorsPanel({
 }) {
 	return (
 		<Sheet>
-			<SheetTrigger className="fixed right-[-56px] top-80 z-10 flex h-[45px] w-[140px] -rotate-90 justify-center rounded-t-2xl bg-primary px-4 py-1 text-lg font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:right-[-50px] md:h-[80px] md:hover:right-[-30px]">
+			<SheetTrigger className="bg-primary text-primary-foreground fixed top-80 right-[-56px] z-10 flex h-[45px] w-[140px] -rotate-90 justify-center rounded-t-2xl px-4 py-1 text-lg font-semibold shadow-md transition-all duration-200 hover:right-[-50px] md:h-[80px] md:hover:right-[-30px]">
 				Contributors
 			</SheetTrigger>
 			<SheetContent>
@@ -88,7 +88,7 @@ export default function ContributorsPanel({
 							<div className="flex flex-col">
 								<p className="font-bold">{getNameByAlias(contributor)}</p>
 								<a
-									className="italic text-primary hover:underline"
+									className="text-primary italic hover:underline"
 									href={`mailto:${getEmailByAlias(contributor)}`}
 								>
 									{getEmailByAlias(contributor)}

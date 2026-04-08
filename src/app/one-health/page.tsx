@@ -86,7 +86,7 @@ export default function OneHealthPage() {
 					Figure by the World Health Organization depicting the One Health
 					concept
 					<a
-						className="ml-1 text-primary hover:underline"
+						className="text-primary ml-1 hover:underline"
 						href="https://www.who.int/news/item/01-12-2021-tripartite-and-unep-support-ohhlep-s-definition-of-one-health"
 					>
 						(www.who.int)
@@ -206,7 +206,7 @@ function ReferenceHoverCard({
 }) {
 	return (
 		<HoverCard>
-			<HoverCardTrigger className="cursor-pointer text-primary hover:underline">
+			<HoverCardTrigger className="text-primary cursor-pointer hover:underline">
 				{refNumber}
 			</HoverCardTrigger>
 			<HoverCardContent className="text-small w-[500px] text-justify">

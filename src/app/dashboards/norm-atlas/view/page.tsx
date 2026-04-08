@@ -8,7 +8,7 @@ export default async function DataLoader() {
 	const geoData = await loadGeoJSON();
 
 	return (
-		<div className="-mx-[calc((100vw-75vw)/2)] mt-10 w-full w-screen pl-2 pr-16">
+		<div className="-mx-[calc((100vw-75vw)/2)] mt-10 w-full w-screen pr-16 pl-2">
 			<RegionsPanel />
 			<Atlas data={data} geoData={geoData} />
 		</div>

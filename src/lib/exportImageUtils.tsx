@@ -31,7 +31,7 @@ export function ChartDialog({
 	return (
 		<>
 			<Dialog open={open} onOpenChange={onOpenChange}>
-				<DialogContent className="max-w-screen h-screen">
+				<DialogContent className="h-screen max-w-screen">
 					<DialogHeader>
 						<DialogTitle>Grafvisualisering</DialogTitle>
 					</DialogHeader>

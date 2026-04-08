@@ -242,7 +242,7 @@ function ReferenceHoverCard({
 }) {
 	return (
 		<HoverCard>
-			<HoverCardTrigger className="cursor-pointer text-primary hover:underline">
+			<HoverCardTrigger className="text-primary cursor-pointer hover:underline">
 				{refNumber}
 			</HoverCardTrigger>
 			<HoverCardContent className="text-small w-[500px] text-justify">

@@ -97,7 +97,7 @@ export default function PathogenPortalContributors() {
 						<CardTitle>{contributor.name}</CardTitle>
 						<CardDescription>{contributor.position}</CardDescription>
 					</CardHeader>
-					<CardContent className="flex flex-grow flex-col items-center justify-between">
+					<CardContent className="flex grow flex-col items-center justify-between">
 						<Image
 							src={contributor.image}
 							alt={contributor.name}
@@ -105,7 +105,7 @@ export default function PathogenPortalContributors() {
 							height={200}
 							className="mb-4 rounded-full object-cover"
 						/>
-						<p className="flex-grow text-justify text-sm font-semibold">
+						<p className="grow text-justify text-sm font-semibold">
 							{contributor.description}
 						</p>
 					</CardContent>
