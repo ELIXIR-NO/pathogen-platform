@@ -32,7 +32,7 @@ export default async function RootLayout({
 	const searchIndex = createSearchIndex(notionPages);
 
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body
 				className={cn(
 					"bg-background flex min-h-screen flex-col font-sans antialiased",
