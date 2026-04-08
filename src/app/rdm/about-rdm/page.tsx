@@ -375,10 +375,10 @@ function ReferenceHoverCard({
 }) {
 	return (
 		<HoverCard>
-			<HoverCardTrigger className="cursor-pointer text-primary hover:underline">
+			<HoverCardTrigger className="text-primary cursor-pointer hover:underline">
 				{refNumber}
 			</HoverCardTrigger>
-			<HoverCardContent className="text-small w-[fit] text-wrap text-left">
+			<HoverCardContent className="text-small w-[fit] text-left text-wrap">
 				{paper};
 				<a href={href} className="text-primary hover:underline">
 					{new URL(href).hostname}

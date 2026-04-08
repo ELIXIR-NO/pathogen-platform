@@ -306,7 +306,7 @@ export function MicrobeSelector({
 					.sort()
 					.map(([microbe, antibiotics]) => (
 						<AccordionItem key={microbe} value={microbe}>
-							<AccordionTrigger className="inline-flex items-center justify-start gap-2 rounded-md px-2 text-sm hover:bg-accent/50 hover:no-underline">
+							<AccordionTrigger className="hover:bg-accent/50 inline-flex items-center justify-start gap-2 rounded-md px-2 text-sm hover:no-underline">
 								<span>{microbe}</span>
 
 								<TooltipProvider>
@@ -333,7 +333,7 @@ export function MicrobeSelector({
 									{antibiotics.map((antibiotic) => (
 										<button
 											key={`${microbe}-${antibiotic}`}
-											className={`rounded-md px-4 py-1 text-left text-sm transition-colors hover:bg-accent ${
+											className={`hover:bg-accent rounded-md px-4 py-1 text-left text-sm transition-colors ${
 												selectedMicrobe === microbe &&
 												selectedAntibiotic === antibiotic
 													? "bg-accent"
@@ -379,7 +379,7 @@ function RegionSelector({
 				{regions.map((region) => (
 					<button
 						key={region}
-						className={`rounded-md px-4 py-2 text-left text-sm transition-colors hover:bg-accent ${
+						className={`hover:bg-accent rounded-md px-4 py-2 text-left text-sm transition-colors ${
 							selectedRegions.includes(region) ? "bg-accent" : ""
 						}`}
 						onClick={() => onRegionChange(region)}
@@ -433,7 +433,7 @@ function YearSelector({
 	onYearChange,
 }: YearSelectorProps) {
 	return (
-		<div className="rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
+		<div className="bg-card text-card-foreground rounded-lg border p-4 shadow-sm">
 			<ScrollArea className="w-full whitespace-nowrap">
 				<div className="flex flex-row justify-center space-x-2 pb-2">
 					{availableYears.map((year) => (
@@ -526,7 +526,7 @@ function TableView({
 	})();
 
 	return (
-		<div className="rounded-lg border bg-card p-4 text-card-foreground shadow-sm">
+		<div className="bg-card text-card-foreground rounded-lg border p-4 shadow-sm">
 			<Table>
 				<TableHeader>
 					<TableRow>
@@ -709,7 +709,7 @@ function ResistanceChart({
 				/>
 				<label
 					htmlFor="show-average-line-chart"
-					className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+					className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 				>
 					Norges gjennomsnitt
 				</label>
@@ -802,7 +802,7 @@ function ResistanceChart({
 	);
 
 	return (
-		<div className="rounded-lg border bg-card p-4">
+		<div className="bg-card rounded-lg border p-4">
 			<div className="mb-2 flex justify-end">
 				<Button onClick={() => setExportOptionsOpen(true)} variant="ghost">
 					<Download />
@@ -1030,7 +1030,7 @@ function ResistanceTrendChart({
 					/>
 					<label
 						htmlFor="show-line-chart"
-						className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+						className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 					>
 						Antall prøveisolater
 					</label>
@@ -1047,7 +1047,7 @@ function ResistanceTrendChart({
 					/>
 					<label
 						htmlFor="show-regression-line"
-						className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+						className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 					>
 						Trend
 					</label>
@@ -1138,7 +1138,7 @@ function ResistanceTrendChart({
 	);
 
 	return (
-		<div className="rounded-lg border bg-card p-4">
+		<div className="bg-card rounded-lg border p-4">
 			<div className="mb-2 flex justify-end">
 				<Button onClick={() => setExportOptionsOpen(true)} variant="ghost">
 					<Download />
@@ -1563,7 +1563,7 @@ export const MyChart = forwardRef<SVGSVGElement, MyChartProps>(
 		]);
 
 		return (
-			<div className="chart-container rounded-lg border bg-card pb-4 text-card-foreground shadow-sm">
+			<div className="chart-container bg-card text-card-foreground rounded-lg border pb-4 shadow-sm">
 				<div className="mb-2">
 					<div className="flex items-center justify-between rounded-t-lg bg-gray-300 px-4 py-3 font-bold text-gray-800 shadow-md">
 						<span>

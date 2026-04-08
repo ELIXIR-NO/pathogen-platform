@@ -138,7 +138,7 @@ export default function Partners() {
 								alt={`${partner.title} logo`}
 							/>
 						</div>
-						<p className="whitespace-pre-line text-justify">
+						<p className="text-justify whitespace-pre-line">
 							{partner.description.map((part, i) => (
 								<React.Fragment key={i}>{part}</React.Fragment>
 							))}

@@ -27,7 +27,7 @@ export function UiTLogoModeToggle() {
 			alt="Logo of UiT The Arctic University of Norway"
 			width={300}
 			height={300}
-			className={cn("hover:ring-2 hover:ring-primary")}
+			className={cn("hover:ring-primary hover:ring-2")}
 			priority={true}
 		/>
 	);

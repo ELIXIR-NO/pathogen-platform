@@ -34,7 +34,7 @@ const NavItems: NavItem[] = [
 
 export function NavBar() {
 	return (
-		<nav className="fixed left-0 right-0 top-0 z-10 h-fit py-2 backdrop-blur-sm">
+		<nav className="fixed top-0 right-0 left-0 z-10 h-fit py-2 backdrop-blur-sm">
 			<div className="container flex flex-row items-center justify-between pt-2">
 				<ul className="flex flex-row items-center justify-center">
 					<li className="pr-4">
@@ -45,7 +45,7 @@ export function NavBar() {
 					<li>
 						<NavigationMenu>
 							<NavigationMenuItem>
-								<NavigationMenuTrigger className="text-lg font-normal decoration-primary underline-offset-4 hover:underline">
+								<NavigationMenuTrigger className="decoration-primary text-lg font-normal underline-offset-4 hover:underline">
 									Topics
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
@@ -63,7 +63,7 @@ export function NavBar() {
 								</NavigationMenuContent>
 							</NavigationMenuItem>
 							<NavigationMenuItem>
-								<NavigationMenuTrigger className="text-lg font-normal decoration-primary underline-offset-4 hover:underline">
+								<NavigationMenuTrigger className="decoration-primary text-lg font-normal underline-offset-4 hover:underline">
 									Pandemic Preparedness
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
@@ -81,7 +81,7 @@ export function NavBar() {
 								</NavigationMenuContent>
 							</NavigationMenuItem>
 							<NavigationMenuItem>
-								<NavigationMenuTrigger className="text-lg font-normal decoration-primary underline-offset-4 hover:underline">
+								<NavigationMenuTrigger className="decoration-primary text-lg font-normal underline-offset-4 hover:underline">
 									RDM
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
@@ -99,7 +99,7 @@ export function NavBar() {
 								</NavigationMenuContent>
 							</NavigationMenuItem>
 							<NavigationMenuItem>
-								<NavigationMenuTrigger className="text-lg font-normal decoration-primary underline-offset-4 hover:underline">
+								<NavigationMenuTrigger className="decoration-primary text-lg font-normal underline-offset-4 hover:underline">
 									One Health
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
@@ -144,13 +144,13 @@ const ListItem = React.forwardRef<
 				<a
 					ref={ref}
 					className={cn(
-						"block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+						"hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none",
 						className
 					)}
 					{...props}
 				>
-					<div className="text-sm font-medium leading-none">{title}</div>
-					<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+					<div className="text-sm leading-none font-medium">{title}</div>
+					<p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
 						{children}
 					</p>
 				</a>
@@ -166,8 +166,8 @@ const NavBarItem: FC<NavItem> = ({ pageUrl, pageName }) => {
 		<li>
 			<Link
 				className={cn(
-					"rounded-md bg-background px-3 py-2 text-lg hover:underline hover:decoration-primary hover:underline-offset-4",
-					pathName === `${pageUrl}` && "font-semibold text-primary"
+					"bg-background hover:decoration-primary rounded-md px-3 py-2 text-lg hover:underline hover:underline-offset-4",
+					pathName === `${pageUrl}` && "text-primary font-semibold"
 				)}
 				href={pageUrl}
 			>

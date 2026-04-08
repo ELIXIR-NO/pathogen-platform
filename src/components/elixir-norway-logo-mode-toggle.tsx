@@ -27,7 +27,7 @@ export function ElixirNorwayLogoModeToggle() {
 			alt="Logo of ELIXIR Norway"
 			width={150}
 			height={50}
-			className={cn("hover:ring-2 hover:ring-primary")}
+			className={cn("hover:ring-primary hover:ring-2")}
 			priority={true}
 		/>
 	);

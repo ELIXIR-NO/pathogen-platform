@@ -36,20 +36,20 @@ export default function TabsNorm({
 					<TabsTrigger
 						value="atlas"
 						variant="underline"
-						className="text-lg font-semibold text-gray-500 hover:text-foreground"
+						className="hover:text-foreground text-lg font-semibold text-gray-500"
 					>
 						Atlas
 					</TabsTrigger>
 					<TabsTrigger
 						value="trends"
 						variant="underline"
-						className="text-lg font-semibold text-gray-500 hover:text-foreground"
+						className="hover:text-foreground text-lg font-semibold text-gray-500"
 					>
 						Trends
 					</TabsTrigger>
 				</TabsList>
 				<TabsContent value="atlas">
-					<div className="-mx-[calc((100vw-75vw)/2)] mt-10 w-screen pl-2 pr-16">
+					<div className="-mx-[calc((100vw-75vw)/2)] mt-10 w-screen pr-16 pl-2">
 						{children[0]}
 					</div>
 				</TabsContent>

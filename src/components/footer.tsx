@@ -8,7 +8,7 @@ import { FHILogoModeToggle } from "./fhi-logo-mode-toggle";
 
 export default function Footer() {
 	return (
-		<footer className="w-full bg-background text-foreground">
+		<footer className="bg-background text-foreground w-full">
 			<Separator />
 			<div className="container mx-auto w-3/4 px-4 py-8">
 				<div className="flex flex-wrap items-center justify-center gap-6">
@@ -57,7 +57,7 @@ export default function Footer() {
 					</ul>
 				</div>
 
-				<div className="mt-8 flex flex-row items-center justify-center space-x-2 border-t border-gray-200 pt-4 text-center text-xs text-muted-foreground">
+				<div className="text-muted-foreground mt-8 flex flex-row items-center justify-center space-x-2 border-t border-gray-200 pt-4 text-center text-xs">
 					<CreativeCommons />
 					<p>
 						{new Date().getFullYear()} ELIXIR Norway. Website content is
