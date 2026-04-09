@@ -19,7 +19,7 @@ export function LogoModeToggle() {
 				alt="Logo of pathogens portal norway"
 				width={250}
 				height={65.55}
-				className={cn("hover:ring-primary hover:ring-2 hidden dark:block")}
+				className={cn("hover:ring-primary hidden hover:ring-2 dark:block")}
 				priority={true}
 			/>
 		</>

@@ -19,7 +19,7 @@ export function EuCoFoundedLogoModeToggle() {
 				alt="EU co-funded Logo"
 				width={160}
 				height={50}
-				className={cn("hover:ring-primary hover:ring-2 hidden dark:block")}
+				className={cn("hover:ring-primary hidden hover:ring-2 dark:block")}
 				priority={true}
 			/>
 		</>

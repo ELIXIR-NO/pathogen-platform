@@ -19,7 +19,7 @@ export function FHILogoModeToggle() {
 				alt="Logo of Veterinærinstituttet"
 				width={200}
 				height={200}
-				className={cn("hover:ring-primary hover:ring-2 hidden dark:block")}
+				className={cn("hover:ring-primary hidden hover:ring-2 dark:block")}
 				priority={true}
 			/>
 		</>
