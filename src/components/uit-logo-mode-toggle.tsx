@@ -1,34 +1,27 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import React from "react";
 
 export function UiTLogoModeToggle() {
-	const { resolvedTheme } = useTheme();
-	let src;
-
-	switch (resolvedTheme) {
-		case "light":
-			src = "/uit-logo-black.png";
-			break;
-		case "dark":
-			src = "/uit-logo-white.png";
-			break;
-		default:
-			src = "/uit-logo-black.png";
-			break;
-	}
-
 	return (
-		<Image
-			src={src}
-			alt="Logo of UiT The Arctic University of Norway"
-			width={300}
-			height={300}
-			className={cn("hover:ring-primary hover:ring-2")}
-			priority={true}
-		/>
+		<>
+			<Image
+				src="/uit-logo-black.png"
+				alt="Logo of UiT The Arctic University of Norway"
+				width={300}
+				height={300}
+				className={cn("hover:ring-primary hover:ring-2 dark:hidden")}
+				priority={true}
+			/>
+			<Image
+				src="/uit-logo-white.png"
+				alt="Logo of UiT The Arctic University of Norway"
+				width={300}
+				height={300}
+				className={cn("hover:ring-primary hover:ring-2 hidden dark:block")}
+				priority={true}
+			/>
+		</>
 	);
 }

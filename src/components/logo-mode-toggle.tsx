@@ -1,34 +1,27 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import React from "react";
 
 export function LogoModeToggle() {
-	const { resolvedTheme } = useTheme();
-	let src;
-
-	switch (resolvedTheme) {
-		case "light":
-			src = "/pathogens_portal_norway_logo_light.png";
-			break;
-		case "dark":
-			src = "/pathogens_portal_norway_logo_dark.png";
-			break;
-		default:
-			src = "/pathogens_portal_norway_logo_light.png";
-			break;
-	}
-
 	return (
-		<Image
-			src={src}
-			alt="Logo of pathogens portal norway"
-			width={250}
-			height={65.55}
-			className={cn("hover:ring-primary hover:ring-2")}
-			priority={true}
-		/>
+		<>
+			<Image
+				src="/pathogens_portal_norway_logo_light.png"
+				alt="Logo of pathogens portal norway"
+				width={250}
+				height={65.55}
+				className={cn("hover:ring-primary hover:ring-2 dark:hidden")}
+				priority={true}
+			/>
+			<Image
+				src="/pathogens_portal_norway_logo_dark.png"
+				alt="Logo of pathogens portal norway"
+				width={250}
+				height={65.55}
+				className={cn("hover:ring-primary hover:ring-2 hidden dark:block")}
+				priority={true}
+			/>
+		</>
 	);
 }
