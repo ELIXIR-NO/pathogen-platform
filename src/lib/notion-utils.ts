@@ -1,5 +1,8 @@
 import { Client } from "@notionhq/client";
-import type { DatabaseObjectResponse, PageObjectResponse } from "@notionhq/client";
+import type {
+	DatabaseObjectResponse,
+	PageObjectResponse,
+} from "@notionhq/client";
 
 export const notion = new Client({
 	auth: process.env.NOTION_API_SECRET,
