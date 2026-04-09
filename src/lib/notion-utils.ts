@@ -1,5 +1,8 @@
 import { Client } from "@notionhq/client";
-import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type {
+	DatabaseObjectResponse,
+	PageObjectResponse,
+} from "@notionhq/client";
 
 export const notion = new Client({
 	auth: process.env.NOTION_API_SECRET,
@@ -10,9 +13,21 @@ if (dbId === "") {
 	throw new Error("Notion DB ID not set!! Check env var");
 }
 
+let _dataSourceId: string | undefined;
+
+async function getDataSourceId(): Promise<string> {
+	if (_dataSourceId) return _dataSourceId;
+	const db = await notion.databases.retrieve({ database_id: dbId });
+	const ds = (db as DatabaseObjectResponse).data_sources?.[0];
+	if (!ds) throw new Error(`No data source found for database ${dbId}`);
+	_dataSourceId = ds.id;
+	return _dataSourceId;
+}
+
 export async function getNotionPagesWithTag(tag: string) {
-	const pages = await notion.databases.query({
-		database_id: dbId,
+	const dsId = await getDataSourceId();
+	const pages = await notion.dataSources.query({
+		data_source_id: dsId,
 		filter: {
 			property: "tags",
 			multi_select: {
@@ -25,12 +40,13 @@ export async function getNotionPagesWithTag(tag: string) {
 }
 
 export async function fetchAllPages(): Promise<PageObjectResponse[]> {
+	const dsId = await getDataSourceId();
 	let allPages: PageObjectResponse[] = [];
 	let cursor: string | undefined = undefined;
 
 	while (true) {
-		const response = await notion.databases.query({
-			database_id: dbId,
+		const response = await notion.dataSources.query({
+			data_source_id: dsId,
 			start_cursor: cursor,
 		});
 

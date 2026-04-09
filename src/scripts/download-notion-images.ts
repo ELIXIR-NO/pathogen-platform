@@ -9,8 +9,11 @@ const OUT_DIR = path.join(process.cwd(), "public/notion-images");
 async function main() {
 	await fs.mkdir(OUT_DIR, { recursive: true });
 
-	const { results } = await notion.databases.query({
-		database_id: DB_ID,
+	const db = await notion.databases.retrieve({ database_id: DB_ID });
+	const dataSourceId = (db as any).data_sources?.[0]?.id as string | undefined;
+	if (!dataSourceId) throw new Error("No data source found for database");
+	const { results } = await notion.dataSources.query({
+		data_source_id: dataSourceId,
 	});
 
 	for (const page of results as any[]) {
