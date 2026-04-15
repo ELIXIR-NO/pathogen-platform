@@ -49,7 +49,7 @@ export function NavBar() {
 									Topics
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+									<ul className="grid w-100 gap-3 p-4 md:w-125 md:grid-cols-2 lg:w-150">
 										{topics.map((topic) => (
 											<ListItem
 												key={topic.title}
@@ -67,7 +67,7 @@ export function NavBar() {
 									Pandemic Preparedness
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+									<ul className="grid w-100 gap-3 p-4 md:w-125 md:grid-cols-2 lg:w-150">
 										{pandemicPreparednessNavItems.map((item) => (
 											<ListItem
 												key={item.title}
@@ -85,7 +85,7 @@ export function NavBar() {
 									RDM
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+									<ul className="grid w-100 gap-3 p-4 md:w-125 md:grid-cols-2 lg:w-150">
 										{RDMNavDropdownItems.map((item) => (
 											<ListItem
 												key={item.title}
@@ -103,7 +103,7 @@ export function NavBar() {
 									One Health
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+									<ul className="grid w-100 gap-3 p-4 md:w-125 md:grid-cols-2 lg:w-150">
 										{oneHealthNavItems.map((item) => (
 											<ListItem
 												key={item.title}
