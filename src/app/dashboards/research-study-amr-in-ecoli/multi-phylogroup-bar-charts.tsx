@@ -579,7 +579,7 @@ export function SampleBarChart({
 														}}
 													/>
 													<Tooltip />
-													<ChartLegend content={<ChartLegendContent />} />
+													<ChartLegend content={(props) => <ChartLegendContent payload={props.payload} verticalAlign={props.verticalAlign} />} />
 													{collectionsSamples.map((key, index) => (
 														<Bar
 															key={key}
