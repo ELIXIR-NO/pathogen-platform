@@ -108,7 +108,11 @@ const ChartTooltipContent = React.forwardRef<
 		Partial<
 			Pick<
 				RechartsPrimitive.TooltipContentProps,
-				"payload" | "coordinate" | "accessibilityLayer" | "activeIndex" | "label"
+				| "payload"
+				| "coordinate"
+				| "accessibilityLayer"
+				| "activeIndex"
+				| "label"
 			>
 		> &
 		React.ComponentProps<"div"> & {
@@ -272,7 +276,10 @@ const ChartLegend = RechartsPrimitive.Legend;
 const ChartLegendContent = React.forwardRef<
 	HTMLDivElement,
 	React.ComponentProps<"div"> &
-		Pick<RechartsPrimitive.DefaultLegendContentProps, "payload" | "verticalAlign"> & {
+		Pick<
+			RechartsPrimitive.DefaultLegendContentProps,
+			"payload" | "verticalAlign"
+		> & {
 			hideIcon?: boolean;
 			nameKey?: string;
 		}

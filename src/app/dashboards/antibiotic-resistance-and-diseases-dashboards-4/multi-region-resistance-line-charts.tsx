@@ -325,7 +325,14 @@ export function MultiRegionResistanceLineCharts({
 										}}
 									/>
 									<ChartTooltip content={<CustomTooltip />} />
-									<ChartLegend content={(props) => <ChartLegendContent payload={props.payload} verticalAlign={props.verticalAlign} />} />
+									<ChartLegend
+										content={(props) => (
+											<ChartLegendContent
+												payload={props.payload}
+												verticalAlign={props.verticalAlign}
+											/>
+										)}
+									/>
 									{Object.keys(chartConfig).map((key) => (
 										<Line
 											key={key}
