@@ -169,7 +169,7 @@ export function Covid19LineChart({
 									label={{
 										value: "Occurrences",
 										angle: -90,
-										position: "outsideLeft",
+										position: "left",
 										dx: -30,
 									}}
 									yAxisId="left"
@@ -178,7 +178,7 @@ export function Covid19LineChart({
 									domain={["auto", "auto"]}
 								/>
 								<YAxis
-									label={{ value: "", angle: -90, position: "outsideLeft" }}
+									label={{ value: "", angle: -90, position: "left" }}
 									yAxisId="right"
 									orientation="right"
 									stroke={chartConfig.Vaccine.color}
