@@ -21,8 +21,7 @@ export default async function proxy(request: NextRequest) {
 		request.headers.get("x-forwarded-for") ||
 		request.headers.get("x-real-ip") ||
 		"127.0.0.1";
-	const { success, pending, limit, reset, remaining } =
-		await ratelimit.limit(ip);
+	const { success } = await ratelimit.limit(ip);
 	return success
 		? NextResponse.next()
 		: NextResponse.redirect(new URL("/blocked", request.url));
