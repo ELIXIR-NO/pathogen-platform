@@ -74,7 +74,7 @@ export default function Atlas({
 	const [selectedAntibiotic, setSelectedAntibiotic] = useState<string>();
 	const [selectedRegions, setSelectedRegions] = useState<string[]>(["Norge"]);
 	const [selectedDataSet, setSelectedDataSet] = useState<
-		"Blod" | "Sår" | "Urin" | "Luft" | "Gonorre"
+		"Blod" | "Sår" | "Urin" | "Luft" | "Gonorré"
 	>("Blod");
 	const [selectedYear, setSelectedYear] = useState<number>();
 	const [hoveredRegion, setHoveredRegion] = useState<string[] | null>(null);
@@ -393,9 +393,9 @@ function RegionSelector({
 }
 
 interface DataSetSelectorProps {
-	selectedDataSet: "Blod" | "Sår" | "Urin" | "Luft" | "Gonorre";
+	selectedDataSet: "Blod" | "Sår" | "Urin" | "Luft" | "Gonorré";
 	onDataSetChange: (
-		dataSet: "Blod" | "Sår" | "Urin" | "Luft" | "Gonorre"
+		dataSet: "Blod" | "Sår" | "Urin" | "Luft" | "Gonorré"
 	) => void;
 }
 
@@ -403,7 +403,7 @@ function DataSetSelector({
 	selectedDataSet,
 	onDataSetChange,
 }: DataSetSelectorProps) {
-	const dataSets = ["Blod", "Urin", "Luft", "Sår", "Gonorre"] as const;
+	const dataSets = ["Blod", "Urin", "Luft", "Sår", "Gonorré"] as const;
 
 	return (
 		<div className="flex flex-row space-x-2">
