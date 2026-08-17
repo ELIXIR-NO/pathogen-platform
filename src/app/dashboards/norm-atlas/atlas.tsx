@@ -62,6 +62,13 @@ import {
 	ExportOptionsDialog,
 } from "@/lib/exportImageUtils";
 import DownloadCSV from "@/lib/data/dataExport";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 
 export default function Atlas({
 	data,
@@ -432,23 +439,54 @@ function YearSelector({
 	selectedYear,
 	onYearChange,
 }: YearSelectorProps) {
+	const allYears = useMemo(() => {
+		const currentYear = new Date().getFullYear();
+
+		return Array.from(
+			{ length: currentYear - 2001 + 1 },
+			(_, index) => currentYear - index
+		);
+	}, []);
+
 	return (
 		<div className="bg-card text-card-foreground rounded-lg border p-4 shadow-sm">
-			<ScrollArea className="w-full whitespace-nowrap">
-				<div className="flex flex-row justify-center space-x-2 pb-2">
-					{availableYears.map((year) => (
-						<Button
-							key={year}
-							variant={selectedYear === year ? "default" : "outline"}
-							className="shrink-0"
-							onClick={() => onYearChange(year)}
-						>
-							{year}
-						</Button>
-					))}
-				</div>
-				<ScrollBar orientation="horizontal" />
-			</ScrollArea>
+			<div className="flex justify-center">
+				<Select
+					value={selectedYear?.toString()}
+					onValueChange={(value) => onYearChange(Number(value))}
+				>
+					<SelectTrigger className="bg-primary text-primary-foreground hover:bg-primary/90 w-[180px]">
+						<SelectValue placeholder="Select year" />
+					</SelectTrigger>
+
+					<SelectContent>
+						{allYears.map((year) => {
+							const isAvailable = availableYears.includes(year);
+							const isSelected = selectedYear === year;
+
+							return (
+								<SelectItem
+									key={year}
+									value={year.toString()}
+									disabled={!isAvailable}
+									className={`relative pl-8 ${!isAvailable ? "opacity-40" : ""} ${
+										isAvailable && !isSelected ? "text-primary font-medium" : ""
+									} ${
+										isSelected
+											? "bg-primary text-primary-foreground font-bold"
+											: ""
+									} `}
+								>
+									{isAvailable && !isSelected && (
+										<span className="bg-primary absolute bottom-2/5 left-4 h-1.5 w-1.5 rounded-full" />
+									)}
+									{year}
+								</SelectItem>
+							);
+						})}
+					</SelectContent>
+				</Select>
+			</div>
 		</div>
 	);
 }
